@@ -1,0 +1,185 @@
+\documentclass[a4paper,draft]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{a4wide}
+
+\usepackage{color}
+
+
+\newcommand{\red}{\color{red}}
+
+\parindent=0pt
+\parskip\smallskipamount
+
+\let\set\mathbbm
+\def\<#1>{\langle#1\rangle}
+\def\i{\mathrm{i}}
+\def\e{\mathrm{e}}
+\let\ideal\unlhd
+
+\newcommand\todo[1][.]{\edef\tmpa{.}\edef\tmpb{#1}%
+  \ifx\tmpa\tmpb
+    \typeout{To Be on page \thepage}\fbox{\bf To Be}
+  \else
+    \typeout{To Be on page \thepage: #1}\fbox{{\bf To Be:} #1}
+  \fi
+}
+
+\begin{document}
+
+Working notes: Kauers, Koutschan $\to$ Chen\hfill 2015-12-09
+
+\section{Setup}
+
+$C$ a field, $K=C(x)$, $A=K(\alpha)=K[Y]/\<m>$ for some $m\in K[Y]$ absolutely irreducible.
+
+\section{Preliminaries}
+
+An element $f\in A$ is called integral at $\xi\in C\cup\{\infty\}$ if all
+Puiseux series expansions of $f$ at places over $\xi$ have nonnegative
+valuation.
+
+For a Puiseux series $\sum_{n=n_0}^\infty a_n(x-\xi)^{n/r}$ with $a_{n_0}\neq0$
+and $\xi\in C$, we say that $n_0/r$ is its valuation. A Puiseux series at
+$\infty$ has the form $\sum_{n=n_0}^\infty a_n x^{-n/r}$ with $a_{n_0}\neq0$.
+Its valuation is defined as~$n_0/r$.
+
+To have negative valuation at some place (finite or infinite) means that the
+corresponding ``function'' tends to infinity in a neighborhood of the place.
+
+Let $B=\{w_1,\dots,w_n\}$ be a $K$-vector space basis of $A$.
+\begin{enumerate}
+\item $B$ is called a (local) integral basis
+at $\xi\in C\cup\{\infty\}$ if $w_1,\dots,w_n$ are integral at $\xi$ and every
+$f\in A$ which is integral at $\xi$ can be written as $f=p_1w_1+\cdots+p_nw_n$
+for some $p_i\in C(x)$ whose valuation at $\xi$ is nonnegative. (For $\xi\in C$
+this means that the denominators of the $p_i$ do not vanish at~$\xi$; for $\xi=\infty$
+it means that $p_i(0)\neq0$ for all~$i$.)
+\item $B$ is called a (global) integral basis
+if it is a local integral basis at all $\xi\in C$. This is the case if and only if
+(a) every $w_i$ is integral at all $\xi\in C$, and
+(b) every element $f\in A$ which is integral at all $\xi\in C$ can be written
+as $f=p_1w_1+\cdots+p_nw_n$ for some $p_i\in C[x]$.
+\item $B$ is called a (local) normal basis at $\xi\in C\cup\{\infty\}$ if there
+  exist $r_1,\dots,r_n\in C(x)=K$ such that $\{r_1w_1,\dots,r_nw_n\}$ is a local
+  integral basis at~$\xi$.
+\end{enumerate}
+
+We know how to find an integral basis. Trager (pp.~23f) explains how to transform an integral
+basis into an integral basis which at the same time is a local normal basis at~$\infty$.
+His technique seems to generalize to the fuchsian D-finite case.
+
+MAIN PROPERTY FOR NORMAL AT INFINITY: $\sum_i b_iw_i$ as a pole at infinity as soon as one term $b_iw_i$ has.
+
+\section{Trager's Hermite Reduction}
+
+Let $f\in A$ be given. We want to decide whether there exists $g\in A$ such that $g'=f$.
+Hermite reduction produces $g,h\in A$ such that $f=g'+h$ and $h$ is in some sense as small
+as possible. We call $h$ a Hermite remainder of~$f$.
+
+Let $w_1,\dots,w_n$ be an integral basis of~$A$. Write $f=\frac1d\sum_i a_iw_i$
+for $d,a_1,\dots,a_n\in C[x]$.
+Hermite reduction finds $g,h\in A$ such that $f=g'+h$ and $h=\frac1{d^*}\sum_i c_iw_i$,
+where $d^*$ is the square free part of~$d$.
+
+\section{Main Theorem}
+
+\textit{%
+  \textbf{Claim:}
+  If $f$ has at least a double root at $\infty$
+  (meaning no Puiseux series expansion of $f$ at infinity has a term $x^\alpha$ with $\alpha>-2$)
+  and the integral basis $w_1,\dots,w_n$ is normal at infinity,
+  then $h=0$ if and only if $f$ is integrable in~$A$.
+}
+
+\textbf{Proof.} (Trager, pp. 48ff)
+``$\Rightarrow$'' is obvious, $g$ is the desired integral.
+
+``$\Leftarrow$''. Assume that $f$ is integrable. Then also $h$ is integrable.
+Let $H=\int h$.
+In order to show that $h=0$, we show that $H$ is constant.
+To show that $H$ is constant, we show that it has neither finite poles nor a pole at infinity.
+
+It is clear that $H$ has no finite poles because $h$ has only ``simple'' poles (i.e., all Puiseux
+expansions of $h$ have only exponents $\geq-1$).
+
+We will show below that when $H$ has a pole at infinity, then also $g+H$ must have a pole at infinity.
+Since $f=g'+h=(g+H)'$ has at least a double root at infinity, $g+H$ has at least
+a single root at infinity. This excludes the possibility that $H$ has a pole at infinity.
+
+Assume now that $H$ has a pole at infinity. We show that $g+H$ has also a pole at infinity.
+Since $H$ has no finite poles, $H$ is integral and we can write it as
+$H=p_1w_1+\cdots+p_nw_n$ with $p_i\in C[x]$.
+Since we assume that $H$ has a pole at infinity, it follows that (a) one of the $p_i$ has positive degree
+or (b) some nonconstant $w_i$ has a nonzero coefficient~$p_i$.
+(TRAGER USES HERE THAT EVERY NONCONSTANT $w_i$ HAS A POLE AT INFINITY. THIS IS PLAUSIBLE, BUT
+WHY IS THIS NECESSARY?)
+We know that $g=\sum_i b_iw_i$ with proper rational functions~$b_i$ (by how the algorithm works).
+Consider $g+H=\sum_i (b_i+p_i)w_i$.
+In case (a) there is some $i$ for which $b_i+p_i$ has a pole at infinity, then $(b_i+p_i)w_i$ has a pole
+at infinity (because $w_i$ has no poles at finite places and therefore no zero at infinity),
+and in case (b), there is some $i$ with $p_i\neq 0$ and $w_i$ is non-constant, then $(b_i+p_i)w_i$ has a
+pole at infinity.
+In both cases, therefore, $g+H$ has a pole at infinity because the basis is normal
+at infinity (``MAIN PROPERTY'').
+This completes the proof that $g+H$ has a pole at infinity. \rule{1ex}{1ex}
+
+
+
+\section{Polynomial reductions}
+{\red In this section, we introduce the polynomial reduction in order to turn the form~$h$ computed by the
+Hermite reduction into a residual form. The idea will be quite similar to that in the hyperexponential case.
+
+
+For any~$f \in K(\alpha(x))$, Trager's reduction returns the decomposition
+\[f  = g' + r, \quad \text{where~$r =\sum_{i=1}^n \frac{c_iw_i}{d^*}$ with~$c_i\in C[x]$ and~$d^*$ squarefree}.\]
+Assume that $w_i' = \frac{1}{t}\sum_{j=1}^n s_{i, j}w_j$. Then we have
+\[(\sum_{i=1}^n p_i w_i)' = \sum_{i=1}^n (p_i' + \frac{1}{t}\sum_{j=1}^n p_js_{i, j})w_i.\]
+We can always assume that~$t\mid d^*$. Set~$d^* = ut$, and then~$\gcd(u, t)=1$, since~both $d^*$ and~$t$ are squarefree.
+Then applying the extended Euclidean algorithm to~$c_i$ yields
+\[c_i = a_iu + b_i t \quad \text{with~$\deg_x(b_i) < \deg_x(u)$}.\]
+Therefore,
+\[r =\sum_{i=1}^n \frac{c_iw_i}{d^*} = \sum_{i=1}^n \left(\frac{a_i}{t}+ \frac{b_i}{u}\right)w_i. \]
+We now try to control the degree of~$a_i$'s. Given polynomials~$t, s_1, \ldots, s_n \in C[x]$,
+define the  map $\phi: C[x]^n \rightarrow C[x]$ by
+\[\phi((p_1, p_2, \ldots, p_n)) = tp_1' + s_1p_1+ s_2p_2 + \cdots + s_np_n.\]
+Let~$M = \text{Im}(\phi)$ be the image of~$\phi$, which is a subspace of~$C[x]$ as a linear space over~$C$.
+Then we have the decomposition~$C[x] = M \oplus N$, where~$N$ is the complementary subspace of~$\phi$.
+For any polynomial~$p\in C[x]$, we can decompose~$p= p_M + p_N$ such that~$p_M\in M$ and~$p_N \in N$.
+We now claim that the dimension of~$N$ is finite. Indeed, if any of $s_2, \ldots, s_n$ is nonzero, say~$s_2$, then
+any polynomial $p\in C[x]$ can be written as $p = qs_2 + \tilde{p}$ with~$\deg_x(\tilde p) < \deg_x(s_2)$.
+Note that~$qs_2 \in M$, and then the dimension of $N$ is at most~$\deg_x(s_2)$. Now suppose $s_2=\cdots=s_n=0$.
+In this case, the map~$\phi$ is similar to that in the hyperexponential case (see Section 4.1 of the paper
+[Hermite Reduction and Creative Telescoping for Hyperexponential Functions]). Then the dimension of $N$ is finite.
+
+We now let~$\phi_i$ be the previous map with respect to ${t, s_{i, 1}, \ldots, s_{i, n}}$. Then we can control the degree of $a_i$'s by decomposing
+\[a_i = \tilde a_i + \bar a_i, \]
+where~$\tilde a_i \in \text{Im}(\phi_i)$ and~$\bar a_i$ is in the finitely dimensional complementary subspace.
+
+Combining the Hermite reduction and the polynomial reduction, we now confine any algebraic function
+into a finitely dimensional space.
+
+In the hyperexponential or hypergeometric case, the assumption of differential reduced or shift reduced anables
+us to show that the map $\phi$ is injective. But I have no idea how to show this property in the algebraic case.
+This is needed to show the following claim.
+
+{Claim: Let~$f\in K(\alpha)$. Applying the Hermite reduction and the polynomial reduction to $f$ yields $f = g' + r$.
+Then $f= h'$ for some algebraic function~$h$ if and only if $r=0$. }
+
+
+
+
+
+
+
+
+
+
+
+ }
+
+
+
+
+\end{document}

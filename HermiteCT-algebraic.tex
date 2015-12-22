@@ -76,7 +76,7 @@ Shaoshi Chen$^{1,2}$, \, Manuel Kauers$^{3}$, \, Christoph Koutschan$^{4}$ \\
         \smallskip
        \affaddr{$^4$RICAM, Austrian Academy of Sciences, Altenberger Stra\ss e 69, A-4040 Linz, (Austria)}\\
        \smallskip
-      \email{schen@amss.ac.cn, manuel@kauers.de}\\
+      \email{schen@amss.ac.cn, manuel.kauers@jku.at}\\
       \email{christoph.koutschan@ricam.oeaw.ac.at}
 %Preliminary notes
 }
@@ -87,7 +87,7 @@ Shaoshi Chen$^{1,2}$, \, Manuel Kauers$^{3}$, \, Christoph Koutschan$^{4}$ \\
 \maketitle
 %
 \begin{abstract}
-
+  // TODO 
 \end{abstract}
 
 
@@ -101,9 +101,79 @@ Shaoshi Chen$^{1,2}$, \, Manuel Kauers$^{3}$, \, Christoph Koutschan$^{4}$ \\
 
 \section{Introduction}\label{SECT:intro}
 
-\section{Algebraic function fields \\and integral bases}\label{SECT:alg}
+The classical question in symbolic integration is whether the integral of
+a given function can be written in ``closed form''. In its most restricted form,
+the question is whether for a given function~$f$ belonging to some domain $D$
+there exists another function~$g$, also belonging to~$D$, such that $f=g'$. For
+example, if $D$ is the field of rational functions, then for $f=1/x^2$ we can
+find $g=-1/x$, while for $f=1/x$ no suitable $g$ exists. When no $g$ exists
+in~$D$, there are several other questions we may ask. One possibility is to ask
+whether there is some extension~$E$ of $D$ such that in $E$ there exists some
+$g$ with $g'=f$. For example, in the case of elementary functions, Liouville's
+principle restricts the possible extensions~$E$, and algorithms have been
+designed to construct these extensions whenever possible. Another possibility is
+to ask whether for some modification $\tilde f\in D$ of~$f$ there exists a $g\in
+D$ such that $\tilde f=g'$. Creative telescoping is a question of this
+type. Here we are dealing with domains~$D$ containing functions in several
+variables, say $x$ and~$t$, and the question is whether there is a linear
+differential operator~$P$, nonzero and free of~$x$, such that there exists a
+$g\in D$ with $P\cdot f=g'$, where $g'$ denotes the derivative of $g$ with
+respect to~$x$. Typically, $g$~itself has the form $Q\cdot f$ for some operator
+$Q$ (which may be zero and need not be free of~$x$). In this case, we call $P$
+a telescoper for~$f$, and $Q$ a certificate for~$P$.
 
-\section{Reductions for algebraic \\functions}
+Creative telescoping is the backbone of definite integration. Readers not
+familiar with this technique are refered to the literature~\cite{PWZbook1996,Zeilberger1990c,Zeilberger1991,Zeilberger1990,Koepf1998}
+for motivation, theory, algorithms, implementations, and applications. There are
+several ways to find telescopers for a given $f\in D$. In recent years, an
+approach has become popular which has the feature that it can find a telescoper
+without also constructing the corresponding certificate. This is interesting
+because certificates tend to be much larger than telescopers, and in some
+applications only the telescoper is of interest. This approach was first
+formulated for rational functions $f\in C(t,x)$ in~\cite{BCCL2010} and later
+generalized to rational functions in several variables~\cite{..}, to
+hyperexponential functions~\cite{..} and, for the shift case, to hypergeometric
+terms~\cite{..} and binomial sums~\cite{..}. In the present paper, we will extend
+the approach to [ALGEBRAIC|FUCHSIAN D-FINITE] functions.
+
+The basic principle of the general approach is as follows. Assume that the
+$x$-constants $\mathrm{Const}_x(D)=\{\,c\in D:c'=0\,\}$ form a field, i.e., that $D$
+is a vector space over the field of $x$-constants. Assume further that there is
+some $\mathrm{Const}_x(D)$-linear map $[\cdot]\colon D\to D$ such that for every
+$f\in D$ there exists a $g\in D$ with $f-[f]=g'$. This map is called a
+\emph{reduction.} For example, in $D=C(t,x)$ Hermite reduction produces for
+every $f\in D$ some $g$ such that $f-g'$ is either zero or a rational function
+with a square-free denominator. In this case, we can take $[f]=f-g'$.
+In order to find a telescoper, we can compute $[f]$, $[D_t\cdot f]$, $[D_t^2\cdot f]$, \dots,
+until we find that they are linearly dependent over $\mathrm{Const}_x(D)$.
+When we find a relation
+$p_0[f] + \cdots + p_r[D_t^r\cdot f] = 0$,
+then, by linearity,
+$[p_0 f + \cdots + p_r D_t^r\cdot f] = 0$,
+and then, by definition of $[\cdot]$, there exists a $g\in D$ such that $(p_0+\cdots + p_rD_t^r)\cdot f=g'$.
+In other words, $P=p_0+\cdots + p_rD_t^r$ is a telescoper. 
+
+There are two ways to guarantee that this method works. The first consists in
+showing that $\{\,[f]:f\in D\,\}$ is a finite dimensional vector space over
+$\mathrm{Const}_x(D)$.  This approach was taken in~\cite{..,..,..}. It has the
+nice additional feature that every bound for the dimension of this vector space
+gives rise to a bound for the order of the telescoper. In particular, it implies
+the existence of a telescoper. The second way requires that we already know for
+other reasons that a telescoper exists. The idea is then to show that the
+reduction $[\cdot]$ has the property that when $f\in D$ is such that there
+exists a $g\in D$ with $g'=f$, then $[f]=0$. If this is the case and
+$P=p_0+\cdots+p_rD_t^r$ is a telescoper for~$f$, then $P\cdot f$ is integrable
+in~$D$, so $[P\cdot f]=0$, and by linearity $[f]$, \dots, $[D_t^r\cdot f]$ are
+linearly dependent over $\mathrm{Const}_x(D)$. This means that the method won't
+miss any telescoper. In particular, this argument has the nice feature that we
+are guaranteed to find a telescoper of smallest possible order~$r$. This
+approach was taken in~\cite{..}.
+
+[SAY WHICH OF THE TWO APPROACHES WE TAKE.]
+
+\section{Algebraic function fields\hskip0ptplus1fill\break and integral bases}\label{SECT:alg}
+
+\section{Reductions for algebraic\hskip0ptplus1fill\break functions}
 
 \subsection{Trager's reduction}\label{SECT:trager}
 

@@ -241,39 +241,151 @@ that $\tilde L$ exists amounts to saying that the ``function'' represented by
 $1\in A$ should be D-finite as a bivariate function in $x$ and~$t$, for if its
 annihilator in the operator algebra $k(t,x)[D_t,D_x]$ contains the operators $L$
 and $D_t-\tilde L$, then its Hilbert-dimension is zero, and this is the usual
-definition of D-finiteness~\cite{..,..}.  Note however, that the existence of
+definition of D-finiteness~\cite{..,..}.  Note however that the existence of
 $\tilde L$ does not directly follow from the existence of~$L$. This is different
-from the case of algebraic function fields, where a single polynomial $M$
+from the case of algebraic function fields, where a single minimal polynomial $M$
 suffices even in the case of several variables.
 
 \section{Integral Bases}
 
+Trager's Hermite reduction for algebraic functions rests on the notion of
+integral bases. The notion of integral bases has been generalized to D-finite
+functions last year~\cite{..}, and an algorithm was also given there for
+computing such bases. We recall here the relevant definitions and properties.
 
+Although the elements of a generalized series ring $C[[[x-a]]]$ are formal
+objects, the series notation suggests to certain analogies with complex
+functions.  For simplicity, let us assume throughout that $C\subseteq\set
+R$. Terms $(x-a)^\alpha\log(x-a)^\beta$ or $(\tfrac1x)^\alpha\log(x)^\beta$ are
+called \emph{integral} if $\alpha\geq0$ and $\beta\geq0$ and not
+$\alpha=\beta=0$.  Integrality thus means that the corresponding complex
+function does not diverge at the reference point~$a$ (the reference point is
+$\infty$ in the case of $(\tfrac1x)^\alpha\log(x)^\beta$). A series in
+$C[[[x-a]]]$ or $C[[[x^{-1}]]]$ is called integral if it only contains integral
+terms. A non-integral series is said to have a \emph{pole} at the reference
+point.  Note that in this terminology also $1/\sqrt{x}$ and $\log(x)$ have
+``poles'' at~$0$, although the usual terminology reserves the word pole for
+asymptotic behaviour which agrees with $x^n$ for some negative integer~$n$.
 
-recall definition of valuation, local/global integral series, local/global integral ``algebra'' element,
-local/global integral closure, local/global integral basis.
+Let $L\in C(x)[D_x]$ be a fuchsian operator. An element $P\in A=C(x)[D_x]/\<L>$
+is called (locally) integral at $a\in C\cup\{\infty\}$ if for every solution $f$
+in $C[[[x-a]]]$ or $C[[[x^{-1}]]]$, respectively, the series $P\cdot f$ is
+integral. $P$~is called (globally) integral if it is locally integral at every
+$a\in C$ (``at all finite places''). Because of the Fuchs relation~\cite{..}, an
+element $P\in A$ is integral at every $a\in C\cup\{\infty\}$ if and only if it
+is a constant (i.e., if $D_xP=0$ in~$A$).
 
-note: differentiation with respect to $t$ cannot increase (decrease?) the valuation with respect to $x$
-(meaning: poles at either a finite or the infinite place cannot become worse when differentiating wrt.~$t$)
+The set of all integral elements $P\in A$ forms a $C[x]$-submodule of~$A$.
+A basis $\{\omega_1,\dots,\omega_n\}$ of this module is called an \emph{integral basis}
+for~$A$. In~\cite{..} an algorithm was given which computes an integral basis
+for a given~$A$. This algorithm is a generalization of van Hoeij's
+algorithm~\cite{..} for computing integral bases of algebraic function
+fields.
 
-lemma: main property about integral bases.
+For a fixed $a\in C$, let $C(x)_a$ be the ring of rational functions $p/q$
+with $p(a)=0$ and $q(a)\neq0$, and write $C(x)_\infty$ for the ring of all
+rational functions $p/q$ with $\deg(p)<\deg(q)$ (proper rational
+functions). Then the set of all $P\in A$ which are locally integral at some
+fixed $a\in C\cup\{\infty\}$ forms a $C(x)_a$-module. A basis of this module is
+called a \emph{local integral basis} at $a$ for~$A$. The algorithm given in~\cite{..}
+for computing (global) integral bases computes local integral bases at finite
+points as an intermediate step. The computation of a local integral basis at
+infinity is also possible, either analogously, or by making a chance of
+variables $x'=1/x$ and computing a local integral basis at~$0$.
 
-lemma: $E$ is squarefree. 
+An integral basis $\omega_1,\dots,\omega_n$ is always also a $C(x)$-vector space
+basis of~$A$. A key feature of integral bases is they make poles explicit. Writing
+an element $f\in A$ as a linear combination $f=\sum_{i=1}^n f_i\omega_i$ for some
+$f_i\in C(x)$, we have that $f$ has poles exactly where some of the $f_i$ have
+poles. 
 
-example. 
+\begin{lemma}\label{lemma:1}
+  Let $L$ be a fuchsian operator and let   
+  $\omega_1,\dots,\omega_n$ be a local integral basis of $A=C(x)[D_x]/\<L>$ at $a\in C\cup\{\infty\}$.
+  Let $f\in A$ and $f_1,\dots,f_n\in C(x)$ be such that $f=\sum_{i=1}^nf_i\omega_i$.
+  Then $f$ is integral at $a$ if and only if each $f_i\omega_i$ is integral at~$a$.
+\end{lemma}
+\begin{proof}
+  The direction ``$\Rightarrow$'' is obvious. To show ``$\Leftarrow$'', suppose
+  that $f$ is integral. Then there exist $w_1,\dots,w_n\in C(x)_a$ such that
+  $f=\sum_{i=1}^nw_i\omega_i$. Then $\sum_{i=1}^n(w_i-f_i)\omega_i=0$, and then
+  $w_i=f_i$ for all $i$, because $\omega_1,\dots,\omega_n$ is a basis.
+  As elements of~$C(x)_a$, the $f_i$ are integral, and hence also all the $f_i\omega_i$
+  are integral. 
+\end{proof}
 
-comparison to algebraic function fields. 
+The lemma says in particular that any poles of the $f_i$ in a linear combination
+$\sum_{i=1}^n f_i\omega_i$ have no chance to cancel. 
 
-define normal at infinity. point out that every integral basis can be made normal at infinity.
-(same argument as in the algebraic case.)
+It is important to observe that integrality is not preserved by differentiation.
+For example, $x^{1/2}$ is integral but its derivative $\tfrac12 x^{-1/2}$ is
+not. However, since differentiation of series is defined term by term, it is
+clear that differentiation of an integral element cannot produce multiple
+poles. More precisely, if $\nu$ is such that $f\in C[[[x-a]]]$ contains no term
+$(x-a)^\alpha\log(x-a)^\beta$ for any $\alpha<\nu$, then $f'$ contains no term
+$(x-a)^\alpha\log(x-a)^\beta$ for any $\alpha<\nu-1$, and if $f\in
+C[[[x^{-1}]]]$ contains no term $x^\alpha\log(x)^\beta$ for any $\alpha<\nu$,
+then $f'$ contains no term $x^\alpha\log(x)^\beta$ for any
+$\alpha<\nu-1$. Another consequence of the same observation is the following
+lemma.
 
-lemma: main property about normal bases. 
+\begin{lemma}
+  Let $L$ be a fuchsian operator and let
+  $\omega_1,\dots,\omega_n$ be an integral basis of $A=C(x)[D_x]/\<L>$.
+  Let $e\in C[x]$ and   
+  $M=((m_{i,j}))_{i,j=1}^n\in C[x]^{n\times n}$ be such that
+  \[
+    e\,\omega_i'=\sum_{j=1}^n m_{i,j}\omega_j
+  \]
+  for $i=1,\dots,n$ and $\gcd(e,m_{1,1},\dots,m_{n,n})=1$.
+  Then $e$ is square-free.
+\end{lemma}
+\begin{proof}
+  Suppose that $e$ has a multiple root, say $(x-a)^2\mid e$ for some $a\in\bar
+  C$. Since $\omega_i$ is integral for every~$i$ and differentiation cannot
+  decrease exponents in series expansions by more than~1, $(x-a)\omega_i'$ is
+  integral at $a$ for every~$i$.  Since $a$ is at least a double root of~$e$, it
+  follows that $\sum_{j=1}^n\frac{m_{i,j}}{x-a}\omega_j$ is locally integral
+  at~$a$ for every~$i$.  Because of $\gcd(e,m_{1,1},\dots,m_{n,n})=1$, at least
+  one of the $\frac{m_{i,j}}{x-a}$ is not a polynomial.  This is impossible
+  because $(x-a)\omega_i'$ is integral at $a$ and $\omega_1,\dots,\omega_n$ is
+  an integral basis (and therefore in particular a local integral basis at~$a$).
+\end{proof}
 
-lemma: $\deg_x(M)< E$ (if true)
+A $C(x)$-vector space basis $\omega_1,\dots,\omega_n$ of $C(x)[D_x]/\<L>$ is
+called \emph{normal} at $a\in C\cup\{\infty\}$ if there exist $r_1,\dots,r_n\in
+C(x)$ such that $r_1\omega_1,\dots,r_n\omega_n$ is a local integral basis
+at~$a$. Trager shows for the case of algebraic function fields how to construct
+an integral basis which is normal at infinity from a given integral basis and
+a given local integral basis at infinity~\cite{..}. The same procedure also applies
+in the present situation. It works as follows.
 
-lemma: fuchs relation (comparison to algebraic function fields: chevallier)
+/// TODO.
 
-example. 
+Although normality is a somewhat weaker condition on a basis than integrality,
+it also excludes the possibility that poles in the terms of a linear combination
+of basis elements can cancel: 
+
+\begin{lemma}\label{lemma:3}
+  Let $L$ be a fuchsian operator and let $\omega_1,\dots,\omega_n$ be an integral basis of $A=C(x)[D_x]/\<L>$
+  which is normal at infinity.
+  Let $f=\sum_{i=1}^n f_i\omega_i$ for some $f_1,\dots,f_n\in C[x]$.
+  If $f$ has a pole at infinity, then there is some $i$ such that $f_i\omega_i$ has a pole at infinity.
+\end{lemma}
+\begin{proof}
+  Let $r_1,\dots,r_n\in C(x)$ be such that $r_1\omega_1,\dots,r_n\omega_n$ is a
+  local integral basis at infinity. Then $f=\sum_{i=1}^n
+  (f_ir_i^{-1})(r_i\omega_i)$ and $f$ is integral at infinity iff all
+  $f_ir_i^{-1}r_i\omega_i=f_i\omega_i$ are integral at infinity.
+  The claim now follows from Lemma~\ref{lemma:1}. 
+\end{proof}
+
+\begin{lemma}
+  // IF TRUE, INSERT HERE THE PROOF THAT NORMAL AT INFINITY IMPLIES $\deg_x(m_{i,j})<\deg_x e$ FOR ALL $i,j$.
+\end{lemma}
+\begin{proof}
+  // TOOD.
+\end{proof}
 
 \section{Hermite Reduction}
 

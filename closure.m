@@ -165,14 +165,20 @@ StandardFilter[_[u_, v_]] := (v == 0 && Re[N[u]] >= 0 || v > 0 && Re[N[u]] > 0)
 (**
  INPUT:
    L... an operator L(x,Der[x])
-   alpha... a number
+   alpha... a number or Infinity
  OUTPUT:
    L(x+alpha,Der[x])
  **)
 Subs[L_, alpha_] :=
-  Module[ {coeffs},
-    coeffs = CoefficientList[Normal[L], Der[x]] /. x -> x + alpha;
-    ToOrePolynomial[Sum[coeffs[[i]]**Der[x]^(i-1), {i, 1, Length[coeffs]}], OreAlgebra[Der[x]]]
+  If[ alpha == Infinity, 
+    Module[ {g, u},
+      ToOrePolynomial[ApplyOreOperator[L, g[1/x]] /. x -> 1/x, g[x]]
+    ]
+  , 
+    Module[ {coeffs},
+      coeffs = CoefficientList[Normal[L], Der[x]] /. x -> x + alpha;
+      ToOrePolynomial[Sum[coeffs[[i]]**Der[x]^(i-1), {i, 1, Length[coeffs]}], OreAlgebra[Der[x]]]
+    ]
   ];
 
 (**

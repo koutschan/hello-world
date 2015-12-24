@@ -170,9 +170,9 @@ StandardFilter[_[u_, v_]] := (v == 0 && Re[N[u]] >= 0 || v > 0 && Re[N[u]] > 0)
    L(x+alpha,Der[x])
  **)
 Subs[L_, alpha_] :=
-  If[ alpha == Infinity, 
+  If[ MemberQ[{Infinity,-Infinity,ComplexInfinity}, alpha], 
     Module[ {g, u},
-      ToOrePolynomial[ApplyOreOperator[L, g[1/x]] /. x -> 1/x, g[x]]
+      ToOrePolynomial[Numerator[Together[(ApplyOreOperator[L, g[1/x]] /. x -> 1/x)/x^100]], g[x], OreAlgebra[Der[x]]]
     ]
   , 
     Module[ {coeffs},
@@ -235,11 +235,14 @@ KillXIfPossible[sers_, filter_:StandardFilter] :=
  **)
 LocalIntegralBasis[L_, alpha_:0, filter_:StandardFilter, n_Integer:10] := 
   Module[ {sols, sers, out, op, e, terms},
-    vars = Complement[Variables[Normal[L]], {t}];
+    vars = Complement[Variables[Normal[L]], {x, Der[x]}];
     If[ Length[vars] > 0, Return[CRA[LocalIntegralBasis, {L, alpha, filter, n}, vars]] ];
     If[ alpha =!= 0, Return[Subs[#, -alpha]& /@ LocalIntegralBasis[Subs[L, alpha], 0, filter, n]]];
     out = Catch[ (* exception is thrown when expansion order n was too small *)
       sols = SeriesSolutionBasis[L, alpha, n];
+      If[ Length[sols] =!= Exponent[L, Der[x]], 
+         Print["operator is not fuchsian at expansion point"]; Return[$Failed]
+      ];
       sers = {sols};
       (* find smallest power e of x that makes all solutions integral *)
       terms = Cases[sers, _Term, Infinity];
@@ -289,6 +292,9 @@ GlobalIntegralBasis[L_, filter_:StandardFilter, n_Integer:5] :=
       minpolys = First /@ Rest[FactorList[LeadingCoefficient[L]]]; 
       alphas = ToNumberField[Root[Function[x, #], 1]]& /@ minpolys; (* list of singularities, up to conjugates *)
       sols = SeriesSolutionBasis[L, #, n]& /@ alphas;
+      If[ Union[Length /@ sols] =!= {Exponent[L, Der[x]]}, 
+         Print["operator is not fuchsian at all finite places"]; Return[$Failed]
+      ];
       sers = {#}& /@ sols;
       If[ Length[alphas] === 0, Return[ Table[ToOrePolynomial[Der[x]^i, OreAlgebra[Der[x]]], {i, 0, Exponent[L, Der[x]]-1}] ] ];
       (* first element: prod minpolys[[i]]^e[i], for the smallest integers e[i] that make all the local solutions at alphas[[i]] integral *)
@@ -371,6 +377,41 @@ CRA[f_, args_, vars_] :=
       Catch[out = Lift[imgs, mod, Join[{q, x, Der[x]}, Rest[vars]], t, 0]];
     ];
   ];
+
+
+(**
+ INPUT: 
+   L... an element of OreAlgebra[Der[x]]
+   filter... a function which applied to a pair {i,j} gives True iff x^i Log[x]^j is to be considered integral.
+   n... number of terms to be used in the series expansion. if it turns out to be too small, the code will keep restarting the calculation with higher choices of n until n is large enough.
+ OUTPUT:
+   A list of operators {L[1],...,L[r-1]} that form a global integral basis
+   of C(x)[D]/<L> which is normal at infinity.
+ EXAMPLES:
+   ...
+ **)
+GlobalIntegralBasisNormalAtInfinity[L_, filter_:StandardFilter, m_Integer:5] := 
+   Module[ {w, v, n, k, M, Mhat, N, c, i0},
+     w = GlobalIntegralBasis[L, filter, m];
+     v = LocalIntegralBasis[L, Infinity, filter, m];
+     If[ w === $Failed || v === $Failed, Return[$Failed] ];
+     n = Length[w]; 
+     (* w[i] == sum( M[i,j]*v[j], j=1..n ) *)
+     M = Together[Table[Coefficient[w[[i]], Der[x], j], {i, 1, n}, {j, 0, n-1}] . 
+          Inverse[Table[Coefficient[v[[i]], Der[x], j], {i, 1, n}, {j, 0, n-1}]]];
+     While[ True, 
+       Do[
+         k[i] = Max[(Exponent[Numerator[#],x]-Exponent[Denominator[#],x])& /@ DeleteCases[M[[i]], 0]];
+       , {i, 1, n}];
+       N = Limit[DiagonalMatrix[Table[x^(-k[i]), {i, 1, n}]].M, x -> Infinity];
+       c = NullSpace[Transpose[N]]; 
+       If[ Length[c] == 0, Return[ w ] ]; (* DONE! *)
+       c = First[c];
+       i0 = 0; Do[If[c[[i]] != 0 && (i0 == 0 || k[i0] > k[i]), i0 = i], {i, 2, n}]; 
+       w[[i0]] = Sum[c[[i]]x^(k[i0] - k[i])w[[i]], {i, 1, n}];
+       M[[i0]] = Together[Sum[c[[i]]x^(k[i0] - k[i])M[[i]], {i, 1, n}]];
+     ];
+   ];
 
 (* ================== borrowed from LinearSystemSolver.m ============================ *)
 

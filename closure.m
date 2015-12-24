@@ -229,6 +229,8 @@ KillXIfPossible[sers_, filter_:StandardFilter] :=
  **)
 LocalIntegralBasis[L_, alpha_:0, filter_:StandardFilter, n_Integer:10] := 
   Module[ {sols, sers, out, op, e, terms},
+    vars = Complement[Variables[Normal[L]], {t}];
+    If[ Length[vars] > 0, Return[CRA[LocalIntegralBasis, {L, alpha, filter, n}, vars]] ];
     If[ alpha =!= 0, Return[Subs[#, -alpha]& /@ LocalIntegralBasis[Subs[L, alpha], 0, filter, n]]];
     out = Catch[ (* exception is thrown when expansion order n was too small *)
       sols = SeriesSolutionBasis[L, alpha, n];
@@ -274,7 +276,9 @@ LocalIntegralBasis[L_, alpha_:0, filter_:StandardFilter, n_Integer:10] :=
       - 3*x^3 + 3*x^4)) + ((-1 + x)*x)/(1 + x - 3*x^3 + 3*x^4)**Der[x]}
  **)
 GlobalIntegralBasis[L_, filter_:StandardFilter, n_Integer:5] := 
-  Module[ {sols, sers, out, op, e, terms, minpolys, alphas, d, p, q},
+  Module[ {sols, sers, out, op, e, terms, minpolys, alphas, d, p, q, vars, t},
+    vars = Complement[Variables[Normal[L]], {x, Der[x]}];
+    If[ Length[vars] > 0, Return[CRA[GlobalIntegralBasis, {L, filter, n}, vars]] ];
     out = Catch[ (* exception is thrown when expansion order n was too small *)
       minpolys = First /@ Rest[FactorList[LeadingCoefficient[L]]]; 
       alphas = ToNumberField[Root[Function[x, #], 1]]& /@ minpolys; (* list of singularities, up to conjugates *)
@@ -339,4 +343,200 @@ GlobalIntegralBasis[L_, filter_:StandardFilter, n_Integer:5] :=
       Together[((1/d)**ToOrePolynomial[#, OreAlgebra[Der[x]]])& /@ out]
     ];
     Return[If[StringQ[out], GlobalIntegralBasis[L, filter, n + 3], out]];    
+  ];
+
+(**
+ INPUT: A function f, a list of arguments, and a list of variables
+ OUTPUT: result of chinese remaindering and rational reconstruction on the outputs of f applied to the arguments with the variables replaced by integers. It is assumed that the output of f is a list of operators in x and Der[x].
+ **)
+CRA[f_, args_, vars_] := 
+  Module[ {t, mod, imgs, p, q},
+    If[ Length[vars] == 0, Return[ f@@args ] ];
+    t = First[vars]; mod = {}; imgs = {}; p = 7; out = Null;
+    While[ True,
+      p += 1; 
+      AppendTo[mod, p]; 
+      AppendTo[imgs, (#.q^(Range[Length[#]]-1))&[Normal /@ f@@(args /. t -> p)]];
+      If[ Together[(out /. t -> p) - Last[imgs]] === 0, 
+        Return[ToOrePolynomial[Collect[#, Der[x], Together], OreAlgebra[Der[x]]]& /@ CoefficientList[out, q]];
+      ];
+      (* this assumes that the output of f is already monic. to use the monic-maker in Lift,
+         we must not merge the list into a polynomial wrt. q but instead lift each operator separately *)
+      Catch[out = Lift[imgs, mod, Join[{q, x, Der[x]}, Rest[vars]], t, 0]];
+    ];
+  ];
+
+(* ================== borrowed from LinearSystemSolver.m ============================ *)
+
+(** ------------------------------------------------------------------- **)
+(* Arithmetic *)
+
+List2Poly[coeffs_List, var_] := coeffs . var^(Range[Length[coeffs]]-1);
+Poly2List[p_, var_, deg_] := Module[ {l}, 
+   l = CoefficientList[p, var]; 
+   If[ Length[l] <= deg + 1, 
+       Return[Join[l, Table[0, {deg + 1 - Length[l]}]]],
+       Return[Take[l, deg + 1]]
+   ]];
+
+(**
+ * polynomial division
+ **)
+QuoRem[p_, q_, x_, m_] :=
+  Module[ {p0, q0, quo, c, i, j},
+
+    p0 = CoefficientList[p, x]; q0 = CoefficientList[q, x]; quo = {};
+
+    If[ Length[p0] < Length[q0], Return[ {0, p} ] ];
+
+    While[ Length[p0] >= Length[q0],
+
+      c = PolynomialMod[Last[p0]/Last[q0], m];
+      PrependTo[quo, c];
+
+      j = Length[p0] - Length[q0] + 1;
+      Do[ p0[[j++]] = p0[[j]] - c q0[[i]], {i, 1, Length[q0]} ]; 
+      p0 = Most[p0];
+    ];
+
+    Return[ {List2Poly[quo, x], List2Poly[p0, x]} ]
+  ];
+
+MyPolynomialQuotient[p_, q_, x_, m_] := First[QuoRem[p, q, x, m]];
+MyPolynomialRemainder[p_, q_, x_, m_] := Last[QuoRem[p, q, x, m]];
+
+(** ------------------------------------------------------------------- **)
+(* Reconstruction *)
+
+Lift[rats_, points_, vars_, x_, p_Integer] :=
+  Module[ {u, myvars, data, den, terms, lt, res, deg},
+    If[ Length[rats] =!= Length[points], Throw["illegal argument"] ];
+    myvars = Append[vars, u];
+    data = PolynomialSupport[#, myvars, Modulus -> p]& /@ 
+          (Numerator[#] + u Denominator[#]&) /@ Together[rats, Modulus -> p]; 
+    If[ Length[Union[Length /@ data]] =!= 1, Throw["unexpected zeros."] ]; 
+    terms = (#/(#/.Thread[myvars->1]))&[data[[1]]];
+    (* normalize *)
+    lt = Position[terms, Last[Sort[terms]]][[1, 1]];
+    data = Transpose[#/#[[lt]]& /@ (data /. Thread[myvars -> 1])];
+    (* find denominator and clear it *)
+    den = Sum[Prime[500+i]data[[i]], {i, 1, Length[terms]}];
+    den = InterpolatingPolynomial[Transpose[{points, den}], x, Modulus -> p];
+    den = ReconstructRatfun[den, points, x, p];
+    deg = 1 + Exponent[Numerator[den], x]; den = Denominator[den];
+    data = Transpose[Table[data[[All, i]]*(den /. x -> points[[i]]), {i, 1, Length[points]}]];
+    (* interpolation *)
+    (#1/#2)&@@CoefficientList[Table[Expand[InterpolatingPolynomial[Transpose[Take[#, deg]& /@ {points, data[[i]]}], x, Modulus -> p], Modulus -> p], {i, 1, Length[terms]}].terms, u]
+  ];
+Lift[rats_, points_, vars_, opts:((_Rule|_RuleDelayed)...)] :=
+  Module[ {u, myvars, data, den, terms, lt, res, deg, p, nondefective},
+    recon = "recon" /. {opts} /. {"recon" -> ReconstructQ0};
+    If[ Length[rats] =!= Length[points], Throw["illegal argument"] ];
+    myvars = Append[vars, u];
+    data = Table[PolynomialSupport[(Numerator[#]+u Denominator[#]&)[Together[rats[[i]], Modulus -> points[[i]]]], myvars, Modulus -> points[[i]]], {i, 1, Length[points]}];
+    If[ Length[Union[Length /@ data]] =!= 1, 
+       nondefective = Position[Length /@ data, Max[Length /@ data]];
+       Print["discarding ", Length[points] - Length[nondefective], " images."];
+       Return[Lift[Extract[rats, nondefective], Extract[points, nondefective], vars, opts]];
+    ]; 
+    terms = (#/(#/.Thread[myvars->1]))&[data[[1]]];
+    (* normalize *)
+    lt = Position[terms, Last[Sort[terms]]][[1, 1]];
+    data = Transpose[#/#[[lt]]& /@ (data /. Thread[myvars -> 1])];
+    data = Transpose[Table[PolynomialMod[data[[All, i]], points[[i]]], {i, 1, Length[points]}]];
+    (* reconstruct one by one *)
+    data = Table[recon[ChineseRemainder[data[[i]], points], Times@@points], {i, 1, Length[terms]}];
+    (* data *= LCM@@(Denominator /@ data); *)
+    (#1/#2)&@@CoefficientList[data.terms, u]
+  ];
+
+PolynomialSupport[poly_, vars_, opts___] := (* multivariate polynomial expression to list of monomials *)
+  Module[ {x, rest, terms},
+    If[ poly === 0, Return[ {} ] ];
+    x = First[vars]; rest = Rest[vars];
+    terms = CoefficientList[poly, x, opts];
+    If[ Length[rest] > 0, terms = PolynomialSupport[#, rest, opts]& /@ terms];
+    DeleteCases[Flatten[terms*x^Range[0, Exponent[poly, x, opts]]], 0]
+  ];
+
+(**
+ * Reconstruction of rational numbers
+ **)
+ReconstructQ[n_, pq_] := (#[[1]]/#[[2]])&[First[LatticeReduce[{{n, 1}, {pq, 0}}]]];
+
+ReconstructQ0[n_, pq_] := If[ n===0, 0, (((#[[2,2]]/#[[1,2,2]])&)[Internal`HGCD[pq, Mod[n,pq]]]*2)/2 ];
+
+(* use this if you expect u : v to be close to  #digits in numerator : #digits in denominator. *)
+ReconstructQbiased[u_, v_][n_, q_] := If[ n==0, 0,
+  Module[ {r, s, rr, ss, quo},
+    {r, s, rr, ss} = {q, 0, n, 1};
+    While[ v Log[N[1 + Abs[rr]]] > u Log[N[1 + Abs[ss]]],
+      quo = Quotient[r, rr];
+      {r, s, rr, ss} = {rr, ss, r - quo rr, s - quo ss}
+    ];
+    rr/ss
+  ]];
+
+(* this gives the smallest of all *)
+ReconstructQ2[n_, q_] := If[ n==0, 0,
+  Module[ {r, s, rr, ss, quo, u, v},
+    {u, v} = {n, 1}; 
+    {r, s, rr, ss} = {q, 0, Mod[n, q], 1};
+    While[ rr != 0, 
+      quo = Quotient[r, rr];
+      {r, s, rr, ss} = {rr, ss, r - quo rr, s - quo ss};
+      If[ s != 0 && Abs[r*s] < Abs[u*v], {u, v} = {r, s} ]
+    ];
+    u/v
+  ]];
+
+(**
+ * Reconstruction of rational functions
+ **)
+Do[T[i]=0,{i,1,6}];
+ReconstructRatfun[g_, mod_, x_, p_] := 
+  Module[ {t, r},
+    {t, r} = Timing[MyReconstructRatfun[g, mod, x, p]];
+    T[1] += t;
+    Return[r];    
+  ];
+
+MyReconstructRatfun[g_, mod_, x_, p_] :=
+  Module[ {t, f, r0, r1, t0, t1, n, d, q, c, df, drat, dr1, dt1, unique},
+
+    c = PolynomialMod[#, p]&;
+    If[ c[g] === 0, Return[ 0 ] ];
+
+    f = If[ ListQ[mod], Product[x - mod[[i]], {i, 1, Length[mod]}], mod ];
+    df = Exponent[f, x];
+    {r0, r1, t0, t1} = {f, g, 0, 1}; {n, d} = {r1, t1};
+    drat = Exponent[n, x] + Exponent[d, x];
+    unique = True;
+
+    While[ r1 =!= 0,
+
+      t = First[Timing[
+      dr1 = Exponent[r1, x]; dt1 = Exponent[t1, x];
+      If[ dr1 < df && t1 =!= 1 && drat == dr1 + dt1, unique = False];
+      If[ dr1 < df && drat > dr1 + dt1,
+        {n, d} = {r1, t1}; drat = dr1 + dt1;
+        unique = True;
+      ]; 
+      ]];
+      T[5]+=t;
+
+      {t, q} = Timing[MyPolynomialQuotient[r0, r1, x, p]];
+      T[2]+=t;
+      {t, {r0, r1, t0, t1}} = Timing[{r1, c[r0 - q r1], t1, c[t0 - q t1]}];
+      T[4]+=t;
+    ];
+    If[ !unique, Throw["ambigous reconstruction result"] ];
+    
+    {t, {n, d}} = Timing[CoefficientList[#, x]& /@ {n, d}];
+    T[3]+=t;
+    {t, {n, d}} = Timing[Map[c, {n, d}/Last[d], {2}]];
+    T[6]+=t;
+    {n, d} = List2Poly[#, x]& /@ {n, d};
+
+    Return[Together[n/d, Modulus -> p]];
   ];

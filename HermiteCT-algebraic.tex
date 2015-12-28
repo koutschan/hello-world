@@ -227,9 +227,9 @@ functions. Comparing $A=R[D_x]/\<L>$ to an algebraic function field $R[Y]/\<M>$
 polynomial~$M$. In the algebraic case, $Y$~is a formal solution of the equation
 $M=0$, similar as $1\in A$ is a formal solution of~$L$. Besides these formal
 solutions there are, for each fixed $a\in\bar C$, exactly $\deg(M)$ different
-Puiseux series solutions of $M=0$ at places above~$a$. They correspond in our
-setting to the series solutions of $L$ in $\bar C[[[x-a]]]$, which form a $\bar
-C$-vector space of dimension $\ord(L)$.
+Puiseux series solutions of $M=0$ at places above~$a$. They correspond in the
+differential setting to the series solutions of $L$ in $\bar C[[[x-a]]]$, which
+generate a $\bar C$-vector space of dimension $\ord(L)$.
 
 In the context of creative telescoping, we use $C=k(t)$ as constant field, where
 $t$ is another variable. Integration will always be with respect to~$x$, but
@@ -237,7 +237,7 @@ besides the derivation $D_x$ there is now also the derivation with respect
 to~$t$. The action of $D_t$ on elements of $\bar C[[[x-a]]]$ or $\bar
 C[[[x^{-1}]]]$ is defined coefficient-wise. It is clear that $D_x$ and $D_t$
 commute. For the action of $D_t$ on~$A$, we assume that $D_t\cdot D_x = D_x\cdot
-(D_t\cdot 1)$ in $A$ and that besides $L$ we know some other operator $\tilde
+(D_t\cdot 1)$ in $A$ and that in addition to $L$ we know some other operator $\tilde
 L\in k(t,x)[D_x]$ such that $D_t\cdot 1=\tilde L\cdot 1$ in~$A$. The requirement
 that $\tilde L$ exists amounts to saying that the ``function'' represented by
 $1\in A$ should be D-finite as a bivariate function in $x$ and~$t$, for if its
@@ -256,11 +256,11 @@ functions last year~\cite{..}, and an algorithm was also given there for
 computing such bases. We recall here the relevant definitions and properties.
 
 Although the elements of a generalized series ring $C[[[x-a]]]$ are formal
-objects, the series notation suggests to certain analogies with complex
+objects, the series notation suggests certain analogies with complex
 functions.  For simplicity, let us assume throughout that $C\subseteq\set
 R$. Terms $(x-a)^\alpha\log(x-a)^\beta$ or $(\tfrac1x)^\alpha\log(x)^\beta$ are
-called \emph{integral} if $\alpha\geq0$ and $\beta\geq0$ and not
-$\alpha=\beta=0$.  Integrality thus means that the corresponding complex
+called \emph{integral} if $\alpha>0$ or $\alpha=\beta=0$.
+Integrality thus means that the corresponding complex
 function does not diverge at the reference point~$a$ (the reference point is
 $\infty$ in the case of $(\tfrac1x)^\alpha\log(x)^\beta$). A series in
 $C[[[x-a]]]$ or $C[[[x^{-1}]]]$ is called integral if it only contains integral
@@ -271,7 +271,7 @@ asymptotic behaviour which agrees with $x^n$ for some negative integer~$n$.
 
 Let $L\in C(x)[D_x]$ be a fuchsian operator. An element $P\in A=C(x)[D_x]/\<L>$
 is called (locally) integral at $a\in C\cup\{\infty\}$ if for every solution $f$
-in $C[[[x-a]]]$ or $C[[[x^{-1}]]]$, respectively, the series $P\cdot f$ is
+of $L$ in $C[[[x-a]]]$ or $C[[[x^{-1}]]]$, respectively, the series $P\cdot f$ is
 integral. $P$~is called (globally) integral if it is locally integral at every
 $a\in C$ (``at all finite places''). Because of the Fuchs relation~\cite{..}, an
 element $P\in A$ is integral at every $a\in C\cup\{\infty\}$ if and only if it
@@ -292,14 +292,14 @@ fixed $a\in C\cup\{\infty\}$ forms a $C(x)_a$-module. A basis of this module is
 called a \emph{local integral basis} at $a$ for~$A$. The algorithm given in~\cite{..}
 for computing (global) integral bases computes local integral bases at finite
 points as an intermediate step. The computation of a local integral basis at
-infinity is also possible, either analogously, or by making a chance of
-variables $x'=1/x$ and computing a local integral basis at~$0$.
+infinity is also possible, either analogously, or by making a change of
+variables $\tilde x=1/x$ and computing a local integral basis at~$0$.
 
 An integral basis $\omega_1,\dots,\omega_n$ is always also a $C(x)$-vector space
 basis of~$A$. A key feature of integral bases is they make poles explicit. Writing
 an element $f\in A$ as a linear combination $f=\sum_{i=1}^n f_i\omega_i$ for some
-$f_i\in C(x)$, we have that $f$ has poles exactly where some of the $f_i$ have
-poles.
+$f_i\in C(x)$, we have that $f$ has a pole at $a\in C$ if and only if at least one
+of the $f_i$ has a pole there. 
 
 \begin{lemma}\label{lemma:1}
   Let $L$ be a fuchsian operator and let
@@ -316,8 +316,8 @@ poles.
   are integral.
 \end{proof}
 
-The lemma says in particular that any poles of the $f_i$ in a linear combination
-$\sum_{i=1}^n f_i\omega_i$ have no chance to cancel.
+The lemma says in particular that poles of the $f_i$ in a linear combination
+$\sum_{i=1}^n f_i\omega_i$ have no chance to cancel each other. 
 
 It is important to observe that integrality is not preserved by differentiation.
 For example, $x^{1/2}$ is integral but its derivative $\tfrac12 x^{-1/2}$ is
@@ -326,9 +326,9 @@ clear that differentiation of an integral element cannot produce multiple
 poles. More precisely, if $\nu$ is such that $f\in C[[[x-a]]]$ contains no term
 $(x-a)^\alpha\log(x-a)^\beta$ for any $\alpha<\nu$, then $f'$ contains no term
 $(x-a)^\alpha\log(x-a)^\beta$ for any $\alpha<\nu-1$, and if $f\in
-C[[[x^{-1}]]]$ contains no term $x^\alpha\log(x)^\beta$ for any $\alpha<\nu$,
+C[[[x^{-1}]]]$ contains no term $x^\alpha\log(x)^\beta$ for any $\alpha>\nu$,
 then $f'$ contains no term $x^\alpha\log(x)^\beta$ for any
-$\alpha<\nu-1$. Another consequence of the same observation is the following
+$\alpha>\nu-1$. Another consequence of the same observation is the following
 lemma.
 
 \begin{lemma}
@@ -377,9 +377,8 @@ of basis elements can cancel:
 \begin{proof}
   Let $r_1,\dots,r_n\in C(x)$ be such that $r_1\omega_1,\dots,r_n\omega_n$ is a
   local integral basis at infinity. Then $f=\sum_{i=1}^n
-  (f_ir_i^{-1})(r_i\omega_i)$ and $f$ is integral at infinity iff all
+  (f_ir_i^{-1})(r_i\omega_i)$ and by Lemma~\ref{lemma:1}, $f$~is integral at infinity iff all
   $f_ir_i^{-1}r_i\omega_i=f_i\omega_i$ are integral at infinity.
-  The claim now follows from Lemma~\ref{lemma:1}.
 \end{proof}
 
 \begin{lemma} \label{lemma:degM}
@@ -449,7 +448,7 @@ note that the theorem does not imply that the hermite remainder is uniquely dete
 $f$ and the basis (it is not). it only makes a statement about the integrable case.
 
 to make it true, we need to normalize the hermite remainder further. in view of the result
-of the previous section, investing additional computational seems pointless, because we have
+of the previous section, investing additional computational work seems pointless, because we have
 already shown that repeated hermite reduction suffices to detect the minimal order telescoper.
 in fact, the main point of the algorithm we discuss next is that it gives rise to a bound on
 the telescoper. we will obtain an independent proof of the bound that already appeared in \cite{GAZ}.
@@ -475,8 +474,8 @@ where~$a_i, d\in C[x]$. Applying Hermite reduction to~$\alpha$, we get
 \[\alpha = D_x(\beta) + \sum_{i=1}^n \frac{c_i\omega_i}{d^*e},\]
 where~$\beta\in K$, $d^*, e, c_i\in C[x]$, $\gcd(d^*, e)=1$ and~$d^*$ is squarefree.
 By the extended Euclidean algorithm, we compute~$u_i, v_i\in C[x]$ such that
-$\deg_x(v_i) < \deg_x(D^*)$ and
-\[c_i = u_i D^* + v_i Q.\]
+$\deg_x(v_i) < \deg_x(d^*)$ and
+\[c_i = u_i d^* + v_i Q.\]
 Then we get
 \[ \sum_{i=1}^n \frac{c_i\omega_i}{d^*e} =  \sum_{i=1}^n \left(\frac{u_i}{e} + \frac{v_i}{d^*}\right)\omega_i.\]
 In order to control the number of supporting monomials of~$u_i$'s, we now introduce the polynomial reduction.

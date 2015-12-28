@@ -135,9 +135,9 @@ without also constructing the corresponding certificate. This is interesting
 because certificates tend to be much larger than telescopers, and in some
 applications only the telescoper is of interest. This approach was first
 formulated for rational functions $f\in C(t,x)$ in~\cite{BCCL2010} and later
-generalized to rational functions in several variables~\cite{..}, to
-hyperexponential functions~\cite{..} and, for the shift case, to hypergeometric
-terms~\cite{..} and binomial sums~\cite{..}. In the present paper, we will extend
+generalized to rational functions in several variables~\cite{bostan13}, to
+hyperexponential functions~\cite{bostan13a} and, for the shift case, to hypergeometric
+terms~\cite{chen15a} and binomial sums~\cite{bostan15}. In the present paper, we will extend
 the approach to fuchsian D-finite functions.
 
 The basic principle of the general approach is as follows. Assume that the
@@ -159,7 +159,7 @@ In other words, $P=p_0+\cdots + p_rD_t^r$ is a telescoper.
 
 There are two ways to guarantee that this method works. The first consists in
 showing that $\{\,[f]:f\in D\,\}$ is a finite dimensional vector space over
-$\mathrm{Const}_x(D)$. This approach was taken in~\cite{..,..,..}. It has the
+$\mathrm{Const}_x(D)$. This approach was taken in~\cite{BCCL2010,bostan13a}. It has the
 nice additional feature that every bound for the dimension of this vector space
 gives rise to a bound for the order of the telescoper. In particular, it implies
 the existence of a telescoper. The second way requires that we already know for
@@ -171,12 +171,12 @@ in~$D$, so $[P\cdot f]=0$, and by linearity $[f]$, \dots, $[D_t^r\cdot f]$ are
 linearly dependent over $\mathrm{Const}_x(D)$. This means that the method won't
 miss any telescoper. In particular, this argument has the nice feature that we
 are guaranteed to find a telescoper of smallest possible order~$r$. This
-approach was taken in~\cite{..}.
+approach was taken in~\cite{chen15a}.
 
 Using an analog of Trager's Hermite reduction for algebraic
-functions~\cite{..,..}  adapted to fuchsian D-finite functions, we provide an
-algorithm for finding the minimal order telescoper in Section~\ref{..} using the
-first argument. We then proceed to describe in Section~\ref{..} an additional
+functions~\cite{trager84,geddes92}  adapted to fuchsian D-finite functions, we provide an
+algorithm for finding the minimal order telescoper in Section~\ref{sec:hermite} using the
+first argument. We then proceed to describe in Section~\ref{sec:polynomial} an additional
 reduction which in combination with the Hermite reduction ensures that the
 remainders live in a finite dimensional vector space [IF THE REDUCTION
 WORKS]. This gives a new proof of a bound for the order of the telescopers,
@@ -243,7 +243,7 @@ that $\tilde L$ exists amounts to saying that the ``function'' represented by
 $1\in A$ should be D-finite as a bivariate function in $x$ and~$t$, for if its
 annihilator in the operator algebra $k(t,x)[D_t,D_x]$ contains the operators $L$
 and $D_t-\tilde L$, then its Hilbert-dimension is zero, and this is the usual
-definition of D-finiteness~\cite{..,..}.  Note however that the existence of
+definition of D-finiteness in the case of several variables~\cite{zeilberger90,chyzak98,koutschan09,kauers14c}. 
 $\tilde L$ does not directly follow from the existence of~$L$. This is different
 from the case of algebraic function fields, where a single minimal polynomial $M$
 suffices even in the case of several variables.
@@ -252,7 +252,7 @@ suffices even in the case of several variables.
 
 Trager's Hermite reduction for algebraic functions rests on the notion of
 integral bases. The notion of integral bases has been generalized to D-finite
-functions last year~\cite{..}, and an algorithm was also given there for
+functions last year~\cite{kauers15b}, and an algorithm was also given there for
 computing such bases. We recall here the relevant definitions and properties.
 
 Although the elements of a generalized series ring $C[[[x-a]]]$ are formal
@@ -273,15 +273,15 @@ Let $L\in C(x)[D_x]$ be a fuchsian operator. An element $P\in A=C(x)[D_x]/\<L>$
 is called (locally) integral at $a\in C\cup\{\infty\}$ if for every solution $f$
 of $L$ in $C[[[x-a]]]$ or $C[[[x^{-1}]]]$, respectively, the series $P\cdot f$ is
 integral. $P$~is called (globally) integral if it is locally integral at every
-$a\in C$ (``at all finite places''). Because of the Fuchs relation~\cite{..}, an
+$a\in C$ (``at all finite places''). Because of the Fuchs relation~\cite{ince26}, an
 element $P\in A$ is integral at every $a\in C\cup\{\infty\}$ if and only if it
 is a constant (i.e., if $D_xP=0$ in~$A$).
 
 The set of all integral elements $P\in A$ forms a $C[x]$-submodule of~$A$.
 A basis $\{\omega_1,\dots,\omega_n\}$ of this module is called an \emph{integral basis}
-for~$A$. In~\cite{..} an algorithm was given which computes an integral basis
+for~$A$. In~\cite{kauers15b} an algorithm was given which computes an integral basis
 for a given~$A$. This algorithm is a generalization of van Hoeij's
-algorithm~\cite{..} for computing integral bases of algebraic function
+algorithm~\cite{kauers15b} for computing integral bases of algebraic function
 fields.
 
 For a fixed $a\in C$, let $C(x)_a$ be the ring of rational functions $p/q$
@@ -289,7 +289,7 @@ with $p(a)=0$ and $q(a)\neq0$, and write $C(x)_\infty$ for the ring of all
 rational functions $p/q$ with $\deg(p)<\deg(q)$ (proper rational
 functions). Then the set of all $P\in A$ which are locally integral at some
 fixed $a\in C\cup\{\infty\}$ forms a $C(x)_a$-module. A basis of this module is
-called a \emph{local integral basis} at $a$ for~$A$. The algorithm given in~\cite{..}
+called a \emph{local integral basis} at $a$ for~$A$. The algorithm given in~\cite{kauers15b}
 for computing (global) integral bases computes local integral bases at finite
 points as an intermediate step. The computation of a local integral basis at
 infinity is also possible, either analogously, or by making a change of
@@ -359,7 +359,7 @@ called \emph{normal} at $a\in C\cup\{\infty\}$ if there exist $r_1,\dots,r_n\in
 C(x)$ such that $r_1\omega_1,\dots,r_n\omega_n$ is a local integral basis
 at~$a$. Trager shows for the case of algebraic function fields how to construct
 an integral basis which is normal at infinity from a given integral basis and
-a given local integral basis at infinity~\cite{..}. The same procedure also applies
+a given local integral basis at infinity~\cite{trager84}. The same procedure also applies
 in the present situation. It works as follows.
 
 /// TODO.
@@ -388,7 +388,7 @@ of basis elements can cancel:
   // TOOD.
 \end{proof}
 
-\section{Hermite Reduction}
+\section{Hermite Reduction}\label{sec:hermite}
 
 work out trager's hermite reduction for the fuchsian d-finite case. (actually, it is
 literally the same as in the algebraic case.)
@@ -437,10 +437,10 @@ This completes the proof that $g+H$ has a pole at infinity. \rule{1ex}{1ex}
 
 remark: double root at infinity can always be achieved by a change of variables.
 double root persists by differentiating wrt. $t$. consequence: creative telescoping works.
-(note: it is known that telescopers exist~\cite{..,..,..}).
+(note: it is known that telescopers exist~\cite{zeilberger90,chyzak00}).
 we find the minimal telescoper.
 
-\section{Polynomial Reduction}
+\section{Polynomial Reduction}\label{sec:polynomial}
 
 second approach: we wish to show that the hermite remainders belong to a finite dimensional
 vector space. in fact, this is not true.
@@ -451,7 +451,7 @@ to make it true, we need to normalize the hermite remainder further. in view of 
 of the previous section, investing additional computational work seems pointless, because we have
 already shown that repeated hermite reduction suffices to detect the minimal order telescoper.
 in fact, the main point of the algorithm we discuss next is that it gives rise to a bound on
-the telescoper. we will obtain an independent proof of the bound that already appeared in \cite{GAZ}.
+the telescoper. we will obtain an independent proof of the bound that already appeared in \cite{chen14a}.
 
 ===== shaoshi's text ahead =====
 

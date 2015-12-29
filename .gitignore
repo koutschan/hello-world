@@ -1,5 +1,6 @@
 ## Added by CK
 *.nb
+*~
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

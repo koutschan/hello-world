@@ -332,7 +332,7 @@ then $f'$ contains no term $x^\alpha\log(x)^\beta$ for any
 $\alpha>\nu-1$. Another consequence of the same observation is the following
 lemma.
 
-\begin{lemma}
+\begin{lemma}\label{lemma:e}
   Let $L$ be a fuchsian operator and let
   $\omega_1,\dots,\omega_n$ be an integral basis of $A=C(x)[D_x]/\<L>$.
   Let $e\in C[x]$ and
@@ -419,50 +419,112 @@ This lemma will be used in Section~\ref{sec:polynomial}.
 
 \section{Hermite Reduction}\label{sec:hermite}
 
-work out trager's hermite reduction for the fuchsian D-finite case. (actually, it is
-literally the same as in the algebraic case.)
+Hermite reduction and its generalizations are the key step in many integration
+algorithms, including the telescoping algorithm presented in this paper. It
+turns out that the Hermite reduction for fuchsian D-finite functions is
+literally the same as Trager's reduction for algebraic
+functions~\cite{trager84}.
 
-make no assumption on the regularity at infinity yet, because it is not needed for the
-reduction but only for the theorem. also the assumption about ``normal at infinity'' is
-not needed for the algorithm.
+Let $L\in C(x)[D_x]$ be a fuchsian differential operator of order~$n$ and
+$\{\omega_1,\ldots,\omega_n\}$ be an integral basis for $A=C(x)[D_x]/\<L>$.
+Further let $e,m_{i,j}\in C[x]$ ($1\leq i,j\leq n$) be such that
+$e\omega_i'=\sum_{j=1}^n m_{i,j}\omega_i$ and
+$\gcd(e,m_{1,1},m_{1,2},\ldots,m_{n,n})=1$. For describing the Hermite
+reduction we fix a D-finite ``function'' $f\in A$ and represent it using the
+integral basis, i.e., $f=\sum_{i=1}^n (f_i/d)\,\omega_i$ with
+$d,f_1,\ldots,f_n\in C[x]$. As differentiating the $\omega_i$ can introduce
+denominators, namely the factors of~$e$, it is convenient to consider those
+denominators from the very beginning on, and this means that we want to assume
+$e\mid d$. Additionally we assume that $d$ is the polynomial of lowest degree
+satisfying these properties. % TODO: Do we really need this?
+Note that $\gcd(d,f_1,\ldots,f_n)$ may be nontrivial.
 
-example.
+Let $m$ be the highest multiplicity of some root of~$d$, i.e., there is no
+polynomial~$w$ of positive degree such that $w^\ell\mid d$ for some $\ell>m$.
+Write $d=uv^m$ with $u,v\in C[x]$ and where $v$ is squarefree of positive
+degree.  It follows that $\gcd(u,v)=1$ and $\gcd(v,v')=1$. By
+Lemma~\ref{lemma:e} the polynomial~$e$ is squarefree and therefore $e\mid uv$.
+A single step of the Hermite reduction consists of lowering the multiplicity
+of~$v$ in the denominator by subtracting a suitable integrable function
+from~$f$. More precisely, the input function~$f$ is decomposed as follows:
+\begin{equation}\label{eq:hred}
+  \sum_{i=1}^n \frac{f_i}{uv^m}\omega_i =
+  \biggl(\sum_{i=1}^n\frac{g_i}{v^{m-1}}\omega_i\biggr)' +
+  \sum_{i=1}^n \frac{h_i}{uv^{m-1}}\omega_i.
+\end{equation}
+In order to determine the unknown polynomials $g_1,\ldots,g_n$ and
+$h_1,\ldots,h_n$, the denominators in the above equation are cleared
+\[
+  \sum_{i=1}^n f_i\omega_i = \sum_{i=1}^n \biggl( uvg_i'\omega_i +
+  uv^mg_i\left(\frac{\omega_i}{v^{m-1}}\right)' + vh_i\omega_i \biggr),
+\]
+and then the equation is reduced modulo~$v$:
+\begin{equation}\label{eq:modv}
+  \sum_{i=1}^n f_i\omega_i =
+  \sum_{i=1}^n ug_i \bigl( v\omega_i' - (m-1)v'\omega_i \bigr) \mod v.
+\end{equation}
+TODO: at this point we have to argue that~\eqref{eq:modv} admits a unique solution.
 
-theorem: if $f$ has a double root at infinity then the hermite remainder wrt an integral
-basis that is normal at infinity is zero iff $f$ is integrable in the ``algebra''.
+Since $e\mid uv$ we can write $uv=ew$ for some $w\in C[x]$. By rewriting the
+derivatives of the $\omega_i$ in terms of the integral basis,
+Equation~\eqref{eq:modv} turns into
+\[
+  \sum_{i=1}^n f_i\omega_i =
+  \sum_{i=1}^n g_i\, \biggl( w\sum_{j=1}^n m_{i,j}\omega_j - (m-1)uv'\omega_i \biggr) \mod v.
+\]
+Coefficient comparison with respect to $\omega_1,\ldots,\omega_n$ yields a
+system of linear equations for $g_1,\ldots,g_n$. Once they are determined, the
+remaining unknowns $h_1,\ldots,h_n$ can be obtained from
+Equation~\eqref{eq:hred}.
 
-/// begin paste proof from note ///
+By a repeated application of the reduction step described above
+one can decompose any fuchsian D-finite function $f\in A$ as
+$f=g'+h$ where $h=\sum_{i=1}^n (h_i/v)\,\omega_i$ has a squarefree
+denominator~$v$. This gives rise to the reduction map $[f]=h$.
 
-``$\Rightarrow$'' is obvious, $g$ is the desired integral.
+\begin{example}
+TODO
+\end{example}
 
-``$\Leftarrow$''. Assume that $f$ is integrable. Then also $h$ is integrable.
-Let $H=\int h$.
-In order to show that $h=0$, we show that $H$ is constant.
-To show that $H$ is constant, we show that it has neither finite poles nor a pole at infinity.
+\begin{theorem}
+Let $f\in A$ be a fuchsian D-finite function that has a double root at
+infinity, and let $B=\{\omega_1,\ldots,\omega_n\}$ be an integral basis for~$A$
+that is normal at infinity.
+% Then the Hermite remainder $[f]$ w.r.t.~$B$
+If $f=g'+h$ is the result of the above-described Hermite reduction,
+then $h$ is zero if and only if $f$ is integrable in~$A$.
+\end{theorem}
+\begin{proof}
+The direction ``$\Rightarrow$'' is trivial. To show the implication
+``$\Leftarrow$'' assume that $f$ is integrable. From $f=g'+h$ it follows that
+also $h$ is integrable; let $H=\int h$.  In order to show that $h=0$, we show
+that $H$ is constant.  To show that $H$ is constant, we show that it has
+neither finite poles nor a pole at infinity.
 
-It is clear that $H$ has no finite poles because $h$ has only ``simple'' poles (i.e., all Puiseux
-expansions of $h$ have only exponents $\geq-1$).
+It is clear that $H$ has no finite poles because $h$ has only ``simple'' poles
+(i.e., all series expansions of $h$ have only terms of the form
+$(x-a)^{-1}$ or $(x-a)^\alpha\log(x-a)^\beta$ with $\alpha>-1$).
 
-We will show below that when $H$ has a pole at infinity, then also $g+H$ must have a pole at infinity.
-Since $f=g'+h=(g+H)'$ has at least a double root at infinity, $g+H$ has at least
-a single root at infinity. This excludes the possibility that $H$ has a pole at infinity.
+We will show below that when $H$ has a pole at infinity, then also $g+H$ must
+have a pole at infinity.  Since $f=g'+h=(g+H)'$ has at least a double root at
+infinity, $g+H$ has at least a single root at infinity. This excludes the
+possibility that $H$ has a pole at infinity.
 
 Assume now that $H$ has a pole at infinity. We show that $g+H$ has also a pole at infinity.
 Since $H$ has no finite poles, $H$ is integral and we can write it as
-$H=p_1w_1+\cdots+p_nw_n$ with $p_i\in C[x]$.
-Since we assume that $H$ has a pole at infinity, it follows that (a) one of the $p_i$ has positive degree
-or (b) some nonconstant $w_i$ has a nonzero coefficient~$p_i$.
-We know that $g=\sum_i b_iw_i$ with proper rational functions~$b_i$ (by how the algorithm works).
-Consider $g+H=\sum_i (b_i+p_i)w_i$.
-In case (a) there is some $i$ for which $b_i+p_i$ has a pole at infinity, then $(b_i+p_i)w_i$ has a pole
-at infinity (because $w_i$ has no poles at finite places and therefore no zero at infinity),
-and in case (b), there is some $i$ with $p_i\neq 0$ and $w_i$ is non-constant, then $(b_i+p_i)w_i$ has a
-pole at infinity.
-In both cases, therefore, $g+H$ has a pole at infinity because the basis is normal
-at infinity (``MAIN PROPERTY'').
-This completes the proof that $g+H$ has a pole at infinity. \rule{1ex}{1ex}
-
-/// end paste proof from note ///
+$H=p_1\omega_1+\cdots+p_n\omega_n$ with $p_i\in C[x]$.
+Since we assume that $H$ has a pole at infinity, it follows by Lemma~\ref{lemma:3} that
+(a) one of the $p_i$ has positive degree or
+(b) some non-constant $\omega_i$ has a nonzero coefficient~$p_i$.
+From how the Hermite reduction works, we know that $g=\sum_i b_i\omega_i$
+with proper rational functions~$b_i$. Consider now $g+H=\sum_i (b_i+p_i)\omega_i$.
+In case (a) there is some $i$ for which $b_i+p_i$ has a pole at infinity,
+and thus $(b_i+p_i)\omega_i$ has a pole at infinity (because $\omega_i$ has
+no poles at finite places and therefore no zero at infinity).
+In case (b), there is some $i$ with $p_i\neq0$ and $\omega_i$ is non-constant,
+which implies that $(b_i+p_i)\omega_i$ has a pole at infinity.
+In both cases, therefore, $g+H$ has a pole at infinity by Lemma~\ref{lemma:3}.
+\end{proof}
 
 remark: double root at infinity can always be achieved by a change of variables.
 double root persists by differentiating wrt. $t$. consequence: creative telescoping works.

@@ -149,14 +149,14 @@ $f\in D$ there exists a $g\in D$ with $f-[f]=g'$. Such a map is called a
 \emph{reduction.} For example, in $D=C(t,x)$ Hermite reduction produces for
 every $f\in D$ some $g$ such that $f-g'$ is either zero or a rational function
 with a square-free denominator. In this case, we can take $[f]=f-g'$.
-In order to find a telescoper, we can compute $[f]$, $[D_t\cdot f]$, $[D_t^2\cdot f]$, \dots,
+In order to find a telescoper, we can compute $[f]$, $[\partial_t\cdot f]$, $[\partial_t^2\cdot f]$, \dots,
 until we find that they are linearly dependent over $\mathrm{Const}_x(D)$.
 When we find a relation
-$p_0[f] + \cdots + p_r[D_t^r\cdot f] = 0$,
+$p_0[f] + \cdots + p_r[\partial_t^r\cdot f] = 0$,
 then, by linearity,
-$[p_0 f + \cdots + p_r D_t^r\cdot f] = 0$,
-and then, by definition of $[\cdot]$, there exists a $g\in D$ such that $(p_0+\cdots + p_rD_t^r)\cdot f=g'$.
-In other words, $P=p_0+\cdots + p_rD_t^r$ is a telescoper.
+$[p_0 f + \cdots + p_r \partial_t^r\cdot f] = 0$,
+and then, by definition of $[\cdot]$, there exists a $g\in D$ such that $(p_0+\cdots + p_r\partial_t^r)\cdot f=g'$.
+In other words, $P=p_0+\cdots + p_r\partial_t^r$ is a telescoper.
 
 There are two ways to guarantee that this method works. The first consists in
 showing that $\{\,[f]:f\in D\,\}$ is a finite-dimensional vector space over
@@ -167,8 +167,8 @@ the existence of a telescoper. The second way requires that we already know for
 other reasons that a telescoper exists. The idea is then to show that the
 reduction $[\cdot]$ has the property that when $f\in D$ is such that there
 exists a $g\in D$ with $g'=f$, then $[f]=0$. If this is the case and
-$P=p_0+\cdots+p_rD_t^r$ is a telescoper for~$f$, then $P\cdot f$ is integrable
-in~$D$, so $[P\cdot f]=0$, and by linearity $[f]$, \dots, $[D_t^r\cdot f]$ are
+$P=p_0+\cdots+p_r\partial_t^r$ is a telescoper for~$f$, then $P\cdot f$ is integrable
+in~$D$, so $[P\cdot f]=0$, and by linearity $[f]$, \dots, $[\partial_t^r\cdot f]$ are
 linearly dependent over $\mathrm{Const}_x(D)$. This means that the method won't
 miss any telescoper. In particular, this argument has the nice feature that we
 are guaranteed to find a telescoper of smallest possible order~$r$. This
@@ -179,76 +179,88 @@ functions~\cite{trager84,geddes92}  adapted to fuchsian D-finite functions, we p
 algorithm for finding the minimal order telescoper in Section~\ref{sec:hermite} using the
 first argument. We then proceed to describe in Section~\ref{sec:polynomial} an additional
 reduction which in combination with the Hermite reduction ensures that the
-remainders live in a finite-dimensional vector space [IF THE REDUCTION
-WORKS]. This gives a new proof of a bound for the order of the telescopers,
+remainders live in a finite-dimensional vector space.
+This gives a new proof of a bound for the order of the telescopers,
 and in particular an independent proof for their existence.
 
 \section{Fuchsian D-finite Functions}
 
 Let $C$ be a field. We consider linear differential operators
-$L=\ell_0+\cdots+\ell_rD_x^r$ with $\ell_0,\dots,\ell_r$ belonging to some ring
-$R$ containing $C$.
-Typical choices for $R$ will be $C[x]$ or $C[[x]]$ or~$C(x)$.
-When $\ell_r\neq0$, we say that $\ord(L):=r$ is the order of~$L$.
+$L=\ell_0+\cdots+\ell_n\partial_x^n$ with $\ell_0,\dots,\ell_n$ belonging to some ring
+$R$ containing~$C$.
+Typical choices for $R$ will be $C[x]$ or~$C(x)$.
+When $\ell_n\neq0$, we say that $\ord(L):=n$ is the order of~$L$.
 
-We write $R[D_x]$ for the algebra consisting of all these operators, together
+We write $R[\partial_x]$ for the algebra consisting of all these operators, together
 with the usual addition and the unique non-commutative multiplication satisfying
-$D_xc=cD_x$ for all $c\in C$ and $D_xx=xD_x+1$.
-The algebra $R[D_x]$ acts on a differential $R$-module~$F$ via
+$\partial_xc=c\partial_x$ for all $c\in C$ and $\partial_xx=x\partial_x+1$.
+The algebra $R[\partial_x]$ acts on a differential $R$-module~$F$ via
 \[
-  (\ell_0+\ell_1D_x+\cdots+\ell_rD_x^r)\cdot f=
-   \ell_0f + \ell_1f' + \cdots + \ell_r f^{(r)}.
+  (\ell_0+\ell_1\partial_x+\cdots+\ell_n\partial_x^n)\cdot f=
+   \ell_0f + \ell_1f' + \cdots + \ell_n f^{(n)}.
 \]
-An element $y\in F$ is called a solution of an operator $L\in R[D_x]$ if
+An element $y\in F$ is called a solution of an operator $L\in R[\partial_x]$ if
 $L\cdot y=0$.
 
+By $\bar C$ we denote some algebraically closed field containing~$C$ (not necessarily the smallest). 
 An operator $L$ of order~$r$ is called fuchsian at a point $a\in\bar C$ if
 it admits $r$ linearly independent solutions in
 \[
-  \bar C[[[x-a]]] := \bigcup_{\nu\in C} (x-a)^\nu\bar C[[x-a]][\log(x-a)],
+  C[[[x-a]]] := \bigcup_{\nu\in C} (x-a)^\nu\bar C[[x-a]][\log(x-a)].
 \]
-where $\bar C$ denotes the algebraic closure of~$C$. It is called fuchsian
-at $\infty$ if it admits $r$ linearly independent solutions in
+It is called fuchsian at $\infty$ if it admits $r$ linearly independent solutions in
 \[
-  \bar C[[[x^{-1}]]] := \bigcup_{\nu\in C} x^{-\nu} \bar C[[x^{-1}]][\log(x)].
+  C[[[x^{-1}]]] := \bigcup_{\nu\in C} x^{-\nu} \bar C[[x^{-1}]][\log(x)].
 \]
 It it simply called \emph{fuchsian} if it is fuchsian at all $a\in\bar C\cup\{\infty\}$.
+Note that the exponents $\nu$ are restricted to~$C$, not to larger field~$\bar C$.
 
-For a fixed fuchsian operator $L$, we will consider the left $R[D_x]$-module
-$A=R[D_x]/\<L>$, where $\<L>$ denotes the left ideal generated by~$L$ in
-$R[D_x]$.  Then $1\in A$ is a solution of~$L$, because we have $L\cdot 1=L=0$
+For a fixed fuchsian operator $L$, we will consider the left $R[\partial_x]$-module
+$A=R[\partial_x]/\<L>$, where $\<L>$ denotes the left ideal generated by~$L$ in
+$R[\partial_x]$.  Then $1\in A$ is a solution of~$L$, because we have $L\cdot 1=L=0$
 in~$A$. We can say that $A$ consists of all the ``functions'' $f$ which can be
 obtained from a ``generic'' solution~$y$ of $L$ by applying some operator $P\in
-R[D_x]$ to it. When $R$ is a field, then $A$ is an $R$-vector space of
-dimension~$r=\ord(L)$, generated by $1,D_x,\dots,D_x^{r-1}$.
+R[\partial_x]$ to it. When $R$ is a field, then $A$ is an $R$-vector space of
+dimension~$r=\ord(L)$, generated by $1,\partial_x,\dots,\partial_x^{r-1}$.
 
 It is instructive to compare this setup to the situation for algebraic
-functions. Comparing $A=R[D_x]/\<L>$ to an algebraic function field $R[Y]/\<M>$
+functions. Comparing $A=R[\partial_x]/\<L>$ to an algebraic function field $R[Y]/\<M>$
 (when $R$ is a field), our operator $L$ plays the role of the minimal
 polynomial~$M$. In the algebraic case, $Y$~is a formal solution of the equation
 $M=0$, similar as $1\in A$ is a formal solution of~$L$. Besides these formal
-solutions there are, for each fixed $a\in\bar C$, exactly $\deg(M)$ different
+solutions there are, for each fixed $a\in\bar C$, exactly $\deg_Y(M)$ different
 Puiseux series solutions of $M=0$ at places above~$a$. They correspond in the
 differential setting to the series solutions of $L$ in $\bar C[[[x-a]]]$, which
 generate a $\bar C$-vector space of dimension $\ord(L)$.
 
-In the context of creative telescoping, we use $C=k(t)$ as constant field, where
-$k$ is some field and $t$ is another variable, and $R$ is typically~$C(x)$.
-Integration will always be with respect to~$x$, but
-besides the derivation $D_x$ there is now also the derivation with respect
-to~$t$. The action of $D_t$ on elements of $\bar C[[[x-a]]]$ or $\bar
-C[[[x^{-1}]]]$ is defined coefficient-wise. It is clear that $D_x$ and $D_t$
-commute. For the action of $D_t$ on~$A$, we assume that $D_t\cdot D_x = D_x\cdot
-(D_t\cdot 1)$ in $A$ and that in addition to $L$ we know some other operator $\tilde
-L\in k(t,x)[D_x]$ such that $D_t\cdot 1=\tilde L\cdot 1$ in~$A$. The requirement
-that $\tilde L$ exists amounts to saying that the ``function'' represented by
-$1\in A$ should be D-finite as a bivariate function in $x$ and~$t$, for if its
-annihilator in the operator algebra $k(t,x)[D_t,D_x]$ contains the operators $L$
-and $D_t-\tilde L$, then its Hilbert dimension is zero, and this is the usual
-definition of D-finiteness in the case of several variables~\cite{zeilberger90,chyzak98,koutschan09,kauers14c}.
-$\tilde L$ does not directly follow from the existence of~$L$. This is different
-from the case of algebraic function fields, where a single minimal polynomial $M$
+In the context of creative telescoping, we let $\bar C$ be some algebraically
+closed field containing the rational function field $K=C(t)$, and we
+use $R=K(x)$ instead of~$C(x)$. Integration will always be with respect to~$x$, but
+besides the derivation $\partial_x$ there is now also the derivation with respect
+to~$t$. The notation $f'$ will always refer to the derivative of $f$
+with respect to~$x$. In addition to the operator algebra $R[\partial_x]$, we consider the
+operator algebra $R[\partial_x,\partial_t]$, in which $\partial_x,\partial_t$
+commute with each other (although the need not commute with elements of~$R$). 
+
+The action of $R[\partial_x]$ on $C[[[x-a]]]$ or $C[[[x^{-1}]]]$ is extended
+to $R[\partial_t,\partial_x]$ by letting $\partial_t$ act coefficient-wise.
+To extend the action of $R[\partial_x]$ on $A=R[\partial_x]/\<L>$ to an action of
+$R[\partial_t,\partial_x]$ on~$A$, we assume that there is some other
+operator $\tilde L\in R[\partial_x]$ such that $\partial_t\cdot1=\tilde L\cdot 1$.
+In order to have a well-defined action of $R[\partial_x,\partial_t]$ on some module~$F$,
+we need to have
+\[
+\partial_x\cdot(\partial_y\cdot f)=(\partial_x\partial_t)\cdot f=(\partial_t\partial_x)\cdot f=\partial_t\cdot(\partial_x\cdot f)
+\]
+for all $f\in F$. It is clear that this is satisfied for the action on series domains,
+but for the proposed action on $A$ it implies an implicit restriction on the possible
+choices of~$\tilde L$. Even worse, for some $L$ it may be that no $\tilde L$ exists.
+Note that this is different from the case of algebraic function fields, where a single minimal polynomial $M$
 suffices even in the case of several variables.
+In the differential case, the requirement that $\tilde L$ exists amounts to saying that the element $1\in A$ is
+D-finite with respect to the action of $R[\partial_x,\partial_t]$, for if its annihilator $\mathfrak{a}$
+contains the operators $L$ and $\partial_t-\tilde L$, then we have $\dim\mathfrak{a}=0$, and this is the usual
+definition of D-finiteness in the case of several variables~\cite{zeilberger90,chyzak98,koutschan09,kauers14c}.
 
 \section{Integral Bases}
 
@@ -271,79 +283,68 @@ point.  Note that in this terminology also $1/\sqrt{x}$ and $\log(x)$ have
 ``poles'' at~$0$, although the usual terminology reserves the word pole for
 asymptotic behaviour which agrees with $x^n$ for some negative integer~$n$.
 
-Note also that integrality at $a\in C$ is not preserved by differentiation,
+Note also that integrality at $a\in\bar C$ is not preserved by differentiation,
 but if $f$ is integral at~$a$, then so is $(x-a)f'$. Somewhat conversely,
 integrality at infinity is preserved by differentiation, we even have that
 when $f$ is integral at infinity, then not only $f'$ but also $xf'$ is
 integral at infinity. 
 
-Let $L\in C(x)[D_x]$ be a fuchsian operator. An element $P\in A=C(x)[D_x]/\<L>$
-is called (locally) integral at $a\in C\cup\{\infty\}$ if for every solution $f$
-of $L$ in $C[[[x-a]]]$ or $C[[[x^{-1}]]]$, respectively, the series $P\cdot f$ is
+Let $K$ be some field with $C\subseteq K\subseteq\bar C$. 
+Let $L\in K(x)[\partial_x]$ be a fuchsian operator. An element $P\in A=K(x)[\partial_x]/\<L>$
+is called (locally) integral at $a\in\bar C\cup\{\infty\}$ if for every solution $y$
+of $L$ in $C[[[x-a]]]$ or $C[[[x^{-1}]]]$, respectively, the series $P\cdot y$ is
 integral. $P$~is called (globally) integral if it is locally integral at every
-$a\in C$ (``at all finite places''). Because of the Fuchs relation~\cite{ince26}, an
-element $P\in A$ is integral at every $a\in C\cup\{\infty\}$ if and only if it
-is a constant (i.e., if $D_xP=0$ in~$A$).
+$a\in\bar C$ (``at all finite places''). Because of the Fuchs relation~\cite{ince26}, an
+element $P\in A$ is integral at every $a\in\bar C\cup\{\infty\}$ if and only if it
+is a constant (i.e., if $\partial_xP=0$ in~$A$).
 
-The set of all integral elements $P\in A$ forms a $C[x]$-submodule of~$A$.
+The set of all integral elements $P\in A$ forms a $K[x]$-submodule of~$A$.
 A basis $\{\omega_1,\dots,\omega_n\}$ of this module is called an \emph{integral basis}
 for~$A$. In~\cite{kauers15b} an algorithm was given which computes an integral basis
 for a given~$A$. This algorithm is a generalization of van Hoeij's
 algorithm~\cite{vanHoeij94} for computing integral bases of algebraic function
 fields.
 
-For a fixed $a\in C$, let $C(x)_a$ be the ring of rational functions $p/q$
-with $q(a)\neq0$, and write $C(x)_\infty$ for the ring of all
-rational functions $p/q$ with $\deg(p)\leq\deg(q)$.
+For a fixed $a\in\bar C$, let $\bar C(x)_a$ be the ring of rational functions $p/q$
+with $q(a)\neq0$, and write $\bar C(x)_\infty$ for the ring of all
+rational functions $p/q$ with $\deg_x(p)\leq\deg_x(q)$.
 Then the set of all $P\in A$ which are locally integral at some
-fixed $a\in C\cup\{\infty\}$ forms a $C(x)_a$-module. A basis of this module is
+fixed $a\in\bar C\cup\{\infty\}$ forms a $\bar C(x)_a$-module. A basis of this module is
 called a \emph{local integral basis} at $a$ for~$A$. The algorithm given in~\cite{kauers15b}
 for computing (global) integral bases computes local integral bases at finite
 points as an intermediate step. The computation of a local integral basis at
 infinity is also possible, either analogously, or by making a change of
 variables $\tilde x=1/x$ and computing a local integral basis at~$0$.
 
-An integral basis $\omega_1,\dots,\omega_n$ is always also a $C(x)$-vector space
+An integral basis $\omega_1,\dots,\omega_n$ is always also a $K(x)$-vector space
 basis of~$A$. A key feature of integral bases is that they make poles explicit. Writing
 an element $f\in A$ as a linear combination $f=\sum_{i=1}^n f_i\omega_i$ for some
-$f_i\in C(x)$, we have that $f$ has a pole at $a\in C$ if and only if at least one
+$f_i\in K(x)$, we have that $f$ has a pole at $a\in\bar C$ if and only if at least one
 of the $f_i$ has a pole there.
 
 \begin{lemma}\label{lemma:1}
   Let $L$ be a fuchsian operator and let
-  $\omega_1,\dots,\omega_n$ be a local integral basis of $A=C(x)[D_x]/\<L>$ at $a\in C\cup\{\infty\}$.
-  Let $f\in A$ and $f_1,\dots,f_n\in C(x)$ be such that $f=\sum_{i=1}^nf_i\omega_i$.
+  $\omega_1,\dots,\omega_n$ be a local integral basis of $A=K(x)[\partial_x]/\<L>$ at $a\in\bar C\cup\{\infty\}$.
+  Let $f\in A$ and $f_1,\dots,f_n\in K(x)$ be such that $f=\sum_{i=1}^nf_i\omega_i$.
   Then $f$ is integral at $a$ if and only if each $f_i\omega_i$ is integral at~$a$.
 \end{lemma}
 \begin{proof}
   The direction ``$\Rightarrow$'' is obvious. To show ``$\Leftarrow$'', suppose
-  that $f$ is integral at~$a$. Then there exist $w_1,\dots,w_n\in C(x)_a$ such that
+  that $f$ is integral at~$a$. Then there exist $w_1,\dots,w_n\in\bar C(x)_a$ such that
   $f=\sum_{i=1}^nw_i\omega_i$. Thus $\sum_{i=1}^n(w_i-f_i)\omega_i=0$, and then
   $w_i=f_i$ for all $i$, because $\omega_1,\dots,\omega_n$ is a basis.
-  As elements of~$C(x)_a$, the $f_i$ are integral at~$a$, and hence also all the $f_i\omega_i$
+  As elements of $\bar C(x)_a$, the $f_i$ are integral at~$a$, and hence also all the $f_i\omega_i$
   are integral at~$a$.
 \end{proof}
 
 The lemma says in particular that poles of the $f_i$ in a linear combination
 $\sum_{i=1}^n f_i\omega_i$ have no chance to cancel each other.
 
-It is important to observe that integrality is not preserved by differentiation.
-For example, $x^{1/2}$ is integral but its derivative $\tfrac12 x^{-1/2}$ is
-not. However, since differentiation of series is defined term by term, it is
-clear that differentiation of an integral element cannot produce multiple
-poles. More precisely, if $\nu$ is such that $f\in C[[[x-a]]]$ contains no term
-$(x-a)^\alpha\log(x-a)^\beta$ for any $\alpha<\nu$, then $f'$ contains no term
-$(x-a)^\alpha\log(x-a)^\beta$ for any $\alpha<\nu-1$, and if $f\in
-C[[[x^{-1}]]]$ contains no term $x^\alpha\log(x)^\beta$ for any $\alpha>\nu$,
-then $f'$ contains no term $x^\alpha\log(x)^\beta$ for any
-$\alpha>\nu-1$. Another consequence of the same observation is the following
-lemma.
-
 \begin{lemma}\label{lemma:e}
   Let $L$ be a fuchsian operator and let
-  $\omega_1,\dots,\omega_n$ be an integral basis of $A=C(x)[D_x]/\<L>$.
-  Let $e\in C[x]$ and
-  $M=((m_{i,j}))_{i,j=1}^n\in C[x]^{n\times n}$ be such that
+  $\omega_1,\dots,\omega_n$ be an integral basis of $A=K(x)[\partial_x]/\<L>$.
+  Let $e\in K[x]$ and
+  $M=((m_{i,j}))_{i,j=1}^n\in K[x]^{n\times n}$ be such that
   \[
     e\,\omega_i'=\sum_{j=1}^n m_{i,j}\omega_j
   \]
@@ -355,7 +356,7 @@ lemma.
   Since $\omega_i$ is integral, it is in particular locally integral at~$a$.
   Therefore $(x-a)\omega_i'$ is locally integral at~$a$.
   Since $\omega_1,\dots,\omega_n$ is an integral basis, it follows that
-  $(x-a)m_{i,j}/e\in C(x)_a$ for all~$i,j$.
+  $(x-a)m_{i,j}/e\in\bar C(x)_a$ for all~$i,j$.
   Because of $\gcd(e,m_{1,1},\dots,m_{n,n})=1$, no factor $x-a$ of $e$
   can be canceled by all the~$m_{i,j}$.
   Therefore the factor $x-a$ can appear in $e$ only once.
@@ -363,39 +364,40 @@ lemma.
 
 \begin{lemma} \label{lemma:degM}
   Let $L$ be a fuchsian operator and let $\omega_1,\dots,\omega_n$ be a local integral
-  basis at infinity of $A=C(x)[D_x]/\<L>$. Let $e\in C[x]$ and $M=((m_{i,j}))_{i,j=1}^n\in C[x]^{n\times n}$
-  be defined as in Lemma~\ref{lemma:e}. Then $\deg(m_{i,j})<\deg e$ for all $i,j$.
+  basis at infinity of $A=K(x)[\partial_x]/\<L>$. Let $e\in K[x]$ and $M=((m_{i,j}))_{i,j=1}^n\in K[x]^{n\times n}$
+  be defined as in Lemma~\ref{lemma:e}. Then $\deg_x(m_{i,j})<\deg_x(e)$ for all $i,j$.
 \end{lemma}
 \begin{proof}
   Since every $\omega_i$ is local integral at infinity, so is every $x\,\omega_i'$.
   Since $\omega_1,\dots,\omega_n$ is an integral basis at infinity, it follows that
-  $xm_{i,j}/e\in C(x)_\infty$ for all~$i,j$. This means that $1+\deg(m_{i,j})\leq\deg(e)$
-  for all~$i,j$, and therefore $\deg(m_{i,j})<\deg(e)$, as claimed.
+  $xm_{i,j}/e\in\bar C(x)_\infty$ for all~$i,j$. This means that $1+\deg_x(m_{i,j})\leq\deg_x(e)$
+  for all~$i,j$, and therefore $\deg_x(m_{i,j})<\deg_x(e)$, as claimed.
 \end{proof}
 
-A $C(x)$-vector space basis $\omega_1,\dots,\omega_n$ of $C(x)[D_x]/\<L>$ is
-called \emph{normal} at $a\in C\cup\{\infty\}$ if there exist $r_1,\dots,r_n\in
-C(x)$ such that $r_1\omega_1,\dots,r_n\omega_n$ is a local integral basis
+A $K(x)$-vector space basis $\omega_1,\dots,\omega_n$ of $A=K(x)[\partial_x]/\<L>$ is
+called \emph{normal} at $a\in\bar C\cup\{\infty\}$ if there exist $r_1,\dots,r_n\in
+K(x)$ such that $r_1\omega_1,\dots,r_n\omega_n$ is a local integral basis
 at~$a$. Trager shows for the case of algebraic function fields how to construct
 an integral basis which is normal at infinity from a given integral basis and
 a given local integral basis at infinity~\cite{trager84}. The same procedure also applies
-in the present situation. It works as follows.
+in the present situation. % It works as follows.
 
-/// TODO.
+/// MK: I WILL ADD THIS IN THE END, IF SPACE PERMITS. OTHERWISE WE DROP IT. 
 
 Although normality is a somewhat weaker condition on a basis than integrality,
 it also excludes the possibility that poles in the terms of a linear combination
 of basis elements can cancel:
 
 \begin{lemma}\label{lemma:3}
-  Let $L$ be a fuchsian operator and let $\omega_1,\dots,\omega_n$ be an integral basis of $A=C(x)[D_x]/\<L>$
+  Let $L$ be a fuchsian operator and let $\omega_1,\dots,\omega_n$ be an integral basis of $A=K(x)[\partial_x]/\<L>$
   which is normal at infinity.
-  Let $f=\sum_{i=1}^n f_i\omega_i$ for some $f_1,\dots,f_n\in C[x]$.
-  If $f$ has a pole at infinity, then there is some $i$ such that $f_i\omega_i$ has a pole at infinity.
+  Let $f=\sum_{i=1}^n f_i\omega_i$ for some $f_1,\dots,f_n\in K[x]$.
+  Then $f$ has a pole at infinity if and only if
+  there is some $i$ such that $f_i\omega_i$ has a pole at infinity.
 \end{lemma}
 \begin{proof}
-  Let $r_1,\dots,r_n\in C(x)$ be such that $r_1\omega_1,\dots,r_n\omega_n$ is a
-  local integral basis at infinity. Then $f=\sum_{i=1}^n
+  Let $r_1,\dots,r_n\in K(x)$ be such that $r_1\omega_1,\dots,r_n\omega_n$ is a
+  local integral basis at infinity. By $f=\sum_{i=1}^n
   (f_ir_i^{-1})(r_i\omega_i)$ and by Lemma~\ref{lemma:1}, $f$~is integral at infinity iff all
   $f_ir_i^{-1}r_i\omega_i=f_i\omega_i$ are integral at infinity.
 \end{proof}
@@ -413,19 +415,22 @@ Hermite reduction always works. The analogous statement for algebraic
 functions and its proof can be found in~\cite[pp. 46--47]{trager84}; for
 sake of self-containedness, we give the full proof here, although it is a
 straightforward generalization of Trager's proof.
+
+Throughout this section, let $L\in K(x)[\partial_x]$ be a fuchsian operator
+of order~$n$ and let $A=K(x)[\partial_x]/\<L>$.
+
 \begin{lemma}\label{lemma:ibv}
-Let $L\in C(x)[D_x]$ be a fuchsian operator and let
-$\{\omega_1,\ldots,\omega_n\}$ be an integral basis for
-$C(x)[D_x]/\<L>$. Moreover, let $u,v\in C[x]$ be such that $uv\omega_i'$ is
+Let $\{\omega_1,\ldots,\omega_n\}$ be an integral basis of~$A$.
+Moreover, let $u,v\in K[x]$ be such that $uv\omega_i'$ is
 integral for $1\leq i\leq n$ and $\gcd(u,v)=\gcd(v,v')=1$.  For some integer
 $m>1$ we define $\psi_i:=uv^m(\omega_i/v^{m-1})'$; then
-$\{\psi_1,\ldots,\psi_n\}$ is a local integral basis at each root of~$v$.
+$\{\psi_1,\ldots,\psi_n\}$ is a local integral basis at each root $a\in\bar C$ of~$v$.
 \end{lemma}
 \begin{proof}
 By expanding $\psi_i=uv\omega_i'-(m-1)uv'\omega_i$ one sees that the $\psi_i$
-themselves are integral elements. Let now $a\in\bar{C}$ be a root of~$v$. We
+themselves are integral elements. We 
 have to show that each integral element can be expressed as a linear
-combination of the $\psi_i$ with coefficients in $\bar{C}(x)_a$. To the contrary,
+combination of the $\psi_i$ with coefficients in $\bar C(x)_a$. To the contrary, 
 assume that there exists an integral element~$f$ that requires $x-a$ in the
 denominator of some coefficient, i.e.,
 \[
@@ -440,7 +445,7 @@ denominator of some coefficient, i.e.,
   &= v^{m-1} \sum_{i=1}^n \left(\frac{uc_i\omega_i}{v^{m-1}}\right)'
 \end{align*}
 must be integral. Since $\{\omega_1,\ldots,\omega_n\}$ is an integral basis,
-there exists for each $\omega_i$ a series solution $y\in\bar{C}[[[x-a]]]$ with
+there exists for each $\omega_i$ a series solution $y\in C[[[x-a]]]$ with
 $L\cdot y=0$ such that $\omega_i\cdot y$ involves a term
 $T=(x-a)^\alpha\log(x-a)^\beta$ with $0\leq\alpha<1,\beta=0$ or
 $0<\alpha\leq1,\beta>0$. Let $i$ be an index such that $c_i(a)\neq0$; together
@@ -448,21 +453,20 @@ with $\gcd(u,v)=1$ this implies that $T$ appears in $(uc_i\omega_i)\cdot
 y$. Using the fact that the $\omega_i$ form an integral basis, it follows that
 $T$ is also present in $h\cdot y$ where $h=\sum_{i=1}^n uc_i\omega_i$. {\red
   (TODO: clear?  justification needed?)}  Applying the operator
-$v^{m-1}D_xv^{1-m}$ to $h\cdot y$ turns $T$ into
+$v^{m-1}\partial_xv^{1-m}$ to $h\cdot y$ turns $T$ into
 $(x-a)^{\alpha-1}\log(x-a)^\beta$, which reveals that
 $v^{m-1}(h/v^{m-1})'=f+g$ is not integral. This contradicts our assumption of
 $f$ being integral, and hence $\{\psi_1,\ldots,\psi_n\}$ is a local integral
 basis at~$a$.
 \end{proof}
 
-Let $L\in C(x)[D_x]$ be a fuchsian differential operator of order~$n$ and
-$\{\omega_1,\ldots,\omega_n\}$ be an integral basis for $A=C(x)[D_x]/\<L>$.
-Further let $e,m_{i,j}\in C[x]$ ($1\leq i,j\leq n$) be such that
+Let $\{\omega_1,\ldots,\omega_n\}$ be an integral basis for~$A$.
+Further let $e,m_{i,j}\in K[x]$ ($1\leq i,j\leq n$) be such that
 $e\omega_i'=\sum_{j=1}^n m_{i,j}\omega_i$ and
 $\gcd(e,m_{1,1},m_{1,2},\ldots,m_{n,n})=1$. For describing the Hermite
 reduction we fix a D-finite ``function'' $f\in A$ and represent it using the
 integral basis, i.e., $f=\sum_{i=1}^n (f_i/d)\,\omega_i$ with
-$d,f_1,\ldots,f_n\in C[x]$. As differentiating the $\omega_i$ can introduce
+$d,f_1,\ldots,f_n\in K[x]$. As differentiating the $\omega_i$ can introduce
 denominators, namely the factors of~$e$, it is convenient to consider those
 denominators from the very beginning on, and this means that we want to assume
 $e\mid d$. Additionally we assume that $d$ is the polynomial of lowest degree
@@ -471,7 +475,7 @@ Note that $\gcd(d,f_1,\ldots,f_n)$ may be nontrivial.
 
 Let $m$ be the highest multiplicity of some root of~$d$, i.e., there is no
 polynomial~$w$ of positive degree such that $w^\ell\mid d$ for some $\ell>m$.
-Write $d=uv^m$ with $u,v\in C[x]$ and where $v$ is squarefree of positive
+Write $d=uv^m$ with $u,v\in K[x]$ and where $v$ is squarefree of positive
 degree.  It follows that $\gcd(u,v)=1$ and $\gcd(v,v')=1$. By
 Lemma~\ref{lemma:e} the polynomial~$e$ is squarefree and therefore $e\mid uv$.
 A single step of the Hermite reduction consists of lowering the multiplicity
@@ -497,7 +501,7 @@ By Lemma~\ref{lemma:ibv} the elements $uv^m(\omega_i/v^{m-1})'$ form a local
 integral basis, which implies that the coefficients $g_i$ are uniquely
 determined.
 
-Since $e\mid uv$ we can write $uv=ew$ for some $w\in C[x]$. By rewriting the
+Since $e\mid uv$ we can write $uv=ew$ for some $w\in K[x]$. By rewriting the
 derivatives of the $\omega_i$ in terms of the integral basis,
 Equation~\eqref{eq:modv} turns into
 \begin{align*}
@@ -506,7 +510,7 @@ Equation~\eqref{eq:modv} turns into
   &= \sum_{i=1}^n g_i\, \biggl( w\sum_{j=1}^n m_{i,j}\omega_j - (m-1)uv'\omega_i \biggr) \mod v.
 \end{align*}
 Coefficient comparison with respect to $\omega_1,\ldots,\omega_n$ yields a
-system of linear equations for $g_1,\ldots,g_n$. Note that $\deg(g_i)<\deg(v)$
+system of linear equations for $g_1,\ldots,g_n$. Note that $\deg_x(g_i)<\deg_x(v)$
 since we are computing modulo~$v$. Finally, the remaining unknowns
 $h_1,\ldots,h_n$ can be obtained from Equation~\eqref{eq:hred}.
 
@@ -520,7 +524,7 @@ TODO
 \end{example}
 
 \begin{theorem}
-Let $f\in A$ be a fuchsian D-finite function that has a double root at
+Let $f\in A$ have a double root at
 infinity, and let $B=\{\omega_1,\ldots,\omega_n\}$ be an integral basis for~$A$
 that is normal at infinity.
 % Then the Hermite remainder $[f]$ w.r.t.~$B$
@@ -549,22 +553,29 @@ $H=p_1\omega_1+\cdots+p_n\omega_n$ with $p_i\in C[x]$.
 Since we assume that $H$ has a pole at infinity, it follows by Lemma~\ref{lemma:3} that
 (a) one of the $p_i$ has positive degree or
 (b) some non-constant $\omega_i$ has a nonzero coefficient~$p_i$.
-From how the Hermite reduction works, we know that $g=\sum_i b_i\omega_i$
-with proper rational functions~$b_i$. Consider now $g+H=\sum_i (b_i+p_i)\omega_i$.
-In case (a) there is some $i$ for which $b_i+p_i$ has a pole at infinity,
-and thus $(b_i+p_i)\omega_i$ has a pole at infinity (because $\omega_i$ has
+From how the Hermite reduction works, we know that $g=\sum_i g_i\omega_i$
+with proper rational functions~$g_i$. Consider now $g+H=\sum_i (g_i+p_i)\omega_i$.
+In case (a) there is some $i$ for which $g_i+p_i$ has a pole at infinity,
+and thus $(g_i+p_i)\omega_i$ has a pole at infinity (because $\omega_i$ has
 no poles at finite places and therefore no zero at infinity).
 In case (b), there is some $i$ with $p_i\neq0$ and $\omega_i$ is non-constant,
-which implies that $(b_i+p_i)\omega_i$ has a pole at infinity.
+which implies that $(g_i+p_i)\omega_i$ has a pole at infinity.
 In both cases, therefore, $g+H$ has a pole at infinity by Lemma~\ref{lemma:3}.
 \end{proof}
 
 remark: double root at infinity can always be achieved by a change of variables.
-double root persists by differentiating wrt. $t$. consequence: creative telescoping works.
-(note: it is known that telescopers exist~\cite{zeilberger90,chyzak00}).
-we find the minimal telescoper.
 
 \section{Polynomial Reduction}\label{sec:polynomial}
+
+///// MANUEL TO SHAOSHI: I don't want to mess around in your text in order to avoid
+editing conflicts. please note that in view of having $t$ available in the ground
+field for creative telescoping, I have changed $C$ to $K$ in the preceeding sections,
+where $K=C(t)$, so that $C$ is really the constant field. Where you use $K$ below,
+it should be $A$, and most of the $C$'s in your text should now be $K$'s. Once you
+check in your next version to git, please wait for me to do the required changes in
+your section before you continue editing. (Or do the changes yourself, if you don't
+mind.) Sorry for the inconvenience. /////
+
 
 second approach: we wish to show that the hermite remainders belong to a finite-dimensional
 vector space. in fact, this is not true.
@@ -582,7 +593,7 @@ the telescoper. we will obtain an independent proof of the bound that already ap
 Let $K= C(x, y)$ be a finite algebraic extension of degree~$n$ over~$C(x)$.
 Assume that~$\Omega:=\{\omega_1, \ldots, \omega_n\}$ be an integral basis of~$K$
 over~$C[x]$.  Assume that
-\[D_x(\omega_i) = \frac{1}{e}\sum_{j=1}^n m_{i, j}\omega_j,\]
+\[\partial_x(\omega_i) = \frac{1}{e}\sum_{j=1}^n m_{i, j}\omega_j,\]
 where~$e, m_{i, j}\in C[x]$ such that the gcd of~$e$ and~$m_{i,j}$'s is~$1$.
 Set~$M=(m_{i, j})\in C[x]^{n\times n}$
 and
@@ -595,7 +606,7 @@ and
 Any element~$\alpha\in K$ can be written as
 \[\alpha = \sum_{i=1}^n \frac{a_i\omega_i}{d},\]
 where~$a_i, d\in C[x]$. Applying Hermite reduction to~$\alpha$, we get
-\[\alpha = D_x(\beta) + \sum_{i=1}^n \frac{c_i\omega_i}{d^*e},\]
+\[\alpha = \partial_x(\beta) + \sum_{i=1}^n \frac{c_i\omega_i}{d^*e},\]
 where~$\beta\in K$, $d^*, e, c_i\in C[x]$, $\gcd(d^*, e)=1$ and~$d^*$ is squarefree.
 By the extended Euclidean algorithm, we compute~$u_i, v_i\in C[x]$ such that
 $\deg_x(v_i) < \deg_x(d^*)$ and
@@ -610,7 +621,7 @@ with matrix coefficients of the form
 \[M = m_{\deg_x(M)}x^{\deg_x(M)} + \ldots + m_0, \]
 where~$m_i\in C^{n\times n}$. Define the map:
 \[\phi: C[x]^n \rightarrow C[x]^n\]
-by~$\phi(p)= eD_x(p) + Mp$ for any~$p\in C[x]^n$. This map is $C[x]$-linear.
+by~$\phi(p)= e\partial_x(p) + Mp$ for any~$p\in C[x]^n$. This map is $C[x]$-linear.
 The image~$\im(\phi)$ is a subspace of~$C[x]^n$ as a vector space over~$C$.
 Let~$\{\ve_1, \ldots, \ve_n\}$ be the standard basis of~$C^n$. Then the $C$-vector space~$C[x]^n$
 is spanned by
@@ -665,10 +676,18 @@ $\dim(N_\phi) \leq ...$
 
 \section{Creative Telescoping}
 
-Explain how to represent $D_t^i$ in~$A$ using~$\tilde{L}$.
+Explain how to represent $\partial_t^i$ in~$A$ using~$\tilde{L}$.
 Describe creative telescoping.
 If desired, the certificate can be computed by remembering the $g$ in each call of Hermite reduction.
 If possible, present some timings/comparisons/examples.
+
+double root persists by differentiating wrt. $t$. consequence: creative telescoping works.
+(note: it is known that telescopers exist~\cite{zeilberger90,chyzak00}).
+we find the minimal telescoper via hermite reduction by the trager-theorem.
+
+// why does the shift case not work? answer: because $\partial_t$ has to be such that the representations of all the $\partial_t^i\cdot f$
+with respect to the fixed chosen integral basis of the Hermite reduction have a finite common denominator.
+(todo: show that this is the case in the differential case)
 
 
 \section{Conclusion}

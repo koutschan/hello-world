@@ -425,6 +425,38 @@ turns out that the Hermite reduction for fuchsian D-finite functions is
 literally the same as Trager's reduction for algebraic
 functions~\cite{trager84}.
 
+We start with a technical lemma, which is needed to ensure that the Hermite
+reduction always works. The analogous statement for algebraic functions and
+its proof can be found in~\cite[pp. 46--47]{trager84}.
+\begin{lemma}\label{lemma:ibv}
+Let $\{\omega_1,\ldots,\omega_n\}$ be an integral basis for $A=C(x)[D_x]/\<L>$
+for some $L\in C(x)[D_x]$, and let $u,v\in C[x]$ such that
+$\gcd(u,v)=\gcd(v,v')=1$ and $uv\omega_i'$ is integral for $1\leq i\leq n$.
+Then $\{\psi_1,\ldots,\psi_n\}$ where $\psi_i:=uv^m(\omega_i/v^{m-1})'$ is a
+local integral basis at each root of~$v$.
+% TODO: is this even a global integral basis?
+\end{lemma}
+\begin{proof}
+By expanding $\psi_i=uv\omega_i'-(m-1)uv'\omega_i$ one sees that the $\psi_i$
+themselves are integral elements. Let now $a\in\bar{C}$ be a root of~$v$. We
+have to show that each integral element can be expressed as a linear
+combination of the $\psi_i$ with coefficients in $C(x)_a$. To the contrary,
+assume that there exists an integral function~$f$ that requires $v$ in the
+denominator of some coefficient, i.e.,
+\[
+  f = \frac{1}{v} \sum_{i=1}^n c_i \psi_i \quad\text{with }c_i\in C(x)_a
+  \text{ and } c_i(a)\neq0 \text{ for some } i.
+\]
+Further let $g=\sum_{i=1}^n (c_iu)'\omega_i$, which is obviously integral. Then
+their sum
+\begin{align*}
+  f+g &= v^{m-1} \sum_{i=1}^n \left(c_iu \left(\frac{\omega_i}{v^{m-1}}\right)'
+  + (c_iu)'\frac{\omega_i}{v^{m-1}} \right) \\
+  &= v^{m-1} \sum_{i=1}^n \left(\frac{uc_i\omega_i}{v^{m-1}}\right)'
+\end{align*}
+must also be integral. But this is obviously not the case\dots
+\end{proof}
+
 Let $L\in C(x)[D_x]$ be a fuchsian differential operator of order~$n$ and
 $\{\omega_1,\ldots,\omega_n\}$ be an integral basis for $A=C(x)[D_x]/\<L>$.
 Further let $e,m_{i,j}\in C[x]$ ($1\leq i,j\leq n$) be such that
@@ -452,8 +484,8 @@ from~$f$. More precisely, the input function~$f$ is decomposed as follows:
   \biggl(\sum_{i=1}^n\frac{g_i}{v^{m-1}}\omega_i\biggr)' +
   \sum_{i=1}^n \frac{h_i}{uv^{m-1}}\omega_i.
 \end{equation}
-In order to determine the unknown polynomials $g_1,\ldots,g_n$ and
-$h_1,\ldots,h_n$, the denominators in the above equation are cleared
+In order to determine the unknown polynomials $g_1,\ldots,g_n$, the
+denominator $uv^m$ in the above equation is cleared
 \[
   \sum_{i=1}^n f_i\omega_i = \sum_{i=1}^n \biggl( uvg_i'\omega_i +
   uv^mg_i\left(\frac{\omega_i}{v^{m-1}}\right)' + vh_i\omega_i \biggr),
@@ -461,21 +493,24 @@ $h_1,\ldots,h_n$, the denominators in the above equation are cleared
 and then the equation is reduced modulo~$v$:
 \begin{equation}\label{eq:modv}
   \sum_{i=1}^n f_i\omega_i =
-  \sum_{i=1}^n ug_i \bigl( v\omega_i' - (m-1)v'\omega_i \bigr) \mod v.
+  \sum_{i=1}^n uv^mg_i\left(\frac{\omega_i}{v^{m-1}}\right)' \mod v.
 \end{equation}
-TODO: at this point we have to argue that~\eqref{eq:modv} admits a unique solution.
+By Lemma~\ref{lemma:ibv} the elements $uv^m(\omega_i/v^{m-1})'$ form a local
+integral basis, which implies that the coefficients $g_i$ are uniquely
+determined.
 
 Since $e\mid uv$ we can write $uv=ew$ for some $w\in C[x]$. By rewriting the
 derivatives of the $\omega_i$ in terms of the integral basis,
 Equation~\eqref{eq:modv} turns into
-\[
-  \sum_{i=1}^n f_i\omega_i =
-  \sum_{i=1}^n g_i\, \biggl( w\sum_{j=1}^n m_{i,j}\omega_j - (m-1)uv'\omega_i \biggr) \mod v.
-\]
+\begin{align*}
+  \sum_{i=1}^n f_i\omega_i 
+  &= \sum_{i=1}^n ug_i \bigl( v\omega_i' - (m-1)v'\omega_i \bigr) \mod v\\
+  &= \sum_{i=1}^n g_i\, \biggl( w\sum_{j=1}^n m_{i,j}\omega_j - (m-1)uv'\omega_i \biggr) \mod v.
+\end{align*}
 Coefficient comparison with respect to $\omega_1,\ldots,\omega_n$ yields a
-system of linear equations for $g_1,\ldots,g_n$. Once they are determined, the
-remaining unknowns $h_1,\ldots,h_n$ can be obtained from
-Equation~\eqref{eq:hred}.
+system of linear equations for $g_1,\ldots,g_n$. Note that $\deg(g_i)<\deg(v)$
+since we are computing modulo~$v$. Finally, the remaining unknowns
+$h_1,\ldots,h_n$ can be obtained from Equation~\eqref{eq:hred}.
 
 By a repeated application of the reduction step described above
 one can decompose any fuchsian D-finite function $f\in A$ as

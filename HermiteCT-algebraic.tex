@@ -83,11 +83,7 @@ Shaoshi Chen$^{1,2}$, \, Manuel Kauers$^{3}$, \, Christoph Koutschan$^{4}$ \\
        \smallskip
       \email{schen@amss.ac.cn, manuel.kauers@jku.at}\\
       \email{christoph.koutschan@ricam.oeaw.ac.at}
-%Preliminary notes
 }
-
-
-
 
 \maketitle
 %
@@ -519,14 +515,28 @@ denominator~$v$. This gives rise to the reduction map $[f]=h$.
 TODO
 \end{example}
 
-\section{xxx}
+\section{The Canonical Form Property}
+
+Recall from the introduction that reduction based creative telescoping requires
+some $K$-linear reduction map $[\cdot]\colon A\to A$ with the property that
+$f-[f]$ is integrable in $A$ for every $f\in A$. This is sufficient for the
+correctness of the method, but additional properties are needed in order to
+prove that the method terminates.
+
+As also explained already in the introduction, one possibility consists in
+showing that $[f]=0$ whenever $f$ is integrable. In the present section,
+we will show that things can be arranged such that the Hermite reduction
+has this property. The key is the following theorem, which was already shown
+by Trager for algebraic functions.
 
 \begin{theorem}\label{thm:intiff0}
-Let $f\in A$ have a double root at
-infinity, and let $B=\{\omega_1,\ldots,\omega_n\}$ be an integral basis for~$A$
+  Suppose that $f\in A$ has a double root at infinity,
+  i.e., that for every solution $y\in C[[[x^{-1}]]]$ of $L$
+  the series $f\cdot y$ contains only monomials $x^\alpha\log(x)^\beta$ with $\alpha\leq-2$.
+  Let $B=\{\omega_1,\ldots,\omega_n\}$ be an integral basis for~$A$
 that is normal at infinity.
 % Then the Hermite remainder $[f]$ w.r.t.~$B$
-If $f=g'+h$ is the result of the above-described Hermite reduction,
+If $f=g'+h$ is the result of the Hermite reduction described above,
 then $h$ is zero if and only if $f$ is integrable in~$A$.
 \end{theorem}
 \begin{proof}
@@ -563,7 +573,7 @@ In both cases, therefore, $g+H$ has a pole at infinity by Lemma~\ref{lemma:3}.
 
 Note that the condition in Theorem~\ref{thm:intiff0} that $f$ has a double
 root at infinity is not a restriction at all, but it can always be achieved by
-a suitable change of variables.  Let $a\in C$ be a regular point of $L$; by
+a suitable change of variables. Let $a\in C$ be a regular point of~$L$; by
 the transformation $x\to a+1/x$ the regular point~$a$ is moved to
 infinity. From
 \[
@@ -571,48 +581,42 @@ infinity. From
 \]
 we see that the new integrand has a double root at infinity.
 
+Moreover, since the action of $\partial_t$ on series domains is defined coefficient-wise,
+it follows that when $f$ has (at least) a doulbe root at infinity (with respect to~$x$), 
+this is also true for $\partial_t\cdot f, \partial_t^2\cdot f, \partial_t^3\cdot f,\dots$,
+and then also for every $K$-linear combination $p_0f+p_1\partial_tf+\cdots+p_r\partial_t^rf$.
+This means that $p_0+p_1\partial_t+\cdots+p_r\partial_t^r$ is a telescoper for $f$ if
+\emph{and only if} $[p_0+p_1\partial_t+\cdots+p_r\partial_t^r]=0$.
 
-/////
-Explain how to represent $\partial_t^i$ in~$A$ using~$\tilde{L}$.
-Describe creative telescoping.
-If desired, the certificate can be computed by remembering the $g$ in each call of Hermite reduction.
-If possible, present some timings/comparisons/examples.
-
-double root persists by differentiating wrt. $t$. consequence: creative telescoping works.
-(note: it is known that telescopers exist~\cite{Zeilberger1990,chyzak00}).
-we find the minimal telescoper via hermite reduction by the trager-theorem.
-
-// why does the shift case not work? answer: because $\partial_t$ has to be such that the representations of all the $\partial_t^i\cdot f$
-with respect to the fixed chosen integral basis of the Hermite reduction have a finite common denominator.
-(todo: show that this is the case in the differential case)
-/////
-
+We already know for other reasons~\cite{Zeilberger1990,chyzak00} that
+telescopers for D-finite functions exist, and therefore the reduction-based
+creative telescoping procedure with Hermite reduction with respect to an
+integral basis that is normal at infinity as reduction function succeeds when
+applied to an integrand $f\in A$ that has a double root at infinity. Again, if
+$f$ has no double root at infinity, we can produce one by a change of variables.
+In particular, the method finds a telescoper of smallest possible order.
 
 \section{Polynomial Reduction}\label{sec:polynomial}
 
-///// MANUEL TO SHAOSHI: I don't want to mess around in your text in order to avoid
-editing conflicts. please note that in view of having $t$ available in the ground
-field for creative telescoping, I have changed $C$ to $K$ in the preceeding sections,
-where $K=C(t)$, so that $C$ is really the constant field. Where you use $K$ below,
-it should be $A$, and most of the $C$'s in your text should now be $K$'s. Once you
-check in your next version to git, please wait for me to do the required changes in
-your section before you continue editing. (Or do the changes yourself, if you don't
-mind.) Sorry for the inconvenience. /////
+The argument in the previous section based on Theorem~\ref{thm:intiff0}
+has the advantage that it ensures that the algorithm will find the minimal telescoper.
+A disadvantage is that it does not tell us in advance how large this telescoper will be.
+Not even the existence of a telescoper follows from this approach, but has to be imported
+into the argument from elsewhere.
 
+An independent proof of the existence of telescopers could be obtained if we could show
+that the $K$-vector space $\{\,[f]:f\in A\,\}$ has finite dimension. Note that this does
+not follow from Theorem~\ref{thm:intiff0}. In fact, it is not true if $[\cdot]$ is just
+the Hermite reduction. We therefore introduce below an additional reduction, called
+\emph{polynomial reduction,} which we apply after Hermite reduction. We then show that
+the combined reduction (Hermite reduction followed by polynomial reduction) has the
+desired dimension property for the space of remainders. As a result, we obtain a new
+proof for the bound on the order of the telescoper given in~\cite{chen14a}.
 
-second approach: we wish to show that the hermite remainders belong to a finite-dimensional
-vector space. in fact, this is not true.
-note that the theorem does not imply that the hermite remainder is uniquely determined by
-$f$ and the basis (it is not). it only makes a statement about the integrable case.
-
-to make it true, we need to normalize the hermite remainder further. in view of the result
-of the previous section, investing additional computational work seems pointless, because we have
-already shown that repeated hermite reduction suffices to detect the minimal order telescoper.
-in fact, the main point of the algorithm we discuss next is that it gives rise to a bound on
-the telescoper. we will obtain an independent proof of the bound that already appeared in \cite{chen14a}.
-
-===== shaoshi's text ahead =====
-
+In this approach, we use two integral bases. First we use a global integral basis (not
+necessarily normal at infinity) in order perfrom Hermite reduction. Then we write the
+remainder $h$ with respect to some local integral basis at infinity and perform the
+polynomial reduction on this representation.
 
 The Hermite reduction decomposes the input element~$f\in A$ into the form
 \[f = \partial_x(g) + h,\]
@@ -702,10 +706,11 @@ decomposed into the form
 where~$g\in A$ and $u_i, v_i\in K[x]$ with $u_i \in N_{\phi_{\tilde \Omega}}$ and $\deg_x(v_i) < \deg_x(d)$.
 Moreover, $\tilde e$ and~$d$ only depend on the given integral basis~$\{\omega_1, \ldots, \omega_n\}$.
 
+// TODO: DISSUSS IMPLICATIONS FOR CREATIVE TELESCOPING. BOUND. 
 
 \section{Conclusion}
 
-[[IF DESIRED]]
+[[IF NECESSARY]]
 
 \bibliographystyle{abbrv}
 \bibliography{Hermite}

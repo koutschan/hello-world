@@ -523,6 +523,9 @@ denominator~$v$. This gives rise to the reduction map $[f]=h$.
 TODO
 \end{example}
 
+
+\section{Creative Telescoping}
+
 \begin{theorem}\label{thm:intiff0}
 Let $f\in A$ have a double root at
 infinity, and let $B=\{\omega_1,\ldots,\omega_n\}$ be an integral basis for~$A$
@@ -572,6 +575,22 @@ infinity. From
   \int f(x) \,\mathrm{d}x = \int f\left(\frac{1}{x}+a\right)\left(-\frac{1}{x^2}\right) \mathrm{d}x
 \]
 we see that the new integrand has a double root at infinity.
+
+
+/////
+Explain how to represent $\partial_t^i$ in~$A$ using~$\tilde{L}$.
+Describe creative telescoping.
+If desired, the certificate can be computed by remembering the $g$ in each call of Hermite reduction.
+If possible, present some timings/comparisons/examples.
+
+double root persists by differentiating wrt. $t$. consequence: creative telescoping works.
+(note: it is known that telescopers exist~\cite{Zeilberger1990,chyzak00}).
+we find the minimal telescoper via hermite reduction by the trager-theorem.
+
+// why does the shift case not work? answer: because $\partial_t$ has to be such that the representations of all the $\partial_t^i\cdot f$
+with respect to the fixed chosen integral basis of the Hermite reduction have a finite common denominator.
+(todo: show that this is the case in the differential case)
+/////
 
 
 \section{Polynomial Reduction}\label{sec:polynomial}
@@ -687,21 +706,6 @@ decomposed into the form
 \[f = \partial_x(g) +  \sum_{i=1}^n \left(\frac{u_i}{\tilde e}\tilde \omega_i + \frac{v_i}{d}\omega_i\right),\]
 where~$g\in A$ and $u_i, v_i\in K[x]$ with $u_i \in N_{\phi_{\tilde \Omega}}$ and $\deg_x(v_i) < \deg_x(d)$.
 Moreover, $\tilde e$ and~$d$ only depend on the given integral basis~$\{\omega_1, \ldots, \omega_n\}$.
-
-\section{Creative Telescoping}
-
-Explain how to represent $\partial_t^i$ in~$A$ using~$\tilde{L}$.
-Describe creative telescoping.
-If desired, the certificate can be computed by remembering the $g$ in each call of Hermite reduction.
-If possible, present some timings/comparisons/examples.
-
-double root persists by differentiating wrt. $t$. consequence: creative telescoping works.
-(note: it is known that telescopers exist~\cite{Zeilberger1990,chyzak00}).
-we find the minimal telescoper via hermite reduction by the trager-theorem.
-
-// why does the shift case not work? answer: because $\partial_t$ has to be such that the representations of all the $\partial_t^i\cdot f$
-with respect to the fixed chosen integral basis of the Hermite reduction have a finite common denominator.
-(todo: show that this is the case in the differential case)
 
 
 \section{Conclusion}

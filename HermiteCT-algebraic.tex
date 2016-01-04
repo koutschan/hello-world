@@ -439,16 +439,15 @@ denominator of some coefficient, i.e.,
   &= v^{m-1} \sum_{i=1}^n \left(\frac{uc_i\omega_i}{v^{m-1}}\right)'
 \end{align*}
 must be integral. Since $\{\omega_1,\ldots,\omega_n\}$ is an integral basis,
-there exists for each $\omega_i$ a series solution $y\in C[[[x-a]]]$ with
-$L\cdot y=0$ such that $\omega_i\cdot y$ involves a term
+there exists for each $i=1,\ldots,n$ a series solution $y_i\in C[[[x-a]]]$
+of~$L$ such that $\omega_i\cdot y_i$ involves a term
 $T=(x-a)^\alpha\log(x-a)^\beta$ with $0\leq\alpha<1,\beta=0$ or
-$0<\alpha\leq1,\beta>0$. Let $i$ be an index such that $c_i(a)\neq0$; together
-with $\gcd(u,v)=1$ this implies that $T$ appears in $(uc_i\omega_i)\cdot
-y$. Using the fact that the $\omega_i$ form an integral basis, it follows that
-$T$ is also present in $h\cdot y$ where $h=\sum_{i=1}^n uc_i\omega_i$. {\red
-  (TODO: clear?  justification needed?)}  Applying the operator
-$v^{m-1}\partial_xv^{1-m}$ to $h\cdot y$ turns $T$ into
-$(x-a)^{\alpha-1}\log(x-a)^\beta$, which reveals that
+$0<\alpha\leq1,\beta>0$. Let now $i$ be an index such that $c_i(a)\neq0$; together
+with $\gcd(u,v)=1$ this implies that $T$ appears in $(uc_i\omega_i)\cdot y_i$.
+Using the fact that the $\omega_i$ form an integral basis, it follows by
+Lemma~\ref{lemma:1} that $T$ is also present in $h\cdot y_i$ where
+$h=\sum_{i=1}^n uc_i\omega_i$. Applying the operator $v^{m-1}\partial_xv^{1-m}$
+to $h\cdot y_i$ turns $T$ into $(x-a)^{\alpha-1}\log(x-a)^\beta$, which reveals that
 $v^{m-1}(h/v^{m-1})'=f+g$ is not integral. This contradicts our assumption of
 $f$ being integral, and hence $\{\psi_1,\ldots,\psi_n\}$ is a local integral
 basis at~$a$.
@@ -457,36 +456,38 @@ basis at~$a$.
 Let $\{\omega_1,\ldots,\omega_n\}$ be an integral basis for~$A$.
 Further let $e,m_{i,j}\in K[x]$ ($1\leq i,j\leq n$) be such that
 $e\omega_i'=\sum_{j=1}^n m_{i,j}\omega_i$ and
-$\gcd(e,m_{1,1},m_{1,2},\ldots,m_{n,n})=1$. For describing the Hermite
-reduction we fix a D-finite ``function'' $f\in A$ and represent it using the
+$\gcd(e,m_{1,1},m_{1,2},\ldots,m_{n,n})=1$ as in Lemma~\ref{lemma:e}. For describing
+the Hermite reduction we fix an integrand $f\in A$ and represent it in the
 integral basis, i.e., $f=\sum_{i=1}^n (f_i/d)\,\omega_i$ with
-$d,f_1,\ldots,f_n\in K[x]$. As differentiating the $\omega_i$ can introduce
-denominators, namely the factors of~$e$, it is convenient to consider those
+$d,f_1,\ldots,f_n\in K[x]$. The purpose is to find $g,h\in A$ such that
+$f=g'+h$ and $h=\sum_{i=1}^n(h_i/d^\ast)\omega_i$ with $h_1,\ldots,h_n\in K[x]$
+and $d^\ast$ denoting the squarefree part of~$d$.
+As differentiating the $\omega_i$ can introduce
+denominators, name\-ly the factors of~$e$, it is convenient to consider those
 denominators from the very beginning on, and this means that we want to assume
-$e\mid d$. Additionally we assume that $d$ is the polynomial of lowest degree
-satisfying these properties. % TODO: Do we really need this?
-Note that $\gcd(d,f_1,\ldots,f_n)$ may be nontrivial.
+$e\mid d$. Note that $\gcd(d,f_1,\ldots,f_n)$ may be nontrivial.
 
-Let $m$ be the highest multiplicity of some root of~$d$, i.e., there is no
-polynomial~$w$ of positive degree such that $w^\ell\mid d$ for some $\ell>m$.
-Write $d=uv^m$ with $u,v\in K[x]$ and where $v$ is squarefree of positive
-degree.  It follows that $\gcd(u,v)=1$ and $\gcd(v,v')=1$. By
-Lemma~\ref{lemma:e} the polynomial~$e$ is squarefree and therefore $e\mid uv$.
-A single step of the Hermite reduction consists of lowering the multiplicity
-of~$v$ in the denominator by subtracting a suitable integrable function
-from~$f$. More precisely, the input function~$f$ is decomposed as follows:
+We now describe one step of the Hermite reduction, where the multiplicity
+$m>1$ of some nontrivial squarefree factor~$v\in K[x]$ of $d$ is reduced.
+Let $u\in K[x]$ be such that $d=uv^m$; it follows that $\gcd(u,v)=1$ and
+$\gcd(v,v')=1$. We want to find $g_1,\ldots,g_n,h_1,\ldots,h_n\in K[x]$
+such that
 \begin{equation}\label{eq:hred}
   \sum_{i=1}^n \frac{f_i}{uv^m}\omega_i =
   \biggl(\sum_{i=1}^n\frac{g_i}{v^{m-1}}\omega_i\biggr)' +
   \sum_{i=1}^n \frac{h_i}{uv^{m-1}}\omega_i.
 \end{equation}
-In order to determine the unknown polynomials $g_1,\ldots,g_n$, the
-denominator $uv^m$ in the above equation is cleared
-\[
+By a repeated application of such reduction steps one can decompose any $f\in A$
+as $f=g'+h$ where the denominators of the coefficients of $h$ are squarefree.
+% This gives rise to the reduction map $[f]=h$.
+
+In order to determine the unknown polynomials $g_1,\ldots,g_n$ in~\eqref{eq:hred},
+the denominator $uv^m$ is cleared which yields
+\begin{equation}\label{eq:clear}
   \sum_{i=1}^n f_i\omega_i = \sum_{i=1}^n \biggl( uvg_i'\omega_i +
   uv^mg_i\left(\frac{\omega_i}{v^{m-1}}\right)' + vh_i\omega_i \biggr),
-\]
-and then the equation is reduced modulo~$v$:
+\end{equation}
+and then this equation is reduced modulo~$v$:
 \begin{equation}\label{eq:modv}
   \sum_{i=1}^n f_i\omega_i =
   \sum_{i=1}^n uv^mg_i\left(\frac{\omega_i}{v^{m-1}}\right)' \mod v.
@@ -495,7 +496,8 @@ By Lemma~\ref{lemma:ibv} the elements $uv^m(\omega_i/v^{m-1})'$ form a local
 integral basis, which implies that the coefficients $g_i$ are uniquely
 determined.
 
-Since $e\mid uv$ we can write $uv=ew$ for some $w\in K[x]$. By rewriting the
+By Lemma~\ref{lemma:e} the polynomial~$e$ is squarefree and therefore $e\mid uv$;
+hence we can write $uv=ew$ for some $w\in K[x]$. By rewriting the
 derivatives of the $\omega_i$ in terms of the integral basis,
 Equation~\eqref{eq:modv} turns into
 \begin{align*}
@@ -505,13 +507,11 @@ Equation~\eqref{eq:modv} turns into
 \end{align*}
 Coefficient comparison with respect to $\omega_1,\ldots,\omega_n$ yields a
 system of linear equations for $g_1,\ldots,g_n$. Note that $\deg_x(g_i)<\deg_x(v)$
-since we are computing modulo~$v$. Finally, the remaining unknowns
-$h_1,\ldots,h_n$ can be obtained from Equation~\eqref{eq:hred}.
+since this system is solved modulo~$v$.
 
-By a repeated application of the reduction step described above
-one can decompose any fuchsian D-finite function $f\in A$ as
-$f=g'+h$ where $h=\sum_{i=1}^n (h_i/v)\,\omega_i$ has a squarefree
-denominator~$v$. This gives rise to the reduction map $[f]=h$.
+The remaining unknowns $h_1,\ldots,h_n$ are obtained by plugging
+$g_1,\ldots,g_n$ into Equation~\eqref{eq:clear}.
+
 
 \begin{example}
 TODO

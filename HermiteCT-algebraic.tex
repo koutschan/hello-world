@@ -244,22 +244,18 @@ commute with each other (although they need not commute with elements of~$R$).
 
 The action of $R[\partial_x]$ on $C[[[x-a]]]$ or $C[[[x^{-1}]]]$ is extended
 to $R[\partial_t,\partial_x]$ by letting $\partial_t$ act coefficient-wise.
-To extend the action of $R[\partial_x]$ on $A=R[\partial_x]/\<L>$ to an action of
-$R[\partial_t,\partial_x]$ on~$A$, we assume that there is some other
-operator $\tilde L\in R[\partial_x]$ such that $\partial_t\cdot1=\tilde L\cdot 1$.
-In order to have a well-defined action of $R[\partial_x,\partial_t]$ on some module~$F$,
-we need to have
-\[
-\partial_x\cdot(\partial_t\cdot f)=(\partial_x\partial_t)\cdot f=(\partial_t\partial_x)\cdot f=\partial_t\cdot(\partial_x\cdot f)
-\]
-for all $f\in F$. It is clear that this is satisfied for the action on series domains,
-but for the proposed action on $A$ it implies an implicit restriction on the possible
-choices of~$\tilde L$. Even worse, for some $L$ it may be that no $\tilde L$ exists.
-Note that this is different from the case of algebraic function fields, where a single minimal polynomial $M$
-suffices even in the case of several variables.
-In the differential case, the requirement that $\tilde L$ exists amounts to saying that the element $1\in A$ is
-D-finite with respect to the action of $R[\partial_x,\partial_t]$, for if its annihilator $\mathfrak{a}$
-contains the operators $L$ and $\partial_t-\tilde L$, then we have $\dim\mathfrak{a}=0$, and this is the usual
+We further assume that the action of $R[\partial_x]$ on $A=R[\partial_x]/\<L>$ is
+extended to an action of $R[\partial_t,\partial_x]$ on~$A$ in a way that is
+compatible with the action of $R[\partial_t,\partial_x]$ on series domains.
+This means that when $y\in C[[[x-a]]]$ is a solution of~$L$ and $f$ is an
+element of~$A$, so that $f\cdot y$ is an element of $C[[[x-a]]]$, then we
+want to have $(\partial_t\cdot f)\cdot y=\partial_t\cdot(f\cdot y)$, where
+the $\cdot$ in $(\partial_t\cdot f)$ refers to the action of $R[\partial_t,\partial_x]$
+on $A$ and the three other dots refer to the action on $C[[[x-a]]]$. 
+If $u\in A$ is such that $\partial_t\cdot 1 = u$ and $U\in R[\partial_x]$ is such
+that $u=U+\<L>$, then the annihilator $\mathfrak{a}=\mathrm{ann}(1)\subseteq R[\partial_t,\partial_x]$
+of $1\in A$ in $R[\partial_t,\partial_x]$ contains $L$ and $\partial_t-U$. We
+therefore have $\dim\mathfrak{a}=0$, and this is the usual
 definition of D-finiteness in the case of several variables~\cite{Zeilberger1990,chyzak98,koutschan09,kauers14c}.
 
 \section{Integral Bases}
@@ -523,8 +519,7 @@ denominator~$v$. This gives rise to the reduction map $[f]=h$.
 TODO
 \end{example}
 
-
-\section{Creative Telescoping}
+\section{xxx}
 
 \begin{theorem}\label{thm:intiff0}
 Let $f\in A$ have a double root at
@@ -569,7 +564,7 @@ In both cases, therefore, $g+H$ has a pole at infinity by Lemma~\ref{lemma:3}.
 Note that the condition in Theorem~\ref{thm:intiff0} that $f$ has a double
 root at infinity is not a restriction at all, but it can always be achieved by
 a suitable change of variables.  Let $a\in C$ be a regular point of $L$; by
-the transformation $x\to1/x+a$ the regular point~$a$ is moved to
+the transformation $x\to a+1/x$ the regular point~$a$ is moved to
 infinity. From
 \[
   \int f(x) \,\mathrm{d}x = \int f\left(\frac{1}{x}+a\right)\left(-\frac{1}{x^2}\right) \mathrm{d}x

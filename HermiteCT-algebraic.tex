@@ -460,7 +460,7 @@ $\gcd(e,m_{1,1},m_{1,2},\ldots,m_{n,n})=1$ as in Lemma~\ref{lemma:e}. For descri
 the Hermite reduction we fix an integrand $f\in A$ and represent it in the
 integral basis, i.e., $f=\sum_{i=1}^n (f_i/d)\,\omega_i$ with
 $d,f_1,\ldots,f_n\in K[x]$. The purpose is to find $g,h\in A$ such that
-$f=g'+h$ and $h=\sum_{i=1}^n(h_i/d^\ast)\omega_i$ with $h_1,\ldots,h_n\in K[x]$
+$f=g'+h$ and $h=\sum_{i=1}^n(h_i/d^\ast)\,\omega_i$ with $h_1,\ldots,h_n\in K[x]$
 and $d^\ast$ denoting the squarefree part of~$d$.
 As differentiating the $\omega_i$ can introduce
 denominators, name\-ly the factors of~$e$, it is convenient to consider those
@@ -485,15 +485,15 @@ In order to determine the unknown polynomials $g_1,\ldots,g_n$ in~\eqref{eq:hred
 the denominator $uv^m$ is cleared which yields
 \begin{equation}\label{eq:clear}
   \sum_{i=1}^n f_i\omega_i = \sum_{i=1}^n \biggl( uvg_i'\omega_i +
-  uv^mg_i\left(\frac{\omega_i}{v^{m-1}}\right)' + vh_i\omega_i \biggr),
+  uv^mg_i\left(v^{1-m}\omega_i\right)' + vh_i\omega_i \biggr),
 \end{equation}
 and then this equation is reduced modulo~$v$:
 \begin{equation}\label{eq:modv}
   \sum_{i=1}^n f_i\omega_i =
-  \sum_{i=1}^n uv^mg_i\left(\frac{\omega_i}{v^{m-1}}\right)' \mod v.
+  \sum_{i=1}^n uv^mg_i\left(v^{1-m}\omega_i\right)' \mod v.
 \end{equation}
 By Lemma~\ref{lemma:ibv} and from $\gcd(u,v)=1$ it follows that
-the elements $uv^m(\omega_i/v^{m-1})'$ form a local integral basis
+the elements $uv^m(v^{1-m}\omega_i)'$ form a local integral basis
 at each root of~$v$, which implies that the coefficients $g_i$ are
 uniquely determined.
 
@@ -507,8 +507,8 @@ Equation~\eqref{eq:modv} turns into
   &= \sum_{i=1}^n g_i\, \biggl( w\sum_{j=1}^n m_{i,j}\omega_j - (m-1)uv'\omega_i \biggr) \mod v.
 \end{align*}
 Coefficient comparison with respect to $\omega_1,\ldots,\omega_n$ yields a
-system of linear equations for $g_1,\ldots,g_n$. Note that $\deg_x(g_i)<\deg_x(v)$
-since this system is solved modulo~$v$.
+system of linear equations for $g_1,\ldots,g_n$. As this system is solved modulo~$v$,
+we get that $\deg_x(g_i)<\deg_x(v)$.
 
 The remaining unknowns $h_1,\ldots,h_n$ are obtained by plugging
 $g_1,\ldots,g_n$ into Equation~\eqref{eq:clear}.

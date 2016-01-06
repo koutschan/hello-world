@@ -414,42 +414,42 @@ Throughout this section, let $L\in K(x)[\partial_x]$ be a fuchsian operator
 of order~$n$ and let $A=K(x)[\partial_x]/\<L>$.
 
 \begin{lemma}\label{lemma:ibv}
-Let $\{\omega_1,\ldots,\omega_n\}$ be an integral basis of~$A$.
-Moreover, let $u,v\in K[x]$ be such that $uv\omega_i'$ is
-integral for $1\leq i\leq n$ and $\gcd(u,v)=\gcd(v,v')=1$.  For some integer
-$m>1$ we define $\psi_i:=uv^m(\omega_i/v^{m-1})'$; then
-$\{\psi_1,\ldots,\psi_n\}$ is a local integral basis at each root $a\in\bar C$ of~$v$.
+Let $v\in K[x]$ be a squarefree polynomial and let $\{\omega_1,\ldots,\omega_n\}$
+be a basis of~$A$ that is locally integral at all roots of~$v$.
+For some integer $m>1$ we define $\psi_i:=v^m\left(v^{1-m}\omega_i\right)'$; then
+$\{\psi_1,\ldots,\psi_n\}$ is a local integral basis at each root of~$v$.
 \end{lemma}
 \begin{proof}
-By expanding $\psi_i=uv\omega_i'-(m-1)uv'\omega_i$ one sees that the $\psi_i$
-themselves are integral elements. We
-have to show that each integral element can be expressed as a linear
-combination of the $\psi_i$ with coefficients in $\bar C(x)_a$. To the contrary,
-assume that there exists an integral element~$f$ that requires $x-a$ in the
-denominator of some coefficient, i.e.,
+By expanding $\psi_i=v\omega_i'-(m-1)v'\omega_i$ one sees that the $\psi_i$
+themselves are integral at all roots of~$v$. Let now $a\in\bar{C}$ be an
+arbitrary but fixed root of~$v$. We have to show that each $f\in A$ that is
+integral at~$a$ can be expressed as a linear combination of the $\psi_i$ with
+coefficients in $\bar C(x)_a$. To the contrary, assume that there exists an
+integral element~$f$ that requires $x-a$ in the denominator of some
+coefficient, i.e.,
 \[
   f = \frac{1}{v} \sum_{i=1}^n c_i \psi_i \quad\text{with }c_i\in \bar{C}(x)_a
   \text{ and } c_i(a)\neq0 \text{ for some } i
 \]
 (here we use the fact that $v$ is squarefree).  Further let $g=\sum_{i=1}^n
-(c_iu)'\omega_i$, which is obviously integral. Then also their sum
+c_i'\omega_i$, which is obviously integral. Then also their sum
 \begin{align*}
-  f+g &= v^{m-1} \sum_{i=1}^n \left(c_iu \left(\frac{\omega_i}{v^{m-1}}\right)'
-  + (c_iu)'\frac{\omega_i}{v^{m-1}} \right) \\
-  &= v^{m-1} \sum_{i=1}^n \left(\frac{uc_i\omega_i}{v^{m-1}}\right)'
+  f+g &= v^{m-1} \sum_{i=1}^n \left(c_i\left(v^{1-m}\omega_i\right)'
+  + c_i'v^{1-m}\omega_i \right) \\
+  &= v^{m-1} \sum_{i=1}^n \left(c_iv^{1-m}\omega_i\right)'
 \end{align*}
-must be integral. Since $\{\omega_1,\ldots,\omega_n\}$ is an integral basis,
+must be integral. Since $\{\omega_1,\ldots,\omega_n\}$ is an integral basis at~$a$,
 there exists for each $i=1,\ldots,n$ a series solution $y_i\in C[[[x-a]]]$
 of~$L$ such that $\omega_i\cdot y_i$ involves a term
 $T=(x-a)^\alpha\log(x-a)^\beta$ with $0\leq\alpha<1,\beta=0$ or
-$0<\alpha\leq1,\beta>0$. Let now $i$ be an index such that $c_i(a)\neq0$; together
-with $\gcd(u,v)=1$ this implies that $T$ appears in $(uc_i\omega_i)\cdot y_i$.
-Using the fact that the $\omega_i$ form an integral basis, it follows by
+$0<\alpha\leq1,\beta>0$. Let now $i$ be an index such that $c_i(a)\neq0$;
+this implies that $T$ appears in $(c_i\omega_i)\cdot y_i$.
+Using the fact that the $\omega_i$ form a local integral basis, it follows by
 Lemma~\ref{lemma:1} that $T$ is also present in $h\cdot y_i$ where
-$h=\sum_{i=1}^n uc_i\omega_i$. Applying the operator $v^{m-1}\partial_xv^{1-m}$
+$h=\sum_{i=1}^n c_i\omega_i$. Applying the operator $v^{m-1}\partial_xv^{1-m}$
 to $h\cdot y_i$ turns $T$ into $(x-a)^{\alpha-1}\log(x-a)^\beta$, which reveals that
-$v^{m-1}(h/v^{m-1})'=f+g$ is not integral. This contradicts our assumption of
-$f$ being integral, and hence $\{\psi_1,\ldots,\psi_n\}$ is a local integral
+$v^{m-1}(v^{1-m}h)'=f+g$ is not integral at~$a$. This contradicts our assumption on
+the integrality of~$f$, and hence $\{\psi_1,\ldots,\psi_n\}$ is a local integral
 basis at~$a$.
 \end{proof}
 
@@ -492,9 +492,10 @@ and then this equation is reduced modulo~$v$:
   \sum_{i=1}^n f_i\omega_i =
   \sum_{i=1}^n uv^mg_i\left(\frac{\omega_i}{v^{m-1}}\right)' \mod v.
 \end{equation}
-By Lemma~\ref{lemma:ibv} the elements $uv^m(\omega_i/v^{m-1})'$ form a local
-integral basis, which implies that the coefficients $g_i$ are uniquely
-determined.
+By Lemma~\ref{lemma:ibv} and from $\gcd(u,v)=1$ it follows that
+the elements $uv^m(\omega_i/v^{m-1})'$ form a local integral basis
+at each root of~$v$, which implies that the coefficients $g_i$ are
+uniquely determined.
 
 By Lemma~\ref{lemma:e} the polynomial~$e$ is squarefree and therefore $e\mid uv$;
 hence we can write $uv=ew$ for some $w\in K[x]$. By rewriting the

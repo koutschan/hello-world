@@ -62,10 +62,16 @@
 \def\lt{\operatorname{lt}}
 \def\im{\operatorname{Im}}
 \def\lclm{\operatorname{lclm}}
+\def\diag{\operatorname{diag}}
 
 \begin{document}
 
-\title{Reduction-Based Creative~Telescoping for \\ Fuchsian D-finite~Functions}
+\title{Reduction-Based Creative~Telescoping for \\ Fuchsian D-finite~Functions
+\titlenote{S.\ Chen was supported by the NSFC grant 11501552 and
+by the President Fund of the Academy of
+Mathematics and Systems Science, CAS (2014-cjrwlzx-chshsh). This work was
+also supported by the Fields Institute's 2015 Thematic Program on Computer
+Algebra in Toronto, Canada.}}
 
 \numberofauthors{1}
 
@@ -74,7 +80,7 @@ Shaoshi Chen$^{1,2}$, \, Manuel Kauers$^{3}$, \, Christoph Koutschan$^{4}$ \\
 \smallskip
        \affaddr{$^1$KLMM,\, AMSS, \,Chinese Academy of Sciences, Beijing, 100190, (China)}\\
        \smallskip
-       \affaddr{$^2$SCG, Faculty of Mathematics, University of Waterloo, Ontario, N2L3G1, (Canada)}\\
+       \affaddr{$^2$Symbolic Computation Group, University of Waterloo, Ontario, N2L3G1, (Canada)}\\
               \smallskip
        \affaddr{$^3$Institute for Algebra, Johannes Kepler University, Altenberger Stra\ss e 69,
  A-4040 Linz, (Austria)}\\
@@ -90,7 +96,7 @@ Shaoshi Chen$^{1,2}$, \, Manuel Kauers$^{3}$, \, Christoph Koutschan$^{4}$ \\
 \begin{abstract}
   Continuing a series of articles on the past few years on reduction-based creative telescoping,
   we adapt Trager's Hermite reduction for algebraic functions to fuchsian D-finite functions and
-  develop a reduction-based creative telescoping algorithm for these functions. 
+  develop a reduction-based creative telescoping algorithm for these functions.
 \end{abstract}
 
 
@@ -249,7 +255,7 @@ This means that when $y\in C[[[x-a]]]$ is a solution of~$L$ and $f$ is an
 element of~$A$, so that $f\cdot y$ is an element of $C[[[x-a]]]$, then we
 want to have $(\partial_t\cdot f)\cdot y=\partial_t\cdot(f\cdot y)$, where
 the $\cdot$ in $(\partial_t\cdot f)$ refers to the action of $R[\partial_t,\partial_x]$
-on $A$ and the three other dots refer to the action on $C[[[x-a]]]$. 
+on $A$ and the three other dots refer to the action on $C[[[x-a]]]$.
 If $u\in A$ is such that $\partial_t\cdot 1 = u$ and $U\in R[\partial_x]$ is such
 that $u=U+\<L>$, then the annihilator $\mathfrak{a}\subseteq R[\partial_t,\partial_x]$
 of $1\in A$ in $R[\partial_t,\partial_x]$ contains $L$ and $\partial_t-U$. We
@@ -585,7 +591,7 @@ infinity. From
 we see that the new integrand has a double root at infinity.
 
 Moreover, since the action of $\partial_t$ on series domains is defined coefficient-wise,
-it follows that when $f$ has (at least) a double root at infinity (with respect to~$x$), 
+it follows that when $f$ has (at least) a double root at infinity (with respect to~$x$),
 this is also true for $\partial_t\cdot f, \partial_t^2\cdot f, \partial_t^3\cdot f,\dots$,
 and then also for every $K$-linear combination $p_0f+p_1\partial_tf+\cdots+p_r\partial_t^rf$.
 This means that $p_0+p_1\partial_t+\cdots+p_r\partial_t^r$ is a telescoper for $f$ if
@@ -621,32 +627,48 @@ necessarily normal at infinity) in order to perform Hermite reduction. Then we w
 remainder $h$ with respect to some local integral basis at infinity and perform the
 polynomial reduction on this representation.
 
+Assume that $W := \{\omega_1, \ldots, \omega_n\}$ is an integral basis of~$A$ and
+\begin{equation} \label{EQ:eM}
+e \cdot  \partial_x(\omega_i) = \sum_{j=1}^n m_{i, j}\omega_j,
+\end{equation}
+where~$e, m_{i, j}\in K[x]$ and $\gcd(e, m_{1, 1}, m_{1, 2}, \ldots, m_{n, n})=1$.
 The Hermite reduction decomposes the input element~$f\in A$ into the form
 \[f = \partial_x(g) + h,\]
 where~$g, h\in A$ and~$h = \sum_{i=1}^n \frac{h_i \omega_i}{d\cdot e}$ with~$h_i, d, e\in K[x]$ and~$\gcd(d, e)=1$.
-Recall that $\{\omega_1, \ldots, \omega_n\}$ is an integral basis of~$A$ and
-\[e \cdot  \partial_x(\omega_i) = \sum_{j=1}^n m_{i, j}\omega_j,\]
-where~$e, m_{i, j}\in K[x]$ and~$\gcd(e, m_{1, 1}, m_{1, 2}, \ldots, m_{n, n})=1$.
+\begin{lemma}\label{LEM:d}
+If~$h$ is integrable in~$A$, then~$d$ is constant in~$K$.
+\end{lemma}
+\begin{proof}
+Suppose $h = \partial_x(g)$ for some~$g = \frac{1}{a}\sum_{i=1}^n b_i \omega_i$ with $a, b_i\in K[x]$.
+Then
+\[ h = \sum_{i=1}^n \frac{h_i \omega_i}{d\cdot e}= \sum_{i=1}^n (\partial_x(\frac{b_i}{a}) \omega_i + \frac{b_i}{a e} \sum_{j=1}^n  m_{i, j}\omega_j)).\]
+We first claim that $a$ is constant. Otherwise, for any irreducible factor $p$ of $a$, we have $\nu_p(h) > 1$. This contradicts
+with the factor that $d, e$ are squarefree. Thus, $d$ is also a constant.
+\end{proof}
+
 By the extended Euclidean algorithm, we compute~$u_i, v_i\in K[x]$ such that
 $\deg_x(v_i) < \deg_x(d)$ and
 \[h_i = u_i d + v_i e.\]
 Then we get
 \[ \sum_{i=1}^n \frac{h_i\omega_i}{d \cdot e} =  \sum_{i=1}^n \left(\frac{u_i}{e} + \frac{v_i}{d}\right)\omega_i.\]
-We now introduce the \emph{polynomial reduction} for confining the $u_i$'s to a finitely
+
+We now introduce the \emph{polynomial reduction} for confining the $u_i$ to a finite
 dimensional vector space over~$K$. Similar reductions had been introduced and used in creative telescoping
 for hyperexponential functions~\cite{bostan13a} and hypergeometric terms~\cite{chen15a}.
-
 Let~$V = (\nu_1, \ldots, \nu_n)^T$ whose entries form a basis of~$A$ over~$K(x)$. Assume that
 $a \partial_x(V) = BV$ with~$a\in K[x]$, $B = (b_{i, j})\in K[x]^{n \times n}$
 and $\gcd(a, b_{1, 1}, b_{1, 2}, \ldots, b_{n ,n})=1$. Let~$p = (p_1, \ldots, p_n)\in K[x]^n$. Then
 \begin{equation} \label{EQ:polyred}
 \partial_x (p V)=\partial_x \sum_{i=1}^n p_i \nu_i = \frac{a\partial_x(p) + B\cdot p}{a}\, V.
 \end{equation}
-This motivates us to introduce the map~$\phi_V: K[x]^n \rightarrow K[x]^n$
-defined by~$\phi_V(p) = a \partial_x(p) + B \cdot p$ for any~$p\in K[x]^n$. We call $\phi_V$
-the \emph{map for polynomial reduction} with respect to~$V$, and call
+This motivates us to introduce the following definition.
+\begin{defi}\label{DEF:polyred}
+Let the map~$\phi_V: K[x]^n \rightarrow K[x]^n$
+be defined by~$\phi_V(p) = a \partial_x(p) + B \cdot p$ for any~$p\in K[x]^n$.
+We call $\phi_V$ the \emph{map for polynomial reduction} with respect to~$V$, and call
 the subspace $\im(\phi_V) = \{\phi_V(p) \mid p \in K[x]^n\}$
 the \emph{subspace for polynomial reduction} with respect to~$V$.
+\end{defi}
 We can always view the polynomial matrix~$B\in K[x]^{n\times n}$ as a polynomial in~$x$
 with matrix coefficients of the form
 \[B = B_{\deg_x(B)}x^{\deg_x(B)} + \ldots + B_0, \]
@@ -660,10 +682,11 @@ where~$\vp_i\in K^n$ and~$\vp_s \neq 0$. We call $\vp_sx^s$
 the \emph{leading term} of~$p$ in~$x$ and~$\vp_s$ the corresponding \emph{leading coefficient},
 denoted by~$\lt_x(p)$ and~$\lc_x(p)$, respectively.
 Let~$N_{\phi_V}$ be the subspace of~$K[x]^n$ spanned by
-\[\{t \in \cS \mid t \neq \lt(p) ~\text{for all~$p\in \im(\phi_V)$}. \}\]
-Then~$K[x]^n = \im(\phi_V) \oplus N_{\phi_V}$. We call~$N_{\phi_V}$ the \emph{standard complement} of~$\im(\phi_V)$.
+\[\{t \in \cS \mid t \neq \lt(p) ~\text{for all~$p\in \im(\phi_V)$}\}.\]
+Then~$K[x]^n = \im(\phi_V) \oplus N_{\phi_V}$.
+We call~$N_{\phi_V}$ the \emph{standard complement} of~$\im(\phi_V)$.
 \begin{prop}\label{PROP:finite}
-If~$\deg_x(B) \leq \deg_x(a)-1$, then $N_{\phi_V}$ is a finitely dimensional
+If~$\deg_x(B) \leq \deg_x(a)-1$, then $N_{\phi_V}$ is a finite dimensional
 vector space over~$K$.
 \end{prop}
 \begin{proof} Let~$p\in K[x]^n$ with~$s=\deg_x(p)$ and~$\mu := \deg_x(B)$.
@@ -682,34 +705,85 @@ the matrix~$J_s = s\lc(a) + B_{\mu}$ is invertible and then $e_ix^{s+\mu}$ is no
 for any~$i=1, \ldots, n$. Since~$B_\mu$ has at most~$n$ eigenvalues, the dimension of~$N_{\phi_V}$
 is therefore at most~$n^2+n(\deg_x(a)-1)$. This completes the proof.
 \end{proof}
-\begin{remark}
-{\red To explain how to find the basis of~$N_{{\phi_V}}$.}
-\end{remark}
+%\begin{remark}
+%{\red To explain how to find the basis of~$N_{{\phi_V}}$.}
+%\end{remark}
 
-In general, the inequality~$\deg_x(M)\leq \deg_x(e)-1$ may not hold
-for an integral basis~$\Omega := \{\omega_1, \ldots, \omega_n\}$ of~$A$. By Lemma~\ref{lemma:degM}, we could
-change the basis into a local integral basis at the infinity. The simplest
-way to achieve this is to make a change of variables~$\tilde x = 1/x$.
-Let~$\tilde \omega_i(x) = \omega_i(1/x)$. Then $\tilde \Omega := \{\tilde \omega_1, \ldots, \tilde \omega_n\}$
-is a local integral basis of~$A$ at any place except at the origin. If~$\Omega$
-is normal at the infinity, then $\tilde \Omega$ is normal at the origin.
-By $\partial_x \tilde \omega_i(x) = \partial_x(\omega_i)(1/x)\cdot \frac{-1}{x^2} $, we get
-\[\partial_x \tilde \omega_i(x) = \sum_{i=1}^n\frac{-m_{i, j}(1/x)}{x^2e(1/x)}  \tilde \omega_j(x) = \sum_{i=1}^n \frac{\tilde m_{i, j}}{\tilde e}  \tilde \omega_j(x) .\]
-If $\deg_x(M) \geq \deg_x(e)$, then~$\deg_x(\tilde M)<\deg_x(\tilde e)-1$.
-{\red To add sentences about the transformation matrix between two basis... }
+We consider the function
+\[r = \frac{1}{e}U\cdot W,\]
+where~$U = (u_1, \ldots, u_n) \in K[x]^n$ and $e$ is defined as in~\eqref{EQ:eM}.
+If $\deg_x(M) \leq  \deg_x(e)-1$, then we can decompose $U$ into $U = \phi_W(U_1) + U_2$, where $U_1, U_2\in K[x]^n$
+and $U_2\in N_{\phi_W}$. Then we have
+\[r = \partial_x(U_1\cdot W) + \frac{1}{e} U_2 \cdot W. \]
+Note that~$U_2\in N_{\phi_W}$ belongs to a finite dimensional vector space over~$K$.
+When the inequality~$\deg_x(M)\leq \deg_x(e)-1$ does hold
+for the integral basis~$W$, we can
+change the basis into a local integral basis at the infinity. If~$W$ is also normal at the infinity,
+we can find nonnegative integers~$r_1, \ldots, r_n$ such that
+\[ V := \{\nu_1, \ldots, \nu_n\} \quad \text{with $\nu_i = 1/x^{r_i} \omega_i$}\]
+is a basis of~$A$ which is normal at $0$ and integral at all other places (including infinity).
+{\red Manual and Christoph, could you add some sentences to explain this?}
+Set $T = \diag(1/x^{r_1}, \ldots, 1/x^{r_n})$, we then have~$V = T\cdot W$.
+By taking derivatives, we get
+\[\partial_x(V) = \left(\partial_x(T) + T\cdot \frac{M}{e}\right)T^{-1} \cdot  V = \frac{B}{a} \cdot V, \]
+where~$a=x^\lambda e$ for some~$\lambda\in \bN$ and~$B\in K[x]^{n\times n}$. Since $V$ is local integral
+at the infinity, $\deg_x(B) \leq \deg_x(a)-1$ by Lemma~\ref{lemma:degM}.
+First we expand $r$ in terms of the new basis~$V$,
+\[r = \frac{1}{e} U \cdot W = \frac{1}{a} \tilde{U}\cdot V, \]
+where~$\tilde{U} = x^\lambda U T^{-1} \in K[x]^n$. Next, we decompose $\tilde{U}$ into
+$\tilde{U} = \phi_{V}(\tilde{U}_1) + \tilde{U}_2$ with~$\tilde{U}_1, \tilde{U}_2\in K[x]^n$ and
+$\tilde{U}_2\in N_{\phi_V}$. This means $r$ is decomposed into the sum of a integrable function
+and a nonintegrable one that lies in a finite dimensional vector space over~$K$.
 
-Since~$K[x]^n = \im(\phi_{\tilde \Omega}) \oplus N_{\phi_{\tilde \Omega}}$,
-we can write any vector~$u = (u_1, \ldots, u_n)\in K[x]^n$
-as $u = \phi_{\tilde \Omega}(p) + q$ with~$p\in K[x]^n$ and~$q\in N_{\phi_{\tilde \Omega}}$. Then
-\[\sum_{i=1}^n \left(\frac{u_i}{\tilde e}\right){\tilde \omega}_i = \partial_x\left(\sum_{i=1}^n p_i {\tilde \omega}_i\right)
-+ \sum_{i=1}^n \left(\frac{q_i}{\tilde e}\right){\tilde \omega}_i.\]
-Combining the Hermite reduction and polynomial reduction, any element $f\in A$ can be
-decomposed into the form
-\[f = \partial_x(g) +  \sum_{i=1}^n \left(\frac{u_i}{\tilde e}\tilde \omega_i + \frac{v_i}{d}\omega_i\right),\]
-where~$g\in A$ and $u_i, v_i\in K[x]$ with $u_i \in N_{\phi_{\tilde \Omega}}$ and $\deg_x(v_i) < \deg_x(d)$.
-Moreover, $\tilde e$ and~$d$ only depend on the given integral basis~$\{\omega_1, \ldots, \omega_n\}$.
+Combining the Hermite reduction and polynomial reduction, we get the following theorem.
+\begin{theorem}\label{THM:polyred}
+Let~$W$ be an integral basis of~$A$ and also normal at $0$. Let~$T := \diag(1/x^{r_1}, \ldots, 1/x^{r_n}) \in K[x]^{n\times n}$
+be such that~$V = T\cdot W$ is normal at $0$ and integral at all other places.
+Let~$e\in K[x]$, $\lambda \in \bN$, and~$B, M \in K[x]^{n \times n} $ be such that
+$e \partial_x (W) = M \cdot W$ and~$x^\lambda e \partial_x (V) = B\cdot V$.
+Then any element $f\in A$ can be decomposed into
+\begin{equation}\label{EQ:add}
+f = \partial_x(g) + \frac{1}{d} P\cdot W + \frac{1}{x^\lambda e} Q\cdot V,
+\end{equation}
+where~$g\in A$, $d\in K[x]$ is squarefree and $\gcd(d, e)=1$, $P, Q\in K[x]^n$ with $\deg_x(P) < \deg_x(d)$ and~$Q\in N_{\phi_{V}}$, which is
+a finite dimensional vector space over $K$. Moreover, $P, Q$ are zero if~$f$ is integral in~$A$.
+\end{theorem}
+\begin{proof}
+The decomposition follows from the discussion before this theorem.
+Assume that~$f$ is integrable, Lemma~\ref{LEM:d} implies that~$d\in K$.
+Since~$\deg_x(P) < \deg_x(d)$, we have $P=0$. Then $\frac{1}{x^\lambda e} Q\cdot V = \partial_x(\sum_{i=1}^n a_i \nu_i)$
+for some~$a_i\in K[x]$. This means $Q \in \im(\phi_V)$.
+Since~$\im(\phi_V) \bigcap N_{\phi_V} = \{0\}$,~$Q=0$.
+\end{proof}
+The decomposition in~\eqref{EQ:add} is called an \emph{additive decomposition} of~$f$ with respect to~$x$.
+We now discuss how to compute telescopers for functions in~$A$ via Hermite reduction and
+polynomial reduction.
 
-// TODO: DISSUSS IMPLICATIONS FOR CREATIVE TELESCOPING. BOUND. 
+We first consider the additive decompositions of the successive derivatives~$\partial_t^i(f)$ for~$i\in \bN$.
+Assume that
+\[\partial_t(W) = \frac{1}{\tilde{e}} \tilde{M} \cdot W \quad \text{and}
+\quad \partial_t(V) = \frac{1}{x^{\tilde{\lambda}} \tilde{e}} \tilde{B} \cdot V,\]
+where~$\tilde e \in K[x]$, $\tilde M, \tilde B\in K[x]^{n\times n}$, and~$\tilde \lambda \in \bN$.
+By Proposition 7 in~\cite{chen14a}, we have $\tilde e \mid e$ and~$x^{\tilde{\lambda}} \tilde{e} \mid x^\lambda e$.
+So we an just take $\tilde e = e$ and $\tilde{\lambda}  = \lambda$ by multiplying $\tilde M, \tilde B$ by some factors
+of~$x^\lambda e$. A direct calculation yields $\partial_t(f) = \partial_x(\partial_t(g))+ h$,
+where
+\[h = \left(\partial_t(\frac{P}{d})+\frac{P\tilde M}{de}\right)W + \left(\partial_t(\frac{Q}{x^\lambda e})+ \frac{Q\tilde B}{x^{2\lambda} e^2}\right)V.\]
+This implies that the squarefree part of the denominator of $h$ divides $xde$. Applying Hermite reduction and polynomial reduction
+to~$h$ yields
+\[ h = \partial_x(\tilde g_1) + \frac{1}{d} P_1\cdot W + \frac{1}{x^\lambda e} Q_1\cdot V,\]
+where~$P_1, Q_1\in K[x]^n$ with $\deg_x(P_1) < \deg_x(d)$ and~$Q_1\in N_{\phi_{V}}$.
+Repeat this discussion, we get the following lemma.
+\begin{lemma}\label{LEM:idtf}
+For any~$i\in \bN$, the derivative~$\partial_t^i(f)$ has an additive decomposition of the form
+\[ \partial_t^i(f) = \partial_x(g_i) + \frac{1}{d} P_i\cdot W + \frac{1}{x^\lambda e} Q_i\cdot V,\]
+where $g_i\in A$, $P_i, Q_i\in K[x]^n$ with $\deg_x(P_i) < \deg_x(d)$ and~$Q_i\in N_{\phi_{V}}$.
+\end{lemma}
+As applications of the above lemma, we can compute the minimal telescoper for $f$ by finding the first
+linear dependency among $(P_i, Q_i)$'s over~$K$ and we also obtain an upper bound for the order of telescopers.
+\begin{corollary}
+Any function $f\in A$ has a telescoper of order at most~$n\deg_x(d) + \dim_K(N_{\phi_V})$.
+\end{corollary}
 
 \section{Conclusion}
 

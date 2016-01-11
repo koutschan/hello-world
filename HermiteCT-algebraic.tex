@@ -719,10 +719,20 @@ When the inequality~$\deg_x(M)\leq \deg_x(e)-1$ does hold
 for the integral basis~$W$, we can
 change the basis into a local integral basis at the infinity. If~$W$ is also normal at the infinity,
 we can find nonnegative integers~$r_1, \ldots, r_n$ such that
-\[ V := \{\nu_1, \ldots, \nu_n\} \quad \text{with $\nu_i = 1/x^{r_i} \omega_i$}\]
+\[ V := \{\nu_1, \ldots, \nu_n\} \quad \text{with $\nu_i = x^{-r_i} \omega_i$}\]
 is a basis of~$A$ which is normal at $0$ and integral at all other places (including infinity).
-{\red Manual and Christoph, could you add some sentences to explain this?}
-Set $T = \diag(1/x^{r_1}, \ldots, 1/x^{r_n})$, we then have~$V = T\cdot W$.
+It is clear that such a basis will be normal at zero, because multiplying the generators by
+the rational functions $x^{r_i}$ brings it back to a global integral basis, which is in particular
+a local integral basis at zero.
+It is also clear that such a basis will be integral at every other point $a\in\bar C$, because the
+multipliers $x^{-r_i}$ are locally units at~$a$.
+Finally, since the original basis is normal at infinity, there exist rational functions $u_1,\dots,u_n$
+such that $\{u_1\omega_1,\dots,u_n\omega_n\}$ is a local integral basis at infinity.
+At infinity, each $u_i$ is equal to $x^{-r_i}$ for some $r_i\in\set Z$, and these integers
+can only be nonnegative because the $\omega_i$'s have no finite poles and therefore each
+of them is either constant or has a pole at infinity.
+
+Set $T = \diag(x^{-r_1}, \ldots, x^{-r_n})$, we then have~$V = T\cdot W$.
 By taking derivatives, we get
 \[\partial_x(V) = \left(\partial_x(T) + T\cdot \frac{M}{e}\right)T^{-1} \cdot  V = \frac{B}{a} \cdot V, \]
 where~$a=x^\lambda e$ for some~$\lambda\in \bN$ and~$B\in K[x]^{n\times n}$. Since $V$ is local integral

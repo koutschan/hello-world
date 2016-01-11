@@ -162,7 +162,7 @@ $[p_0 f + \cdots + p_r \partial_t^r\cdot f] = 0$,
 and then, by definition of $[\cdot]$, there exists a $g\in D$ such that $(p_0+\cdots + p_r\partial_t^r)\cdot f=g'$.
 In other words, $P=p_0+\cdots + p_r\partial_t^r$ is a telescoper.
 
-There are two ways to guarantee that this method works. The first consists in
+There are two ways to guarantee that this method terminates. The first consists in
 showing that $\{\,[f]:f\in D\,\}$ is a finite-dimensional vector space over
 $\mathrm{Const}_x(D)$. This approach was taken in~\cite{BCCL2010,bostan13a}. It has the
 nice additional feature that every bound for the dimension of this vector space
@@ -312,9 +312,8 @@ Then the set of all $f\in A$ which are locally integral at some
 fixed $a\in\bar C\cup\{\infty\}$ forms a $\bar C(x)_a$-module. A basis of this module is
 called a \emph{local integral basis} at $a$ for~$A$. The algorithm given in~\cite{kauers15b}
 for computing (global) integral bases computes local integral bases at finite
-points as an intermediate step. The computation of a local integral basis at
-infinity is also possible, either analogously, or by making a change of
-variables $\tilde x=1/x$ and computing a local integral basis at~$0$.
+points as an intermediate step. By an analogous algorithm, it is also possible
+to compute a local integral basis at infinity.
 
 An integral basis $\omega_1,\dots,\omega_n$ is always also a $K(x)$-vector space
 basis of~$A$. A key feature of integral bases is that they make poles explicit. Writing
@@ -390,16 +389,16 @@ of basis elements can cancel:
 
 \begin{lemma}\label{lemma:3}
   Let $L$ be a fuchsian operator and let $\omega_1,\dots,\omega_n$ be an integral basis of $A=K(x)[\partial_x]/\<L>$
-  which is normal at infinity.
+  which is normal at some $a\in\bar C\cup\{\infty\}$.
   Let $f=\sum_{i=1}^n f_i\omega_i$ for some $f_1,\dots,f_n\in K(x)$.
-  Then $f$ has a pole at infinity if and only if
-  there is some $i$ such that $f_i\omega_i$ has a pole at infinity.
+  Then $f$ has a pole at $a$ if and only if
+  there is some $i$ such that $f_i\omega_i$ has a pole at~$a$.
 \end{lemma}
 \begin{proof}
   Let $r_1,\dots,r_n\in K(x)$ be such that $r_1\omega_1,\dots,r_n\omega_n$ is a
-  local integral basis at infinity. By $f=\sum_{i=1}^n
-  (f_ir_i^{-1})(r_i\omega_i)$ and by Lemma~\ref{lemma:1}, $f$~is integral at infinity iff all
-  $f_ir_i^{-1}r_i\omega_i=f_i\omega_i$ are integral at infinity.
+  local integral basis at~$a$. By $f=\sum_{i=1}^n
+  (f_ir_i^{-1})(r_i\omega_i)$ and by Lemma~\ref{lemma:1}, $f$~is integral at~$a$ iff all
+  $f_ir_i^{-1}r_i\omega_i=f_i\omega_i$ are integral at~$a$.
 \end{proof}
 
 \section{Hermite Reduction}\label{sec:hermite}
@@ -501,7 +500,7 @@ and then this equation is reduced modulo~$v$:
 By Lemma~\ref{lemma:ibv} and from $\gcd(u,v)=1$ it follows that
 the elements $uv^m(v^{1-m}\omega_i)'$ form a local integral basis
 at each root of~$v$, which implies that the coefficients $g_i$ are
-uniquely determined.
+uniquely determined modulo~$v$.
 
 By Lemma~\ref{lemma:e} the polynomial~$e$ is squarefree and therefore $e\mid uv$;
 hence we can write $uv=ew$ for some $w\in K[x]$. By rewriting the

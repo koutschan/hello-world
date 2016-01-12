@@ -72,7 +72,8 @@ by the President Fund of the Academy of
 Mathematics and Systems Science, CAS (2014-cjrwlzx-chshsh). This work was
 also supported by the Fields Institute's 2015 Thematic Program on Computer
 Algebra in Toronto, Canada.\\
-M. Kauers was supported by FWF grants F50-04 and Y464-N18.
+M. Kauers was supported by FWF grants F50-04 and Y464-N18.\\
+C. Koutschan was supported by the Austrian Science Fund (FWF): W1214.
 }}
 
 \numberofauthors{1}
@@ -652,15 +653,21 @@ Assume that $W := \{\omega_1, \ldots, \omega_n\}$ is an integral basis of~$A$ an
 \end{equation}
 where $e, m_{i, j}\in K[x]$ and $\gcd(e, m_{1, 1}, m_{1, 2}, \ldots, m_{n, n})=1$.
 The Hermite reduction decomposes the input element $f\in A$ into the form
-\[f = g' + h,\]
-where $g, h\in A$ and $h = \sum_{i=1}^n \frac{h_i}{de} \omega_i$ with $h_i, d, e\in K[x]$ and $\gcd(d, e)=1$.
+\[
+  f = g' + h = g' + \sum_{i=1}^n \frac{h_i}{de} \omega_i,\qquad
+  g, h\in A,
+\]
+with $h_i, d\in K[x]$ such that $\gcd(d, e)=\gcd(h_i,de)=1$ and $d$ is squarefree.
 \begin{lemma}\label{LEM:d}
 If $h$ is integrable in~$A$, then $d$ is constant in~$K$.
 \end{lemma}
 \begin{proof}
 Suppose $h = g'$ for some $g = \frac{1}{a}\sum_{i=1}^n b_i \omega_i$ with $a, b_i\in K[x]$.
 Then
-\[ h = \sum_{i=1}^n \frac{h_i}{de}\omega_i= \sum_{i=1}^n ((\frac{b_i}{a})' \omega_i + \frac{b_i}{a e} \sum_{j=1}^n  m_{i, j}\omega_j)).\]
+\[
+  h = \sum_{i=1}^n \frac{h_i}{de}\omega_i= \sum_{i=1}^n \biggl(\Bigl(\frac{b_i}{a}\Bigr)' \omega_i +
+  \frac{b_i}{a e} \sum_{j=1}^n  m_{i, j}\omega_j\biggr).
+\]
 We first claim that $a$ is constant. Otherwise, for any irreducible factor $p$ of~$a$, we would have that $h$ has a pole of
 multiplicity greater than $1$ at the roots of~$p$. This contradicts
 the fact that $d, e$ are squarefree. Thus, $d$ is also a constant.
@@ -672,8 +679,8 @@ $\deg_x(v_i) < \deg_x(d)$ and
 Then we get
 \[ \sum_{i=1}^n \frac{h_i}{de}\omega_i =  \sum_{i=1}^n \left(\frac{u_i}{e} + \frac{v_i}{d}\right)\omega_i.\]
 
-We now introduce the \emph{polynomial reduction} for confining the $u_i$ to a finite
-dimensional vector space over~$K$. Similar reductions had been introduced and used in creative telescoping
+We now introduce the \emph{polynomial reduction} for confining the $u_i$ to a finite-dimensional
+vector space over~$K$. Similar reductions had been introduced and used in creative telescoping
 for hyperexponential functions~\cite{bostan13a} and hypergeometric terms~\cite{chen15a}.
 Let $V = (\nu_1, \ldots, \nu_n)^T$ whose entries form a basis of~$A$ over $K(x)$. Assume that
 $a \partial_x(V) = BV$ with $a\in K[x]$, $B = (b_{i, j})\in K[x]^{n \times n}$
@@ -683,7 +690,7 @@ and $\gcd(a, b_{1, 1}, b_{1, 2}, \ldots, b_{n ,n})=1$. Let $p = (p_1, \ldots, p_
 \end{equation}
 This motivates us to introduce the following definition.
 \begin{defi}\label{DEF:polyred}
-Let the map $\phi_V: K[x]^n \rightarrow K[x]^n$
+Let the map $\phi_V\colon K[x]^n \rightarrow K[x]^n$
 be defined by $\phi_V(p) = a \partial_x(p) + Bp$ for any $p\in K[x]^n$.
 We call $\phi_V$ the \emph{map for polynomial reduction} with respect to~$V$, and call
 the subspace $\im(\phi_V) = \{\phi_V(p) \mid p \in K[x]^n\}$
@@ -749,7 +756,7 @@ a basis of $N_{\phi_V}$ can be computed by
 looking at the echelon form of the matrix ${M_{\lambda_0}}$.
 As a consequence of the above discussions about the complement space $N_{\phi_V}$, we get the following result.
 \begin{prop}\label{PROP:finite}
-If $\deg_x(B) \leq \deg_x(a)-1$, then $N_{\phi_V}$ is a finite dimensional
+If $\deg_x(B) \leq \deg_x(a)-1$, then $N_{\phi_V}$ is a finite-dimensional
 vector space over~$K$.
 \end{prop}
 %%\begin{proof} Let $p\in K[x]^n$ with $s=\deg_x(p)$ and $\mu := \deg_x(B)$.
@@ -778,10 +785,10 @@ where $U = (u_1, \ldots, u_n) \in K[x]^n$ and $e$ is defined as in~\eqref{EQ:eM}
 If $\deg_x(M) \leq  \deg_x(e)-1$, then we can decompose $U$ into $U = \phi_W(U_1) + U_2$, where $U_1, U_2\in K[x]^n$
 and $U_2\in N_{\phi_W}$. Then we have
 \[r = \partial_x(U_1W) + \frac{1}{e} U_2W. \]
-Note that $U_2\in N_{\phi_W}$ belongs to a finite dimensional vector space over~$K$.
+Note that $U_2\in N_{\phi_W}$ belongs to a finite-dimensional vector space over~$K$.
 When the inequality $\deg_x(M)\leq \deg_x(e)-1$ does hold
 for the integral basis~$W$, we can
-change the basis into a local integral basis at the infinity. If $W$ is also normal at the infinity,
+change the basis into a local integral basis at infinity. If $W$ is also normal at infinity,
 we can find nonnegative integers~$r_1, \ldots, r_n$ such that
 \[ V := \{\nu_1, \ldots, \nu_n\} \quad \text{with $\nu_i = x^{-r_i} \omega_i$}\]
 is a basis of~$A$ which is normal at $0$ and integral at all other places (including infinity).
@@ -805,12 +812,12 @@ First we expand $r$ in terms of the new basis~$V$,
 \[r = \frac{1}{e} UW = \frac{1}{a} \tilde{U}V, \]
 where $\tilde{U} = x^\lambda U T^{-1} \in K[x]^n$. Next, we decompose $\tilde{U}$ into
 $\tilde{U} = \phi_{V}(\tilde{U}_1) + \tilde{U}_2$ with $\tilde{U}_1, \tilde{U}_2\in K[x]^n$ and
-$\tilde{U}_2\in N_{\phi_V}$. This means $r$ is decomposed into the sum of a integrable function
-and a nonintegrable one that lies in a finite dimensional vector space over~$K$.
+$\tilde{U}_2\in N_{\phi_V}$. This means $r$ is decomposed into the sum of an integrable function
+and a nonintegrable one that lies in a finite-dimensional vector space over~$K$.
 
 Combining the Hermite reduction and polynomial reduction, we get the following theorem.
 \begin{theorem}\label{THM:polyred}
-Let $W$ be an integral basis of~$A$ and also normal at~$\infty$. Let $T := \diag(x^{-r_1}, \ldots, x^{-r_n}) \in K[x]^{n\times n}$
+Let $W$ be an integral basis of~$A$ that is normal at~$\infty$. Let $T := \diag(x^{-r_1}, \ldots, x^{-r_n}) \in K[x]^{n\times n}$
 be such that $V = TW$ is normal at $0$ and integral at all other places.
 Let $e\in K[x]$, $\lambda \in \bN$, and $B, M \in K[x]^{n \times n} $ be such that
 $e \partial_x (W) = MW$ and $x^\lambda e \partial_x (V) = BV$.
@@ -819,7 +826,7 @@ Then any element $f\in A$ can be decomposed into
 f = \partial_x(g) + \frac{1}{d} PW + \frac{1}{x^\lambda e} QV,
 \end{equation}
 where $g\in A$, $d\in K[x]$ is squarefree and $\gcd(d, e)=1$, $P, Q\in K[x]^n$ with $\deg_x(P) < \deg_x(d)$ and $Q\in N_{\phi_{V}}$, which is
-a finite dimensional vector space over $K$. Moreover, $P, Q$ are zero if $f$ is integrable in~$A$.
+a finite-dimensional vector space over $K$. Moreover, $P, Q$ are zero if $f$ is integrable in~$A$.
 \end{theorem}
 \begin{proof}
 The decomposition follows from the discussion before this theorem.

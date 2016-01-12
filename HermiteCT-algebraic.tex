@@ -71,7 +71,9 @@
 by the President Fund of the Academy of
 Mathematics and Systems Science, CAS (2014-cjrwlzx-chshsh). This work was
 also supported by the Fields Institute's 2015 Thematic Program on Computer
-Algebra in Toronto, Canada.}}
+Algebra in Toronto, Canada.\\
+M. Kauers was supported by FWF grants F50-04 and Y464-N18.
+}}
 
 \numberofauthors{1}
 
@@ -640,7 +642,7 @@ If $h$ is integrable in~$A$, then $d$ is constant in~$K$.
 \begin{proof}
 Suppose $h = g'$ for some $g = \frac{1}{a}\sum_{i=1}^n b_i \omega_i$ with $a, b_i\in K[x]$.
 Then
-\[ h = \sum_{i=1}^n \frac{h_i \omega_i}{de}= \sum_{i=1}^n ((\frac{b_i}{a})' \omega_i + \frac{b_i}{a e} \sum_{j=1}^n  m_{i, j}\omega_j)).\]
+\[ h = \sum_{i=1}^n \frac{h_i}{de}\omega_i= \sum_{i=1}^n ((\frac{b_i}{a})' \omega_i + \frac{b_i}{a e} \sum_{j=1}^n  m_{i, j}\omega_j)).\]
 We first claim that $a$ is constant. Otherwise, for any irreducible factor $p$ of~$a$, we would have that $h$ has a pole of
 multiplicity greater than $1$ at the roots of~$p$. This contradicts
 the fact that $d, e$ are squarefree. Thus, $d$ is also a constant.
@@ -650,7 +652,7 @@ By the extended Euclidean algorithm, we compute $u_i, v_i\in K[x]$ such that
 $\deg_x(v_i) < \deg_x(d)$ and
 \[h_i = u_i d + v_i e.\]
 Then we get
-\[ \sum_{i=1}^n \frac{h_i\omega_i}{de} =  \sum_{i=1}^n \left(\frac{u_i}{e} + \frac{v_i}{d}\right)\omega_i.\]
+\[ \sum_{i=1}^n \frac{h_i}{de}\omega_i =  \sum_{i=1}^n \left(\frac{u_i}{e} + \frac{v_i}{d}\right)\omega_i.\]
 
 We now introduce the \emph{polynomial reduction} for confining the $u_i$ to a finite
 dimensional vector space over~$K$. Similar reductions had been introduced and used in creative telescoping

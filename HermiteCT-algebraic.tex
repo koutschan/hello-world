@@ -381,9 +381,27 @@ K(x)$ such that $r_1\omega_1,\dots,r_n\omega_n$ is a local integral basis
 at~$a$. Trager shows for the case of algebraic function fields how to construct
 an integral basis which is normal at infinity from a given integral basis and
 a given local integral basis at infinity~\cite{trager84}. The same procedure also applies
-in the present situation. % It works as follows.
+in the present situation. It works as follows.
 
-/// MK: I WILL ADD THIS IN THE END, IF SPACE PERMITS. OTHERWISE WE DROP IT.
+Let $\omega_1,\dots,\omega_n$ be a global integral basis and $\nu_1,\dots,\nu_n$ be a local
+integral basis at infinity. Let $m_{i,j}\in K(x)$ be such that
+\[
+ \omega_i = \sum_{j=1}^n m_{i,j}\nu_j.
+\]
+For each~$i$, let $r_i$ be the smallest integer such that $x^{-r_i}m_{i,j}$ has no pole at infinity for any~$j$.
+Then each $x^{-r_i}\omega_i$ is local integral at infinity.
+Note that the $r_i$ will be nonnegative, because the $\omega_i$ have no finite poles and therefore,
+by the Fuchs relation, they must be either constant or have a pole at infinity. 
+Let $A\in K^{n\times n}$ be the matrix obtained by evaluating $((x^{-r_i}m_{i,j}))_{i,j=1}^n$ at infinity
+(this is possible by the choice of~$r_i$).
+If $A$ is invertible, then the $x^{-r_i}\omega_i$ form a local integral basis at infinity and we are done.
+Otherwise, there exists a nonzero vector $a=(a_1,\dots,a_n)\in K^n$ with $aA=0$.
+Among the indices $\ell$ with $a_\ell\neq0$ choose one where $r_\ell$ is maximal, %%% MK: TRAGER WRITES MINIMAL, I THINK THIS IS A TYPO.
+and then replace $\omega_\ell$ by $\sum_{i=1}^n a_i x^{r_\ell-r_i}\omega_i$.
+Note that the resulting basis is still global integral.
+Repeating the process, it can be checked that the value of $r_1+\cdots+r_n$ strictly decreases in each iteration,
+so it must come to an end after a finite number of steps.
+See Trager's discussion~\cite{trager84} for further details. 
 
 Although normality is a somewhat weaker condition on a basis than integrality,
 it also excludes the possibility that poles in the terms of a linear combination

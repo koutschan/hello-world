@@ -652,18 +652,17 @@ the combined reduction (Hermite reduction followed by polynomial reduction) has 
 desired dimension property for the space of remainders. As a result, we obtain a new
 proof for the bound on the order of the telescoper given in~\cite{chen14a}.
 
-In this approach, we use two integral bases. First we use a global integral basis
-$W=\{\omega_1, \ldots, \omega_n\}$ (not
+In this approach, we use two integral bases. First we use a global integral basis (not
 necessarily normal at infinity) in order to perform Hermite reduction. Then we write the
 remainder $h$ with respect to some local integral basis at infinity and perform the
 polynomial reduction on this representation.
 
-Assume that
-\begin{equation} \label{EQ:eM}
-  e \omega_i'= \sum_{j=1}^n m_{i, j}\omega_j,
-\end{equation}
-where $e, m_{i, j}\in K[x]$ and $\gcd(e, m_{1, 1}, m_{1, 2}, \ldots, m_{n, n})=1$.
-The Hermite reduction decomposes the input element $f\in A$ into the form
+Throughout this section let $W=(\omega_1,\ldots,\omega_n)^T\in A^n$ be such
+that $\{\omega_1, \ldots, \omega_n\}$ is a global integral basis of~$A$, and
+let $e\in K[x]$ and $M=(m_{i,j})\in K[x]^{n\times n}$ be such that $eW'=MW$
+and $\gcd(e, m_{1, 1}, m_{1, 2}, \ldots, m_{n ,n})=1$. The Hermite reduction
+described in Section~\ref{sec:hermite} decomposes an input element $f\in A$
+into the form
 \[
   f = g' + h = g' + \sum_{i=1}^n \frac{h_i}{de} \omega_i,\qquad
   g, h\in A,
@@ -673,8 +672,8 @@ with $h_i, d\in K[x]$ such that $\gcd(d, e)=\gcd(h_i,de)=1$ and $d$ is squarefre
 If $h$ is integrable in~$A$, then $d$ is constant in~$K$.
 \end{lemma}
 \begin{proof}
-Suppose $h = g'$ for some $g = \frac{1}{a}\sum_{i=1}^n b_i \omega_i$ with $a, b_i\in K[x]$.
-Then
+Suppose that $h$ is integrable in~$A$, i.e., there exist $a, b_i\in K[x]$
+such that $h = \bigl(\frac{1}{a}\sum_{i=1}^n b_i \omega_i\bigr)'$. Then
 \[
   h = \sum_{i=1}^n \frac{h_i}{de}\omega_i= \sum_{i=1}^n \biggl(\Bigl(\frac{b_i}{a}\Bigr)' \omega_i +
   \frac{b_i}{a e} \sum_{j=1}^n  m_{i, j}\omega_j\biggr).
@@ -685,113 +684,110 @@ the fact that $d, e$ are squarefree. Thus, $d$ is also a constant.
 \end{proof}
 
 By the extended Euclidean algorithm, we compute $u_i, v_i\in K[x]$ such that
-$h_i = u_i d + v_i e$ and $\deg_x(v_i) < \deg_x(d)$. Then we get
+$h_i = u_i d + v_i e$ and $\deg_x(v_i) < \deg_x(d)$. Then the Hermite remainder~$h$
+decomposes as
 \[
-  \sum_{i=1}^n \frac{h_i}{de}\omega_i =  \sum_{i=1}^n \left(\frac{u_i}{e} + \frac{v_i}{d}\right)\omega_i.
+  \sum_{i=1}^n \frac{h_i}{de}\omega_i =  \sum_{i=1}^n \frac{u_i}{e}\omega_i + \sum_{i=1}^n \frac{v_i}{d}\omega_i.
 \]
 
-We now introduce the \emph{polynomial reduction} for confining the $u_i$ to a finite-dimensional
+We now introduce the \emph{polynomial reduction} whose goal is to confine the $u_i$ to a finite-dimensional
 vector space over~$K$. Similar reductions had been introduced and used in creative telescoping
 for hyperexponential functions~\cite{bostan13a} and hypergeometric terms~\cite{chen15a}.
-Let $V = (\nu_1, \ldots, \nu_n)^T$ whose entries form a basis of~$A$ over $K(x)$. Assume that
-$a \partial_x(V) = BV$ with $a\in K[x]$, $B = (b_{i, j})\in K[x]^{n \times n}$
-and $\gcd(a, b_{1, 1}, b_{1, 2}, \ldots, b_{n ,n})=1$. Let $p = (p_1, \ldots, p_n)\in K[x]^n$. Then
+Let $V = (\nu_1, \ldots, \nu_n)^T\in A^n$ be such that its entries form a $K(x)$-basis of~$A$,
+and let $a\in K[x]$ and $B = (b_{i, j})\in K[x]^{n \times n}$ be such that $aV'=BV$ and
+$\gcd(a, b_{1, 1}, b_{1, 2}, \ldots, b_{n ,n})=1$. Let $p = (p_1, \ldots, p_n)\in K[x]^n$. Then
 \begin{equation} \label{EQ:polyred}
-\partial_x (p V)=\partial_x \sum_{i=1}^n p_i \nu_i = \frac{a\partial_x(p) + pB}{a}\, V.
+  (pV)' = \sum_{i=1}^n (p_i \nu_i)' = \frac{ap' + pB}{a}\, V.
 \end{equation}
 This motivates us to introduce the following definition.
 \begin{defi}\label{DEF:polyred}
 Let the map $\phi_V\colon K[x]^n \rightarrow K[x]^n$
-be defined by $\phi_V(p) = a \partial_x(p) + pB$ for any $p\in K[x]^n$.
+be defined by $\phi_V(p) = ap' + pB$ for any $p\in K[x]^n$.
 We call $\phi_V$ the \emph{map for polynomial reduction} with respect to~$V$, and call
 the subspace $\im(\phi_V) = \{\phi_V(p) \mid p \in K[x]^n\}$
 the \emph{subspace for polynomial reduction} with respect to~$V$.
 Note that, by construction and using Lemma~\ref{LEM:d}, $q\in K[x]^n$ is in
 $\im(\phi_V)$ if and only if $(1/a)qV$ is integrable in~$A$.
 \end{defi}
-We can always view the polynomial matrix $B\in K[x]^{n\times n}$ as a polynomial in~$x$
-with matrix coefficients of the form
+
+We can always view an element of $K[x]^n$ (resp. $K[x]^{n\times n}$) as a polynomial in~$x$
+with coefficients in~$K^n$ (resp. $K^{n\times n}$). In this sense we use the notation $\lc(\cdot)$
+for the leading coefficient and $\lt(\cdot)$ for the leading term of a vector (resp. matrix).
+For example, if $p\in K[x]^n$ is of the form
 \[
-  B = B_rx^r + \ldots + B_0,
+  p = p^{(r)}x^r + \dots + p^{(1)}x + p^{(0)},\quad p^{(i)}\in K^n,
 \]
-where $r=\deg_x(B)=\max_{i,j}\deg_x(b_{i,j})$ and $B_i\in K^{n\times n}$.
-Let $\{e_1, \ldots, e_n\}$ be the standard basis of~$K^n$. Then the module $K[x]^n$ viewed as a vector space over~$K$
-is spanned by
-\[\cS := \{e_ix^j \mid 1\leq i \leq n, j\in \bN\}.\]
-Every $p \in K[x]^n$ can be written as
-\[p = \vp_sx^s + \cdots + \vp_0,\]
-where $\vp_i\in K^n$ and $\vp_s \neq 0$. We call $\vp_sx^s$
-the \emph{leading term} of~$p$ in~$x$ and $\vp_s$ the corresponding \emph{leading coefficient},
-denoted by $\lt_x(p)$ and $\lc_x(p)$, respectively.
-Let $N_V$ be the subspace of $K[x]^n$ spanned by
-\[\{t \in \cS \mid t \neq \lt(p) \ \text{for all $p\in \im(\phi_V)$}\}.\]
+then $\deg_x(p)=r$, $\lc(p)=p^{(r)}$, and $\lt(p)=p^{(r)}x^r$.
+Let $\{e_1, \ldots, e_n\}$ be the standard basis of~$K^n$.
+Then the module $K[x]^n$ viewed as a $K$-vector space is spanned by
+\[
+  \cS := \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, j\in \bN\bigr\}.
+\]
+We define $K[x]_m^n:=\{p\in K[x]^n \mid \deg_x(p) \leq m\}$; as a $K$-vector
+space it is spanned by
+\[
+  \cS_m := \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, 0\leq j\leq m\bigr\}.
+\]
+Any element $q\in K[x]^n$ of degree at most $m$ can be expressed in the
+basis $\cS_m$ as a vector $\vec{q}\in K^{n(m+1)}$ (in the following the
+decoration~\raisebox{-1pt}{$\vec{}\;$} always indicates such a typecast).
+
+\begin{defi}\label{DEF:polyred}
+Let $N_V$ be the $K$-subspace of $K[x]^n$ spanned by
+\[
+  \bigl\{t \in \cS \mathrel{\big|} t \neq \lt(p) \ \text{for all $p\in \im(\phi_V)$}\bigr\}.
+\]
 Then $K[x]^n = \im(\phi_V) \oplus N_V$.
 We call $N_V$ the \emph{standard complement} of $\im(\phi_V)$.
+\end{defi}
 
-
-We now explain how to determine the dimension and a basis for $N_V$ when $\deg_x(B) \leq  \mu := \deg_x(a)-1$.
-
-\smallskip
-{\it Case 1.}~
-Assume that $\deg_x(B) < \mu$. For any $p\in K[x]^n$ of degree $s>0$, we have
-\[\phi_V(p) = s\lc(a)x^{s+\mu} + \text{lower terms in~$x$}.\]
-Then any monomial $e_i x^j\in \cS$
-with $j\geq \mu +1$ and $i\in \{1, \ldots, n\}$ is not in $N_V$. Let $K[x]_\mu^n := \{p\in K[x]^n \mid \deg_x(p) \leq \mu\}$.
-Then $\cS_{\mu} := \{e_i x^j \mid 0\leq j\leq \mu,  1\leq i \leq n\}$ is a basis of $K[x]_\mu^n$
-over~$K$.
-Any element $q\in K[x]^n$ of
-degree at most $\mu$ can be expressed in the basis $\cS_{\mu}$ as a vector $\vec{q}\in K^{n(\mu+1)}$
-(in the following the decoration~\raisebox{-1pt}{$\vec{}\;$} always indicates such a typecast).
-Similarly, the columns of the matrix $B\in K[x]^{n\times n}$ can be expressed as vectors $\vec{B}_1, \ldots, \vec{B}_n$.
-Let $C(B)$ be the subspace of $K[x]_\mu^n$ generated by these column vectors over~$K$.
-If $q\in \im(\phi_V)$, then $q = \phi_V(p) = pB$ for some $p \in K^n$, which implies
-$\vec{q}$  is a linear combination of $\vec{B}_i$'s. Then $K[x]_\mu^n = C_B \oplus N_V$.
-So $\dim_K(N_V)= (\mu+1)n - \dim(C(B))$ and a basis of $N_V$ can be computed by
-looking at the echelon form of the matrix $C(B) = (\vec{B}_1, \ldots, \vec{B}_n)$.
-
-\smallskip
-{\it Case 2.}~
-Assume that $\deg_x(B) =\mu$. For any $p\in K[x]^n$ of degree $s$, we have
-\[\phi_V(p) = (s\lc(a) + B_{\mu})\lc(p)x^{s+\mu}+\text{lower terms in~$x$}.\]
-Let $\lambda_0$ be the largest nonnegative integer such that $-\lambda_0 \lc(a)$ in $K$ is an
-eigenvalue of $B_{\mu}\in K^{n\times n}$. Then for any $s>\lambda_0$,
-the matrix $J_s = s\lc(a) + B_{\mu}$ is invertible. So any monomial $e_ix^j$ with $j> \lambda_0+\mu$ is not in~$N_V$
-for any $i=1, \ldots, n$. Let $p = \sum_{i=1}^n \sum_{j=0}^{\lambda_0} p_{i, j} e_ix^j$.
-Then $\phi_V(p)$ belongs to $K[x]_{\lambda_0+\mu}^n$.
-In the basis of $\cS_{\lambda_0+\mu}$, we can
-express $\phi_V(p)$ as a vector of length ${n(\lambda_0+\mu+1)}$ with entries linear in $p_{i, j}$'s.
-This vector can be written in the form $M_{\lambda_0} \vec{P}$,
-where $\vec{P} = (p_{1, 0}, p_{2, 0}, \ldots, p_{n, \lambda_0})^T$ and $M_{\lambda_0} \in K_{\alpha\times \beta}$
-with $\alpha =  n(\lambda_0+\mu +1)$ and $\beta = n(\lambda_0+1)$.
-Any element $q\in K[x]_{\lambda_0+\mu}^n$ can be expressed as a vector $\vec{q} \in K^{n(\lambda_0 + \mu +1)}$.
-Then $q\in\im(\phi_v)$ if and only if $\vec{q}$ is in the column space of $M_{\lambda_0}$.
-Therefore,
-\[K[x]_{\lambda_0+\mu}^n = C({M_{\lambda_0}}) \oplus N_V. \]
-This implies that $\dim_K(N_V) = n(\lambda_0+\mu+1) - \rank({M_{\lambda_0}})$, and
-a basis of $N_V$ can be computed by
-looking at the echelon form of the matrix ${M_{\lambda_0}}$.
-As a consequence of the above discussions about the complement space $N_V$, we get the following result.
 \begin{prop}\label{PROP:finite}
+Let $a\in K[x]$ and $B\in K[x]^{n \times n}$ be such that $aV'=BV$, as before.
 If $\deg_x(B) \leq \deg_x(a)-1$, then $N_V$ is a finite-dimensional
 vector space over~$K$.
 \end{prop}
-%%\begin{proof} Let $p\in K[x]^n$ with $s=\deg_x(p)$ and $\mu := \deg_x(B)$.
-%%We first consider the case when $\mu <\deg_x(a)-1$.
-%%If $s=0$, then $\phi_V(p) = B p$,
-%%which implies that $\deg_x(\phi_V(p))\leq \mu$. If $s>0$, then
-%%\[\phi_V(p)=\lc(a)s\lc(p)x^{s+\deg_x(a)-1} +  \text{lower terms in~$x$}.\]
-%%Therefore, any element $q\in K[x]^n$ of degree at least $\deg_x(a)$ can be written as
-%%$q = \phi_V(q_1) + q_2$ for some $q_1, q_2\in K[x]^n$ such that $\deg_x(q_2)\leq \deg_x(a)-1$.
-%%Thus, the dimension of $N_V$ is at most $n (\deg_x(a)-1)$.
-%%
-%%Next we consider the case when $\mu =\deg_x(a)-1$. Then
-%%\[\phi_V(p) = (s\lc(a) + B_{\mu})\lc(p)x^{s+\mu}+\text{lower terms in~$x$}.\]
-%%If $-s\lc(a)\in K$ is not an eigenvalue of $B_{\mu}\in K^{n\times n}$, then
-%%the matrix $J_s = s\lc(a) + B_{\mu}$ is invertible and then $e_ix^{s+\mu}$ is not in $N_V$
-%%for any $i=1, \ldots, n$. Since $B_\mu$ has at most $n$ eigenvalues, the dimension of $N_V$
-%%is therefore at most $n^2+n(\deg_x(a)-1)$. This completes the proof.
-%%\end{proof}
+\begin{proof}
+In addition to the proof of the assertion, we also explain how to determine
+the dimension and a basis for $N_V$, for later use. For brevity, let
+$m:=\deg_x(a)-1$. We distinguish two cases.
 
+\smallskip
+{\it Case 1.}~
+Assume that $\deg_x(B) < m$. For any $p\in K[x]^n$ of degree $s>0$, we have
+\[
+  \lt\bigl(\phi_V(p)\bigr) = s\lc(a)\lc(p)x^{s+m}.
+\]
+Thus all monomials $e_i x^j\in \cS$ with $1\leq i\leq n$ and $j\geq m+1$ are not in~$N_V$.
+Let $\vec{B}_1, \ldots, \vec{B}_n$ be the columns of~$B$, expressed in the basis $\cS_m$.
+Let $C(B)$ be the $K$-subspace of $K[x]_m^n$ generated by these column vectors.
+If $q\in \im(\phi_V)$, then $q = \phi_V(p) = pB$ for some $p \in K^n$, which implies that
+$\vec{q}\,$ is a linear combination of $\vec{B}_i$'s. Then $K[x]_m^n = C_B \oplus N_V$.
+So $\dim_K(N_V)= (m+1)n - \dim_K(C(B))$ and a basis of $N_V$ can be computed by
+looking at the echelon form of the matrix $\bigl(\vec{B}_1, \ldots, \vec{B}_n\bigr)$.
+
+\smallskip
+{\it Case 2.}~
+Assume that $\deg_x(B) =m$. For any $p\in K[x]^n$ of degree $s$, we have
+\[
+  \lt\bigl(\phi_V(p)\bigr) = (s\lc(a) + \lc(B))\lc(p)x^{s+m}.
+\]
+Let $\ell$ be the largest nonnegative integer such that $-\ell \lc(a)$ is an
+eigenvalue of $\lc(B)\in K^{n\times n}$. Then for any $s>\ell$,
+the matrix $J_s = s\lc(a) + \lc(B)$ is invertible. So any monomial $e_ix^j$ with $j> \ell+m$ is not in~$N_V$
+for any $i=1, \ldots, n$. Let $p = \sum_{i=1}^n \sum_{j=0}^{\ell} p_{i, j} e_ix^j$.
+Then $\phi_V(p)$ belongs to $K[x]_{\ell+m}^n$.
+In the basis $\cS_{\ell+m}$, we can
+express $\phi_V(p)$ as a vector of length ${n(\ell+m+1)}$ with entries linear in the $p_{i, j}$'s.
+This vector can be written in the form $M_{\ell} \vec{P}$,
+where $\vec{P} = (p_{1, 0}, p_{2, 0}, \ldots, p_{n, \ell})^T$ and $M_{\ell} \in K^{n(\ell+m +1) \times n(\ell+1)}$.
+Any element $q\in K[x]_{\ell+m}^n$ can be expressed as a vector $\vec{q} \in K^{n(\ell + m +1)}$.
+Then $q\in\im(\phi_v)$ if and only if $\vec{q}\,$ is in the column space of $M_{\ell}$.
+Therefore,
+\[K[x]_{\ell+m}^n = C({M_{\ell}}) \oplus N_V. \]
+This implies that $\dim_K(N_V) = n(\ell+m+1) - \rank({M_{\ell}})$, and
+a basis of $N_V$ can be computed by
+looking at the echelon form of the matrix ${M_{\ell}}$.
+\end{proof}
 
 
 
@@ -800,7 +796,7 @@ We consider the function
 where $U = (u_1, \ldots, u_n) \in K[x]^n$ and $e$ is defined as in~\eqref{EQ:eM}.
 If $\deg_x(M) \leq  \deg_x(e)-1$, then we can decompose $U$ into $U = \phi_W(U_1) + U_2$, where $U_1, U_2\in K[x]^n$
 and $U_2\in N_W$. Then we have
-\[r = \partial_x(U_1W) + \frac{1}{e} U_2W. \]
+\[r = (U_1W)' + \frac{1}{e} U_2W. \]
 Note that $U_2\in N_W$ belongs to a finite-dimensional vector space over~$K$.
 When the inequality $\deg_x(M)\leq \deg_x(e)-1$ does hold
 for the integral basis~$W$, we can
@@ -822,7 +818,7 @@ of them is either constant or has a pole at infinity.
 
 Set $T = \diag(x^{-r_1}, \ldots, x^{-r_n})$, we then have $V = TW$.
 By taking derivatives, we get
-\[\partial_x(V) = \left(\partial_x(T) + T\frac{M}{e}\right)T^{-1}V = \frac{B}{a}V, \]
+\[V' = \left(T' + T\frac{M}{e}\right)T^{-1}V = \frac{B}{a}V, \]
 where $a=x^\lambda e$ for some $\lambda\in \bN$ and $B\in K[x]^{n\times n}$. Since $V$ is local integral
 at infinity, $\deg_x(B) \leq \deg_x(a)-1$ by Lemma~\ref{lemma:degM}.
 First we expand $r$ in terms of the new basis~$V$,
@@ -837,10 +833,10 @@ Combining the Hermite reduction and polynomial reduction, we get the following t
 Let $W$ be an integral basis of~$A$ that is normal at infinity. Let $T := \diag(x^{-r_1}, \ldots, x^{-r_n}) \in K(x)^{n\times n}$
 be such that $V = TW$ is integral at infinity.
 Let $e\in K[x]$, $\lambda \in \bN$, and $B, M \in K[x]^{n \times n} $ be such that
-$e \partial_x (W) = MW$ and $x^\lambda e \partial_x (V) = BV$.
+$eW' = MW$ and $x^\lambda eV' = BV$.
 Then any element $f\in A$ can be decomposed into
 \begin{equation}\label{EQ:add}
-f = \partial_x(g) + \frac{1}{d} PW + \frac{1}{x^\lambda e} QV,
+f = g' + \frac{1}{d} PW + \frac{1}{x^\lambda e} QV,
 \end{equation}
 where $g\in A$, $d\in K[x]$ is squarefree and $\gcd(d, e)=1$, $P, Q\in K[x]^n$ with $\deg_x(P) < \deg_x(d)$ and $Q\in N_V$, which is
 a finite-dimensional vector space over $K$. Moreover, $P, Q$ are zero if and only if $f$ is integrable in~$A$.
@@ -848,7 +844,7 @@ a finite-dimensional vector space over $K$. Moreover, $P, Q$ are zero if and onl
 \begin{proof}
 The decomposition follows from the discussion before this theorem.
 Assume that $f$ is integrable. Then Lemma~\ref{LEM:d} implies that $d\in K$.
-Since $\deg_x(P) < \deg_x(d)$, we have $P=0$. Then $\frac{1}{x^\lambda e} QV = \partial_x(\sum_{i=1}^n a_i \nu_i)$
+Since $\deg_x(P) < \deg_x(d)$, we have $P=0$. Then $\frac{1}{x^\lambda e} QV = \sum_{i=1}^n (a_i \nu_i)'$
 for some $a_i\in K[x]$. This means $Q \in \im(\phi_V)$.
 Since $\im(\phi_V) \cap N_V = \{0\}$, $Q=0$.
 \end{proof}
@@ -863,17 +859,17 @@ Assume that
 where $\tilde e \in K[x]$, $\tilde M, \tilde B\in K[x]^{n\times n}$, and $\tilde \lambda \in \bN$.
 By Proposition 7 in~\cite{chen14a}, we have $\tilde e \mid e$ and $x^{\tilde{\lambda}} \tilde{e} \mid x^\lambda e$.
 So we can just take $\tilde e = e$ and $\tilde{\lambda}  = \lambda$ by multiplying $\tilde M, \tilde B$ by some factors
-of~$x^\lambda e$. A direct calculation yields $\partial_t(f) = \partial_x(\partial_t(g))+ h$,
+of~$x^\lambda e$. A direct calculation yields $\partial_t(f) = (\partial_t(g))' + h$,
 where
 \[h = \left(\partial_t(\frac{P}{d})+\frac{P\tilde M}{de}\right)W + \left(\partial_t(\frac{Q}{x^\lambda e})+ \frac{Q\tilde B}{x^{2\lambda} e^2}\right)V.\]
 This implies that the squarefree part of the denominator of $h$ divides $xde$. Applying Hermite reduction and polynomial reduction
 to~$h$ yields
-\[ h = \partial_x(\tilde g_1) + \frac{1}{d} P_1W + \frac{1}{x^\lambda e} Q_1V,\]
+\[ h = \tilde g_1' + \frac{1}{d} P_1W + \frac{1}{x^\lambda e} Q_1V,\]
 where $P_1, Q_1\in K[x]^n$ with $\deg_x(P_1) < \deg_x(d)$ and $Q_1\in N_V$.
 Repeating this discussion, we get the following lemma.
 \begin{lemma}\label{LEM:idtf}
 For any $i\in \bN$, the derivative $\partial_t^i(f)$ has an additive decomposition of the form
-\[ \partial_t^i(f) = \partial_x(g_i) + \frac{1}{d} P_iW + \frac{1}{x^\lambda e} Q_iV,\]
+\[ \partial_t^i(f) = g_i' + \frac{1}{d} P_iW + \frac{1}{x^\lambda e} Q_iV,\]
 where $g_i\in A$, $P_i, Q_i\in K[x]^n$ with $\deg_x(P_i) < \deg_x(d)$ and $Q_i\in N_V$.
 \end{lemma}
 As applications of the above lemma, we can compute the minimal telescoper for $f$ by finding the first

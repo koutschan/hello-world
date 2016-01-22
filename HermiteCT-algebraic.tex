@@ -149,7 +149,7 @@ terms~\cite{chen15a} and binomial sums~\cite{bostan15}. In the present paper, we
 the approach to fuchsian D-finite functions.
 
 The basic principle of the general approach is as follows. Assume that the
-$x$-constants $\mathrm{Const}_x(D)=\{\,c\in D:c'=0\,\}$ form a field, i.e., that $D$
+$x$-constants $\mathrm{Const}_x(D)=\{\,c\in D:c'=0\,\}$ form a field and that $D$
 is a vector space over the field of $x$-constants. Assume further that there is
 some $\mathrm{Const}_x(D)$-linear map $[\cdot]\colon D\to D$ such that for every
 $f\in D$ there exists a $g\in D$ with $f-[f]=g'$. Such a map is called a
@@ -158,7 +158,7 @@ every $f\in D$ some $g$ such that $f-g'$ is either zero or a rational function
 with a square-free denominator. In this case, we can take $[f]=f-g'$.
 In order to find a telescoper, we can compute $[f]$, $[\partial_t\cdot f]$, $[\partial_t^2\cdot f]$, \dots,
 until we find that they are linearly dependent over $\mathrm{Const}_x(D)$.
-When we find a relation
+Once we find a relation
 $p_0[f] + \cdots + p_r[\partial_t^r\cdot f] = 0$,
 then, by linearity,
 $[p_0 f + \cdots + p_r \partial_t^r\cdot f] = 0$,
@@ -224,8 +224,8 @@ Note that the exponents $\nu$ are restricted to~$C$, not to the larger field~$\b
 
 Examples for fuchsian operators are operators that have a basis of algebraic
 function solutions, or the operator $L=x\partial_x^2-\partial_x$, whose
-solutions are $1$ and $\log(x)$.  We must admit that the class of functions
-considered in this paper is not as large as it may seem at first glance, because
+solutions are $1$ and $\log(x)$.  We must admit that the class of fuchsian D-finite functions
+considered in this paper is not as rich as it may seem at first glance, because
 we require that the operators under consideration should be fuchsian at all
 points \emph{including infinity.} Most of the popular transcendental functions
 such as $\exp(x)$, $\sin(x)$, $\cos(x)$, Bessel functions, etc.\ are only
@@ -293,13 +293,13 @@ $\infty$ in the case of $(\tfrac1x)^\alpha\log(x)^\beta$). A series in
 $C[[[x-a]]]$ or $C[[[x^{-1}]]]$ is called integral if it only contains integral
 terms. A non-integral series is said to have a \emph{pole} at the reference
 point.  Note that in this terminology also $1/\sqrt{x}$ and $\log(x)$ have
-``poles'' at~$0$, although the usual terminology reserves the word pole for
+``poles'' at~$0$, although the usual terminology in analysis reserves the word pole for
 asymptotic behaviour which agrees with $x^n$ for some negative integer~$n$.
 
 Note also that integrality at $a\in\bar C$ is not preserved by differentiation,
 but if $f$ is integral at~$a$, then so is $(x-a)f'$. Somewhat conversely,
-integrality at infinity is preserved by differentiation, we even have that
-when $f$ is integral at infinity, then not only $f'$ but also $xf'$ is
+integrality at infinity is preserved by differentiation, we even have the
+stronger property that when $f$ is integral at infinity, then not only $f'$ but also $xf'$ is
 integral at infinity.
 
 Let $K$ be some field with $C\subseteq K\subseteq\bar C$.
@@ -328,7 +328,7 @@ for computing (global) integral bases computes local integral bases at finite
 points as an intermediate step. By an analogous algorithm, it is also possible
 to compute a local integral basis at infinity.
 
-An integral basis $\omega_1,\dots,\omega_n$ is always also a $K(x)$-vector space
+An integral basis $\{\omega_1,\dots,\omega_n\}$ is always also a $K(x)$-vector space
 basis of~$A$. A key feature of integral bases is that they make poles explicit. Writing
 an element $f\in A$ as a linear combination $f=\sum_{i=1}^n f_i\omega_i$ for some
 $f_i\in K(x)$, we have that $f$ has a pole at $a\in\bar C$ if and only if at least one
@@ -344,7 +344,7 @@ of the $f_i$ has a pole there.
   The direction ``$\Rightarrow$'' is obvious. To show ``$\Leftarrow$'', suppose
   that $f$ is integral at~$a$. Then there exist $w_1,\dots,w_n\in\bar C(x)_a$ such that
   $f=\sum_{i=1}^nw_i\omega_i$. Thus $\sum_{i=1}^n(w_i-f_i)\omega_i=0$, and then
-  $w_i=f_i$ for all $i$, because $\omega_1,\dots,\omega_n$ is a basis.
+  $w_i=f_i$ for all $i$, because $\omega_1,\dots,\omega_n$ is a vector space basis of~$A$.
   As elements of $\bar C(x)_a$, the $f_i$ are integral at~$a$, and hence also all the $f_i\omega_i$
   are integral at~$a$.
 \end{proof}
@@ -380,7 +380,7 @@ $\sum_{i=1}^n f_i\omega_i$ have no chance to cancel each other.
   be defined as in Lemma~\ref{lemma:e}. Then $\deg_x(m_{i,j})<\deg_x(e)$ for all $i,j$.
 \end{lemma}
 \begin{proof}
-  Since every $\omega_i$ is local integral at infinity, so is every $x\,\omega_i'$.
+  Since every $\omega_i$ is locally integral at infinity, so is every $x\,\omega_i'$.
   Since $\omega_1,\dots,\omega_n$ is an integral basis at infinity, it follows that
   $xm_{i,j}/e\in\bar C(x)_\infty$ for all~$i,j$. This means that $1+\deg_x(m_{i,j})\leq\deg_x(e)$
   for all~$i,j$, and therefore $\deg_x(m_{i,j})<\deg_x(e)$, as claimed.
@@ -501,7 +501,7 @@ and $d^\ast$ denoting the squarefree part of~$d$.
 As differentiating the $\omega_i$ can introduce
 denominators, name\-ly the factors of~$e$, it is convenient to consider those
 denominators from the very beginning on, and this means that we want to assume
-$e\mid d$. Note that $\gcd(d,f_1,\ldots,f_n)$ may be nontrivial.
+$e\mid d$. Note that $\gcd(d,f_1,\ldots,f_n)$ can then be nontrivial.
 
 We now describe one step of the Hermite reduction, where the multiplicity
 $m>1$ of some nontrivial squarefree factor~$v\in K[x]$ of $d$ is reduced.
@@ -518,7 +518,7 @@ as $f=g'+h$ where the denominators of the coefficients of $h$ are squarefree.
 % This gives rise to the reduction map $[f]=h$.
 
 In order to determine the unknown polynomials $g_1,\ldots,g_n$ in~\eqref{eq:hred},
-the denominator $uv^m$ is cleared which yields
+clearing the denominator $uv^m$ yields
 \begin{equation}\label{eq:clear}
   \sum_{i=1}^n f_i\omega_i = \sum_{i=1}^n \biggl( uvg_i'\omega_i +
   uv^mg_i\left(v^{1-m}\omega_i\right)' + vh_i\omega_i \biggr),
@@ -543,8 +543,9 @@ Equation~\eqref{eq:modv} turns into
   &= \sum_{i=1}^n g_i\, \biggl( w\sum_{j=1}^n m_{i,j}\omega_j - (m-1)uv'\omega_i \biggr) \mod v.
 \end{align*}
 Coefficient comparison with respect to $\omega_1,\ldots,\omega_n$ yields a
-system of linear equations for $g_1,\ldots,g_n$. As this system is solved modulo~$v$,
-we get that $\deg_x(g_i)<\deg_x(v)$.
+system of linear equations for $g_1,\ldots,g_n$ over $K[x]/\<v>$, which has
+a unique solution. For the coordinates of the solution vector $(g_1,\dots,g_n)$,
+we can choose representatives in $K[X]$ whose degree is less than~$\deg_x(v)$.
 
 The remaining unknowns $h_1,\ldots,h_n$ are obtained by plugging
 $g_1,\ldots,g_n$ into Equation~\eqref{eq:clear}.
@@ -560,7 +561,7 @@ Recall from the introduction that reduction-based creative telescoping requires
 some $K$-linear reduction map $[\cdot]\colon A\to A$ with the property that
 $f-[f]$ is integrable in $A$ for every $f\in A$. This is sufficient for the
 correctness of the method, but additional properties are needed in order to
-prove that the method terminates.
+ensure that the method terminates.
 
 As also explained already in the introduction, one possibility consists in
 showing that $[f]=0$ whenever $f$ is integrable. In the present section,
@@ -575,7 +576,7 @@ by Trager for algebraic functions.
   Let $B=\{\omega_1,\ldots,\omega_n\}$ be an integral basis for~$A$
 that is normal at infinity.
 % Then the Hermite remainder $[f]$ w.r.t.~$B$
-If $f=g'+h$ is the result of the Hermite reduction described above,
+If $f=g'+h$ is the result of the Hermite reduction with respect to~$B$,
 then $h$ is zero if and only if $f$ is integrable in~$A$.
 \end{theorem}
 \begin{proof}
@@ -611,7 +612,7 @@ In both cases, therefore, $g+H$ has a pole at infinity by Lemma~\ref{lemma:3}.
 \end{proof}
 
 Note that the condition in Theorem~\ref{thm:intiff0} that $f$ has a double
-root at infinity is not a restriction at all, but it can always be achieved by
+root at infinity is not a restriction at all, as it can always be achieved by
 a suitable change of variables. Let $a\in C$ be a regular point of~$L$; by
 the transformation $x\to a+1/x$ the regular point~$a$ is moved to
 infinity. From
@@ -700,7 +701,7 @@ $\gcd(a, b_{1, 1}, b_{1, 2}, \ldots, b_{n ,n})=1$. Let $p = (p_1, \ldots, p_n)\i
   (pV)' = \sum_{i=1}^n (p_i \nu_i)' = \frac{ap' + pB}{a}\, V.
 \end{equation}
 This motivates us to introduce the following definition.
-\begin{defi}\label{DEF:polyred}
+\begin{defi}
 Let the map $\phi_V\colon K[x]^n \rightarrow K[x]^n$
 be defined by $\phi_V(p) = ap' + pB$ for any $p\in K[x]^n$.
 We call $\phi_V$ the \emph{map for polynomial reduction} with respect to~$V$, and call
@@ -708,7 +709,7 @@ the subspace $\im(\phi_V) = \{\phi_V(p) \mid p \in K[x]^n\}$
 the \emph{subspace for polynomial reduction} with respect to~$V$.
 \end{defi}
 \begin{remark}
-Note that, by construction and using Lemma~\ref{LEM:d}, $q\in K[x]^n$ is in
+Note that, by construction and because of Lemma~\ref{LEM:d}, $q\in K[x]^n$ is in
 $\im(\phi_V)$ if and only if $\frac{q}{a}V$ is integrable in~$A$.
 \end{remark}
 
@@ -721,12 +722,12 @@ For example, if $p\in K[x]^n$ is of the form
 \]
 then $\deg_x(p)=r$, $\lc(p)=p^{(r)}$, and $\lt(p)=p^{(r)}x^r$.
 Let $\{e_1, \ldots, e_n\}$ be the standard basis of~$K^n$.
-Then the module $K[x]^n$ viewed as a $K$-vector space is spanned by
+Then the module $K[x]^n$ viewed as a $K$-vector space is generated by
 \[
   \cS := \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, j\in \bN\bigr\}.
 \]
 We define $K[x]_m^n:=\{p\in K[x]^n \mid \deg_x(p) \leq m\}$; as a $K$-vector
-space it is spanned by
+space it is generated by
 \[
   \cS_m := \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, 0\leq j\leq m\bigr\}.
 \]
@@ -734,8 +735,8 @@ Any element $q\in K[x]^n$ of degree at most $m$ can be expressed in the
 basis $\cS_m$ as a vector $\vec{q}\in K^{n(m+1)}$ (in the following the
 decoration~\raisebox{-1pt}{$\vec{}\;$} always indicates such a typecast).
 
-\begin{defi}\label{DEF:polyred}
-Let $N_V$ be the $K$-subspace of $K[x]^n$ spanned by
+\begin{defi}
+Let $N_V$ be the $K$-subspace of $K[x]^n$ generated by
 \[
   \bigl\{t \in \cS \mathrel{\big|} t \neq \lt(p) \ \text{for all $p\in \im(\phi_V)$}\bigr\}.
 \]

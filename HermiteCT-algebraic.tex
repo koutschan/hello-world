@@ -548,8 +548,49 @@ The remaining unknowns $h_1,\ldots,h_n$ are obtained by plugging
 $g_1,\ldots,g_n$ into Equation~\eqref{eq:clear}.
 
 
-\begin{example}
-TODO
+\begin{example}\label{ex:hr}
+We consider the fuchsian D-finite function
+$\log\bigl(x^2-1\bigr)\sqrt{(x+1)/(x-1)}$. It doesn't have a double root at
+infinity; hence we move the regular point~$0$ to~$\infty$ by the change of
+variables $x\mapsto1/x$ and obtain the new integrand
+\[
+  -\frac{1}{x^2} \log\Bigl(\frac{1}{x^2}-1\Bigr)\sqrt{\frac{1+x}{1-x}}.
+\]
+It is annihilated by the second-order differential operator
+\begin{multline*}
+  L = (x^2-1)^2 x^2 \partial_x^2 + (x^2-1) (x+1) (7x-5) x \partial_x + {}\\
+    8x^4+5x^3-11x^2-5x+4.
+\end{multline*}
+Using the algorithm described in~\cite{kauers15b} we compute the following
+integral basis $\{\omega_1,\omega_2\}$ for $A=\bC(x)[\partial_x]/\<L>$:
+\[
+  \bigl\{ (x-1) x^2,\, (x^2-1) (x-1) x^3 \partial_x + 2(x-1) x^4 \bigr\}
+\]
+For the differentiation matrix, a simple calculation yields
+\[
+  \begin{pmatrix} \omega_1' \\[2pt] \omega_2' \end{pmatrix} =
+  \frac{1}{e} \begin{pmatrix} (x-1) (x+2) & 1 \\[2pt] -x^3-x^2+5x-4 & x^2-x+2 \end{pmatrix}
+  \begin{pmatrix} \omega_1 \\[2pt] \omega_2 \end{pmatrix}
+\]
+with $e=(x^2-1)x$. As our integrand corresponds to $1\in A$, its
+representation in the integral basis is
+\[
+  f = \frac{1}{(x-1)x^2} \omega_1 = \frac{x+1}{ex} \omega_1;
+\]
+using the notation employed above, we have $d=(x^2-1)x^2$, $f_1=x+1$,
+and $f_2=0$. Here we can only reduce the power of~$x$ in the denominator, so
+we start with $u=x^2-1$, $v=x$, and $m=2$. Then Equation~\eqref{eq:modv} leads
+to the following linear system for the unknowns $g_1$ and $g_2$:
+\[
+  \begin{pmatrix} x-1 & -x^3-x^2+5 x-4 \\ 1 & 3-x \end{pmatrix}
+  \begin{pmatrix} g_1 \\ g_2 \end{pmatrix} =
+  \begin{pmatrix} x+1 \\ 0 \end{pmatrix} \mod x.
+\]
+Thus we get $g_1=3$ and $g_2=-1$ and the final result of the Hermite reduction is
+\[
+  \biggl(\, \underbrace{\vphantom{\frac{1}{(x)}}  \frac{3}{x} \omega_1 - \frac{1}{x} \omega_2}_{=g} \,\biggr)' +\>
+  \underbrace{\frac{-x^2-x+3}{(x^2-1)x} \omega_1 - \frac{1}{(x^2-1)x} \omega_2}_{=h}.
+\]
 \end{example}
 
 \section{The Canonical Form Property}\label{sec:canonic}
@@ -859,7 +900,35 @@ Every $f\in A$ has a telescoper of order at most $n\deg_x(d) + \dim_K(N_V)$.
 \end{corollary}
 
 \begin{example}
-TO DO
+We want to compute a telescoper for the function
+$-x^{-2}\log\bigl(x^{-2}-t^2\bigr)\sqrt{(x+t)/(x-t)}$ Note that for $t=1$ we
+obtain the function from Example~\ref{ex:hr}. The annihilating operator~$L$
+and the integral basis $\{\omega_1,\omega_2\}$ for
+$A=\bC(t,x)[\partial_x]/\<L>$ are very similar to those in Example~\ref{ex:hr}
+and therefore not displayed here.  Also the computation of its Hermite
+reduction is analogous, yielding
+\[
+  \frac{-t^3x^2-t^2x+3t}{(t^2x^2-1)x} \omega_1 - \frac{t}{(t^2x^2-1)x} \omega_2
+\]
+as the Hermite remainder~$h$. Next, we consider the derivative
+$\partial_tf=tx^3\partial_x+2tx^2+x\in A$ whose Hermite remainder is
+\[
+  \frac{1}{(tx+1)x} \omega_1 + \frac{1}{(t^2x^2-1)x} \omega_2.
+\]
+Since there is no linear dependency over $\bC(t)$ yet, we continue with
+\[
+  \partial_t^2f =
+  \frac{(tx+1)x^3}{1-tx} \partial_x -
+  \frac{x^2(2t^4x^4+5t^3x^3+2t^2x^2-5tx-3)}{(t^2x^2-1)^2}
+\]
+Writing $\partial_t^2f$ in terms of the integral basis produces the denominator
+$d=(tx-1)^3(tx+1)^2x$, which means that the Hermite reduction consists of three
+reduction steps. As a remainder we obtain
+\[
+  \frac{t^2x^2+2tx-4}{(t^2x^2-1)tx} \omega_1 + \frac{2}{(t^2x^2-1)tx} \omega_2.
+\]
+Now we can find a linear dependence that gives rise to the telescoper
+$t^2\partial_t^2-t\partial_t+1$, which is the minimal one for this example.
 \end{example}
 
 \section*{Acknowledgements}

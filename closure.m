@@ -160,7 +160,8 @@ SeriesSolutionBasis[L_, alpha_, n_Integer] :=
   ];
 
 (* true iff the term x^u Log[x]^v is integral *)
-StandardFilter[_[u_, v_]] := (v == 0 && Re[N[u]] >= 0 || v > 0 && Re[N[u]] > 0)
+(* StandardFilter[_[u_, v_]] := (v == 0 && Re[N[u]] >= 0 || v > 0 && Re[N[u]] > 0)*)
+StandardFilter[_[u_, v_]] := Re[N[u]] >= 0;
 
 (**
  INPUT:

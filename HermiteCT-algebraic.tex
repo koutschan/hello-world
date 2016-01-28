@@ -181,14 +181,15 @@ miss any telescoper. In particular, this argument has the nice feature that we
 are guaranteed to find a telescoper of smallest possible order~$r$. This
 approach was taken in~\cite{chen15a}.
 
-Using an analog of Trager's Hermite reduction for algebraic
-functions~\cite{trager84,geddes92}  adapted to fuchsian D-finite functions, we provide an
-algorithm for finding the minimal order telescoper in Section~\ref{sec:hermite} using the
-first argument. We then proceed to describe in Section~\ref{sec:polynomial} an additional
-reduction which in combination with the Hermite reduction ensures that the
-remainders live in a finite-dimensional vector space.
-This gives a new proof of a bound for the order of the telescopers,
-and in particular an independent proof for their existence.
+In this paper, we will show that Trager's Hermite reduction for algebraic
+functions directly gives rise to a reduction-based creative telescoping
+algorithm via the first approach (Section~\ref{sec:canonic}). We will also
+generalize his Hermite reduction to fuchsian D-finite functions in
+Section~\ref{sec:hermite} and then combine it in Section~\ref{sec:polynomial}
+with a second reduction which together give rise to a reduction-based creative
+telescoping algorithm for fuchsian D-finite functions via the second approach.
+This gives a new proof of a bound for the order of the telescopers, and in
+particular an independent proof for their existence.
 
 \section{Fuchsian D-finite Functions}
 
@@ -286,15 +287,11 @@ Although the elements of a generalized series ring $C[[[x-a]]]$ are formal
 objects, the series notation suggests certain analogies with complex
 functions.  For simplicity, let us assume throughout that $C\subseteq\set
 R$. Terms $(x-a)^\alpha\log(x-a)^\beta$ or $(\tfrac1x)^\alpha\log(x)^\beta$ are
-called \emph{integral} if $\alpha>0$ or $\alpha=\beta=0$.
-Integrality thus means that the corresponding complex
-function does not diverge at the reference point~$a$ (the reference point is
-$\infty$ in the case of $(\tfrac1x)^\alpha\log(x)^\beta$). A series in
+called \emph{integral} if $\alpha\geq0$. A series in
 $C[[[x-a]]]$ or $C[[[x^{-1}]]]$ is called integral if it only contains integral
 terms. A non-integral series is said to have a \emph{pole} at the reference
-point.  Note that in this terminology also $1/\sqrt{x}$ and $\log(x)$ have
-``poles'' at~$0$, although the usual terminology in analysis reserves the word pole for
-asymptotic behaviour which agrees with $x^n$ for some negative integer~$n$.
+point. Note that in this terminology also $1/\sqrt{x}$ has a ``pole''
+at~$0$, while $\log(x)$ does not.
 
 Note also that integrality at $a\in\bar C$ is not preserved by differentiation,
 but if $f$ is integral at~$a$, then so is $(x-a)f'$. Somewhat conversely,
@@ -477,8 +474,8 @@ c_i'\omega_i$, which is obviously integral. Then also their sum
 must be integral. Since $\{\omega_1,\ldots,\omega_n\}$ is an integral basis at~$a$,
 there exists for each $i=1,\ldots,n$ a series solution $y_i\in C[[[x-a]]]$
 of~$L$ such that $\omega_i\cdot y_i$ involves a term
-$T=(x-a)^\alpha\log(x-a)^\beta$ with $0\leq\alpha<1,\beta=0$ or
-$0<\alpha\leq1,\beta>0$. Let now $i$ be an index such that $c_i(a)\neq0$;
+$T=(x-a)^\alpha\log(x-a)^\beta$ with $0\leq\alpha<1$.
+Let now $i$ be an index such that $c_i(a)\neq0$;
 this implies that $T$ appears in $(c_i\omega_i)\cdot y_i$.
 Using the fact that the $\omega_i$ form a local integral basis, it follows by
 Lemma~\ref{lemma:1} that $T$ is also present in $h\cdot y_i$ where
@@ -555,7 +552,7 @@ $g_1,\ldots,g_n$ into Equation~\eqref{eq:clear}.
 TODO
 \end{example}
 
-\section{The Canonical Form Property}
+\section{The Canonical Form Property}\label{sec:canonic}
 
 Recall from the introduction that reduction-based creative telescoping requires
 some $K$-linear reduction map $[\cdot]\colon A\to A$ with the property that
@@ -564,52 +561,17 @@ correctness of the method, but additional properties are needed in order to
 ensure that the method terminates.
 
 As also explained already in the introduction, one possibility consists in
-showing that $[f]=0$ whenever $f$ is integrable. In the present section,
-we will show that things can be arranged such that the Hermite reduction
-has this property. The key is the following theorem, which was already shown
-by Trager for algebraic functions.
+showing that $[f]=0$ whenever $f$ is integrable. For the special case of
+algebraic functions, Trager showed that his Hermite reduction has this property:
 
-\begin{theorem}\label{thm:intiff0}
-  Suppose that $f\in A$ has a double root at infinity,
-  i.e., that for every solution $y\in C[[[x^{-1}]]]$ of $L$
-  the series $f\cdot y$ contains only monomials $x^\alpha\log(x)^\beta$ with $\alpha\leq-2$.
-  Let $B=\{\omega_1,\ldots,\omega_n\}$ be an integral basis for~$A$
-that is normal at infinity.
-% Then the Hermite remainder $[f]$ w.r.t.~$B$
-If $f=g'+h$ is the result of the Hermite reduction with respect to~$B$,
-then $h$ is zero if and only if $f$ is integrable in~$A$.
+\begin{theorem} \cite{trager84}\label{thm:intiff0}
+  Let $A$ be an algebraic extension of~$K(x)$ and let $f\in A$ be such that
+  $f$ has a double root at infinity (i.e., for every Puiseux series expansion
+  of $f$ contains only monomials $x^\alpha$ with $\alpha\leq-2$). Let $B=\{\omega_1,\dots,\omega_n\}$
+  be an integral basis for $A$ which is normal at infinity.
+  If $f=g'+h$ is the result of the Hermite reduction with respect to~$B$,
+  then $h$ is zero if and only if $f$ is integrable in~$A$.
 \end{theorem}
-\begin{proof}
-The direction ``$\Rightarrow$'' is trivial. To show the implication
-``$\Leftarrow$'' assume that $f$ is integrable. From $f=g'+h$ it follows that
-also $h$ is integrable; let $H\in A$ be such that $H'=h$.  In order to show
-that $h=0$, we show that $H$ is constant.  To show that $H$ is constant, we
-show that it has neither finite poles nor a pole at infinity.
-
-It is clear that $H$ has no finite poles because $h$ has only ``simple'' poles
-(i.e., all series expansions of $h$ have only terms of the form
-$(x-a)^{-1}$ or $(x-a)^\alpha\log(x-a)^\beta$ with $\alpha>-1$).
-
-We will show below that when $H$ has a pole at infinity, then also $g+H$ must
-have a pole at infinity.  Since $f=g'+h=(g+H)'$ has at least a double root at
-infinity, $g+H$ has at least a single root at infinity. This excludes the
-possibility that $H$ has a pole at infinity.
-
-Assume now that $H$ has a pole at infinity. We show that $g+H$ has also a pole at infinity.
-Since $H$ has no finite poles, $H$ is integral and we can write it as
-$H=p_1\omega_1+\cdots+p_n\omega_n$ with $p_i\in C[x]$.
-Since we assume that $H$ has a pole at infinity, it follows by Lemma~\ref{lemma:3} that
-(a) one of the $p_i$ has positive degree or
-(b) some non-constant $\omega_i$ has a nonzero coefficient~$p_i$.
-From how the Hermite reduction works, we know that $g=\sum_i g_i\omega_i$
-with proper rational functions~$g_i$. Consider now $g+H=\sum_i (g_i+p_i)\omega_i$.
-In case (a) there is some $i$ for which $g_i+p_i$ has a pole at infinity,
-and thus $(g_i+p_i)\omega_i$ has a pole at infinity (because $\omega_i$ has
-no poles at finite places and therefore no zero at infinity).
-In case (b), there is some $i$ with $p_i\neq0$ and $\omega_i$ is non-constant,
-which implies that $(g_i+p_i)\omega_i$ has a pole at infinity.
-In both cases, therefore, $g+H$ has a pole at infinity by Lemma~\ref{lemma:3}.
-\end{proof}
 
 Note that the condition in Theorem~\ref{thm:intiff0} that $f$ has a double
 root at infinity is not a restriction at all, as it can always be achieved by
@@ -628,30 +590,35 @@ and then also for every $K$-linear combination $p_0f+p_1\partial_tf+\cdots+p_r\p
 This means that $p_0+p_1\partial_t+\cdots+p_r\partial_t^r$ is a telescoper for $f$ if
 \emph{and only if} $[p_0+p_1\partial_t+\cdots+p_r\partial_t^r]=0$.
 
-We already know for other reasons~\cite{Zeilberger1990,chyzak00} that
-telescopers for D-finite functions exist, and therefore the reduction-based
+We already know for other reasons~\cite{Zeilberger1990,chyzak00,chen12d} that
+telescopers for algebraic functions exist, and therefore the reduction-based
 creative telescoping procedure with Hermite reduction with respect to an
 integral basis that is normal at infinity as reduction function succeeds when
 applied to an integrand $f\in A$ that has a double root at infinity. Again, if
 $f$ has no double root at infinity, we can produce one by a change of variables.
 In particular, the method finds a telescoper of smallest possible order.
 
+Unfortunately, Trager's theorem does not easily generalize to the case of
+fuchsian D-finite functions. Its proof relies on Chevallier's theorem~\cite{Chevalley1951},
+which says that an algebraic function that has no poles (neither at a finite
+place nor at infinity) must be constant. In our setting this is not true. For
+example, $\log(x)$ is fuchsian D-finite and has no poles (neither at a finite
+place nor at infinity), but it is not a constant. For general fuchsian D-finite
+functions, we therefore complete the discussion of creative telescoping using
+the second approach.
+
 \section{Polynomial Reduction}\label{sec:polynomial}
 
-The argument in the previous section based on Theorem~\ref{thm:intiff0}
-has the advantage that it ensures that the algorithm will find the minimal telescoper.
-A disadvantage is that it does not tell us in advance how large this telescoper will be.
-Not even the existence of a telescoper follows from this approach, but has to be imported
-into the argument from elsewhere.
-
-An independent proof of the existence of telescopers could be obtained if we could show
-that the $K$-vector space $\{\,[f]:f\in A\,\}$ has finite dimension. Note that this does
-not follow from Theorem~\ref{thm:intiff0}. In fact, it is not true if $[\cdot]$ is just
-the Hermite reduction. We therefore introduce below an additional reduction, called
-\emph{polynomial reduction,} which we apply after Hermite reduction. We then show that
-the combined reduction (Hermite reduction followed by polynomial reduction) has the
-desired dimension property for the space of remainders. As a result, we obtain a new
-bound on the order of the telescoper, which is similar to that in~\cite{chen14a}.
+Recall that instead of requesting that $[f]=0$ iff and only if $f$ is integrable
+(first approach), we can also justify the termination of reduction-based
+creative telescoping by showing that the $K$-vector space $\{\,[f]:f\in A\,\}$
+has finite dimension (second approach). If $[\cdot]$ is just the Hermite
+reduction, we do not have this property. We therefore introduce below an
+additional reduction, called \emph{polynomial reduction,} which we apply after
+Hermite reduction. We then show that the combined reduction (Hermite reduction
+followed by polynomial reduction) has the desired dimension property for the
+space of remainders. As a result, we obtain a new bound on the order of the
+telescoper, which is similar to that in~\cite{chen14a}.
 
 In this approach, we use two integral bases. First we use a global integral basis (not
 necessarily normal at infinity) in order to perform Hermite reduction. Then we write the

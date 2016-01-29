@@ -397,7 +397,7 @@ integral basis at infinity. Let $m_{i,j}\in K(x)$ be such that
  \omega_i = \sum_{j=1}^n m_{i,j}\nu_j.
 \]
 For each~$i$, let $r_i$ be the smallest integer such that $x^{-r_i}m_{i,j}$ has no pole at infinity for any~$j$.
-Then each $x^{-r_i}\omega_i$ is local integral at infinity.
+Then each $x^{-r_i}\omega_i$ is locally integral at infinity.
 Note that the $r_i$ will be nonnegative, because the $\omega_i$ have no finite poles and therefore,
 by the Fuchs relation, they must be either constant or have a pole at infinity.
 Let $A\in K^{n\times n}$ be the matrix obtained by evaluating $((x^{-r_i}m_{i,j}))_{i,j=1}^n$ at infinity
@@ -853,7 +853,7 @@ be such that $V = TW$ is normal at $0$ and integral at any other places (includi
 choose~$T$ as the identity matrix if~$\deg_x(M)\leq \deg_x(e)-1$.
 By taking derivatives, we get
 \[V' = \left(T' + T\frac{M}{e}\right)T^{-1}V = \frac{B}{a}V, \]
-where $a=x^\lambda e$ for some $\lambda\in \bN$ and $B\in K[x]^{n\times n}$. Since $V$ is local integral
+where $a=x^\lambda e$ for some $\lambda\in \bN$ and $B\in K[x]^{n\times n}$. Since $V$ is locally integral
 at infinity, $\deg_x(B) \leq \deg_x(a)-1$ by Lemma~\ref{lemma:degM}.
 By expanding in terms of the new basis~$V$, we get
 \[\frac{1}{e} UW = \frac{1}{a} \tilde{U}V, \]
@@ -901,13 +901,13 @@ Every $f\in A$ has a telescoper of order at most $n\deg_x(d) + \dim_K(N_V)$.
 
 \begin{example}
 We would like to compute a minimal telescoper for the function
-\[f := -x^{-2}\log\bigl(x^{-2}-t^2\bigr)\sqrt{(x+t)/(x-t)}.\]
+\[F := -x^{-2}\log\bigl(x^{-2}-t^2\bigr)\sqrt{(x+t)/(x-t)}.\]
 Note that for $t=1$ we
-obtain the function from Example~\ref{ex:hr}. The annihilating operator~$L$
+obtain the function from Example~\ref{ex:hr}. The operator~$L$ with $LF=0$
 and the integral basis $\{\omega_1,\omega_2\}$ for
-$A=\bC(t,x)[\partial_x]/\<L>$ are very similar to those in Example~\ref{ex:hr}
-and therefore not displayed here.  Also the computation of its Hermite
-reduction is analogous, yielding
+$A=\bC(t,x)[\partial_x]/\<L>$ are very similar to those in Example~\ref{ex:hr}.
+As before, $F$ is represented by $f=1\in A$.
+Also the computation of its Hermite reduction is analogous, yielding
 \[
   h = \frac{-t^3x^2-t^2x+3t}{(t^2x^2-1)x} \omega_1 - \frac{t}{(t^2x^2-1)x} \omega_2
 \]

@@ -909,29 +909,36 @@ $A=\bC(t,x)[\partial_x]/\<L>$ are very similar to those in Example~\ref{ex:hr}
 and therefore not displayed here.  Also the computation of its Hermite
 reduction is analogous, yielding
 \[
-  \frac{-t^3x^2-t^2x+3t}{(t^2x^2-1)x} \omega_1 - \frac{t}{(t^2x^2-1)x} \omega_2
+  h = \frac{-t^3x^2-t^2x+3t}{(t^2x^2-1)x} \omega_1 - \frac{t}{(t^2x^2-1)x} \omega_2
 \]
 as the Hermite remainder~$h$. The matrix~$M$ representing the differentiation
 of the $\omega_i$ does not satisfy the degree condition of
 Proposition~\ref{PROP:finite}; this fact is already visible
 in~\eqref{eq:dmat}. Hence we perform a change of basis to
 $\nu_1=x^{-1}\omega_1$, $\nu_2=x^{-2}\omega_2$, which is an integral basis at
-infinity. When differentiating the $\nu_i$, we obtain the matrix~$B$ and the
-denominator $a=x^2(t^2x^2-1)$. Writing the Hermite remainder in terms of the
-$\nu_i$, we see that all denominators divide~$a$. Hence $d=1$ and
-in~\eqref{EQ:h} we get $u_i=h_i$ and $v_i=0$. By investigating the eigenvalues
-of $\lc(B)$ we find that $\ell=1$ and the echelon form of $M_\ell$ is
-\[
+infinity. We have $aV'=BV$ for $V=(\nu_1,\nu_2)^T$, $a=x^2(t^2x^2-1)$, and
+some matrix~$B\in K[x]^{2\times2}$.  By investigating the eigenvalues of
+$\lc(B)$ we find that $\ell=1$ and the echelon form of $M_\ell$ is
+\begin{equation}\label{eq:M_ell}
   \begin{pmatrix}
   1 & 0 & 0 & 0 & 0 & 2/t^3 & 0 & 4/t^4 & -4/t^4 & 0 \\
   0 & 0 & 1 & 1/t & 0 & 0 & 0 & -4/t^3 & 4/t^3 & 0 \\
   0 & 0 & 0 & 0 & 1 & 1/t & 0 & 0 & 0 & 0 \\
   0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0
   \end{pmatrix}.
+\end{equation}
+Writing the Hermite remainder~$h$ in terms of the $\nu_i$, we see that all
+denominators divide the polynomial~$a$. Thus we write
+$h=a^{-1}(h_1\nu_1+h_2\nu_2)$ and in~\eqref{EQ:h} we get
+$u_1=h_1=-t^3x^4-t^2x^3+3tx^2$, $u_2=h_2=-tx^3$, and $v_1=v_2=0$.
+In the basis $\cS_4$ the vector $(u_1,u_2)$ reads
+\[
+  \bigl(-t^3, 0, -t^2, -t, 3 t, 0, 0, 0, 0, 0\bigr).
 \]
-The Hermite remainder of~$f$ after polynomial reduction is $-x^2/a\nu_2$.
-Next, we consider the derivative $\partial_tf=tx^3\partial_x+2tx^2+x\in A$
-whose Hermite remainder is
+The polynomial reduction now corresponds to reduce this vector with the rows
+of~\eqref{eq:M_ell}, yielding the final result $[f]=-x^2/a\nu_2$.  Next, we
+consider the derivative $\partial_tf=tx^3\partial_x+2tx^2+x\in A$ whose
+Hermite remainder is
 \[
   \frac{1}{(tx+1)x} \omega_1 + \frac{1}{(t^2x^2-1)x} \omega_2.
 \]
@@ -956,7 +963,7 @@ which by polynomial reduction is converted into
   \frac1a \Bigl( -\frac{4}{t^3} \nu_1 + \frac{2(tx+2)x}{t^3} \nu_2 \Bigr).
 \]
 Now we can find a linear dependence that gives rise to the telescoper
-$t^2\partial_t^2-t\partial_t+1$, which is the minimal one for this example.
+$t^2\partial_t^2-t\partial_t+1$, which is indeed the minimal one for this example.
 \end{example}
 
 \section*{Acknowledgements}

@@ -548,11 +548,8 @@ $g_1,\ldots,g_n$ into Equation~\eqref{eq:clear}.
 
 \begin{example}\label{ex:hr}
 We consider the fuchsian D-finite function
-$\log\bigl(x^2-1\bigr)\sqrt{(x+1)/(x-1)}$. It doesn't have a double root at
-infinity; hence we move the regular point~$0$ to~$\infty$ by the change of
-variables $x\mapsto1/x$ and obtain the new integrand
 \[
-  -\frac{1}{x^2} \log\Bigl(\frac{1}{x^2}-1\Bigr)\sqrt{\frac{1+x}{1-x}}.
+  \frac{1}{x^2} \log\Bigl(\frac{1}{x^2}-1\Bigr)\sqrt{\frac{1+x}{1-x}}.
 \]
 This function is annihilated by the second-order differential operator
 \begin{multline*}
@@ -900,7 +897,9 @@ Every $f\in A$ has a telescoper of order at most $n\deg_x(d) + \dim_K(N_V)$.
 
 \begin{example}
 We compute a minimal telescoper for the function
-\[F := -x^{-2}\log\bigl(x^{-2}-t^2\bigr)\sqrt{(x+t)/(x-t)}.\]
+\[
+  F := \frac{1}{x^2} \log\Bigl(\frac{1}{x^2}-t^2\Bigr)\sqrt{\frac{1+tx}{1-tx}}.
+\]
 Note that for $t=1$ we
 obtain the function from Example~\ref{ex:hr}. The operator~$L$ with $LF=0$
 and the integral basis $\{\omega_1,\omega_2\}$ for

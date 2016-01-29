@@ -784,18 +784,18 @@ looking at the echelon form of the matrix $\bigl(\vec{B}_1, \ldots, \vec{B}_n\bi
 {\it Case 2.}~
 Assume that $\deg_x(B) =m$. For any $p\in K[x]^n$ of degree $s$, we have
 \[
-  \lt\bigl(\phi_V(p)\bigr) = (s\lc(a) + \lc(B))\lc(p)x^{s+m}.
+  \lt\bigl(\phi_V(p)\bigr) = \lc(p)(s\lc(a)I_n + \lc(B))x^{s+m}.
 \]
 Let $\ell$ be the largest nonnegative integer such that $-\ell \lc(a)$ is an
 eigenvalue of $\lc(B)\in K^{n\times n}$. Then for any $s>\ell$,
-the matrix $J_s = s\lc(a) + \lc(B)$ is invertible. So any monomial $e_ix^j$ with $j> \ell+m$ is not in~$N_V$
+the matrix $J_s = s\lc(a)I_n + \lc(B)$ is invertible. So any monomial $e_ix^j$ with $j> \ell+m$ is not in~$N_V$
 for any $i=1, \ldots, n$. Let $p = \sum_{i=1}^n \sum_{j=0}^{\ell} p_{i, j} e_ix^j$.
 Then $\phi_V(p)$ belongs to $K[x]_{\ell+m}^n$.
 In the basis $\cS_{\ell+m}$, we can
 express $\phi_V(p)$ as a vector of length ${n(\ell+m+1)}$ with entries linear in the $p_{i, j}$'s.
 This vector can be written in the form $M_{\ell} \vec{P}$,
 where $\vec{P} = (p_{1, 0}, p_{2, 0}, \ldots, p_{n, \ell})^T$ and $M_{\ell} \in K^{n(\ell+m +1) \times n(\ell+1)}$.
-Any element $q\in K[x]_{\ell+m}^n$ can be expressed as a vector $\vec{q} \in K^{n(\ell + m +1)}$.
+Every $q\in K[x]_{\ell+m}^n$ can be expressed as a vector $\vec{q} \in K^{n(\ell + m +1)}$.
 Then $q\in\im(\phi_v)$ if and only if $\vec{q}\,$ is in the column space of $M_{\ell}$.
 Therefore,
 \[K[x]_{\ell+m}^n = C({M_{\ell}}) \oplus N_V. \]
@@ -932,6 +932,7 @@ denominators divide the polynomial~$a$. Thus we write
 $h=a^{-1}(h_1\nu_1+h_2\nu_2)$ and in~\eqref{EQ:h} we get
 $u_1=h_1=-t^3x^4-t^2x^3+3tx^2$, $u_2=h_2=-tx^3$, and $v_1=v_2=0$.
 In the basis $\cS_4$ the vector $(u_1,u_2)$ reads
+% here we could employ the \vec notation
 \[
   \bigl(-t^3, 0, -t^2, -t, 3 t, 0, 0, 0, 0, 0\bigr).
 \]

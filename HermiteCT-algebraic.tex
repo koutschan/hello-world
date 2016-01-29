@@ -567,11 +567,11 @@ integral basis $\{\omega_1,\omega_2\}$ for $A=\bC(x)[\partial_x]/\<L>$:
   \bigl\{ (x-1) x^2,\, (x^2-1) (x-1) x^3 \partial_x + 2(x-1) x^4 \bigr\}
 \]
 For the differentiation matrix, a simple calculation yields
-\[
+\begin{equation}\label{eq:dmat}
   \begin{pmatrix} \omega_1' \\[2pt] \omega_2' \end{pmatrix} =
   \frac{1}{e} \begin{pmatrix} (x-1) (x+2) & 1 \\[2pt] -x^3-x^2+5x-4 & x^2-x+2 \end{pmatrix}
   \begin{pmatrix} \omega_1 \\[2pt] \omega_2 \end{pmatrix}
-\]
+\end{equation}
 with $e=(x^2-1)x$. As our integrand corresponds to $1\in A$, its
 representation in the integral basis is
 \[
@@ -910,22 +910,49 @@ reduction is analogous, yielding
 \[
   \frac{-t^3x^2-t^2x+3t}{(t^2x^2-1)x} \omega_1 - \frac{t}{(t^2x^2-1)x} \omega_2
 \]
-as the Hermite remainder~$h$. Next, we consider the derivative
-$\partial_tf=tx^3\partial_x+2tx^2+x\in A$ whose Hermite remainder is
+as the Hermite remainder~$h$. The matrix~$M$ representing the differentiation
+of the $\omega_i$ does not satisfy the degree condition of
+Proposition~\ref{PROP:finite}; this fact is already visible
+in~\eqref{eq:dmat}. Hence we perform a change of basis to
+$\nu_1=x^{-1}\omega_1$, $\nu_2=x^{-2}\omega_2$, which is an integral basis at
+infinity. When differentiating the $\nu_i$, we obtain the matrix~$B$ and the
+denominator $a=x^2(t^2x^2-1)$. Writing the Hermite remainder in terms of the
+$\nu_i$, we see that all denominators divide~$a$. Hence $d=1$ and
+in~\eqref{EQ:h} we get $u_i=h_i$ and $v_i=0$. By investigating the eigenvalues
+of $\lc(B)$ we find that $\ell=1$ and the echelon form of $M_\ell$ is
+\[
+  \begin{pmatrix}
+  1 & 0 & 0 & 0 & 0 & 2/t^3 & 0 & 4/t^4 & -4/t^4 & 0 \\
+  0 & 0 & 1 & 1/t & 0 & 0 & 0 & -4/t^3 & 4/t^3 & 0 \\
+  0 & 0 & 0 & 0 & 1 & 1/t & 0 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0
+  \end{pmatrix}.
+\]
+The Hermite remainder of~$f$ after polynomial reduction is $-x^2/a\nu_2$.
+Next, we consider the derivative $\partial_tf=tx^3\partial_x+2tx^2+x\in A$
+whose Hermite remainder is
 \[
   \frac{1}{(tx+1)x} \omega_1 + \frac{1}{(t^2x^2-1)x} \omega_2.
+\]
+After polynomial reduction we obtain
+\[
+  \frac1a \Bigl( -\frac{4}{t^2} \nu_1 + \frac{(tx+4)x}{t^2} \nu_2 \Bigr).
 \]
 Since there is no linear dependency over $\bC(t)$ yet, we continue with
 \[
   \partial_t^2f =
   \frac{(tx+1)x^3}{1-tx} \partial_x -
-  \frac{x^2(2t^4x^4+5t^3x^3+2t^2x^2-5tx-3)}{(t^2x^2-1)^2}
+  \frac{x^2(2t^4x^4+5t^3x^3+2t^2x^2-5tx-3)}{(t^2x^2-1)^2}.
 \]
 Writing $\partial_t^2f$ in terms of the integral basis produces the denominator
 $d=(tx-1)^3(tx+1)^2x$, which means that the Hermite reduction consists of three
-reduction steps. As a remainder we obtain
+reduction steps. As a Hermite remainder we obtain
 \[
-  \frac{t^2x^2+2tx-4}{(t^2x^2-1)tx} \omega_1 + \frac{2}{(t^2x^2-1)tx} \omega_2.
+  \frac{t^2x^2+2tx-4}{(t^2x^2-1)tx} \omega_1 + \frac{2}{(t^2x^2-1)tx} \omega_2
+\]
+which by polynomial reduction is converted into
+\[
+  \frac1a \Bigl( -\frac{4}{t^3} \nu_1 + \frac{2(tx+2)x}{t^3} \nu_2 \Bigr).
 \]
 Now we can find a linear dependence that gives rise to the telescoper
 $t^2\partial_t^2-t\partial_t+1$, which is the minimal one for this example.

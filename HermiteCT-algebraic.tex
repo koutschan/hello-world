@@ -304,9 +304,7 @@ Let $L\in K(x)[\partial_x]$ be a fuchsian operator. An element $f\in A=K(x)[\par
 is called (locally) integral at $a\in\bar C\cup\{\infty\}$ if for every solution $y$
 of $L$ in $C[[[x-a]]]$ or $C[[[x^{-1}]]]$, respectively, the series $f\cdot y$ is
 integral. $f$~is called (globally) integral if it is locally integral at every
-$a\in\bar C$ (``at all finite places''). Because of the Fuchs relation~\cite{ince26}, an
-element $f\in A$ is integral at every $a\in\bar C\cup\{\infty\}$ if and only if it
-is a constant (i.e., if $\partial_xf=0$ in~$A$).
+$a\in\bar C$ (``at all finite places'').
 
 The set of all integral elements $f\in A$ forms a $K[x]$-submodule of~$A$.
 A basis $\{\omega_1,\dots,\omega_n\}$ of this module is called an \emph{integral basis}
@@ -542,7 +540,7 @@ Equation~\eqref{eq:modv} turns into
 Coefficient comparison with respect to $\omega_1,\ldots,\omega_n$ yields a
 system of linear equations for $g_1,\ldots,g_n$ over $K[x]/\<v>$, which has
 a unique solution. For the coordinates of the solution vector $(g_1,\dots,g_n)$,
-we can choose representatives in $K[X]$ whose degree is less than~$\deg_x(v)$.
+we can choose representatives in $K[X]$ whose degrees are less than~$\deg_x(v)$.
 
 The remaining unknowns $h_1,\ldots,h_n$ are obtained by plugging
 $g_1,\ldots,g_n$ into Equation~\eqref{eq:clear}.
@@ -556,7 +554,7 @@ variables $x\mapsto1/x$ and obtain the new integrand
 \[
   -\frac{1}{x^2} \log\Bigl(\frac{1}{x^2}-1\Bigr)\sqrt{\frac{1+x}{1-x}}.
 \]
-It is annihilated by the second-order differential operator
+This function is annihilated by the second-order differential operator
 \begin{multline*}
   L = (x^2-1)^2 x^2 \partial_x^2 + (x^2-1) (x+1) (7x-5) x \partial_x + {}\\
     8x^4+5x^3-11x^2-5x+4.
@@ -572,7 +570,7 @@ For the differentiation matrix, a simple calculation yields
   \frac{1}{e} \begin{pmatrix} (x-1) (x+2) & 1 \\[2pt] -x^3-x^2+5x-4 & x^2-x+2 \end{pmatrix}
   \begin{pmatrix} \omega_1 \\[2pt] \omega_2 \end{pmatrix}
 \end{equation}
-with $e=(x^2-1)x$. As our integrand corresponds to $1\in A$, its
+with $e=(x^2-1)x$. As the integrand corresponds to $1\in A$, its
 representation in the integral basis is
 \[
   f = \frac{1}{(x-1)x^2} \omega_1 = \frac{x+1}{ex} \omega_1;
@@ -588,6 +586,7 @@ to the following linear system for the unknowns $g_1$ and $g_2$:
 \]
 Thus we get $g_1=3$ and $g_2=-1$ and the final result of the Hermite reduction is
 \[
+f=
   \biggl(\, \underbrace{\vphantom{\frac{1}{(x)}}  \frac{3}{x} \omega_1 - \frac{1}{x} \omega_2}_{=g} \,\biggr)' +\>
   \underbrace{\frac{-x^2-x+3}{(x^2-1)x} \omega_1 - \frac{1}{(x^2-1)x} \omega_2}_{=h}.
 \]
@@ -687,7 +686,7 @@ such that $h = \bigl(\frac{1}{a}\sum_{i=1}^n b_i \omega_i\bigr)'$. Then
   h = \sum_{i=1}^n \frac{h_i}{de}\omega_i= \sum_{i=1}^n \biggl(\Bigl(\frac{b_i}{a}\Bigr)' \omega_i +
   \frac{b_i}{a e} \sum_{j=1}^n  m_{i, j}\omega_j\biggr).
 \]
-We first claim that $a$ is constant. Otherwise, for any irreducible factor $p$ of~$a$, we would have that $h$ has a pole of
+We show that $a$ is constant. Otherwise, for any irreducible factor $p$ of~$a$, we would have that $h$ has a pole of
 multiplicity greater than $1$ at the roots of~$p$. This contradicts
 the fact that $d, e$ are squarefree. Thus, $d$ is a constant.
 \end{proof}
@@ -804,7 +803,7 @@ a basis of $N_V$ can be computed by
 looking at the echelon form of the matrix ${M_{\ell}}$.
 \end{proof}
 
-In general, the condition $\deg_x(B) \leq \deg_x(a)-1$ may not hold for arbitrary basis~$V$ of~$A$.
+In general, the condition $\deg_x(B) \leq \deg_x(a)-1$ may not hold for an arbitrary basis~$V$ of~$A$.
 The following lemma shows that we can perform a simple change of bases to make the condition hold.
 
 \begin{lemma}\label{LM:CB}
@@ -900,7 +899,7 @@ Every $f\in A$ has a telescoper of order at most $n\deg_x(d) + \dim_K(N_V)$.
 \end{corollary}
 
 \begin{example}
-We would like to compute a minimal telescoper for the function
+We compute a minimal telescoper for the function
 \[F := -x^{-2}\log\bigl(x^{-2}-t^2\bigr)\sqrt{(x+t)/(x-t)}.\]
 Note that for $t=1$ we
 obtain the function from Example~\ref{ex:hr}. The operator~$L$ with $LF=0$

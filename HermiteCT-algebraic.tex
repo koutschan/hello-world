@@ -66,8 +66,7 @@
 
 \begin{document}
 
-\title{Reduction-Based Creative~Telescoping for \\ Fuchsian D-finite~Functions
-\titlenote{S.\ Chen was supported by the NSFC grant 11501552 and
+\title{Reduction-Based Creative~Telescoping for \\ Algebraic Functions\titlenote{S.\ Chen was supported by the NSFC grant 11501552 and
 by the President Fund of the Academy of
 Mathematics and Systems Science, CAS (2014-cjrwlzx-chshsh). This work was
 also supported by the Fields Institute's 2015 Thematic Program on Computer
@@ -97,9 +96,10 @@ Shaoshi Chen$^{1,2}$, \, Manuel Kauers$^{3}$, \, Christoph Koutschan$^{4}$ \\
 \maketitle
 %
 \begin{abstract}
-  Continuing a series of articles in the past few years on creative telescoping using reductions,
-  we adapt Trager's Hermite reduction for algebraic functions to fuchsian D-finite functions and
-  develop a reduction-based creative telescoping algorithm for these functions.
+Continuing a series of articles in the past few years on creative telescoping using reductions,
+we develop a new algorithm to construct minimal telescopers for algebraic functions. This algorithm is
+based on Trager's Hermite reduction and polynomial reduction, which was originally designed for
+hyperexponential functions and extended to the algebraic case in this paper.
 \end{abstract}
 
 
@@ -146,7 +146,7 @@ formulated for rational functions $f\in C(t,x)$ in~\cite{BCCL2010} and later
 generalized to rational functions in several variables~\cite{bostan13}, to
 hyperexponential functions~\cite{bostan13a} and, for the shift case, to hypergeometric
 terms~\cite{chen15a} and binomial sums~\cite{bostan15}. In the present paper, we will extend
-the approach to fuchsian D-finite functions.
+the approach to algebraic functions.
 
 The basic principle of the general approach is as follows. Assume that the
 $x$-constants $\mathrm{Const}_x(D)=\{\,c\in D:c'=0\,\}$ form a field and that $D$
@@ -183,11 +183,9 @@ approach was taken in~\cite{chen15a}.
 
 In this paper, we will show that Trager's Hermite reduction for algebraic
 functions directly gives rise to a reduction-based creative telescoping
-algorithm via the first approach (Section~\ref{sec:canonic}). We will also
-generalize his Hermite reduction to fuchsian D-finite functions in
-Section~\ref{sec:hermite} and then combine it in Section~\ref{sec:polynomial}
-with a second reduction which together give rise to a reduction-based creative
-telescoping algorithm for fuchsian D-finite functions via the second approach.
+algorithm via the first approach (Section~\ref{SECT:CT-1}). We will combine Trager's Hermite reduction
+with a second reduction (Section~\ref{sec:polynomial}) to obtain a reduction-based creative
+telescoping algorithm for algebraic functions via the second approach (Section~\ref{SECT:CT-2}).
 This gives a new proof of a bound for the order of the telescopers, and in
 particular an independent proof for their existence.
 
@@ -412,6 +410,7 @@ See Trager's discussion~\cite{trager84} for further details.
 Although normality is a somewhat weaker condition on a basis than integrality,
 it also excludes the possibility that poles in the terms of a linear combination
 of basis elements can cancel:
+{\red please keep this lemma, since we will need this later}
 
 \begin{lemma}\label{lemma:3}
   Let $L$ be a fuchsian operator and let $\omega_1,\dots,\omega_n$ be an integral basis of $A=K(x)[\partial_x]/\<L>$
@@ -428,125 +427,50 @@ of basis elements can cancel:
 \end{proof}
 
 \section{Hermite Reduction}\label{sec:hermite}
+Hermite reduction was first introduced by Hermite in~\cite{Hermite1872} for rational functions.
+This reduction was later extended to the algebraic case by Trager in~\cite{trager84} and to the
+hyperexponential case in~\cite{bostan13a}.
+These generalizations are the key step in many integration
+algorithms, including the telescoping algorithm presented in this paper.
 
-Hermite reduction and its generalizations are the key step in many integration
-algorithms, including the telescoping algorithm presented in this paper. It
-turns out that the Hermite reduction for fuchsian D-finite functions is
-literally the same as Trager's reduction for algebraic
-functions~\cite{trager84}.
-
-We start with a technical lemma, which is needed later to ensure that the
-Hermite reduction always works. The analogous statement for algebraic
-functions and its proof can be found in~\cite[pp. 46--47]{trager84}; for
-sake of self-containedness, we give the full proof here, although it is a
-straightforward generalization of Trager's proof.
-
-Throughout this section, let $L\in K(x)[\partial_x]$ be a fuchsian operator
-of order~$n$ and let $A=K(x)[\partial_x]/\<L>$.
-
-\begin{lemma}\label{lemma:ibv}
-Let $v\in K[x]$ be a squarefree polynomial and let $\{\omega_1,\ldots,\omega_n\}$
-be a basis of~$A$ that is locally integral at all roots of~$v$.
-For some integer $m>1$ we define $\psi_i:=v^m\left(v^{1-m}\omega_i\right)'$; then
-$\{\psi_1,\ldots,\psi_n\}$ is a local integral basis at each root of~$v$.
-\end{lemma}
-\begin{proof}
-By expanding $\psi_i=v\omega_i'-(m-1)v'\omega_i$ one sees that the $\psi_i$
-themselves are integral at all roots of~$v$. Let now $a\in\bar{C}$ be an
-arbitrary but fixed root of~$v$. We have to show that each $f\in A$ that is
-integral at~$a$ can be expressed as a linear combination of the $\psi_i$ with
-coefficients in $\bar C(x)_a$. To the contrary, assume that there exists an
-integral element~$f$ that requires $x-a$ in the denominator of some
-coefficient, i.e.,
-\[
-  f = \frac{1}{v} \sum_{i=1}^n c_i \psi_i \quad\text{with }c_i\in \bar{C}(x)_a
-  \text{ and } c_i(a)\neq0 \text{ for some } i
-\]
-(here we use the fact that $v$ is squarefree).  Further let $g=\sum_{i=1}^n
-c_i'\omega_i$, which is obviously integral. Then also their sum
-\begin{align*}
-  f+g &= v^{m-1} \sum_{i=1}^n \left(c_i\left(v^{1-m}\omega_i\right)'
-  + c_i'v^{1-m}\omega_i \right) \\
-  &= v^{m-1} \sum_{i=1}^n \left(c_iv^{1-m}\omega_i\right)'
-\end{align*}
-must be integral. Since $\{\omega_1,\ldots,\omega_n\}$ is an integral basis at~$a$,
-there exists for each $i=1,\ldots,n$ a series solution $y_i\in C[[[x-a]]]$
-of~$L$ such that $\omega_i\cdot y_i$ involves a term
-$T=(x-a)^\alpha\log(x-a)^\beta$ with $0\leq\alpha<1$.
-Let now $i$ be an index such that $c_i(a)\neq0$;
-this implies that $T$ appears in $(c_i\omega_i)\cdot y_i$.
-Using the fact that the $\omega_i$ form a local integral basis, it follows by
-Lemma~\ref{lemma:1} that $T$ is also present in $h\cdot y_i$ where
-$h=\sum_{i=1}^n c_i\omega_i$. Applying the operator $v^{m-1}\partial_xv^{1-m}$
-to $h\cdot y_i$ turns $T$ into $(x-a)^{\alpha-1}\log(x-a)^\beta$, which reveals that
-$v^{m-1}(v^{1-m}h)'=f+g$ is not integral at~$a$. This contradicts our assumption on
-the integrality of~$f$, and hence $\{\psi_1,\ldots,\psi_n\}$ is a local integral
-basis at~$a$.
-\end{proof}
-
+We now recall the Hermite reduction for algebraic functions in~\cite{trager84}.
+Let~$A= K(x, y)$ be a finite algebraic extension of~$K(x)$ with $y$ satisfying
+the algebraic equation~$p(x, y)=0$, where~$p\in K[x, y]$ is an irreducible
+polynomial over~$K(x)$ of degree $n$.
 Let $\{\omega_1,\ldots,\omega_n\}$ be an integral basis for~$A$.
-Further let $e,m_{i,j}\in K[x]$ ($1\leq i,j\leq n$) be such that
+Further let $e, m_{i,j}\in K[x]$ ($1\leq i,j\leq n$) be such that
 $e\omega_i'=\sum_{j=1}^n m_{i,j}\omega_i$ and
-$\gcd(e,m_{1,1},m_{1,2},\ldots,m_{n,n})=1$ as in Lemma~\ref{lemma:e}. For describing
-the Hermite reduction we fix an integrand $f\in A$ and represent it in the
+$\gcd(e,m_{1,1},m_{1,2},\ldots,m_{n,n})=1$.
+{\red (Manuel, please keep the key fact that $e$ is squarefree in your part.)}
+For describing the Hermite reduction we fix an integrand $f\in A$ and represent it in the
 integral basis, i.e., $f=\sum_{i=1}^n (f_i/d)\,\omega_i$ with
-$d,f_1,\ldots,f_n\in K[x]$. The purpose is to find $g,h\in A$ such that
-$f=g'+h$ and $h=\sum_{i=1}^n(h_i/d^\ast)\,\omega_i$ with $h_1,\ldots,h_n\in K[x]$
+$d,f_1,\ldots,f_n\in K[x]$. The purpose is to find $g, h\in A$ such that
+$f=g' + h$ and $h=\sum_{i=1}^n(h_i/d^\ast)\,\omega_i$ with $h_1,\ldots,h_n\in K[x]$
 and $d^\ast$ denoting the squarefree part of~$d$.
 As differentiating the $\omega_i$ can introduce
 denominators, name\-ly the factors of~$e$, it is convenient to consider those
 denominators from the very beginning on, and this means that we want to assume
 $e\mid d$. Note that $\gcd(d,f_1,\ldots,f_n)$ can then be nontrivial.
-
-We now describe one step of the Hermite reduction, where the multiplicity
-$m>1$ of some nontrivial squarefree factor~$v\in K[x]$ of $d$ is reduced.
-Let $u\in K[x]$ be such that $d=uv^m$; it follows that $\gcd(u,v)=1$ and
-$\gcd(v,v')=1$. We want to find $g_1,\ldots,g_n,h_1,\ldots,h_n\in K[x]$
-such that
+Let~$v\in K[x]$ be a nontrivial squarefree factor of~$d$ of multiplicity~$m>1$.
+Then~$d = uv^m$ for some~$u\in K[x]$ with~$\gcd(u, v)=1$ and~$\gcd(v,v')=1$.
+One step of the Hermite reduction is as follows:
 \begin{equation}\label{eq:hred}
   \sum_{i=1}^n \frac{f_i}{uv^m}\omega_i =
   \biggl(\sum_{i=1}^n\frac{g_i}{v^{m-1}}\omega_i\biggr)' +
-  \sum_{i=1}^n \frac{h_i}{uv^{m-1}}\omega_i.
+  \sum_{i=1}^n \frac{h_i}{uv^{m-1}}\omega_i,
 \end{equation}
-By a repeated application of such reduction steps one can decompose any $f\in A$
-as $f=g'+h$ where the denominators of the coefficients of $h$ are squarefree.
-% This gives rise to the reduction map $[f]=h$.
-
-In order to determine the unknown polynomials $g_1,\ldots,g_n$ in~\eqref{eq:hred},
-clearing the denominator $uv^m$ yields
-\begin{equation}\label{eq:clear}
-  \sum_{i=1}^n f_i\omega_i = \sum_{i=1}^n \biggl( uvg_i'\omega_i +
-  uv^mg_i\left(v^{1-m}\omega_i\right)' + vh_i\omega_i \biggr),
-\end{equation}
-and then this equation is reduced modulo~$v$:
-\begin{equation}\label{eq:modv}
-  \sum_{i=1}^n f_i\omega_i =
-  \sum_{i=1}^n uv^mg_i\left(v^{1-m}\omega_i\right)' \mod v.
-\end{equation}
-By Lemma~\ref{lemma:ibv} and from $\gcd(u,v)=1$ it follows that
-the elements $uv^m(v^{1-m}\omega_i)'$ form a local integral basis
-at each root of~$v$, which implies that the coefficients $g_i$ are
-uniquely determined modulo~$v$.
-
-By Lemma~\ref{lemma:e} the polynomial~$e$ is squarefree and therefore $e\mid uv$;
-hence we can write $uv=ew$ for some $w\in K[x]$. By rewriting the
-derivatives of the $\omega_i$ in terms of the integral basis,
-Equation~\eqref{eq:modv} turns into
-\begin{align*}
-  \sum_{i=1}^n f_i\omega_i
-  &= \sum_{i=1}^n ug_i \bigl( v\omega_i' - (m-1)v'\omega_i \bigr) \mod v\\
-  &= \sum_{i=1}^n g_i\, \biggl( w\sum_{j=1}^n m_{i,j}\omega_j - (m-1)uv'\omega_i \biggr) \mod v.
-\end{align*}
-Coefficient comparison with respect to $\omega_1,\ldots,\omega_n$ yields a
-system of linear equations for $g_1,\ldots,g_n$ over $K[x]/\<v>$, which has
-a unique solution. For the coordinates of the solution vector $(g_1,\dots,g_n)$,
-we can choose representatives in $K[X]$ whose degrees are less than~$\deg_x(v)$.
-
-The remaining unknowns $h_1,\ldots,h_n$ are obtained by plugging
-$g_1,\ldots,g_n$ into Equation~\eqref{eq:clear}.
+where~$g_i, h_i \in K[x]$ and~$\deg_x(g_i)< \deg_x(v)$.
+The existence of such~$g_i$'s and~$h_i$'s follows from the crucial fact that
+the elements~$s_i :=  uv^m(v^{1-m}\omega_i)'$ with $i\in \{ 1, \ldots, n\}$
+form a local integral basis
+at each root of~$v$~\cite[page 46]{trager84}.
+By a repeated application of such reduction steps, one can decompose any $f\in A$
+as $f=g' + h$ where the denominators of the coefficients of $h$ are squarefree.
 
 
 \begin{example}\label{ex:hr}
+{\red to be modified.....}
+
 We consider the fuchsian D-finite function
 \[
   \frac{1}{x^2} \log\Bigl(\frac{1}{x^2}-1\Bigr)\sqrt{\frac{1+x}{1-x}}.
@@ -589,8 +513,8 @@ f=
 \]
 \end{example}
 
-\section{The Canonical Form Property}\label{sec:canonic}
 
+\section{Telescoping via reductions: \\ first approach} \label{SECT:CT-1}
 Recall from the introduction that reduction-based creative telescoping requires
 some $K$-linear reduction map $[\cdot]\colon A\to A$ with the property that
 $f-[f]$ is integrable in $A$ for every $f\in A$. This is sufficient for the
@@ -598,10 +522,11 @@ correctness of the method, but additional properties are needed in order to
 ensure that the method terminates.
 
 As also explained already in the introduction, one possibility consists in
-showing that $[f]=0$ whenever $f$ is integrable. For the special case of
-algebraic functions, Trager showed that his Hermite reduction has this property:
+showing that $[f]=0$ whenever $f$ is integrable. Trager showed that his
+Hermite reduction has this property~\cite[page 50, Theorem 1]{trager84}. For the sake of self-containedness,
+we give the full proof of this result here.
 
-\begin{theorem} \cite{trager84}\label{thm:intiff0}
+\begin{theorem}\label{thm:intiff0}
   Let $A$ be an algebraic extension of~$K(x)$ and let $f\in A$ be such that
   $f$ has a double root at infinity (i.e., for every Puiseux series expansion
   of $f$ contains only monomials $x^\alpha$ with $\alpha\leq-2$). Let $B=\{\omega_1,\dots,\omega_n\}$
@@ -609,6 +534,38 @@ algebraic functions, Trager showed that his Hermite reduction has this property:
   If $f=g'+h$ is the result of the Hermite reduction with respect to~$B$,
   then $h$ is zero if and only if $f$ is integrable in~$A$.
 \end{theorem}
+
+\begin{proof}
+The direction ``$\Rightarrow$'' is trivial. To show the implication
+``$\Leftarrow$'' assume that $f$ is integrable. From $f=g'+h$ it follows that
+also $h$ is integrable; let $H\in A$ be such that $H'=h$.  In order to show
+that $h=0$, we show that $H$ is constant.  To this end, it suffices to show that
+it has neither finite poles nor a pole at infinity according to Chevalley's result~\cite[page 9, Corollary 3 ]{Chevalley1951}.
+
+It is clear that $H$ has no finite poles because $h$ has only ``simple'' poles (i.e., all Puiseux
+expansions of $h$ have only exponents $\geq-1$).
+
+We will show below that when $H$ has a pole at infinity, then also $g+H$ must
+have a pole at infinity.  Since $f=g'+h=(g+H)'$ has at least a double root at
+infinity, $g+H$ has at least a single root at infinity. This excludes the
+possibility that $H$ has a pole at infinity.
+
+Assume now that $H$ has a pole at infinity. We show that $g+H$ has also a pole at infinity.
+Since $H$ has no finite poles, $H$ is integral and we can write it as
+$H=p_1\omega_1+\cdots+p_n\omega_n$ with $p_i\in C[x]$.
+Since we assume that $H$ has a pole at infinity, it follows by Lemma~\ref{lemma:3}{\red (manuel, please keep the
+Lemma 4 about the normality at the infinity in your part)} that
+(a) one of the $p_i$ has positive degree or
+(b) some non-constant $\omega_i$ has a nonzero coefficient~$p_i$.
+From how the Hermite reduction works, we know that $g=\sum_i g_i\omega_i$
+with proper rational functions~$g_i$. Consider now $g+H=\sum_i (g_i+p_i)\omega_i$.
+In case (a) there is some $i$ for which $g_i+p_i$ has a pole at infinity,
+and thus $(g_i+p_i)\omega_i$ has a pole at infinity (because $\omega_i$ has
+no poles at finite places and therefore no zero at infinity).
+In case (b), there is some $i$ with $p_i\neq0$ and $\omega_i$ is non-constant,
+which implies that $(g_i+p_i)\omega_i$ has a pole at infinity.
+In both cases, therefore, $g+H$ has a pole at infinity by Lemma~\ref{lemma:3}.
+\end{proof}
 
 Note that the condition in Theorem~\ref{thm:intiff0} that $f$ has a double
 root at infinity is not a restriction at all, as it can always be achieved by
@@ -635,14 +592,8 @@ applied to an integrand $f\in A$ that has a double root at infinity. Again, if
 $f$ has no double root at infinity, we can produce one by a change of variables.
 In particular, the method finds a telescoper of smallest possible order.
 
-Unfortunately, Trager's theorem does not easily generalize to the case of
-fuchsian D-finite functions. Its proof relies on Chevalley's theorem~\cite[page 9, Cor.\ 3]{Chevalley1951},
-which says that an algebraic function that has no poles (neither at a finite
-place nor at infinity) must be constant. In our setting this is not true. For
-example, $\log(x)$ is fuchsian D-finite and has no poles (neither at a finite
-place nor at infinity), but it is not a constant. For general fuchsian D-finite
-functions, we therefore complete the discussion of creative telescoping using
-the second approach.
+{\red it will be nice to have an example here!...}
+
 
 \section{Polynomial Reduction}\label{sec:polynomial}
 
@@ -811,16 +762,16 @@ is a basis of~$A$ which is normal at $0$ and integral at all other places (inclu
 \end{lemma}
 \begin{proof}
 It is clear that such a basis~$V$ will be normal at zero, because multiplying the generators by
-the rational functions $x^{r_i}$ brings it back to a global integral basis, which is in particular
+the rational functions $x^{\tau_i}$ brings it back to a global integral basis, which is in particular
 a local integral basis at zero.
 It is also clear that such a basis will be integral at every other point $a\in\bar C\setminus\{0\}$, because the
-multipliers $x^{-r_i}$ are locally units at such~$a$.
+multipliers $x^{-\tau_i}$ are locally units at such~$a$.
 Finally, since the original basis is normal at infinity, there exist rational functions $u_1,\dots,u_n$
 such that $\{u_1\omega_1,\dots,u_n\omega_n\}$ is a local integral basis at infinity.
-Since $u_i$ can be written as $u_i=x^{-r_i}\tilde{u}_i$ with $r_i\in\set Z$ and $\tilde{u}_i$ being a unit
+Since $u_i$ can be written as $u_i=x^{-\tau_i}\tilde{u}_i$ with $\tau_i\in\set Z$ and $\tilde{u}_i$ being a unit
 in $\bar{C}(x)_\infty$, we see that also $V$ is a local integral basis at infinity.
-The integers~$r_i$ can only be nonnegative because the $\omega_i$'s have no finite poles and therefore each
-of them is either constant or has a pole at infinity.
+The integers~$\tau_i$ can only be nonnegative because the $\omega_i$'s have no finite poles and therefore each
+of them is either constant or has a pole at infinity by Chevalley's result~\cite[Page 9, Corollary 3]{Chevalley1951}.
 \end{proof}
 
 
@@ -866,15 +817,22 @@ for some $a_i\in K[x]$. So $Q \in \im(\phi_V)$.
 Since $\im(\phi_V) \cap N_V = \{0\}$, $Q=0$.
 \end{proof}
 The decomposition in~\eqref{EQ:add} is called an \emph{additive decomposition} of~$f$ with respect to~$x$.
-We now discuss how to compute telescopers for elements of~$A$ via Hermite reduction and
+
+\section{Telescoping via reductions: \\ second approach} \label{SECT:CT-2}
+
+We now discuss how to compute telescopers for algebraic functions via Hermite reduction and
 polynomial reduction.
 
-We first consider the additive decompositions of the successive derivatives $\partial_t^i(f)$ for $i\in \bN$.
+Let~$K := C(t)$ and~$A = K(x, y)$ be a finite algebraic extension of~$K(x)$ of degree $n$.
+Let~$W, V, e, \lambda, M, B$ be satisfying the same conditions as in Theorem~\ref{THM:polyred}.
+To construct a telescoper for~$f\in A$,
+we first consider the additive decompositions of the successive derivatives $\partial_t^i(f)$ for $i\in \bN$.
 Assume that
 \[\partial_t(W) = \frac{1}{\tilde{e}} \tilde{M}W \quad \text{and}
 \quad \partial_t(V) = \frac{1}{x^{\tilde{\lambda}} \tilde{e}} \tilde{B}V,\]
 where $\tilde e \in K[x]$, $\tilde M, \tilde B\in K[x]^{n\times n}$, and $\tilde \lambda \in \bN$.
-By Proposition 7 in~\cite{chen14a}, we have $\tilde e \mid e$ and $x^{\tilde{\lambda}} \tilde{e} \mid x^\lambda e$.
+Since $\partial_t$ and~$\partial_x$ commute, Proposition 7 in~\cite{chen14a}
+implies that $\tilde e \mid e$ and $x^{\tilde{\lambda}} \tilde{e} \mid x^\lambda e$, as polynomials in $K[x]$.
 So we can just take $\tilde e = e$ and $\tilde{\lambda}  = \lambda$ by multiplying $\tilde M, \tilde B$ by some factors
 of~$x^\lambda e$. A direct calculation yields $\partial_t(f) = (\partial_t(g))' + h$,
 where
@@ -895,7 +853,7 @@ linear dependency among $(P_i, Q_i)$'s over~$K$. We also obtain an upper bound f
 Every $f\in A$ has a telescoper of order at most $n\deg_x(d) + \dim_K(N_V)$.
 \end{corollary}
 
-\begin{example}
+\begin{example} { \red To be modified.... }
 We compute a minimal telescoper for the function
 \[
   F := \frac{1}{x^2} \log\Bigl(\frac{1}{x^2}-t^2\Bigr)\sqrt{\frac{1+tx}{1-tx}}.
@@ -964,6 +922,10 @@ which by polynomial reduction is converted into
 Now we can find a linear dependence that gives rise to the telescoper
 $t^2\partial_t^2-t\partial_t+1$, which is indeed the minimal one for this example.
 \end{example}
+
+\section{Conclusion}
+
+{\red To add some partial idea for fuchsian D-finite functions.}
 
 \section*{Acknowledgements}
 

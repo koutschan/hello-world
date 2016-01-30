@@ -423,52 +423,6 @@ as $f=g' + h$ where the denominators of the coefficients of $h$ are squarefree
 and the coefficients of $g$ are proper rational functions (i.e., their numerators
 have smaller degree than their denominators).
 
-
-\begin{example}\label{ex:hr}
-{\red to be modified.....}
-
-We consider the fuchsian D-finite function
-\[
-  \frac{1}{x^2} \log\Bigl(\frac{1}{x^2}-1\Bigr)\sqrt{\frac{1+x}{1-x}}.
-\]
-This function is annihilated by the second-order differential operator
-\begin{multline*}
-  L = (x^2-1)^2 x^2 \partial_x^2 + (x^2-1) (x+1) (7x-5) x \partial_x + {}\\
-    8x^4+5x^3-11x^2-5x+4.
-\end{multline*}
-Using the algorithm described in~\cite{kauers15b} we compute the following
-integral basis $\{\omega_1,\omega_2\}$ for $A=\bC(x)[\partial_x]/\<L>$:
-\[
-  \bigl\{ (x-1) x^2,\, (x^2-1) (x-1) x^3 \partial_x + 2(x-1) x^4 \bigr\}
-\]
-For the differentiation matrix, a simple calculation yields
-\begin{equation}\label{eq:dmat}
-  \begin{pmatrix} \omega_1' \\[2pt] \omega_2' \end{pmatrix} =
-  \frac{1}{e} \begin{pmatrix} (x-1) (x+2) & 1 \\[2pt] -x^3-x^2+5x-4 & x^2-x+2 \end{pmatrix}
-  \begin{pmatrix} \omega_1 \\[2pt] \omega_2 \end{pmatrix}
-\end{equation}
-with $e=(x^2-1)x$. As the integrand corresponds to $1\in A$, its
-representation in the integral basis is
-\[
-  f = \frac{1}{(x-1)x^2} \omega_1 = \frac{x+1}{ex} \omega_1;
-\]
-using the notation employed above, we have $d=(x^2-1)x^2$, $f_1=x+1$,
-and $f_2=0$. Here we can only reduce the power of~$x$ in the denominator, so
-we start with $u=x^2-1$, $v=x$, and $m=2$. Then Equation~\eqref{eq:modv} leads
-to the following linear system for the unknowns $g_1$ and $g_2$:
-\[
-  \begin{pmatrix} x-1 & -x^3-x^2+5 x-4 \\ 1 & 3-x \end{pmatrix}
-  \begin{pmatrix} g_1 \\ g_2 \end{pmatrix} =
-  \begin{pmatrix} x+1 \\ 0 \end{pmatrix} \mod x.
-\]
-Thus we get $g_1=3$ and $g_2=-1$ and the final result of the Hermite reduction is
-\[
-f=
-  \biggl(\, \underbrace{\vphantom{\frac{1}{(x)}}  \frac{3}{x} \omega_1 - \frac{1}{x} \omega_2}_{=g} \,\biggr)' +\>
-  \underbrace{\frac{-x^2-x+3}{(x^2-1)x} \omega_1 - \frac{1}{(x^2-1)x} \omega_2}_{=h}.
-\]
-\end{example}
-
 It was observed that Hermite reduction itself often takes less time than the construction
 of an integral basis. If Hermite reduction is applied to some other basis instead
 of an integral basis, it either succeeds or it runs into a division by zero.
@@ -542,9 +496,10 @@ the coefficients of~$h$ have squarefree denominators.
 
 If $H$ has a pole at infinity, then by Lemma~\ref{lemma:pole_at_inf} also
 $g+H$ must have a pole at infinity, because Hermite reduction produces
-$g=\sum_i g_i\omega_i$ with proper rational functions~$g_i$. This contradicts
-the assumption that $f=g'+h=(g+H)'$ has at least a double root at infinity,
-because the latter implies that $g+H$ has at least a single root at infinity.
+$g=\sum_i g_i\omega_i$ with proper rational functions~$g_i$.  On the other
+hand, since $f=g'+h=(g+H)'$ has at least a double root at infinity by
+assumption, $g+H$ must have at least a single root at infinity. This is
+a contradiction.
 \end{proof}
 
 Note that the condition in Theorem~\ref{thm:intiff0} that $f$ has a double
@@ -574,8 +529,61 @@ Again, if $f$ has no double root at infinity, we can produce one by a change of 
 Note that a change of variables $x\to a+1/x$ with $a\in C$ has no affect on
 the telescoper.
 
-\begin{example}
-TODO: {\red it will be nice to have an example here!...}
+\begin{example}\label{ex:hr}
+We consider the algebraic function $f=y/x^2$ where $y$ is a solution of the
+third-degree polynomial equation $m(x,y) = y^3 + y + x + t = 0$. An integral basis for
+$A=K(x)[y]/\<m>$ is given by $\omega_1=1$, $\omega_2=y$, $\omega_3=y^2$.  This
+means that employing lazy Hermite reduction avoids completely the computation
+of an integral basis in this example.
+
+By solving the equation
+\[
+  \frac{\partial m}{\partial x} = \frac{\partial m}{\partial y} \, \frac{\partial y}{\partial x} \mod m
+\]
+for $\partial y/\partial x$ we obtain
+\[
+  y' = \frac{-6y^2 + 9(t+x)y - 4}{27x^2+54tx+27t^2+4}
+\]
+Then for the differentiation matrix~$M$, a simple calculation yields
+\[
+  \begin{pmatrix} \omega_1' \\[1pt] \omega_2' \\[1pt] \omega_3' \end{pmatrix} =
+  \frac{1}{e} \begin{pmatrix} 0 & 0 & 0 \\[1pt] -4 & 9 (t+x) & -6 \\[1pt] 12 (t+x) & 4 & 18 (t+x) \\ \end{pmatrix}
+  \begin{pmatrix} \omega_1 \\[1pt] \omega_2 \\[1pt] \omega_3 \end{pmatrix}
+\]
+with $e=27x^2+54xt+27t^2+4$. Thus we write $f=\sum_{i=1}^3 f_i/d\omega_i$ with
+$f_1=f_3=0$, $f_2=e$, and $d=x^2e$.  After a single step the Hermite reduction
+delivers the result
+\[
+  f = \biggl(\, \underbrace{\vphantom{\frac{1}{(x)}} -\frac{y}{x}}_{\textstyle=g_0} \;\biggr)' +\>
+  \underbrace{\frac{-6y^2+9(x+t)y-4}{x(27x^2+54xt+27t^2+4)}}_{\textstyle=h_0}.
+\]
+As the Hermite remainder~$h_0$ is nonzero, Theorem~\ref{thm:intiff0} tells us that
+$f$ is not integrable in~$A$. Hence we continue by applying Hermite reduction to
+\[
+  \partial_tf = \frac{-6y^2+9(x+t)y-4}{x^2(27x^2+54xt+27t^2+4)}.
+\]
+Again after a single reduction step, the decomposition $\partial_tf = g_1' + h_1$
+is obtained, where
+\begin{align*}
+  g_1 &= \frac{6y^2-9ty+4}{x(27t^2+4)} \\
+  h_1 &= \frac{6\bigl((9x+27t)y^2-(27xt+27t^2-2)y+6x+18t\bigr)}{x(27t^2+4)(27x^2+54xt+27t^2+4)}
+\end{align*}
+Since $h_0$ and $h_1$ are linearly independent over $C(t)$, we continue with
+$\partial_t^2f$, which is given by
+\[
+  \frac{6\bigl(27(x+t)y^2-(27x^2+54xt+27t^2-2)y+18(x+t)\bigr)}{x^2(27x^2+54xt+27t^2+4)^2}.
+\]
+This time the Hermite reduction consists of two steps, one with $v=x$ and one
+with $v=27x^2+54xt+27t^2+4=e$. The remainder $h_2$ is
+\begin{multline*}
+ \bigl(6\bigl((-729xt-1539t^2+96)y^2+(1215xt^2-144x+1215t^3-{}\\
+ 306t)y-486xt-1026t^2+64\bigr)\bigr)\mathrel{\big\slash}\bigl(x(27t^2+4)^2e\bigr)
+\end{multline*}
+and the integrable part $g_2$ is not displayed here for space reasons.
+
+Now one can find a linear dependence between $h_0,h_1,h_2$ that gives rise to the telescoper
+$(27t^2+4)\partial_t^2+81t\partial_t+24$, which is indeed the minimal one for this example.
+% TODO maybe mention polynomial reduction
 \end{example}
 
 
@@ -835,75 +843,6 @@ linear dependence among $(P_i, Q_i)$'s over~$K$. We also obtain an upper bound f
 Every $f\in A$ has a telescoper of order at most $n\deg_x(d) + \dim_K(N_V)$.
 \end{corollary}
 
-\begin{example} { \red To be modified.... }
-We compute a minimal telescoper for the function
-\[
-  F := \frac{1}{x^2} \log\Bigl(\frac{1}{x^2}-t^2\Bigr)\sqrt{\frac{1+tx}{1-tx}}.
-\]
-Note that for $t=1$ we
-obtain the function from Example~\ref{ex:hr}. The operator~$L$ with $LF=0$
-and the integral basis $\{\omega_1,\omega_2\}$ for
-$A=\bC(t,x)[\partial_x]/\<L>$ are very similar to those in Example~\ref{ex:hr}.
-As before, $F$ is represented by $f=1\in A$.
-Also the computation of its Hermite reduction is analogous, yielding
-\[
-  h = \frac{-t^3x^2-t^2x+3t}{(t^2x^2-1)x} \omega_1 - \frac{t}{(t^2x^2-1)x} \omega_2
-\]
-as the Hermite remainder~$h$. The matrix~$M$ representing the differentiation
-of the $\omega_i$ does not satisfy the degree condition of
-Proposition~\ref{PROP:finite}; this fact is already visible
-in~\eqref{eq:dmat}. Hence we perform a change of basis to
-$\nu_1=x^{-1}\omega_1$, $\nu_2=x^{-2}\omega_2$, which is an integral basis at
-infinity. We have $aV'=BV$ for $V=(\nu_1,\nu_2)^T$, $a=x^2(t^2x^2-1)$, and
-some matrix~$B\in K[x]^{2\times2}$.  By investigating the eigenvalues of
-$\lc(B)$ we find that $\ell=1$ and the echelon form of $M_\ell$ is
-\begin{equation}\label{eq:M_ell}
-  \begin{pmatrix}
-  1 & 0 & 0 & 0 & 0 & 2/t^3 & 0 & 4/t^4 & -4/t^4 & 0 \\
-  0 & 0 & 1 & 1/t & 0 & 0 & 0 & -4/t^3 & 4/t^3 & 0 \\
-  0 & 0 & 0 & 0 & 1 & 1/t & 0 & 0 & 0 & 0 \\
-  0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0
-  \end{pmatrix}.
-\end{equation}
-Writing the Hermite remainder~$h$ in terms of the $\nu_i$, we see that all
-denominators divide the polynomial~$a$. Thus we write
-$h=a^{-1}(h_1\nu_1+h_2\nu_2)$ and in~\eqref{EQ:h} we get
-$u_1=h_1=-t^3x^4-t^2x^3+3tx^2$, $u_2=h_2=-tx^3$, and $v_1=v_2=0$.
-In the basis $\cS_4$ the vector $(u_1,u_2)$ reads
-% here we could employ the \vec notation
-\[
-  \bigl(-t^3, 0, -t^2, -t, 3 t, 0, 0, 0, 0, 0\bigr).
-\]
-The polynomial reduction now corresponds to reduce this vector with the rows
-of~\eqref{eq:M_ell}, yielding the final result $[f]=-x^2/a\nu_2$.  Next, we
-consider the derivative $\partial_tf=tx^3\partial_x+2tx^2+x\in A$ whose
-Hermite remainder is
-\[
-  \frac{1}{(tx+1)x} \omega_1 + \frac{1}{(t^2x^2-1)x} \omega_2.
-\]
-After polynomial reduction we obtain
-\[
-  \frac1a \Bigl( -\frac{4}{t^2} \nu_1 + \frac{(tx+4)x}{t^2} \nu_2 \Bigr).
-\]
-Since there is no linear dependency over $\bC(t)$ yet, we continue with
-\[
-  \partial_t^2f =
-  \frac{(tx+1)x^3}{1-tx} \partial_x -
-  \frac{x^2(2t^4x^4+5t^3x^3+2t^2x^2-5tx-3)}{(t^2x^2-1)^2}.
-\]
-Writing $\partial_t^2f$ in terms of the integral basis produces the denominator
-$d=(tx-1)^3(tx+1)^2x$, which means that the Hermite reduction consists of three
-reduction steps. As a Hermite remainder we obtain
-\[
-  \frac{t^2x^2+2tx-4}{(t^2x^2-1)tx} \omega_1 + \frac{2}{(t^2x^2-1)tx} \omega_2
-\]
-which by polynomial reduction is converted into
-\[
-  \frac1a \Bigl( -\frac{4}{t^3} \nu_1 + \frac{2(tx+2)x}{t^3} \nu_2 \Bigr).
-\]
-Now we can find a linear dependence that gives rise to the telescoper
-$t^2\partial_t^2-t\partial_t+1$, which is indeed the minimal one for this example.
-\end{example}
 
 \section{The D-finite Case}
 

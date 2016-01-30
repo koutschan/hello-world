@@ -480,65 +480,80 @@ ensure that the method terminates.
 
 As also explained already in the introduction, one possibility consists in
 showing that $[f]=0$ whenever $f$ is integrable. Trager showed that his
-Hermite reduction has this property~\cite[page 50, Theorem 1]{trager84}. For the sake of self-containedness,
-we give the full proof of this result here.
+Hermite reduction has this property~\cite[page 50, Theorem 1]{trager84}.
+For the sake of self-containedness, we give the full proof of this result here.
+
+\begin{lemma}\label{lemma:pole_at_inf}
+Let $A$ be an algebraic extension of~$K(x)$ and let
+$B=\{\omega_1,\dots,\omega_n\}$ be an integral basis for $A$ that is normal at
+infinity. Let $g=\sum_{i=1}^ng_i\omega_i\in A$ be such that all its
+coefficients $g_i\in K(x)$ are proper rational functions. If an integral
+element $f\in A$ has a pole at infinity, then also $f+g$ has a pole at
+infinity.
+\end{lemma}
+\begin{proof}
+Since $f$ is assumed to be integral we can write it as
+$f=f_1\omega_1+\cdots+f_n\omega_n$ with $f_i\in K[x]$.
+If $f$ has a pole at infinity, there is at least one index~$i$
+such that $f_i\omega_i$ has a pole at infinity. There are two cases why this
+can happen.
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\begin{enumerate}
+\item The polynomial~$f_i$ has positive degree.  This means that $f_i+g_i$ has a
+pole at infinity, and thus $(f_i+g_i)\omega_i$ has a pole at infinity (because
+$\omega_i$ has no poles at finite places and therefore no zero at infinity).
+\item The basis element $\omega_i$ is not constant and $f_i\neq0$. This
+also implies that $(f_i+g_i)\omega_i$ has a pole at infinity.
+\end{enumerate}
+In both cases, therefore, $f+g=\sum_{i=1}^n(f_i+g_i)\omega_i$ has a pole at
+infinity by Lemma~\ref{lemma:3}.
+\end{proof}
+
 
 \begin{theorem}\label{thm:intiff0}
   Let $A$ be an algebraic extension of~$K(x)$ and let $f\in A$ be such that
-  $f$ has a double root at infinity (i.e., for every Puiseux series expansion
-  of $f$ contains only monomials $x^\alpha$ with $\alpha\leq-2$). Let $B=\{\omega_1,\dots,\omega_n\}$
-  be an integral basis for $A$ which is normal at infinity.
+  $f$ has a double root at infinity (i.e., every Puiseux series expansion
+  of $f$ at infinity contains only monomials $(1/x)^\alpha$ with $\alpha\geq2$). Let $B=\{\omega_1,\dots,\omega_n\}$
+  be an integral basis for $A$ that is normal at infinity.
   If $f=g'+h$ is the result of the Hermite reduction with respect to~$B$,
-  then $h$ is zero if and only if $f$ is integrable in~$A$.
+  then $h=0$ if and only if $f$ is integrable in~$A$.
 \end{theorem}
 
 \begin{proof}
 The direction ``$\Rightarrow$'' is trivial. To show the implication
-``$\Leftarrow$'' assume that $f$ is integrable. From $f=g'+h$ it follows that
-also $h$ is integrable; let $H\in A$ be such that $H'=h$.  In order to show
+``$\Leftarrow$'' assume that $f$ is integrable in~$A$. From $f=g'+h$ it follows that
+then also $h$ is integrable in~$A$; let $H\in A$ be such that $H'=h$.  In order to show
 that $h=0$, we show that $H$ is constant.  To this end, it suffices to show that
-it has neither finite poles nor a pole at infinity according to Chevalley's result~\cite[page 9, Corollary 3 ]{Chevalley1951}.
+it has neither finite poles nor a pole at infinity; the claim then follows from
+Chevalley's result~\cite[page 9, Corollary 3 ]{Chevalley1951}.
 
-It is clear that $H$ has no finite poles because $h$ has only ``simple'' poles (i.e., all Puiseux
-expansions of $h$ have only exponents $\geq-1$).
+It is clear that $H$ has no finite poles because $h$ has at most ``simple'' poles
+(i.e., all Puiseux expansions of $h$ have only exponents $\geq-1$).
+This follows from the facts that the $\omega_i$ are integral and that
+the coefficients of~$h$ have squarefree denominators.
 
-We will show below that when $H$ has a pole at infinity, then also $g+H$ must
-have a pole at infinity.  Since $f=g'+h=(g+H)'$ has at least a double root at
-infinity, $g+H$ has at least a single root at infinity. This excludes the
-possibility that $H$ has a pole at infinity.
-
-Assume now that $H$ has a pole at infinity. We show that $g+H$ has also a pole at infinity.
-Since $H$ has no finite poles, $H$ is integral and we can write it as
-$H=p_1\omega_1+\cdots+p_n\omega_n$ with $p_i\in K[x]$.
-Since we assume that $H$ has a pole at infinity, it follows by Lemma~\ref{lemma:3}{\red (manuel, please keep the
-Lemma 4 about the normality at the infinity in your part)} that
-(a) one of the $p_i$ has positive degree or
-(b) some non-constant $\omega_i$ has a nonzero coefficient~$p_i$.
-From how the Hermite reduction works, we know that $g=\sum_i g_i\omega_i$
-with proper rational functions~$g_i$. Consider now $g+H=\sum_i (g_i+p_i)\omega_i$.
-In case (a) there is some $i$ for which $g_i+p_i$ has a pole at infinity,
-and thus $(g_i+p_i)\omega_i$ has a pole at infinity (because $\omega_i$ has
-no poles at finite places and therefore no zero at infinity).
-In case (b), there is some $i$ with $p_i\neq0$ and $\omega_i$ is non-constant,
-which implies that $(g_i+p_i)\omega_i$ has a pole at infinity.
-In both cases, therefore, $g+H$ has a pole at infinity by Lemma~\ref{lemma:3}.
+If $H$ has a pole at infinity, then by Lemma~\ref{lemma:pole_at_inf} also
+$g+H$ must have a pole at infinity; recall that the Hermite reduction produces
+$g=\sum_i g_i\omega_i$ with proper rational functions~$g_i$. This contradicts
+the assumption that $f=g'+h=(g+H)'$ has at least a double root at infinity,
+because the latter implies that $g+H$ has at least a single root at infinity.
 \end{proof}
 
 Note that the condition in Theorem~\ref{thm:intiff0} that $f$ has a double
 root at infinity is not a restriction at all, as it can always be achieved by
-a suitable change of variables. Let $a\in C$ be a regular point of~$L$; by
-the transformation $x\to a+1/x$ the regular point~$a$ is moved to
-infinity. From
+a suitable change of variables. Let $a\in C$ be a regular point; this means
+that $f$ has neither a pole nor a branch point at~$a$. By the transformation
+$x\to a+1/x$ the regular point~$a$ is moved to infinity. From
 \[
   \int f(x) \,\mathrm{d}x = \int f\left(\frac{1}{x}+a\right)\left(-\frac{1}{x^2}\right) \mathrm{d}x
 \]
 we see that the new integrand has a double root at infinity.
 
 Moreover, since the action of $\partial_t$ on series domains is defined coefficient-wise,
-it follows that when $f$ has (at least) a double root at infinity (with respect to~$x$),
+it follows that when $f$ has at least a double root at infinity (with respect to~$x$),
 this is also true for $\partial_t\cdot f, \partial_t^2\cdot f, \partial_t^3\cdot f,\dots$,
 and then also for every $K$-linear combination $p_0f+p_1\partial_tf+\cdots+p_r\partial_t^rf$.
-This means that $p_0+p_1\partial_t+\cdots+p_r\partial_t^r$ is a telescoper for $f$ if
+Thus Theorem~\ref{thm:intiff0} implies that $p_0+p_1\partial_t+\cdots+p_r\partial_t^r$ is a telescoper for $f$ if
 \emph{and only if} $[p_0+p_1\partial_t+\cdots+p_r\partial_t^r]=0$.
 
 We already know for other reasons~\cite{Zeilberger1990,chyzak00,chen12d} that
@@ -549,7 +564,9 @@ applied to an integrand $f\in A$ that has a double root at infinity. Again, if
 $f$ has no double root at infinity, we can produce one by a change of variables.
 In particular, the method finds a telescoper of smallest possible order.
 
-{\red it will be nice to have an example here!...}
+\begin{example}
+TODO: {\red it will be nice to have an example here!...}
+\end{example}
 
 
 \section{Polynomial Reduction}\label{sec:polynomial}

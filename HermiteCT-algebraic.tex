@@ -179,7 +179,7 @@ The second way consists in showing that $\{\,[f]:f\in D\,\}$ is a finite-dimensi
 $\mathrm{Const}_x(D)$. This approach was taken in~\cite{BCCL2010,bostan13a}. It has the
 nice additional feature that every bound for the dimension of this vector space
 gives rise to a bound for the order of the telescoper. In particular, it implies
-the existence of a telescoper. 
+the existence of a telescoper.
 
 In this paper, we show that Trager's Hermite reduction for algebraic
 functions directly gives rise to a reduction-based creative telescoping
@@ -195,49 +195,49 @@ of the integrand, a given creative telescoping problem can be reduced to a creat
 telescoping problem for a function with no residues, which may be much smaller than the
 original function. For this smaller function, however, they still need to construct a
 certificate. The algorithms presented in the present paper are the first which can find
-telescopers for algebraic functions without also constructing corresponding certificates. 
+telescopers for algebraic functions without also constructing corresponding certificates.
 
 \section{Algebraic Functions}
 
-Throughout the paper, let $C$ be a field, $K=C(t)$, and $\bar K$ the algebraic closure of~$K$.
+Throughout the paper, let $C$ be a field of characteristic zero, $K=C(t)$, and $\bar K$ the algebraic closure of~$K$.
 We consider algebraic functions over~$K$.  For some absolutely irreducible
 polynomial $m\in K[x,y]$, we consider the field
 $A=K(x)[y]/\<m>$. If $n=\deg_ym$, then ever element of $A$ can be written uniquely in the form
 $f=f_0+f_1y+\cdots+f_{n-1}y^{n-1}$ for some $f_0,\dots,f_{n-1}\in K(x)$.
 
-The element $y\in A$ is a solution of the equation $m=0$, 
-because in $A$ we have $m=0$ by construction. The polynomial $m$ also admits 
+The element $y\in A$ is a solution of the equation $m=0$,
+because in $A$ we have $m=0$ by construction. The polynomial $m$ also admits
 $n$ distinct solutions in the field
 \[
   \bar K\<x-a>:=\bigcup_{r\in\set N\setminus\{0\}} \bar K((\ (x-a)^{1/r}\ ))
 \]
-of formal Puiseux series around $a\in\bar K$. There are also $n$ distinct 
-solutions in the field 
+of formal Puiseux series around $a\in\bar K$. There are also $n$ distinct
+solutions in the field
 \[
-  \bar K\<x^{-1}>:=\bigcup_{r\in\set N\setminus\{0\}} x^{-\nu}\bar K((x^{-1/r}))
+  \bar K\<x^{-1}>:=\bigcup_{r\in\set N\setminus\{0\}} \bar K((x^{-1/r}))
 \]
-of formal Puiseux series around~$\infty$. 
-Since $\bar K\<x^{-1}>$ and the $\bar K\<x-a>$ are fields, we can associate to every 
-$f\in A$ and every $a\in\bar K\cup\{\infty\}$ in a natural way $n$ distinct series 
+of formal Puiseux series around~$\infty$.
+Since $\bar K\<x^{-1}>$ and the $\bar K\<x-a>$ are fields, we can associate to every
+$f\in A$ and every $a\in\bar K\cup\{\infty\}$ in a natural way $n$ distinct series
 objects with fractional exponents, by plugging any of the $n$ distinct series solutions
-of $m$ into the representation $f=f_0+\cdots+f_{n-1}y^{n-1}$. 
+of $m$ into the representation $f=f_0+\cdots+f_{n-1}y^{n-1}$.
 In other words, for every $a\in\bar K\cup\{\infty\}$ there are $n$ distinct natural
-ring homomorphisms from $A$ to $K\<x-a>$ or $K\<x^{-1}>$, respectively. 
+ring homomorphisms from $A$ to $K\<x-a>$ or $K\<x^{-1}>$, respectively.
 
 In the field $A$ as well as the fields $\bar K\<x-a>$ and $\bar K\<x^{-1}>$, we have
 natural differentiations with respect to~$x$. For a series, differentiation is defined
 termwise using the usual rules $\bigl((x-a)^{\nu+n}\bigr)'=(\nu+n)(x-a)^{\nu+n-1}$ and
-$\bigl((x^{-1})^{\nu+n}\bigr)'=-(\nu+n)(x^{-1})^{\nu+n+1}$. For the elements of~$A$, note 
-first that $m(x,y)=0$ implies 
-\[m(x,y)'=(\frac d{dx}m)(x,y) + (\frac d{dy}m)(x,y)y' = 0,\] 
+$\bigl((x^{-1})^{\nu+n}\bigr)'=-(\nu+n)(x^{-1})^{\nu+n+1}$. For the elements of~$A$, note
+first that $m(x,y)=0$ implies
+\[m(x,y)'=(\frac d{dx}m)(x,y) + (\frac d{dy}m)(x,y)y' = 0,\]
 so $y'=-(\frac d{dx}m)(x,y)/(\frac d{dy}m)(x,y)$. Regarding $m$ as element of $K(x)[y]$
-and observing that $0<\deg_y\frac d{dy}m<n$, we have $\gcd(m,\frac d{dy}m)=1$ in $K(x)[y]$, 
-so $\frac{d}{dy}m$ is invertible in $A=K(x)[y]/\<m>$. 
-Note that we have $x'=1$ and $c'=0$ for all $c\in K=C(t)$, in particular $t'=0$. 
-The derivative of an arbitrary 
+and observing that $0<\deg_y\frac d{dy}m<n$, we have $\gcd(m,\frac d{dy}m)=1$ in $K(x)[y]$,
+so $\frac{d}{dy}m$ is invertible in $A=K(x)[y]/\<m>$.
+Note that we have $x'=1$ and $c'=0$ for all $c\in K=C(t)$, in particular $t'=0$.
+The derivative of an arbitrary
 element $f\in A$, say $f=p(x,y)$ for some $p\in K(x)[y]$ of degree less than~$n$, is
-$f'=(\frac{d}{dx}p)(x,y)+(\frac d{dy}p)(x,y)y'$. 
-We have an action of the algebra $K(x)[\partial_x]$ of differential operators on~$A$. 
+$f'=(\frac{d}{dx}p)(x,y)+(\frac d{dy}p)(x,y)y'$.
+We have an action of the algebra $K(x)[\partial_x]$ of differential operators on~$A$.
 
 The derivations on $A$ and on the series domains are compatible in the sense
 that for every $f\in A$, the series associated to $f'$ are precisely the
@@ -248,10 +248,10 @@ respect to~$t$. The action of $K(x)[\partial_x]$ on $A$ and on the series domain
 is extended to an action of $K(x)[\partial_x,\partial_t]$ on $A$ and on the series
 domains. On $A$, the action of $\partial_t$ is defined as the unique derivation with
 $\partial_t\cdot t=1$ and $\partial_t\cdot x=0$, analogously to the construction
-above. For the series domains, $\partial_t$ acts on the coefficients 
+above. For the series domains, $\partial_t$ acts on the coefficients
 (which are elements of $\bar K$) in the natural way, and does not affect~$x$.
-Since each particular element $c\in\bar K$ belongs to a finite algebraic extension of~$K$, 
-the result $\partial_t\cdot c$ is uniquely determined. 
+Since each particular element $c\in\bar K$ belongs to a finite algebraic extension of~$K$,
+the result $\partial_t\cdot c$ is uniquely determined.
 The actions of the larger operator algebra
 $K(x)[\partial_x,\partial_t]$ on $A$ and on the series domains are compatible to
 each other.
@@ -262,7 +262,7 @@ with respect to~$x$, not with respect to~$t$.
 \medskip
 
 Trager's Hermite reduction for algebraic functions rests on the notion of
-integral bases. Let us recall the relevant definitions and properties. 
+integral bases. Let us recall the relevant definitions and properties.
 Although the elements of a Puiseux series ring $\bar K\<x-a>$ are formal
 objects, the series notation suggests certain analogies with complex
 functions. Terms $(x-a)^\alpha$ or $(\tfrac1x)^\alpha$ are
@@ -270,7 +270,7 @@ called \emph{integral} if $\alpha\geq0$. A series in
 $\bar K\<x-a>$ or $\bar K\<x^{-1}>$ is called integral if it only contains integral
 terms. A non-integral series is said to have a \emph{pole} at the reference
 point. Note that in this terminology also $1/\sqrt{x}$ has a ``pole''
-at~$0$. Note also that the terminology only refers to $x$ but not to~$t$. 
+at~$0$. Note also that the terminology only refers to $x$ but not to~$t$.
 
 Integrality at $a\in\bar K$ is not preserved by differentiation,
 but if $f$ is integral at~$a$, then so is $(x-a)f'$. Somewhat conversely,
@@ -280,14 +280,14 @@ integral at infinity.
 
 An element $f\in A=K(x)[y]/\<m>$
 is called (locally) integral at $a\in\bar K\cup\{\infty\}$ if for every series
-associated to $y$ the corresponding series for $f$ is integral. 
+associated to $y$ the corresponding series for $f$ is integral.
 The element $f$ is called (globally) integral if it is locally integral at every
 $a\in\bar K$ (``at all finite places'').
 This is the case if and only if the minimal polynomial of $f$ in $K[x,y]$ is monic
 with respect to~$y$.
-Because of Chevalley's theorem~\cite[page 9, Corollary 3]{Chevalley1951}, any 
-non-constant algebraic function has at least one pole. Therefore, an element $f$ is 
-integral at all $a\in\bar K\cup\{\infty\}$ if and only if it is constant. 
+Because of Chevalley's theorem~\cite[page 9, Corollary 3]{Chevalley1951}, any
+non-constant algebraic function has at least one pole. Therefore, an element $f$ is
+integral at all $a\in\bar K\cup\{\infty\}$ if and only if it is constant.
 
 For an element $f\in A$ to have a ``pole'' at $a\in\bar K\cup\{\infty\}$ means
 that $f$ is not locally integral at~$a$; to have a ``double pole'' at $a$ means
@@ -304,7 +304,7 @@ rational functions $p/q$ with $\deg_x(p)\leq\deg_x(q)$.
 Then the set of all $f\in A$ which are locally integral at some
 fixed $a\in\bar K\cup\{\infty\}$ forms a $\bar K(x)_a$-module. A basis of this module is
 called a \emph{local integral basis} at $a$ for~$A$. Also local integral bases can
-be computed. 
+be computed.
 
 An integral basis $\{\omega_1,\dots,\omega_n\}$ is always also a $K(x)$-vector space
 basis of~$A$. A key feature of integral bases is that they make poles explicit. Writing
@@ -351,7 +351,7 @@ $\sum_{i=1}^n f_i\omega_i$ have no chance to cancel each other.
 \end{proof}
 
 \begin{lemma} \label{lemma:degM}
-  Let $\{\omega_1,\dots,\omega_n\}$ be a local integral basis at infinity of~$A$. 
+  Let $\{\omega_1,\dots,\omega_n\}$ be a local integral basis at infinity of~$A$.
   Let $e\in K[x]$ and $M=((m_{i,j}))_{i,j=1}^n\in K[x]^{n\times n}$
   be defined as in Lemma~\ref{lemma:e}. Then $\deg_x(m_{i,j})<\deg_x(e)$ for all $i,j$.
 \end{lemma}
@@ -367,7 +367,7 @@ called \emph{normal} at $a\in\bar K\cup\{\infty\}$ if there exist $r_1,\dots,r_n
 K(x)$ such that $r_1\omega_1,\dots,r_n\omega_n$ is a local integral basis
 at~$a$. Trager shows how to construct
 an integral basis which is normal at infinity from a given integral basis and
-a given local integral basis at infinity~\cite{trager84}. 
+a given local integral basis at infinity~\cite{trager84}.
 
 Although normality is a somewhat weaker condition on a basis than integrality,
 it also excludes the possibility that poles in the terms of a linear combination
@@ -418,7 +418,7 @@ form a local integral basis at each root of~$v$~\cite[page 46]{trager84}.
 By a repeated application of such reduction steps, one can decompose any $f\in A$
 as $f=g' + h$ where the denominators of the coefficients of $h$ are squarefree
 and the coefficients of $g$ are proper rational functions (i.e., their numerators
-have smaller degree than their denominators). 
+have smaller degree than their denominators).
 
 
 \begin{example}\label{ex:hr}
@@ -468,7 +468,7 @@ f=
 
 It was observed that Hermite reduction itself often takes less time than the construction
 of an integral basis. If Hermite reduction is applied to some other basis instead
-of an integral basis, it either succeeds or it runs into a division by zero. 
+of an integral basis, it either succeeds or it runs into a division by zero.
 Bronstein~\cite{bronstein98a} noticed that when a division by zero occurs, then the basis can
 be replaced by some other basis that is a little closer to an integral basis, just
 as much as is needed to avoid this particular division by zero. After finitely many
@@ -485,7 +485,7 @@ ensure that the method terminates.
 As also explained already in the introduction, one possibility consists in
 showing that $[f]=0$ whenever $f$ is integrable. Trager showed that his
 Hermite reduction has this property~\cite[page 50, Theorem 1]{trager84}.
-For the sake of completenes, we reproduce his proof here. 
+For the sake of completenes, we reproduce his proof here.
 
 \begin{lemma}\label{lemma:pole_at_inf}
 Let $W=\{\omega_1,\dots,\omega_n\}$ be an integral basis for $A$ that is normal at
@@ -568,7 +568,7 @@ applied to an integrand $f\in A$ that has a double root at infinity.
 In particular, the method finds a telescoper of smallest possible order.
 Again, if $f$ has no double root at infinity, we can produce one by a change of variables.
 Note that a change of variables $x\to a+1/x$ with $a\in C$ has no affect on
-the telescoper. 
+the telescoper.
 
 \begin{example}
 TODO: {\red it will be nice to have an example here!...}

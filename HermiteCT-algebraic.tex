@@ -901,9 +901,37 @@ Now we can find a linear dependence that gives rise to the telescoper
 $t^2\partial_t^2-t\partial_t+1$, which is indeed the minimal one for this example.
 \end{example}
 
-\section{Conclusion}
+\section{The D-finite Case}
 
-{\red To add some partial idea for fuchsian D-finite functions.}
+With algebraic functions being settled, it is natural to wonder about a possible
+reduction-based creative telescoping algorithm for D-finite functions. Recall
+that in this setting we consider an operator $L\in K(x)[\partial_x]$ instead of a minimal
+polynomial $m\in K[x,y]$ and instead of an algebraic field extension
+$K(x)[y]/\<m>$ we consider the $K(x)[\partial_x]$-left-module
+$A=K(x)[\partial_x]/\<L>$. Then the element $1\in A$ is a solution of $L$
+because $L\cdot 1=L=0$ in $A$ by construction. If $n=\deg_{\partial_x}L$, then
+the general element of $A$ has the form
+$f=f_0+f_1\partial_x+\cdots+f_{n-1}\partial_x^{n-1}$ for some
+$f_0,\dots,f_{n-1}\in K(x)$. Very much as in the algebraic case, there is a natural way
+to associate certain series objects to the elements of~$A$. Based on these
+series objects, a notion of integrality was proposed last year~\cite{kauers15b}, and an
+algorithm for computing integral basis has been given for so-called fuchsian
+operators~$L$.
+
+It turns out that the Hermite reduction of Section~\ref{sec:hermite} also works in this setting, if we say that
+a term $(x-a)^\alpha\log(x)^\beta$ in a generalized series solution is integral if and only if $\alpha\geq0$.
+Note that then $\log(x)$ will then be considered integral at zero, despite the singularity of the complex
+function at this point. This has the somewhat counterintuitive consequence that $\log(x)$ is integral at
+every $a\in\bar K\cup\{\infty\}$ although it does not have a pole anywhere. For algebraic functions,
+this is not possible by Chevalley's theorem, and this fact enters in an essential way in the proofs of
+Sections~\ref{SECT:CT-1} and~\ref{sec:polynomial}. The lack of Chevalley's theorem is not an artefact of a (possibly
+wrong) treatment of logarithmic terms. Because of the Fuchs relation \cite[p.~241]{schlesinger95} there exist operators
+$L\in K(x)[\partial_x]$ whose series solutions at every point $a\in\bar K\cup\{\infty\}$ have no logarithmic
+terms, only nonnegative exponents, and which are nevertheless not constant. 
+
+For the time being, the possibility of such operators are a severe obstruction to a possible generalization of
+the termination arguments for reduction-based creative telescoping from algebraic functions to Fuchsian D-finite
+functions. We hope to explore this topic further in the future. 
 
 \section*{Acknowledgements}
 

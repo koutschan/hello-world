@@ -98,7 +98,7 @@ Shaoshi Chen$^{1,2}$, \, Manuel Kauers$^{3}$, \, Christoph Koutschan$^{4}$ \\
 \begin{abstract}
 Continuing a series of articles in the past few years on creative telescoping using reductions,
 we develop a new algorithm to construct minimal telescopers for algebraic functions. This algorithm is
-based on Trager's Hermite reduction and polynomial reduction, which was originally designed for
+based on Trager's Hermite reduction and on polynomial reduction, which was originally designed for
 hyperexponential functions and extended to the algebraic case in this paper.
 \end{abstract}
 
@@ -122,8 +122,8 @@ find $g=-1/x$, while for $f=1/x$ no suitable $g$ exists. When no $g$ exists
 in~$D$, there are several other questions we may ask. One possibility is to ask
 whether there is some extension~$E$ of $D$ such that in $E$ there exists some
 $g$ with $g'=f$. For example, in the case of elementary functions, Liouville's
-principle restricts the possible extensions~$E$, and algorithms have been
-designed to construct these extensions whenever possible. Another possibility is
+principle restricts the possible extensions~$E$, and there are algorithms which
+construct such extensions whenever possible. Another possibility is
 to ask whether for some modification $\tilde f\in D$ of~$f$ there exists a $g\in
 D$ such that $\tilde f=g'$. Creative telescoping is a question of this
 type. Here we are dealing with domains~$D$ containing functions in several
@@ -165,12 +165,7 @@ $[p_0 f + \cdots + p_r \partial_t^r\cdot f] = 0$,
 and then, by definition of $[\cdot]$, there exists a $g\in D$ such that $(p_0+\cdots + p_r\partial_t^r)\cdot f=g'$.
 In other words, $P=p_0+\cdots + p_r\partial_t^r$ is a telescoper.
 
-There are two ways to guarantee that this method terminates. The first consists in
-showing that $\{\,[f]:f\in D\,\}$ is a finite-dimensional vector space over
-$\mathrm{Const}_x(D)$. This approach was taken in~\cite{BCCL2010,bostan13a}. It has the
-nice additional feature that every bound for the dimension of this vector space
-gives rise to a bound for the order of the telescoper. In particular, it implies
-the existence of a telescoper. The second way requires that we already know for
+There are two ways to guarantee that this method terminates. The first requires that we already know for
 other reasons that a telescoper exists. The idea is then to show that the
 reduction $[\cdot]$ has the property that when $f\in D$ is such that there
 exists a $g\in D$ with $g'=f$, then $[f]=0$. If this is the case and
@@ -180,38 +175,46 @@ linearly dependent over $\mathrm{Const}_x(D)$. This means that the method won't
 miss any telescoper. In particular, this argument has the nice feature that we
 are guaranteed to find a telescoper of smallest possible order~$r$. This
 approach was taken in~\cite{chen15a}.
+The second way consists in showing that $\{\,[f]:f\in D\,\}$ is a finite-dimensional vector space over
+$\mathrm{Const}_x(D)$. This approach was taken in~\cite{BCCL2010,bostan13a}. It has the
+nice additional feature that every bound for the dimension of this vector space
+gives rise to a bound for the order of the telescoper. In particular, it implies
+the existence of a telescoper. 
 
-In this paper, we will show that Trager's Hermite reduction for algebraic
+In this paper, we show that Trager's Hermite reduction for algebraic
 functions directly gives rise to a reduction-based creative telescoping
 algorithm via the first approach (Section~\ref{SECT:CT-1}). We will combine Trager's Hermite reduction
-with a second reduction (Section~\ref{sec:polynomial}) to obtain a reduction-based creative
+with a second reduction, called polynomial reduction, (Section~\ref{sec:polynomial}) to obtain a reduction-based creative
 telescoping algorithm for algebraic functions via the second approach (Section~\ref{SECT:CT-2}).
 This gives a new proof of a bound for the order of the telescopers, and in
 particular an independent proof for their existence.
 
-// TODO: THIS PAPER IMPROVES CHEN-KAUERS-SINGER. 
+A few years ago, Chen et al.~\cite{chen12d} have already considered the problem of creative
+telescoping for algebraic functions. They have pointed out that by canceling residues
+of the integrand, a given creative telescoping problem can be reduced to a creative
+telescoping problem for a function with no residues, which may be much smaller than the
+original function. For this smaller function, however, they still need to construct a
+certificate. The algorithms presented in the present paper are the first which can find
+telescopers for algebraic functions without also constructing corresponding certificates. 
 
 \section{Algebraic Functions}
 
-% // MK: WE SHOULD REPLACE $\bar C$ BY $\bar K$ THROUGHOUT. DONE.
-
-Let $C$ be a field, let $K$ be some field containing the rational function 
-field~$C(t)$, and let $\bar K$ some algebraically closed field containing~$K$.  We
-consider algebraic functions over~$K$.  For some absolutely irreducible
+Throughout the paper, let $C$ be a field, $K=C(t)$, and $\bar K$ the algebraic closure of~$K$.
+We consider algebraic functions over~$K$.  For some absolutely irreducible
 polynomial $m\in K[x,y]$, we consider the field
-$A=K(x)[y]/\<m>$. Elements of $A$ can be written uniquely in the form
-$f=f_0+f_1y+\cdots+f_{n-1}y^{n-1}$ for some $f_0,\dots,f_{n-1},d\in K(x)$.
+$A=K(x)[y]/\<m>$. If $n=\deg_ym$, then ever element of $A$ can be written uniquely in the form
+$f=f_0+f_1y+\cdots+f_{n-1}y^{n-1}$ for some $f_0,\dots,f_{n-1}\in K(x)$.
 
 The element $y\in A$ is a solution of the equation $m=0$, 
 because in $A$ we have $m=0$ by construction. The polynomial $m$ also admits 
 $n$ distinct solutions in the field
 \[
-  \bar K\<x-a>:=\bigcup_{\nu\in Q} (x-a)^\nu\bar K[[x-a]]
+  \bar K\<x-a>:=\bigcup_{r\in\set N\setminus\{0\}} \bar K((\ (x-a)^{1/r}\ ))
 \]
 of formal Puiseux series around $a\in\bar K$. There are also $n$ distinct 
 solutions in the field 
 \[
-  \bar K\<x^{-1}>:=\bigcup_{\nu\in Q} x^{-\nu}\bar K[[x^{-1}]]
+  \bar K\<x^{-1}>:=\bigcup_{r\in\set N\setminus\{0\}} x^{-\nu}\bar K((x^{-1/r}))
 \]
 of formal Puiseux series around~$\infty$. 
 Since $\bar K\<x^{-1}>$ and the $\bar K\<x-a>$ are fields, we can associate to every 
@@ -221,7 +224,7 @@ of $m$ into the representation $f=f_0+\cdots+f_{n-1}y^{n-1}$.
 In other words, for every $a\in\bar K\cup\{\infty\}$ there are $n$ distinct natural
 ring homomorphisms from $A$ to $K\<x-a>$ or $K\<x^{-1}>$, respectively. 
 
-In the fields $A$ as well as the fields $\bar K\<x-a>$ and $\bar K\<x^{-1}>$, we have
+In the field $A$ as well as the fields $\bar K\<x-a>$ and $\bar K\<x^{-1}>$, we have
 natural differentiations with respect to~$x$. For a series, differentiation is defined
 termwise using the usual rules $\bigl((x-a)^{\nu+n}\bigr)'=(\nu+n)(x-a)^{\nu+n-1}$ and
 $\bigl((x^{-1})^{\nu+n}\bigr)'=-(\nu+n)(x^{-1})^{\nu+n+1}$. For the elements of~$A$, note 
@@ -230,10 +233,10 @@ first that $m(x,y)=0$ implies
 so $y'=-(\frac d{dx}m)(x,y)/(\frac d{dy}m)(x,y)$. Regarding $m$ as element of $K(x)[y]$
 and observing that $0<\deg_y\frac d{dy}m<n$, we have $\gcd(m,\frac d{dy}m)=1$ in $K(x)[y]$, 
 so $\frac{d}{dy}m$ is invertible in $A=K(x)[y]/\<m>$. 
-Note that we have $c'=0$ for all $c\in K=C(t)$, in particular $t'=0$. 
+Note that we have $x'=1$ and $c'=0$ for all $c\in K=C(t)$, in particular $t'=0$. 
 The derivative of an arbitrary 
-element $f\in A$, say $f=P(x,y)$ for some $P\in K(x)[y]$ of degree less than~$n$, is
-$f'=(\frac{d}{dx}P)(x,y)+(\frac d{dy}P)(x,y)y'$. 
+element $f\in A$, say $f=p(x,y)$ for some $p\in K(x)[y]$ of degree less than~$n$, is
+$f'=(\frac{d}{dx}p)(x,y)+(\frac d{dy}p)(x,y)y'$. 
 We have an action of the algebra $K(x)[\partial_x]$ of differential operators on~$A$. 
 
 The derivations on $A$ and on the series domains are compatible in the sense
@@ -246,13 +249,15 @@ is extended to an action of $K(x)[\partial_x,\partial_t]$ on $A$ and on the seri
 domains. On $A$, the action of $\partial_t$ is defined as the unique derivation with
 $\partial_t\cdot t=1$ and $\partial_t\cdot x=0$, analogously to the construction
 above. For the series domains, $\partial_t$ acts on the coefficients 
-(which are elements of $\bar K$) in the natural way, but does not affect the monomials.
+(which are elements of $\bar K$) in the natural way, and does not affect~$x$.
 Since each particular element $c\in\bar K$ belongs to a finite algebraic extension of~$K$, 
 the result $\partial_t\cdot c$ is uniquely determined. 
-
-With this setup, also the actions of the larger operator algebra
+The actions of the larger operator algebra
 $K(x)[\partial_x,\partial_t]$ on $A$ and on the series domains are compatible to
 each other.
+
+In this paper, the notation $f'$ will always refer to the derivative $\partial_x\cdot f$
+with respect to~$x$, not with respect to~$t$.
 
 \medskip
 
@@ -275,12 +280,11 @@ integral at infinity.
 
 An element $f\in A=K(x)[y]/\<m>$
 is called (locally) integral at $a\in\bar K\cup\{\infty\}$ if for every series
-associated to $y$ in $\bar K\<x-a>$ or $\bar K \<x^{-1}>$, respectively, 
-the corresponding series for $f$ is integral. 
-This is the case if and only if the minimal polynomial of $f$ in $K[x,y]$ is monic
-with respect to~$y$.
+associated to $y$ the corresponding series for $f$ is integral. 
 The element $f$ is called (globally) integral if it is locally integral at every
 $a\in\bar K$ (``at all finite places'').
+This is the case if and only if the minimal polynomial of $f$ in $K[x,y]$ is monic
+with respect to~$y$.
 Because of Chevalley's theorem~\cite[page 9, Corollary 3]{Chevalley1951}, any 
 non-constant algebraic function has at least one pole. Therefore, an element $f$ is 
 integral at all $a\in\bar K\cup\{\infty\}$ if and only if it is constant. 
@@ -293,7 +297,7 @@ and so on.
 
 The set of all globally integral elements $f\in A$ forms a $K[x]$-submodule of~$A$.
 A basis $\{\omega_1,\dots,\omega_n\}$ of this module is called an \emph{integral basis}
-for~$A$. Such bases exist, and algorithms are known for computing them~\cite{trager84,vanHoeij94}.
+for~$A$. Such bases exist, and algorithms are known for computing them~\cite{trager84,Rybowicz:1991:ACI:120694.120715,vanHoeij94}.
 For a fixed $a\in\bar K$, let $\bar K(x)_a$ be the ring of rational functions $p/q$
 with $q(a)\neq0$, and write $\bar K(x)_\infty$ for the ring of all
 rational functions $p/q$ with $\deg_x(p)\leq\deg_x(q)$.
@@ -314,7 +318,7 @@ of the $f_i$ has a pole there.
   Then $f$ is integral at $a$ if and only if each $f_i\omega_i$ is integral at~$a$.
 \end{lemma}
 \begin{proof}
-  The direction ``$\Rightarrow$'' is obvious. To show ``$\Leftarrow$'', suppose
+  The direction ``$\Leftarrow$'' is obvious. To show ``$\Rightarrow$'', suppose
   that $f$ is integral at~$a$. Then there exist $w_1,\dots,w_n\in\bar K(x)_a$ such that
   $f=\sum_{i=1}^nw_i\omega_i$. Thus $\sum_{i=1}^n(w_i-f_i)\omega_i=0$, and then
   $w_i=f_i$ for all $i$, because $\omega_1,\dots,\omega_n$ is a vector space basis of~$A$.
@@ -336,7 +340,7 @@ $\sum_{i=1}^n f_i\omega_i$ have no chance to cancel each other.
   Then $e$ is square-free.
 \end{lemma}
 \begin{proof}
-  Let $a$ be a root of~$e$. We show that $a$ is not a multiple root.
+  Let $a\in\bar K$ be a root of~$e$. We show that $a$ is not a multiple root.
   Since $\omega_i$ is integral, it is in particular locally integral at~$a$.
   Therefore $(x-a)\omega_i'$ is locally integral at~$a$.
   Since $\omega_1,\dots,\omega_n$ is an integral basis, it follows that
@@ -358,7 +362,7 @@ $\sum_{i=1}^n f_i\omega_i$ have no chance to cancel each other.
   for all~$i,j$, and therefore $\deg_x(m_{i,j})<\deg_x(e)$, as claimed.
 \end{proof}
 
-A $K(x)$-vector space basis $\omega_1,\dots,\omega_n$ of $A$ is
+A $K(x)$-vector space basis $\{\omega_1,\dots,\omega_n\}$ of $A$ is
 called \emph{normal} at $a\in\bar K\cup\{\infty\}$ if there exist $r_1,\dots,r_n\in
 K(x)$ such that $r_1\omega_1,\dots,r_n\omega_n$ is a local integral basis
 at~$a$. Trager shows how to construct
@@ -370,7 +374,7 @@ it also excludes the possibility that poles in the terms of a linear combination
 of basis elements can cancel:
 
 \begin{lemma}\label{lemma:3}
-  Let $\{\omega_1,\dots,\omega_n\}$ be an integral basis of~$A$
+  Let $\{\omega_1,\dots,\omega_n\}$ be a basis of~$A$
   which is normal at some $a\in\bar K\cup\{\infty\}$.
   Let $f=\sum_{i=1}^n f_i\omega_i$ for some $f_1,\dots,f_n\in K(x)$.
   Then $f$ has a pole at $a$ if and only if
@@ -385,20 +389,7 @@ of basis elements can cancel:
 
 \section{Hermite Reduction}\label{sec:hermite}
 
-% MK: MAYBE THE WHOLE PARAGRAPH CAN BE DROPPED.
-%Hermite reduction was first introduced by Hermite in~\cite{Hermite1872} for rational functions.
-%This reduction was later extended to liouvillean functions by Risch~\cite{Risch1969,BronsteinBook},
-%and to algebraic functions by Trager~\cite{trager84}. 
-%%% MK: AS FAR AS HERMITE REDUCTION IS CONCERNED, THIS IS A SPECIAL CASE OF RISCH, ISN'T IT? 
-%%% and to hyperexponential functions by~\cite{bostan13a}. 
-%These generalizations are the key step in many integration
-%algorithms, including the telescoping algorithm presented in this paper.
-
 We now recall the Hermite reduction for algebraic functions~\cite{trager84,ACA1992,bronstein98}.
-%MK: DELETED THE FOLLOWING THREE LINES BECAUSE THEY ARE ALREADY GLOBALLY DEFINED IN THE PREVIOUS SECTION.
-%Let~$A= K(x, y)$ be a finite algebraic extension of~$K(x)$ with $y$ satisfying
-%the algebraic equation~$p(x, y)=0$, where~$p\in K[x, y]$ is an irreducible
-%polynomial over~$K(x)$ of degree $n$.
 Let $\{\omega_1,\ldots,\omega_n\}$ be an integral basis for~$A$.
 Further let $e, m_{i,j}\in K[x]$ ($1\leq i,j\leq n$) be such that
 $e\omega_i'=\sum_{j=1}^n m_{i,j}\omega_i$ and
@@ -410,7 +401,7 @@ $f=g' + h$ and $h=\sum_{i=1}^n(h_i/d^\ast)\,\omega_i$ with $h_1,\ldots,h_n\in K[
 and $d^\ast$ denoting the squarefree part of~$d$.
 As differentiating the $\omega_i$ can introduce
 denominators, name\-ly the factors of~$e$, it is convenient to consider those
-denominators from the very beginning on, and this means that we want to assume
+denominators from the very beginning on, which means that we shall assume
 $e\mid d$. Note that $\gcd(d,f_1,\ldots,f_n)$ can then be nontrivial.
 Let~$v\in K[x]$ be a nontrivial squarefree factor of~$d$ of multiplicity~$\mu>1$.
 Then~$d = uv^\mu$ for some $u\in K[x]$ with $\gcd(u, v)=1$ and $\gcd(v,v')=1$.
@@ -425,7 +416,9 @@ The existence of such~$g_i$'s and~$h_i$'s follows from the crucial fact that
 the elements $s_i :=  uv^\mu(v^{1-\mu}\omega_i)'$ with $i\in \{ 1, \ldots, n\}$
 form a local integral basis at each root of~$v$~\cite[page 46]{trager84}.
 By a repeated application of such reduction steps, one can decompose any $f\in A$
-as $f=g' + h$ where the denominators of the coefficients of $h$ are squarefree.
+as $f=g' + h$ where the denominators of the coefficients of $h$ are squarefree
+and the coefficients of $g$ are proper rational functions (i.e., their numerators
+have smaller degree than their denominators). 
 
 
 \begin{example}\label{ex:hr}
@@ -473,7 +466,7 @@ f=
 \]
 \end{example}
 
-It was observed that Hermite reduction often takes less time than the construction
+It was observed that Hermite reduction itself often takes less time than the construction
 of an integral basis. If Hermite reduction is applied to some other basis instead
 of an integral basis, it either succeeds or it runs into a division by zero. 
 Bronstein~\cite{bronstein98a} noticed that when a division by zero occurs, then the basis can
@@ -495,8 +488,7 @@ Hermite reduction has this property~\cite[page 50, Theorem 1]{trager84}.
 For the sake of completenes, we reproduce his proof here. 
 
 \begin{lemma}\label{lemma:pole_at_inf}
-Let $A$ be an algebraic extension of~$K(x)$ and let
-$B=\{\omega_1,\dots,\omega_n\}$ be an integral basis for $A$ that is normal at
+Let $W=\{\omega_1,\dots,\omega_n\}$ be an integral basis for $A$ that is normal at
 infinity. Let $g=\sum_{i=1}^ng_i\omega_i\in A$ be such that all its
 coefficients $g_i\in K(x)$ are proper rational functions. If an integral
 element $f\in A$ has a pole at infinity, then also $f+g$ has a pole at
@@ -511,21 +503,23 @@ can happen.
 \renewcommand{\labelenumi}{(\alph{enumi})}
 \begin{enumerate}
 \item The polynomial~$f_i$ has positive degree.  This means that $f_i+g_i$ has a
-pole at infinity, and thus $(f_i+g_i)\omega_i$ has a pole at infinity (because
-$\omega_i$ has no poles at finite places and therefore no zero at infinity).
+pole at infinity, and thus $(f_i+g_i)\omega_i$ has a pole at infinity because
+$\omega_i$ has no poles at finite places and therefore no root at infinity, and
+because the $g_i$ are proper rational functions.
 \item The basis element $\omega_i$ is not constant and $f_i\neq0$. This
-also implies that $(f_i+g_i)\omega_i$ has a pole at infinity.
+  also implies that $(f_i+g_i)\omega_i$ has a pole at infinity, again because
+  the $g_i$ are proper rational functions.
 \end{enumerate}
 In both cases, therefore, $f+g=\sum_{i=1}^n(f_i+g_i)\omega_i$ has a pole at
 infinity by Lemma~\ref{lemma:3}.
 \end{proof}
 
 \begin{theorem}\label{thm:intiff0}
-  Let $A$ be an algebraic extension of~$K(x)$ and let $f\in A$ be such that
-  $f$ has a double root at infinity (i.e., every Puiseux series expansion
-  of $f$ at infinity contains only monomials $(1/x)^\alpha$ with $\alpha\geq2$). Let $B=\{\omega_1,\dots,\omega_n\}$
+  Let $f\in A$ be such that
+  $f$ has a double root at infinity (i.e., every series in $\bar K\<x^{-1}>$
+  associated to $f$ only contains monomials $(1/x)^\alpha$ with $\alpha\geq2$). Let $W=\{\omega_1,\dots,\omega_n\}$
   be an integral basis for $A$ that is normal at infinity.
-  If $f=g'+h$ is the result of the Hermite reduction with respect to~$B$,
+  If $f=g'+h$ is the result of the Hermite reduction with respect to~$W$,
   then $h=0$ if and only if $f$ is integrable in~$A$.
 \end{theorem}
 
@@ -537,13 +531,13 @@ that $h=0$, we show that $H$ is constant.  To this end, it suffices to show that
 it has neither finite poles nor a pole at infinity; the claim then follows from
 Chevalley's theorem.
 
-It is clear that $H$ has no finite poles because $h$ has at most ``simple'' poles
-(i.e., all Puiseux expansions of $h$ have only exponents $\geq-1$).
+It is clear that $H$ has no finite poles because $h$ has at most simple poles
+(i.e., all series associated to $h$ have only exponents $\geq-1$).
 This follows from the facts that the $\omega_i$ are integral and that
 the coefficients of~$h$ have squarefree denominators.
 
 If $H$ has a pole at infinity, then by Lemma~\ref{lemma:pole_at_inf} also
-$g+H$ must have a pole at infinity; recall that the Hermite reduction produces
+$g+H$ must have a pole at infinity, because Hermite reduction produces
 $g=\sum_i g_i\omega_i$ with proper rational functions~$g_i$. This contradicts
 the assumption that $f=g'+h=(g+H)'$ has at least a double root at infinity,
 because the latter implies that $g+H$ has at least a single root at infinity.
@@ -552,7 +546,7 @@ because the latter implies that $g+H$ has at least a single root at infinity.
 Note that the condition in Theorem~\ref{thm:intiff0} that $f$ has a double
 root at infinity is not a restriction at all, as it can always be achieved by
 a suitable change of variables. Let $a\in C$ be a regular point; this means
-that $f$ has neither a pole nor a branch point at~$a$. By the transformation
+that all series in $\bar K\<x-a>$ associated to $f$ are formal power series. By the substitution
 $x\to a+1/x$ the regular point~$a$ is moved to infinity. From
 \[
   \int f(x) \,\mathrm{d}x = \int f\left(\frac{1}{x}+a\right)\left(-\frac{1}{x^2}\right) \mathrm{d}x
@@ -570,9 +564,11 @@ We already know for other reasons~\cite{Zeilberger1990,chyzak00,chen12d} that
 telescopers for algebraic functions exist, and therefore the reduction-based
 creative telescoping procedure with Hermite reduction with respect to an
 integral basis that is normal at infinity as reduction function succeeds when
-applied to an integrand $f\in A$ that has a double root at infinity. Again, if
-$f$ has no double root at infinity, we can produce one by a change of variables.
+applied to an integrand $f\in A$ that has a double root at infinity.
 In particular, the method finds a telescoper of smallest possible order.
+Again, if $f$ has no double root at infinity, we can produce one by a change of variables.
+Note that a change of variables $x\to a+1/x$ with $a\in C$ has no affect on
+the telescoper. 
 
 \begin{example}
 TODO: {\red it will be nice to have an example here!...}
@@ -609,7 +605,7 @@ into the form
 \]
 with $h_i, d\in K[x]$ such that $\gcd(d, e)=\gcd(h_i,de)=1$ and $d$ is squarefree.
 \begin{lemma}\label{LEM:d}
-If $h$ is integrable in~$A$, then $d$ is constant in~$K$.
+If $h$ is integrable in~$A$, then $d$ is in~$K$.
 \end{lemma}
 \begin{proof}
 Suppose that $h$ is integrable in~$A$, i.e., there exist $a, b_i\in K[x]$
@@ -647,10 +643,9 @@ We call $\phi_V$ the \emph{map for polynomial reduction} with respect to~$V$, an
 the subspace $\im(\phi_V) = \{\phi_V(p) \mid p \in K[x]^n\}$
 the \emph{subspace for polynomial reduction} with respect to~$V$.
 \end{defi}
-\begin{remark}
+
 Note that, by construction and because of Lemma~\ref{LEM:d}, $q\in K[x]^n$ is in
 $\im(\phi_V)$ if and only if $\frac{q}{a}V$ is integrable in~$A$.
-\end{remark}
 
 We can always view an element of $K[x]^n$ (resp. $K[x]^{n\times n}$) as a polynomial in~$x$
 with coefficients in~$K^n$ (resp. $K^{n\times n}$). In this sense we use the notation $\lc(\cdot)$
@@ -665,13 +660,13 @@ Then the module $K[x]^n$ viewed as a $K$-vector space is generated by
 \[
   \cS := \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, j\in \bN\bigr\}.
 \]
-We define $K[x]_m^n:=\{p\in K[x]^n \mid \deg_x(p) \leq m\}$; as a $K$-vector
+We define $K[x]_\mu^n:=\{p\in K[x]^n \mid \deg_x(p) \leq \mu\}$; as a $K$-vector
 space it is generated by
 \[
-  \cS_m := \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, 0\leq j\leq m\bigr\}.
+  \cS_\mu := \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, 0\leq j\leq \mu\bigr\}.
 \]
-Any element $q\in K[x]^n$ of degree at most $m$ can be expressed in the
-basis $\cS_m$ as a vector $\vec{q}\in K^{n(m+1)}$ (in the following the
+Any element $q\in K[x]^n$ of degree at most $\mu$ can be expressed in the
+basis $\cS_\mu$ as a vector $\vec{q}\in K^{n(\mu+1)}$ (in the following the
 decoration~\raisebox{-1pt}{$\vec{}\;$} always indicates such a typecast).
 
 \begin{defi}
@@ -683,7 +678,7 @@ Then $K[x]^n = \im(\phi_V) \oplus N_V$.
 We call $N_V$ the \emph{standard complement} of $\im(\phi_V)$.
 For any $p\in K[x]^n$, there exist $p_1\in K[x]^n$ and~$p_2\in N_V$ such that
 \[\frac{p}{a}V = (p_1V)' + \frac{p_2}{a}V.\]
-Such a decomposition is called the \emph{polynomial reduction} of~$p$
+This decomposition is called the \emph{polynomial reduction} of~$p$
 with respect to~$V$.
 \end{defi}
 
@@ -695,42 +690,42 @@ vector space over~$K$.
 \begin{proof}
 In addition to the proof of the assertion, we also explain how to determine
 the dimension and a basis for $N_V$, for later use. For brevity, let
-$m:=\deg_x(a)-1$. We distinguish two cases.
+$\mu:=\deg_x(a)-1$. We distinguish two cases.
 
 \smallskip
 {\it Case 1.}~
-Assume that $\deg_x(B) < m$. For any $p\in K[x]^n$ of degree $s>0$, we have
+Assume that $\deg_x(B) < \mu$. For any $p\in K[x]^n$ of degree $s>0$, we have
 \[
-  \lt\bigl(\phi_V(p)\bigr) = s\lc(a)\lc(p)x^{s+m}.
+  \lt\bigl(\phi_V(p)\bigr) = s\lc(a)\lc(p)x^{s+\mu}.
 \]
-Thus all monomials $e_i x^j\in \cS$ with $1\leq i\leq n$ and $j\geq m+1$ are not in~$N_V$.
-Let $\vec{B}_1, \ldots, \vec{B}_n$ be the columns of~$B$, expressed in the basis $\cS_m$.
-Let $C(B)$ be the $K$-subspace of $K[x]_m^n$ generated by these column vectors.
+Thus all monomials $e_i x^j\in \cS$ with $1\leq i\leq n$ and $j\geq \mu+1$ are not in~$N_V$.
+Let $\vec{B}_1, \ldots, \vec{B}_n$ be the columns of~$B$, expressed in the basis $\cS_\mu$.
+Let $C(B)$ be the $K$-subspace of $K[x]_\mu^n$ generated by these column vectors.
 If $q\in \im(\phi_V)$, then $q = \phi_V(p) = pB$ for some $p \in K^n$, which implies that
-$\vec{q}\,$ is a linear combination of $\vec{B}_i$'s. Then $K[x]_m^n = C(B) \oplus N_V$.
-So $\dim_K(N_V)= (m+1)n - \dim_K(C(B))$ and a basis of $N_V$ can be computed by
+$\vec{q}\,$ is a linear combination of $\vec{B}_i$'s. Then $K[x]_\mu^n = C(B) \oplus N_V$.
+So $\dim_K(N_V)= (\mu+1)n - \dim_K(C(B))$ and a basis of $N_V$ can be computed by
 looking at the echelon form of the matrix $\bigl(\vec{B}_1, \ldots, \vec{B}_n\bigr)$.
 
 \smallskip
 {\it Case 2.}~
-Assume that $\deg_x(B) =m$. For any $p\in K[x]^n$ of degree $s$, we have
+Assume that $\deg_x(B) =\mu$. For any $p\in K[x]^n$ of degree $s$, we have
 \[
-  \lt\bigl(\phi_V(p)\bigr) = \lc(p)(s\lc(a)I_n + \lc(B))x^{s+m}.
+  \lt\bigl(\phi_V(p)\bigr) = \lc(p)(s\lc(a)I_n + \lc(B))x^{s+\mu}.
 \]
 Let $\ell$ be the largest nonnegative integer such that $-\ell \lc(a)$ is an
 eigenvalue of $\lc(B)\in K^{n\times n}$. Then for any $s>\ell$,
-the matrix $J_s = s\lc(a)I_n + \lc(B)$ is invertible. So any monomial $e_ix^j$ with $j> \ell+m$ is not in~$N_V$
+the matrix $J_s = s\lc(a)I_n + \lc(B)$ is invertible. So any monomial $e_ix^j$ with $j> \ell+\mu$ is not in~$N_V$
 for any $i=1, \ldots, n$. Let $p = \sum_{i=1}^n \sum_{j=0}^{\ell} p_{i, j} e_ix^j$.
-Then $\phi_V(p)$ belongs to $K[x]_{\ell+m}^n$.
-In the basis $\cS_{\ell+m}$, we can
-express $\phi_V(p)$ as a vector of length ${n(\ell+m+1)}$ with entries linear in the $p_{i, j}$'s.
+Then $\phi_V(p)$ belongs to $K[x]_{\ell+\mu}^n$.
+In the basis $\cS_{\ell+\mu}$, we can
+express $\phi_V(p)$ as a vector of length ${n(\ell+\mu+1)}$ with entries linear in the $p_{i, j}$'s.
 This vector can be written in the form $M_{\ell} \vec{P}$,
-where $\vec{P} = (p_{1, 0}, p_{2, 0}, \ldots, p_{n, \ell})^T$ and $M_{\ell} \in K^{n(\ell+m +1) \times n(\ell+1)}$.
-Every $q\in K[x]_{\ell+m}^n$ can be expressed as a vector $\vec{q} \in K^{n(\ell + m +1)}$.
-Then $q\in\im(\phi_v)$ if and only if $\vec{q}\,$ is in the column space of $M_{\ell}$.
+where $\vec{P} = (p_{1, 0}, p_{2, 0}, \ldots, p_{n, \ell})^T$ and $M_{\ell} \in K^{n(\ell+\mu +1) \times n(\ell+1)}$.
+Every $q\in K[x]_{\ell+\mu}^n$ can be expressed as a vector $\vec{q} \in K^{n(\ell + \mu +1)}$.
+Then $q\in\im(\phi_v)$ if and only if $\vec{q}\,$ is in the column space of~$M_{\ell}$.
 Therefore,
-\[K[x]_{\ell+m}^n = C({M_{\ell}}) \oplus N_V. \]
-This implies that $\dim_K(N_V) = n(\ell+m+1) - \rank({M_{\ell}})$, and
+\[K[x]_{\ell+\mu}^n = C({M_{\ell}}) \oplus N_V. \]
+This implies that $\dim_K(N_V) = n(\ell+\mu+1) - \rank({M_{\ell}})$, and
 a basis of $N_V$ can be computed by
 looking at the echelon form of the matrix ${M_{\ell}}$.
 \end{proof}
@@ -755,7 +750,7 @@ such that $\{u_1\omega_1,\dots,u_n\omega_n\}$ is a local integral basis at infin
 Since $u_i$ can be written as $u_i=x^{-\tau_i}\tilde{u}_i$ with $\tau_i\in\set Z$ and $\tilde{u}_i$ being a unit
 in $\bar{C}(x)_\infty$, we see that also $V$ is a local integral basis at infinity.
 The integers~$\tau_i$ can only be nonnegative because the $\omega_i$'s have no finite poles and therefore each
-of them is either constant or has a pole at infinity by Chevalley's result~\cite[Page 9, Corollary 3]{Chevalley1951}.
+of them is either constant or has a pole at infinity by Chevalley's theorem.
 \end{proof}
 
 
@@ -780,7 +775,7 @@ After performing the Hermite reduction on $f$, we get
 where~$P = (v_1, \ldots, v_n)\in K[x]^n$ and $U = (u_1, \ldots, u_n)\in K[x]^n$
 with~$u_i, v_i$ introduced in~\eqref{EQ:h}. By Lemma~\ref{LM:CB}, there exists
 $T := \diag(x^{-\tau_1}, \ldots, x^{-\tau_n}) \in K(x)^{n\times n}$
-be such that $V = TW$ is normal at $0$ and integral at any other places (including the infinity). Note that we can
+such that $V = TW$ is normal at $0$ and integral at any other places (including the infinity). Note that we can
 choose~$T$ as the identity matrix if~$\deg_x(M)\leq \deg_x(e)-1$.
 By taking derivatives, we get
 \[V' = \left(T' + T\frac{M}{e}\right)T^{-1}V = \frac{B}{a}V, \]
@@ -807,8 +802,7 @@ The decomposition in~\eqref{EQ:add} is called an \emph{additive decomposition} o
 We now discuss how to compute telescopers for algebraic functions via Hermite reduction and
 polynomial reduction.
 
-Let~$K := C(t)$ and~$A = K(x, y)$ be a finite algebraic extension of~$K(x)$ of degree $n$.
-Let~$W, V, e, \lambda, M, B$ be satisfying the same conditions as in Theorem~\ref{THM:polyred}.
+Let $W, V, e, \lambda, M, B$ be as in Theorem~\ref{THM:polyred}.
 To construct a telescoper for~$f\in A$,
 we first consider the additive decompositions of the successive derivatives $\partial_t^i(f)$ for $i\in \bN$.
 Assume that
@@ -831,8 +825,8 @@ For any $i\in \bN$, the derivative $\partial_t^i(f)$ has an additive decompositi
 \[ \partial_t^i(f) = g_i' + \frac{1}{d} P_iW + \frac{1}{x^\lambda e} Q_iV,\]
 where $g_i\in A$, $P_i, Q_i\in K[x]^n$ with $\deg_x(P_i) < \deg_x(d)$ and $Q_i\in N_V$.
 \end{lemma}
-As applications of the above lemma, we can compute the minimal telescoper for $f$ by finding the first
-linear dependency among $(P_i, Q_i)$'s over~$K$. We also obtain an upper bound for the order of telescopers.
+As application of the above lemma, we can compute the minimal telescoper for $f$ by finding the first
+linear dependence among $(P_i, Q_i)$'s over~$K$. We also obtain an upper bound for the order of telescopers.
 \begin{corollary}
 Every $f\in A$ has a telescoper of order at most $n\deg_x(d) + \dim_K(N_V)$.
 \end{corollary}

@@ -189,9 +189,11 @@ telescoping algorithm for algebraic functions via the second approach (Section~\
 This gives a new proof of a bound for the order of the telescopers, and in
 particular an independent proof for their existence.
 
+// TODO: THIS PAPER IMPROVES CHEN-KAUERS-SINGER. 
+
 \section{Algebraic Functions}
 
-// MK: WE SHOULD REPLACE $\bar C$ BY $\bar K$ THROUGHOUT.
+% // MK: WE SHOULD REPLACE $\bar C$ BY $\bar K$ THROUGHOUT. DONE.
 
 Let $C$ be a field, let $K$ be some field containing the rational function 
 field~$C(t)$, and let $\bar K$ some algebraically closed field containing~$K$.  We
@@ -490,7 +492,7 @@ ensure that the method terminates.
 As also explained already in the introduction, one possibility consists in
 showing that $[f]=0$ whenever $f$ is integrable. Trager showed that his
 Hermite reduction has this property~\cite[page 50, Theorem 1]{trager84}.
-For the sake of self-containedness, we give the full proof of this result here.
+For the sake of completenes, we reproduce his proof here. 
 
 \begin{lemma}\label{lemma:pole_at_inf}
 Let $A$ be an algebraic extension of~$K(x)$ and let
@@ -518,7 +520,6 @@ In both cases, therefore, $f+g=\sum_{i=1}^n(f_i+g_i)\omega_i$ has a pole at
 infinity by Lemma~\ref{lemma:3}.
 \end{proof}
 
-
 \begin{theorem}\label{thm:intiff0}
   Let $A$ be an algebraic extension of~$K(x)$ and let $f\in A$ be such that
   $f$ has a double root at infinity (i.e., every Puiseux series expansion
@@ -534,7 +535,7 @@ The direction ``$\Rightarrow$'' is trivial. To show the implication
 then also $h$ is integrable in~$A$; let $H\in A$ be such that $H'=h$.  In order to show
 that $h=0$, we show that $H$ is constant.  To this end, it suffices to show that
 it has neither finite poles nor a pole at infinity; the claim then follows from
-Chevalley's result~\cite[page 9, Corollary 3 ]{Chevalley1951}.
+Chevalley's theorem.
 
 It is clear that $H$ has no finite poles because $h$ has at most ``simple'' poles
 (i.e., all Puiseux expansions of $h$ have only exponents $\geq-1$).
@@ -747,7 +748,7 @@ is a basis of~$A$ which is normal at $0$ and integral at all other places (inclu
 It is clear that such a basis~$V$ will be normal at zero, because multiplying the generators by
 the rational functions $x^{\tau_i}$ brings it back to a global integral basis, which is in particular
 a local integral basis at zero.
-It is also clear that such a basis will be integral at every other point $a\in\bar C\setminus\{0\}$, because the
+It is also clear that such a basis will be integral at every other point $a\in\bar K\setminus\{0\}$, because the
 multipliers $x^{-\tau_i}$ are locally units at such~$a$.
 Finally, since the original basis is normal at infinity, there exist rational functions $u_1,\dots,u_n$
 such that $\{u_1\omega_1,\dots,u_n\omega_n\}$ is a local integral basis at infinity.

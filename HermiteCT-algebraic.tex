@@ -66,7 +66,7 @@
 
 \begin{document}
 
-\title{Reduction-Based Creative~Telescoping for \\ Algebraic Functions\titlenote{S.\ Chen was supported by the NSFC grant 11501552 and
+\title{Reduction-Based Creative~Telescoping for Algebraic~Functions\titlenote{S.\ Chen was supported by the NSFC grant 11501552 and
 by the President Fund of the Academy of
 Mathematics and Systems Science, CAS (2014-cjrwlzx-chshsh). This work was
 also supported by the Fields Institute's 2015 Thematic Program on Computer
@@ -196,6 +196,8 @@ telescoping problem for a function with no residues, which may be much smaller t
 original function. For this smaller function, however, they still need to construct a
 certificate. The algorithms presented in the present paper are the first which can find
 telescopers for algebraic functions without also constructing corresponding certificates.
+By Theorem~6 of~\cite{chen12d}, our results also translate into a certificate-free
+creative telescoping algorithm for rational functions in three variables. 
 
 \section{Algebraic Functions}
 
@@ -475,7 +477,7 @@ as much as is needed to avoid this particular division by zero. After finitely m
 such basis changes, the Hermite reduction will come to an end and produce a correct
 output. This variant is known as lazy Hermite reduction.
 
-\section{Telescoping via reductions: \\ first approach} \label{SECT:CT-1}
+\section{Telescoping via reductions: \hskip0ptplus1fill\break first approach} \label{SECT:CT-1}
 Recall from the introduction that reduction-based creative telescoping requires
 some $K$-linear reduction map $[\cdot]\colon A\to A$ with the property that
 $f-[f]$ is integrable in $A$ for every $f\in A$. This is sufficient for the
@@ -515,9 +517,10 @@ infinity by Lemma~\ref{lemma:3}.
 \end{proof}
 
 \begin{theorem}\label{thm:intiff0}
-  Let $f\in A$ be such that
-  $f$ has a double root at infinity (i.e., every series in $\bar K\<x^{-1}>$
-  associated to $f$ only contains monomials $(1/x)^\alpha$ with $\alpha\geq2$). Let $W=\{\omega_1,\dots,\omega_n\}$
+  Suppose that $f\in A$ 
+  has a double root at infinity (i.e., every series in $\bar K\<x^{-1}>$
+  associated to $f$ only contains monomials $(1/x)^\alpha$ with $\alpha\geq2$).
+  Let $W=\{\omega_1,\dots,\omega_n\}$
   be an integral basis for $A$ that is normal at infinity.
   If $f=g'+h$ is the result of the Hermite reduction with respect to~$W$,
   then $h=0$ if and only if $f$ is integrable in~$A$.
@@ -561,7 +564,7 @@ Thus Theorem~\ref{thm:intiff0} implies that $p_0+p_1\partial_t+\cdots+p_r\partia
 \emph{and only if} $[p_0+p_1\partial_t+\cdots+p_r\partial_t^r]=0$.
 
 We already know for other reasons~\cite{Zeilberger1990,chyzak00,chen12d} that
-telescopers for algebraic functions exist, and therefore the reduction-based
+telescopers for algebraic functions exist, and therefore the re\-duc\-tion-based
 creative telescoping procedure with Hermite reduction with respect to an
 integral basis that is normal at infinity as reduction function succeeds when
 applied to an integrand $f\in A$ that has a double root at infinity.
@@ -797,7 +800,7 @@ Since $\im(\phi_V) \cap N_V = \{0\}$, $Q=0$.
 \end{proof}
 The decomposition in~\eqref{EQ:add} is called an \emph{additive decomposition} of~$f$ with respect to~$x$.
 
-\section{Telescoping via reductions: \\ second approach} \label{SECT:CT-2}
+\section{Telescoping via reductions: \hskip0ptplus1fill\break second approach} \label{SECT:CT-2}
 
 We now discuss how to compute telescopers for algebraic functions via Hermite reduction and
 polynomial reduction.
@@ -915,7 +918,7 @@ $f=f_0+f_1\partial_x+\cdots+f_{n-1}\partial_x^{n-1}$ for some
 $f_0,\dots,f_{n-1}\in K(x)$. Very much as in the algebraic case, there is a natural way
 to associate certain series objects to the elements of~$A$. Based on these
 series objects, a notion of integrality was proposed last year~\cite{kauers15b}, and an
-algorithm for computing integral basis has been given for so-called fuchsian
+algorithm for computing integral basis has been given for so-called Fuchsian
 operators~$L$.
 
 It turns out that the Hermite reduction of Section~\ref{sec:hermite} also works in this setting, if we say that

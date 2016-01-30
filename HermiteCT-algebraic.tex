@@ -232,7 +232,9 @@ natural differentiations with respect to~$x$. For a series, differentiation is d
 termwise using the usual rules $\bigl((x-a)^{\nu+n}\bigr)'=(\nu+n)(x-a)^{\nu+n-1}$ and
 $\bigl((x^{-1})^{\nu+n}\bigr)'=-(\nu+n)(x^{-1})^{\nu+n+1}$. For the elements of~$A$, note
 first that $m(x,y)=0$ implies
-\[m(x,y)'=(\frac d{dx}m)(x,y) + (\frac d{dy}m)(x,y)y' = 0,\]
+\begin{equation}\label{eq:yprime}
+  m(x,y)'=(\frac d{dx}m)(x,y) + (\frac d{dy}m)(x,y)y' = 0,
+\end{equation}
 so $y'=-(\frac d{dx}m)(x,y)/(\frac d{dy}m)(x,y)$. Regarding $m$ as element of $K(x)[y]$
 and observing that $0<\deg_y\frac d{dy}m<n$, we have $\gcd(m,\frac d{dy}m)=1$ in $K(x)[y]$,
 so $\frac{d}{dy}m$ is invertible in $A=K(x)[y]/\<m>$.
@@ -531,16 +533,13 @@ the telescoper.
 
 \begin{example}\label{ex:hr}
 We consider the algebraic function $f=y/x^2$ where $y$ is a solution of the
-third-degree polynomial equation $m(x,y) = y^3 + y + x + t = 0$. An integral basis for
-$A=K(x)[y]/\<m>$ is given by $\omega_1=1$, $\omega_2=y$, $\omega_3=y^2$.  This
-means that employing lazy Hermite reduction avoids completely the computation
-of an integral basis in this example.
+third-degree polynomial equation $m(x,y) = y^3 + y + x + t = 0$. An integral
+basis for $A=K(x)[y]/\<m>$ that is normal at infinity is given by
+$\omega_1=1$, $\omega_2=y$, $\omega_3=y^2$.  This means that employing lazy
+Hermite reduction avoids completely the computation of an integral basis in
+this example.
 
-By solving the equation
-\[
-  \frac{\partial m}{\partial x} = \frac{\partial m}{\partial y} \, \frac{\partial y}{\partial x} \mod m
-\]
-for $\partial y/\partial x$ we obtain
+By solving Equation~\eqref{eq:yprime} for $y'$ we obtain
 \[
   y' = \frac{-6y^2 + 9(t+x)y - 4}{27x^2+54tx+27t^2+4}
 \]

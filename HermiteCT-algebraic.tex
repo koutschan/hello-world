@@ -198,8 +198,7 @@ field~$C(t)$, and let $\bar K$ some algebraically closed field containing~$K$.  
 consider algebraic functions over~$K$.  For some absolutely irreducible
 polynomial $m\in K[x,y]$, we consider the field
 $A=K(x)[y]/\<m>$. Elements of $A$ can be written uniquely in the form
-$f=\frac1d(a_0+a_1y+\cdots a_{n-1}y^{n-1})$ for some $a_0,\dots,a_{n-1},d\in K[x]$
-with $\gcd(a_0,\dots,a_{n-1},d)=1$. 
+$f=f_0+f_1y+\cdots+f_{n-1}y^{n-1}$ for some $f_0,\dots,f_{n-1},d\in K(x)$.
 
 The element $y\in A$ is a solution of the equation $m=0$, 
 because in $A$ we have $m=0$ by construction. The polynomial $m$ also admits 
@@ -210,20 +209,20 @@ $n$ distinct solutions in the field
 of formal Puiseux series around $a\in\bar K$. There are also $n$ distinct 
 solutions in the field 
 \[
-  \bar K\<1/x>:=\bigcup_{\nu\in Q} (1/x)^\nu\bar K[[1/x]]
+  \bar K\<x^{-1}>:=\bigcup_{\nu\in Q} x^{-\nu}\bar K[[x^{-1}]]
 \]
 of formal Puiseux series around~$\infty$. 
-Since $\bar K\<1/x>$ and the $\bar K\<x-a>$ are fields, we can associate to every 
+Since $\bar K\<x^{-1}>$ and the $\bar K\<x-a>$ are fields, we can associate to every 
 $f\in A$ and every $a\in\bar K\cup\{\infty\}$ in a natural way $n$ distinct series 
 objects with fractional exponents, by plugging any of the $n$ distinct series solutions
-of $m$ into the representation $f=\frac1d(a_0+a_1y+\cdots+a_{n-1}y^{n-1})$. 
+of $m$ into the representation $f=f_0+\cdots+f_{n-1}y^{n-1}$. 
 In other words, for every $a\in\bar K\cup\{\infty\}$ there are $n$ distinct natural
-ring homomorphisms from $A$ to $K\<x-a>$ or $K\<1/x>$, respectively. 
+ring homomorphisms from $A$ to $K\<x-a>$ or $K\<x^{-1}>$, respectively. 
 
-In the fields $A$ as well as the fields $\bar K\<x-a>$ and $\bar K\<1/x>$, we have
+In the fields $A$ as well as the fields $\bar K\<x-a>$ and $\bar K\<x^{-1}>$, we have
 natural differentiations with respect to~$x$. For a series, differentiation is defined
 termwise using the usual rules $\bigl((x-a)^{\nu+n}\bigr)'=(\nu+n)(x-a)^{\nu+n-1}$ and
-$\bigl((1/x)^{\nu+n}\bigr)'=-(\nu+n)(1/x)^{\nu+n+1}$. For the elements of~$A$, note 
+$\bigl((x^{-1})^{\nu+n}\bigr)'=-(\nu+n)(x^{-1})^{\nu+n+1}$. For the elements of~$A$, note 
 first that $m(x,y)=0$ implies 
 \[m(x,y)'=(\frac d{dx}m)(x,y) + (\frac d{dy}m)(x,y)y' = 0,\] 
 so $y'=-(\frac d{dx}m)(x,y)/(\frac d{dy}m)(x,y)$. Regarding $m$ as element of $K(x)[y]$
@@ -266,10 +265,10 @@ terms. A non-integral series is said to have a \emph{pole} at the reference
 point. Note that in this terminology also $1/\sqrt{x}$ has a ``pole''
 at~$0$. Note also that the terminology only refers to $x$ but not to~$t$. 
 
-Note also that integrality at $a\in\bar K$ is not preserved by differentiation,
+Integrality at $a\in\bar K$ is not preserved by differentiation,
 but if $f$ is integral at~$a$, then so is $(x-a)f'$. Somewhat conversely,
 integrality at infinity is preserved by differentiation, we even have the
-stronger property that when $f$ is integral at infinity, then not only $f'$ but also $xf'$ is
+stronger property that when $f$ is integral at infinity, then not only $f'$ but also $xf'=(x^{-1})^{-1}f'$ is
 integral at infinity.
 
 An element $f\in A=K(x)[y]/\<m>$
@@ -298,7 +297,8 @@ with $q(a)\neq0$, and write $\bar K(x)_\infty$ for the ring of all
 rational functions $p/q$ with $\deg_x(p)\leq\deg_x(q)$.
 Then the set of all $f\in A$ which are locally integral at some
 fixed $a\in\bar K\cup\{\infty\}$ forms a $\bar K(x)_a$-module. A basis of this module is
-called a \emph{local integral basis} at $a$ for~$A$. 
+called a \emph{local integral basis} at $a$ for~$A$. Also local integral bases can
+be computed. 
 
 An integral basis $\{\omega_1,\dots,\omega_n\}$ is always also a $K(x)$-vector space
 basis of~$A$. A key feature of integral bases is that they make poles explicit. Writing
@@ -356,10 +356,10 @@ $\sum_{i=1}^n f_i\omega_i$ have no chance to cancel each other.
   for all~$i,j$, and therefore $\deg_x(m_{i,j})<\deg_x(e)$, as claimed.
 \end{proof}
 
-A $K(x)$-vector space basis $\omega_1,\dots,\omega_n$ of $A=K(x)[\partial_x]/\<L>$ is
+A $K(x)$-vector space basis $\omega_1,\dots,\omega_n$ of $A$ is
 called \emph{normal} at $a\in\bar K\cup\{\infty\}$ if there exist $r_1,\dots,r_n\in
 K(x)$ such that $r_1\omega_1,\dots,r_n\omega_n$ is a local integral basis
-at~$a$. Trager shows for the case of algebraic function fields how to construct
+at~$a$. Trager shows how to construct
 an integral basis which is normal at infinity from a given integral basis and
 a given local integral basis at infinity~\cite{trager84}. 
 
@@ -369,7 +369,7 @@ of basis elements can cancel:
 
 \begin{lemma}\label{lemma:3}
   Let $\{\omega_1,\dots,\omega_n\}$ be an integral basis of~$A$
-  which is normal at some $a\in\bar C\cup\{\infty\}$.
+  which is normal at some $a\in\bar K\cup\{\infty\}$.
   Let $f=\sum_{i=1}^n f_i\omega_i$ for some $f_1,\dots,f_n\in K(x)$.
   Then $f$ has a pole at $a$ if and only if
   there is some $i$ such that $f_i\omega_i$ has a pole at~$a$.
@@ -383,15 +383,16 @@ of basis elements can cancel:
 
 \section{Hermite Reduction}\label{sec:hermite}
 
-Hermite reduction was first introduced by Hermite in~\cite{Hermite1872} for rational functions.
-This reduction was later extended to liouvillean functions by Risch~\cite{..,..},
-and to algebraic functions by Trager~\cite{trager84}. 
-%% MK: AS FAR AS HERMITE REDUCTION IS CONCERNED, THIS IS A SPECIAL CASE OF RISCH, ISN'T IT? 
-%% and to hyperexponential functions by~\cite{bostan13a}. 
-These generalizations are the key step in many integration
-algorithms, including the telescoping algorithm presented in this paper.
+% MK: MAYBE THE WHOLE PARAGRAPH CAN BE DROPPED.
+%Hermite reduction was first introduced by Hermite in~\cite{Hermite1872} for rational functions.
+%This reduction was later extended to liouvillean functions by Risch~\cite{Risch1969,BronsteinBook},
+%and to algebraic functions by Trager~\cite{trager84}. 
+%%% MK: AS FAR AS HERMITE REDUCTION IS CONCERNED, THIS IS A SPECIAL CASE OF RISCH, ISN'T IT? 
+%%% and to hyperexponential functions by~\cite{bostan13a}. 
+%These generalizations are the key step in many integration
+%algorithms, including the telescoping algorithm presented in this paper.
 
-We now recall the Hermite reduction for algebraic functions in~\cite{trager84}.
+We now recall the Hermite reduction for algebraic functions~\cite{trager84,ACA1992,bronstein98}.
 %MK: DELETED THE FOLLOWING THREE LINES BECAUSE THEY ARE ALREADY GLOBALLY DEFINED IN THE PREVIOUS SECTION.
 %Let~$A= K(x, y)$ be a finite algebraic extension of~$K(x)$ with $y$ satisfying
 %the algebraic equation~$p(x, y)=0$, where~$p\in K[x, y]$ is an irreducible
@@ -470,6 +471,14 @@ f=
 \]
 \end{example}
 
+It was observed that Hermite reduction often takes less time than the construction
+of an integral basis. If Hermite reduction is applied to some other basis instead
+of an integral basis, it either succeeds or it runs into a division by zero. 
+Bronstein~\cite{bronstein98a} noticed that when a division by zero occurs, then the basis can
+be replaced by some other basis that is a little closer to an integral basis, just
+as much as is needed to avoid this particular division by zero. After finitely many
+such basis changes, the Hermite reduction will come to an end and produce a correct
+output. This variant is known as lazy Hermite reduction.
 
 \section{Telescoping via reductions: \\ first approach} \label{SECT:CT-1}
 Recall from the introduction that reduction-based creative telescoping requires

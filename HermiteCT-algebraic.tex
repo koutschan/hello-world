@@ -549,7 +549,7 @@ Then for the differentiation matrix~$M$, a simple calculation yields
   \frac{1}{e} \begin{pmatrix} 0 & 0 & 0 \\[1pt] -4 & 9 (t+x) & -6 \\[1pt] 12 (t+x) & 4 & 18 (t+x) \\ \end{pmatrix}
   \begin{pmatrix} \omega_1 \\[1pt] \omega_2 \\[1pt] \omega_3 \end{pmatrix}
 \]
-with $e=27x^2+54xt+27t^2+4$. Thus we write $f=\sum_{i=1}^3 f_i/d\omega_i$ with
+with $e=27x^2+54xt+27t^2+4$. Thus we write $f=\sum_{i=1}^3 (f_i/d) \omega_i$ with
 $f_1=f_3=0$, $f_2=e$, and $d=x^2e$.  After a single step the Hermite reduction
 delivers the result
 \[
@@ -565,7 +565,7 @@ Again after a single reduction step, the decomposition $\partial_tf = g_1' + h_1
 is obtained, where
 \begin{align*}
   g_1 &= \frac{6y^2-9ty+4}{x(27t^2+4)} \\
-  h_1 &= \frac{6\bigl((9x+27t)y^2-(27xt+27t^2-2)y+6x+18t\bigr)}{x(27t^2+4)(27x^2+54xt+27t^2+4)}
+  h_1 &= \frac{6\bigl((9x+27t)y^2-(27xt+27t^2-2)y+6x+18t\bigr)}{x(27t^2+4)(27x^2+54xt+27t^2+4)}.
 \end{align*}
 Since $h_0$ and $h_1$ are linearly independent over $C(t)$, we continue with
 $\partial_t^2f$, which is given by

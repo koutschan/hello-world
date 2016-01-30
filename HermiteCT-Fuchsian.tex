@@ -1,0 +1,975 @@
+\documentclass{sig-alternate}
+\let\proof\undefined
+\let\endproof\undefined
+\usepackage{amsthm,amssymb,amsmath}
+\usepackage{graphics}
+\usepackage{bbm}
+\usepackage{tikz}
+\usepackage[plainpages=false,pdfpagelabels,colorlinks=true,citecolor=blue,hypertexnames=false]{hyperref}
+\usepackage{color}
+\overfullrule=1mm
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{notation}[theorem]{Convention}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{defi}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{fact}[theorem]{Fact}
+\def\qed{\quad\rule{1ex}{1ex}}
+\def\ord{\operatorname{ord}}
+\def\<#1>{\langle#1\rangle}
+
+\newcommand{\red}{\color{red}}
+\newcommand{\blue}{\color{blue}}
+\newcommand{\bQ}{ {\mathbb Q}}
+\newcommand{\bA}{ {\mathbb A}}
+\newcommand{\bE}{ {\mathbb E}}
+\newcommand{\bB}{ {\mathbb B}}
+\newcommand{\cB}{ {\mathcal B}}
+\newcommand{\bC}{ {\mathbb C}}
+\newcommand{\bF}{ {\mathbb F}}
+\newcommand{\bN}{ {\mathbb N}}
+\newcommand{\bZ}{ {\mathbb Z}}
+\newcommand{\bK}{ {\mathbb K}}
+\newcommand{\cM}{ {\mathcal M}}
+\newcommand{\cN}{ {\mathcal N}}
+\newcommand{\cS}{ {\mathcal S}}
+\newcommand{\cO}{ {\mathcal O}}
+\newcommand{\cE}{ {\mathcal E}}
+\newcommand{\cP}{ {\mathcal P}}
+\newcommand{\den } {{\rm den}}
+\newcommand{\num }{{\rm num}}
+\newcommand{\de } {\delta}
+\newcommand{\pa}{\partial}
+\newcommand{\spanning}{\text{span}}
+
+\overfullrule=1ex
+
+\newcommand{\ve} {{\bf e}}
+\newcommand{\vp} {{\bf p}}
+\newcommand{\vv} {{\bf v}}
+\newcommand{\vq} {{\bf q }}
+\newcommand{\vx} {{\bf x}}
+
+\let\set\mathbbm
+\def\lc{\operatorname{lc}}
+\def\rank{\operatorname{rank}}
+\def\lt{\operatorname{lt}}
+\def\im{\operatorname{im}}
+\def\lclm{\operatorname{lclm}}
+\def\diag{\operatorname{diag}}
+
+\begin{document}
+
+\title{Reduction-Based Creative~Telescoping for \\ Fuchsian D-finite~Functions
+\titlenote{S.\ Chen was supported by the NSFC grant 11501552 and
+by the President Fund of the Academy of
+Mathematics and Systems Science, CAS (2014-cjrwlzx-chshsh). This work was
+also supported by the Fields Institute's 2015 Thematic Program on Computer
+Algebra in Toronto, Canada.\\
+M. Kauers was supported by FWF grants F50-04 and Y464-N18.\\
+C. Koutschan was supported by the Austrian Science Fund (FWF): W1214.
+}}
+
+\numberofauthors{1}
+
+\author{\medskip
+Shaoshi Chen$^{1,2}$, \, Manuel Kauers$^{3}$, \, Christoph Koutschan$^{4}$ \\
+\smallskip
+       \affaddr{$^1$KLMM,\, AMSS, \,Chinese Academy of Sciences, Beijing, 100190, (China)}\\
+       \smallskip
+       \affaddr{$^2$Symbolic Computation Group, University of Waterloo, Ontario, N2L3G1, (Canada)}\\
+              \smallskip
+       \affaddr{$^3$Institute for Algebra, Johannes Kepler University, Altenberger Stra\ss e 69,
+ A-4040 Linz, (Austria)}\\
+        \smallskip
+       \affaddr{$^4$RICAM, Austrian Academy of Sciences, Altenberger Stra\ss e 69, A-4040 Linz, (Austria)}\\
+       \smallskip
+      \email{schen@amss.ac.cn, manuel.kauers@jku.at}\\
+      \email{christoph.koutschan@ricam.oeaw.ac.at}
+}
+
+\maketitle
+%
+\begin{abstract}
+  Continuing a series of articles in the past few years on creative telescoping using reductions,
+  we adapt Trager's Hermite reduction for algebraic functions to fuchsian D-finite functions and
+  develop a reduction-based creative telescoping algorithm for these functions.
+\end{abstract}
+
+
+\category{I.1.2}{Computing Methodologies}{Symbolic and Algebraic Manipulation}[Algebraic Algorithms]
+
+\terms{Algorithms, Theory}
+
+\keywords{Algebraic function, Integral basis, Trager's Reduction, Telescoper}
+
+%\bigskip
+
+\section{Introduction}\label{SECT:intro}
+
+The classical question in symbolic integration is whether the integral of
+a given function can be written in ``closed form''. In its most restricted form,
+the question is whether for a given function~$f$ belonging to some domain $D$
+there exists another function~$g$, also belonging to~$D$, such that $f=g'$. For
+example, if $D$ is the field of rational functions, then for $f=1/x^2$ we can
+find $g=-1/x$, while for $f=1/x$ no suitable $g$ exists. When no $g$ exists
+in~$D$, there are several other questions we may ask. One possibility is to ask
+whether there is some extension~$E$ of $D$ such that in $E$ there exists some
+$g$ with $g'=f$. For example, in the case of elementary functions, Liouville's
+principle restricts the possible extensions~$E$, and algorithms have been
+designed to construct these extensions whenever possible. Another possibility is
+to ask whether for some modification $\tilde f\in D$ of~$f$ there exists a $g\in
+D$ such that $\tilde f=g'$. Creative telescoping is a question of this
+type. Here we are dealing with domains~$D$ containing functions in several
+variables, say $x$ and~$t$, and the question is whether there is a linear
+differential operator~$P$, nonzero and free of~$x$, such that there exists a
+$g\in D$ with $P\cdot f=g'$, where $g'$ denotes the derivative of $g$ with
+respect to~$x$. Typically, $g$~itself has the form $Q\cdot f$ for some operator
+$Q$ (which may be zero and need not be free of~$x$). In this case, we call $P$
+a telescoper for~$f$, and $Q$ a certificate for~$P$.
+
+Creative telescoping is the backbone of definite integration. Readers not
+familiar with this technique are refered to the literature~\cite{PWZbook1996,Zeilberger1990c,Zeilberger1991,Zeilberger1990,Koepf1998}
+for motivation, theory, algorithms, implementations, and applications. There are
+several ways to find telescopers for a given $f\in D$. In recent years, an
+approach has become popular which has the feature that it can find a telescoper
+without also constructing the corresponding certificate. This is interesting
+because certificates tend to be much larger than telescopers, and in some
+applications only the telescoper is of interest. This approach was first
+formulated for rational functions $f\in C(t,x)$ in~\cite{BCCL2010} and later
+generalized to rational functions in several variables~\cite{bostan13}, to
+hyperexponential functions~\cite{bostan13a} and, for the shift case, to hypergeometric
+terms~\cite{chen15a} and binomial sums~\cite{bostan15}. In the present paper, we will extend
+the approach to fuchsian D-finite functions.
+
+The basic principle of the general approach is as follows. Assume that the
+$x$-constants $\mathrm{Const}_x(D)=\{\,c\in D:c'=0\,\}$ form a field and that $D$
+is a vector space over the field of $x$-constants. Assume further that there is
+some $\mathrm{Const}_x(D)$-linear map $[\cdot]\colon D\to D$ such that for every
+$f\in D$ there exists a $g\in D$ with $f-[f]=g'$. Such a map is called a
+\emph{reduction.} For example, in $D=C(t,x)$ Hermite reduction produces for
+every $f\in D$ some $g$ such that $f-g'$ is either zero or a rational function
+with a square-free denominator. In this case, we can take $[f]=f-g'$.
+In order to find a telescoper, we can compute $[f]$, $[\partial_t\cdot f]$, $[\partial_t^2\cdot f]$, \dots,
+until we find that they are linearly dependent over $\mathrm{Const}_x(D)$.
+Once we find a relation
+$p_0[f] + \cdots + p_r[\partial_t^r\cdot f] = 0$,
+then, by linearity,
+$[p_0 f + \cdots + p_r \partial_t^r\cdot f] = 0$,
+and then, by definition of $[\cdot]$, there exists a $g\in D$ such that $(p_0+\cdots + p_r\partial_t^r)\cdot f=g'$.
+In other words, $P=p_0+\cdots + p_r\partial_t^r$ is a telescoper.
+
+There are two ways to guarantee that this method terminates. The first consists in
+showing that $\{\,[f]:f\in D\,\}$ is a finite-dimensional vector space over
+$\mathrm{Const}_x(D)$. This approach was taken in~\cite{BCCL2010,bostan13a}. It has the
+nice additional feature that every bound for the dimension of this vector space
+gives rise to a bound for the order of the telescoper. In particular, it implies
+the existence of a telescoper. The second way requires that we already know for
+other reasons that a telescoper exists. The idea is then to show that the
+reduction $[\cdot]$ has the property that when $f\in D$ is such that there
+exists a $g\in D$ with $g'=f$, then $[f]=0$. If this is the case and
+$P=p_0+\cdots+p_r\partial_t^r$ is a telescoper for~$f$, then $P\cdot f$ is integrable
+in~$D$, so $[P\cdot f]=0$, and by linearity $[f]$, \dots, $[\partial_t^r\cdot f]$ are
+linearly dependent over $\mathrm{Const}_x(D)$. This means that the method won't
+miss any telescoper. In particular, this argument has the nice feature that we
+are guaranteed to find a telescoper of smallest possible order~$r$. This
+approach was taken in~\cite{chen15a}.
+
+In this paper, we will show that Trager's Hermite reduction for algebraic
+functions directly gives rise to a reduction-based creative telescoping
+algorithm via the first approach (Section~\ref{sec:canonic}). We will also
+generalize his Hermite reduction to fuchsian D-finite functions in
+Section~\ref{sec:hermite} and then combine it in Section~\ref{sec:polynomial}
+with a second reduction which together give rise to a reduction-based creative
+telescoping algorithm for fuchsian D-finite functions via the second approach.
+This gives a new proof of a bound for the order of the telescopers, and in
+particular an independent proof for their existence.
+
+\section{Fuchsian D-finite Functions}
+
+Let $C$ be a field. We consider linear differential operators
+$L=\ell_0+\cdots+\ell_n\partial_x^n$ with $\ell_0,\dots,\ell_n$ belonging to some ring
+$R$ containing~$C$.
+Typical choices for $R$ will be $C[x]$ or~$C(x)$.
+When $\ell_n\neq0$, we say that $\ord(L):=n$ is the order of~$L$.
+
+We write $R[\partial_x]$ for the algebra consisting of all these operators, together
+with the usual addition and the unique non-commutative multiplication satisfying
+$\partial_xc=c\partial_x$ for all $c\in C$ and $\partial_xx=x\partial_x+1$.
+The algebra $R[\partial_x]$ acts on a differential $R$-module~$F$ via
+\[
+  (\ell_0+\ell_1\partial_x+\cdots+\ell_n\partial_x^n)\cdot f=
+   \ell_0f + \ell_1f' + \cdots + \ell_n f^{(n)}.
+\]
+An element $y\in F$ is called a solution of an operator $L\in R[\partial_x]$ if
+$L\cdot y=0$.
+
+By $\bar C$ we denote some algebraically closed field containing~$C$ (not necessarily the smallest).
+An operator $L$ of order~$n$ is called fuchsian at a point $a\in\bar C$ if
+it admits $n$ linearly independent solutions in
+\[
+  C[[[x-a]]] := \bigcup_{\nu\in C} (x-a)^\nu\bar C[[x-a]][\log(x-a)].
+\]
+It is called fuchsian at $\infty$ if it admits $n$ linearly independent solutions in
+\[
+  C[[[x^{-1}]]] := \bigcup_{\nu\in C} x^{-\nu} \bar C[[x^{-1}]][\log(x)].
+\]
+It is simply called \emph{fuchsian} if it is fuchsian at all $a\in\bar C\cup\{\infty\}$.
+Note that the exponents $\nu$ are restricted to~$C$, not to the larger field~$\bar C$.
+
+Examples for fuchsian operators are operators that have a basis of algebraic
+function solutions, or the operator $L=x\partial_x^2-\partial_x$, whose
+solutions are $1$ and $\log(x)$.  We must admit that the class of fuchsian D-finite functions
+considered in this paper is not as rich as it may seem at first glance, because
+we require that the operators under consideration should be fuchsian at all
+points \emph{including infinity.} Most of the popular transcendental functions
+such as $\exp(x)$, $\sin(x)$, $\cos(x)$, Bessel functions, etc.\ are only
+fuchsian at all finite points but not at infinity. It would be interesting to
+generalize the results presented below so as to cover also such functions.
+
+For a fixed fuchsian operator $L$, we will consider the left $R[\partial_x]$-module
+$A=R[\partial_x]/\<L>$, where $\<L>$ denotes the left ideal generated by~$L$ in
+$R[\partial_x]$.  Then $1\in A$ is a solution of~$L$, because we have $L\cdot 1=L=0$
+in~$A$. We can say that $A$ consists of all the ``functions'' $f$ which can be
+obtained from a ``generic'' solution~$y$ of $L$ by applying some operator $P\in
+R[\partial_x]$ to it. When $R$ is a field, then $A$ is an $R$-vector space of
+dimension~$n=\ord(L)$, generated by $1,\partial_x,\dots,\partial_x^{n-1}$.
+
+It is instructive to compare this setup to the situation for algebraic
+functions. Comparing $A=R[\partial_x]/\<L>$ to an algebraic function field $R[Y]/\<M>$
+(when $R$ is a field), our operator $L$ plays the role of the minimal
+polynomial~$M$. In the algebraic case, $Y$~is a formal solution of the equation
+$M=0$, similar as $1\in A$ is a formal solution of~$L$. Besides these formal
+solutions there are, for each fixed $a\in\bar C$, exactly $\deg_Y(M)$ different
+Puiseux series solutions of $M=0$ at places above~$a$. They correspond in the
+differential setting to the series solutions of $L$ in $\bar C[[[x-a]]]$, which
+generate a $\bar C$-vector space of dimension $\ord(L)$.
+
+In the context of creative telescoping, we let $\bar C$ be some algebraically
+closed field containing the rational function field $K=C(t)$, and we
+use $R=K(x)$ instead of~$C(x)$. Integration will always be with respect to~$x$, but
+besides the derivation $\partial_x$ there is now also the derivation with respect
+to~$t$. The notation $f'$ will always refer to the derivative of $f$
+with respect to~$x$. In addition to the operator algebra $R[\partial_x]$, we consider the
+operator algebra $R[\partial_x,\partial_t]$, in which $\partial_x,\partial_t$
+commute with each other (although they need not commute with elements of~$R$).
+
+The action of $R[\partial_x]$ on $C[[[x-a]]]$ or $C[[[x^{-1}]]]$ is extended
+to $R[\partial_t,\partial_x]$ by letting $\partial_t$ act coefficient-wise.
+We further assume that the action of $R[\partial_x]$ on $A=R[\partial_x]/\<L>$ is
+extended to an action of $R[\partial_t,\partial_x]$ on~$A$ in a way that is
+compatible with the action of $R[\partial_t,\partial_x]$ on series domains.
+This means that when $y\in C[[[x-a]]]$ is a solution of~$L$ and $f$ is an
+element of~$A$, so that $f\cdot y$ is an element of $C[[[x-a]]]$, then we
+want to have $(\partial_t\cdot f)\cdot y=\partial_t\cdot(f\cdot y)$, where
+the $\cdot$ in $(\partial_t\cdot f)$ refers to the action of $R[\partial_t,\partial_x]$
+on $A$ and the three other dots refer to the action on $C[[[x-a]]]$.
+If $u\in A$ is such that $\partial_t\cdot 1 = u$ and $U\in R[\partial_x]$ is such
+that $u=U+\<L>$, then the annihilator $\mathfrak{a}\subseteq R[\partial_t,\partial_x]$
+of $1\in A$ in $R[\partial_t,\partial_x]$ contains $L$ and $\partial_t-U$. We
+therefore have $\dim\mathfrak{a}=0$, and this is the usual
+definition of D-finiteness in the case of several variables~\cite{Zeilberger1990,chyzak98,koutschan09,kauers14c}.
+
+\section{Integral Bases}
+
+Trager's Hermite reduction for algebraic functions rests on the notion of
+integral bases. The notion of integral bases has been generalized to D-finite
+functions last year~\cite{kauers15b}, and an algorithm was also given there for
+computing such bases. We recall here the relevant definitions and properties.
+
+Although the elements of a generalized series ring $C[[[x-a]]]$ are formal
+objects, the series notation suggests certain analogies with complex
+functions.  For simplicity, let us assume throughout that $C\subseteq\set
+R$. Terms $(x-a)^\alpha\log(x-a)^\beta$ or $(\tfrac1x)^\alpha\log(x)^\beta$ are
+called \emph{integral} if $\alpha\geq0$. A series in
+$C[[[x-a]]]$ or $C[[[x^{-1}]]]$ is called integral if it only contains integral
+terms. A non-integral series is said to have a \emph{pole} at the reference
+point. Note that in this terminology also $1/\sqrt{x}$ has a ``pole''
+at~$0$, while $\log(x)$ does not.
+
+Note also that integrality at $a\in\bar C$ is not preserved by differentiation,
+but if $f$ is integral at~$a$, then so is $(x-a)f'$. Somewhat conversely,
+integrality at infinity is preserved by differentiation, we even have the
+stronger property that when $f$ is integral at infinity, then not only $f'$ but also $xf'$ is
+integral at infinity.
+
+Let $K$ be some field with $C\subseteq K\subseteq\bar C$.
+Let $L\in K(x)[\partial_x]$ be a fuchsian operator. An element $f\in A=K(x)[\partial_x]/\<L>$
+is called (locally) integral at $a\in\bar C\cup\{\infty\}$ if for every solution $y$
+of $L$ in $C[[[x-a]]]$ or $C[[[x^{-1}]]]$, respectively, the series $f\cdot y$ is
+integral. $f$~is called (globally) integral if it is locally integral at every
+$a\in\bar C$ (``at all finite places'').
+
+The set of all integral elements $f\in A$ forms a $K[x]$-submodule of~$A$.
+A basis $\{\omega_1,\dots,\omega_n\}$ of this module is called an \emph{integral basis}
+for~$A$. In~\cite{kauers15b} an algorithm was given which computes an integral basis
+for a given~$A$. This algorithm is a generalization of van Hoeij's
+algorithm~\cite{vanHoeij94} for computing integral bases of algebraic function
+fields.
+
+For a fixed $a\in\bar C$, let $\bar C(x)_a$ be the ring of rational functions $p/q$
+with $q(a)\neq0$, and write $\bar C(x)_\infty$ for the ring of all
+rational functions $p/q$ with $\deg_x(p)\leq\deg_x(q)$.
+Then the set of all $f\in A$ which are locally integral at some
+fixed $a\in\bar C\cup\{\infty\}$ forms a $\bar C(x)_a$-module. A basis of this module is
+called a \emph{local integral basis} at $a$ for~$A$. The algorithm given in~\cite{kauers15b}
+for computing (global) integral bases computes local integral bases at finite
+points as an intermediate step. By an analogous algorithm, it is also possible
+to compute a local integral basis at infinity.
+
+An integral basis $\{\omega_1,\dots,\omega_n\}$ is always also a $K(x)$-vector space
+basis of~$A$. A key feature of integral bases is that they make poles explicit. Writing
+an element $f\in A$ as a linear combination $f=\sum_{i=1}^n f_i\omega_i$ for some
+$f_i\in K(x)$, we have that $f$ has a pole at $a\in\bar C$ if and only if at least one
+of the $f_i$ has a pole there.
+
+\begin{lemma}\label{lemma:1}
+  Let $L$ be a fuchsian operator and let
+  $\omega_1,\dots,\omega_n$ be a local integral basis of $A=K(x)[\partial_x]/\<L>$ at $a\in\bar C\cup\{\infty\}$.
+  Let $f\in A$ and $f_1,\dots,f_n\in K(x)$ be such that $f=\sum_{i=1}^nf_i\omega_i$.
+  Then $f$ is integral at $a$ if and only if each $f_i\omega_i$ is integral at~$a$.
+\end{lemma}
+\begin{proof}
+  The direction ``$\Rightarrow$'' is obvious. To show ``$\Leftarrow$'', suppose
+  that $f$ is integral at~$a$. Then there exist $w_1,\dots,w_n\in\bar C(x)_a$ such that
+  $f=\sum_{i=1}^nw_i\omega_i$. Thus $\sum_{i=1}^n(w_i-f_i)\omega_i=0$, and then
+  $w_i=f_i$ for all $i$, because $\omega_1,\dots,\omega_n$ is a vector space basis of~$A$.
+  As elements of $\bar C(x)_a$, the $f_i$ are integral at~$a$, and hence also all the $f_i\omega_i$
+  are integral at~$a$.
+\end{proof}
+
+The lemma says in particular that poles of the $f_i$ in a linear combination
+$\sum_{i=1}^n f_i\omega_i$ have no chance to cancel each other.
+
+\begin{lemma}\label{lemma:e}
+  Let $L$ be a fuchsian operator and let
+  $\omega_1,\dots,\omega_n$ be an integral basis of $A=K(x)[\partial_x]/\<L>$.
+  Let $e\in K[x]$ and
+  $M=((m_{i,j}))_{i,j=1}^n\in K[x]^{n\times n}$ be such that
+  \[
+    e\,\omega_i'=\sum_{j=1}^n m_{i,j}\omega_j
+  \]
+  for $i=1,\dots,n$ and $\gcd(e,m_{1,1},\dots,m_{n,n})=1$.
+  Then $e$ is square-free.
+\end{lemma}
+\begin{proof}
+  Let $a$ be a root of~$e$. We show that $a$ is not a multiple root.
+  Since $\omega_i$ is integral, it is in particular locally integral at~$a$.
+  Therefore $(x-a)\omega_i'$ is locally integral at~$a$.
+  Since $\omega_1,\dots,\omega_n$ is an integral basis, it follows that
+  $(x-a)m_{i,j}/e\in\bar C(x)_a$ for all~$i,j$.
+  Because of $\gcd(e,m_{1,1},\dots,m_{n,n})=1$, no factor $x-a$ of $e$
+  can be canceled by all the~$m_{i,j}$.
+  Therefore the factor $x-a$ can appear in $e$ only once.
+\end{proof}
+
+\begin{lemma} \label{lemma:degM}
+  Let $L$ be a fuchsian operator and let $\omega_1,\dots,\omega_n$ be a local integral
+  basis at infinity of $A=K(x)[\partial_x]/\<L>$. Let $e\in K[x]$ and $M=((m_{i,j}))_{i,j=1}^n\in K[x]^{n\times n}$
+  be defined as in Lemma~\ref{lemma:e}. Then $\deg_x(m_{i,j})<\deg_x(e)$ for all $i,j$.
+\end{lemma}
+\begin{proof}
+  Since every $\omega_i$ is locally integral at infinity, so is every $x\,\omega_i'$.
+  Since $\omega_1,\dots,\omega_n$ is an integral basis at infinity, it follows that
+  $xm_{i,j}/e\in\bar C(x)_\infty$ for all~$i,j$. This means that $1+\deg_x(m_{i,j})\leq\deg_x(e)$
+  for all~$i,j$, and therefore $\deg_x(m_{i,j})<\deg_x(e)$, as claimed.
+\end{proof}
+
+A $K(x)$-vector space basis $\omega_1,\dots,\omega_n$ of $A=K(x)[\partial_x]/\<L>$ is
+called \emph{normal} at $a\in\bar C\cup\{\infty\}$ if there exist $r_1,\dots,r_n\in
+K(x)$ such that $r_1\omega_1,\dots,r_n\omega_n$ is a local integral basis
+at~$a$. Trager shows for the case of algebraic function fields how to construct
+an integral basis which is normal at infinity from a given integral basis and
+a given local integral basis at infinity~\cite{trager84}. The same procedure also applies
+in the present situation. It works as follows.
+
+Let $\omega_1,\dots,\omega_n$ be a global integral basis and $\nu_1,\dots,\nu_n$ be a local
+integral basis at infinity. Let $m_{i,j}\in K(x)$ be such that
+\[
+ \omega_i = \sum_{j=1}^n m_{i,j}\nu_j.
+\]
+For each~$i$, let $r_i$ be the smallest integer such that $x^{-r_i}m_{i,j}$ has no pole at infinity for any~$j$.
+Then each $x^{-r_i}\omega_i$ is locally integral at infinity.
+Note that the $r_i$ will be nonnegative, because the $\omega_i$ have no finite poles and therefore,
+by the Fuchs relation, they must be either constant or have a pole at infinity.
+Let $A\in K^{n\times n}$ be the matrix obtained by evaluating $((x^{-r_i}m_{i,j}))_{i,j=1}^n$ at infinity
+(this is possible by the choice of~$r_i$).
+If $A$ is invertible, then the $x^{-r_i}\omega_i$ form a local integral basis at infinity and we are done.
+Otherwise, there exists a nonzero vector $a=(a_1,\dots,a_n)\in K^n$ with $aA=0$.
+Among the indices $\ell$ with $a_\ell\neq0$ choose one where $r_\ell$ is maximal, %%% MK: TRAGER WRITES MINIMAL, I THINK THIS IS A TYPO.
+and then replace $\omega_\ell$ by $\sum_{i=1}^n a_i x^{r_\ell-r_i}\omega_i$.
+Note that the resulting basis is still global integral.
+Repeating the process, it can be checked that the value of $r_1+\cdots+r_n$ strictly decreases in each iteration,
+so it must come to an end after a finite number of steps.
+See Trager's discussion~\cite{trager84} for further details.
+
+Although normality is a somewhat weaker condition on a basis than integrality,
+it also excludes the possibility that poles in the terms of a linear combination
+of basis elements can cancel:
+
+\begin{lemma}\label{lemma:3}
+  Let $L$ be a fuchsian operator and let $\omega_1,\dots,\omega_n$ be an integral basis of $A=K(x)[\partial_x]/\<L>$
+  which is normal at some $a\in\bar C\cup\{\infty\}$.
+  Let $f=\sum_{i=1}^n f_i\omega_i$ for some $f_1,\dots,f_n\in K(x)$.
+  Then $f$ has a pole at $a$ if and only if
+  there is some $i$ such that $f_i\omega_i$ has a pole at~$a$.
+\end{lemma}
+\begin{proof}
+  Let $r_1,\dots,r_n\in K(x)$ be such that $r_1\omega_1,\dots,r_n\omega_n$ is a
+  local integral basis at~$a$. By $f=\sum_{i=1}^n
+  (f_ir_i^{-1})(r_i\omega_i)$ and by Lemma~\ref{lemma:1}, $f$~is integral at~$a$ iff all
+  $f_ir_i^{-1}r_i\omega_i=f_i\omega_i$ are integral at~$a$.
+\end{proof}
+
+\section{Hermite Reduction}\label{sec:hermite}
+
+Hermite reduction and its generalizations are the key step in many integration
+algorithms, including the telescoping algorithm presented in this paper. It
+turns out that the Hermite reduction for fuchsian D-finite functions is
+literally the same as Trager's reduction for algebraic
+functions~\cite{trager84}.
+
+We start with a technical lemma, which is needed later to ensure that the
+Hermite reduction always works. The analogous statement for algebraic
+functions and its proof can be found in~\cite[pp. 46--47]{trager84}; for
+sake of self-containedness, we give the full proof here, although it is a
+straightforward generalization of Trager's proof.
+
+Throughout this section, let $L\in K(x)[\partial_x]$ be a fuchsian operator
+of order~$n$ and let $A=K(x)[\partial_x]/\<L>$.
+
+\begin{lemma}\label{lemma:ibv}
+Let $v\in K[x]$ be a squarefree polynomial and let $\{\omega_1,\ldots,\omega_n\}$
+be a basis of~$A$ that is locally integral at all roots of~$v$.
+For some integer $m>1$ we define $\psi_i:=v^m\left(v^{1-m}\omega_i\right)'$; then
+$\{\psi_1,\ldots,\psi_n\}$ is a local integral basis at each root of~$v$.
+\end{lemma}
+\begin{proof}
+By expanding $\psi_i=v\omega_i'-(m-1)v'\omega_i$ one sees that the $\psi_i$
+themselves are integral at all roots of~$v$. Let now $a\in\bar{C}$ be an
+arbitrary but fixed root of~$v$. We have to show that each $f\in A$ that is
+integral at~$a$ can be expressed as a linear combination of the $\psi_i$ with
+coefficients in $\bar C(x)_a$. To the contrary, assume that there exists an
+integral element~$f$ that requires $x-a$ in the denominator of some
+coefficient, i.e.,
+\[
+  f = \frac{1}{v} \sum_{i=1}^n c_i \psi_i \quad\text{with }c_i\in \bar{C}(x)_a
+  \text{ and } c_i(a)\neq0 \text{ for some } i
+\]
+(here we use the fact that $v$ is squarefree).  Further let $g=\sum_{i=1}^n
+c_i'\omega_i$, which is obviously integral. Then also their sum
+\begin{align*}
+  f+g &= v^{m-1} \sum_{i=1}^n \left(c_i\left(v^{1-m}\omega_i\right)'
+  + c_i'v^{1-m}\omega_i \right) \\
+  &= v^{m-1} \sum_{i=1}^n \left(c_iv^{1-m}\omega_i\right)'
+\end{align*}
+must be integral. Since $\{\omega_1,\ldots,\omega_n\}$ is an integral basis at~$a$,
+there exists for each $i=1,\ldots,n$ a series solution $y_i\in C[[[x-a]]]$
+of~$L$ such that $\omega_i\cdot y_i$ involves a term
+$T=(x-a)^\alpha\log(x-a)^\beta$ with $0\leq\alpha<1$.
+Let now $i$ be an index such that $c_i(a)\neq0$;
+this implies that $T$ appears in $(c_i\omega_i)\cdot y_i$.
+Using the fact that the $\omega_i$ form a local integral basis, it follows by
+Lemma~\ref{lemma:1} that $T$ is also present in $h\cdot y_i$ where
+$h=\sum_{i=1}^n c_i\omega_i$. Applying the operator $v^{m-1}\partial_xv^{1-m}$
+to $h\cdot y_i$ turns $T$ into $(x-a)^{\alpha-1}\log(x-a)^\beta$, which reveals that
+$v^{m-1}(v^{1-m}h)'=f+g$ is not integral at~$a$. This contradicts our assumption on
+the integrality of~$f$, and hence $\{\psi_1,\ldots,\psi_n\}$ is a local integral
+basis at~$a$.
+\end{proof}
+
+Let $\{\omega_1,\ldots,\omega_n\}$ be an integral basis for~$A$.
+Further let $e,m_{i,j}\in K[x]$ ($1\leq i,j\leq n$) be such that
+$e\omega_i'=\sum_{j=1}^n m_{i,j}\omega_i$ and
+$\gcd(e,m_{1,1},m_{1,2},\ldots,m_{n,n})=1$ as in Lemma~\ref{lemma:e}. For describing
+the Hermite reduction we fix an integrand $f\in A$ and represent it in the
+integral basis, i.e., $f=\sum_{i=1}^n (f_i/d)\,\omega_i$ with
+$d,f_1,\ldots,f_n\in K[x]$. The purpose is to find $g,h\in A$ such that
+$f=g'+h$ and $h=\sum_{i=1}^n(h_i/d^\ast)\,\omega_i$ with $h_1,\ldots,h_n\in K[x]$
+and $d^\ast$ denoting the squarefree part of~$d$.
+As differentiating the $\omega_i$ can introduce
+denominators, name\-ly the factors of~$e$, it is convenient to consider those
+denominators from the very beginning on, and this means that we want to assume
+$e\mid d$. Note that $\gcd(d,f_1,\ldots,f_n)$ can then be nontrivial.
+
+We now describe one step of the Hermite reduction, where the multiplicity
+$m>1$ of some nontrivial squarefree factor~$v\in K[x]$ of $d$ is reduced.
+Let $u\in K[x]$ be such that $d=uv^m$; it follows that $\gcd(u,v)=1$ and
+$\gcd(v,v')=1$. We want to find $g_1,\ldots,g_n,h_1,\ldots,h_n\in K[x]$
+such that
+\begin{equation}\label{eq:hred}
+  \sum_{i=1}^n \frac{f_i}{uv^m}\omega_i =
+  \biggl(\sum_{i=1}^n\frac{g_i}{v^{m-1}}\omega_i\biggr)' +
+  \sum_{i=1}^n \frac{h_i}{uv^{m-1}}\omega_i.
+\end{equation}
+By a repeated application of such reduction steps one can decompose any $f\in A$
+as $f=g'+h$ where the denominators of the coefficients of $h$ are squarefree.
+% This gives rise to the reduction map $[f]=h$.
+
+In order to determine the unknown polynomials $g_1,\ldots,g_n$ in~\eqref{eq:hred},
+clearing the denominator $uv^m$ yields
+\begin{equation}\label{eq:clear}
+  \sum_{i=1}^n f_i\omega_i = \sum_{i=1}^n \biggl( uvg_i'\omega_i +
+  uv^mg_i\left(v^{1-m}\omega_i\right)' + vh_i\omega_i \biggr),
+\end{equation}
+and then this equation is reduced modulo~$v$:
+\begin{equation}\label{eq:modv}
+  \sum_{i=1}^n f_i\omega_i =
+  \sum_{i=1}^n uv^mg_i\left(v^{1-m}\omega_i\right)' \mod v.
+\end{equation}
+By Lemma~\ref{lemma:ibv} and from $\gcd(u,v)=1$ it follows that
+the elements $uv^m(v^{1-m}\omega_i)'$ form a local integral basis
+at each root of~$v$, which implies that the coefficients $g_i$ are
+uniquely determined modulo~$v$.
+
+By Lemma~\ref{lemma:e} the polynomial~$e$ is squarefree and therefore $e\mid uv$;
+hence we can write $uv=ew$ for some $w\in K[x]$. By rewriting the
+derivatives of the $\omega_i$ in terms of the integral basis,
+Equation~\eqref{eq:modv} turns into
+\begin{align*}
+  \sum_{i=1}^n f_i\omega_i
+  &= \sum_{i=1}^n ug_i \bigl( v\omega_i' - (m-1)v'\omega_i \bigr) \mod v\\
+  &= \sum_{i=1}^n g_i\, \biggl( w\sum_{j=1}^n m_{i,j}\omega_j - (m-1)uv'\omega_i \biggr) \mod v.
+\end{align*}
+Coefficient comparison with respect to $\omega_1,\ldots,\omega_n$ yields a
+system of linear equations for $g_1,\ldots,g_n$ over $K[x]/\<v>$, which has
+a unique solution. For the coordinates of the solution vector $(g_1,\dots,g_n)$,
+we can choose representatives in $K[X]$ whose degrees are less than~$\deg_x(v)$.
+
+The remaining unknowns $h_1,\ldots,h_n$ are obtained by plugging
+$g_1,\ldots,g_n$ into Equation~\eqref{eq:clear}.
+
+
+\begin{example}\label{ex:hr}
+We consider the fuchsian D-finite function
+\[
+  \frac{1}{x^2} \log\Bigl(\frac{1}{x^2}-1\Bigr)\sqrt{\frac{1+x}{1-x}}.
+\]
+This function is annihilated by the second-order differential operator
+\begin{multline*}
+  L = (x^2-1)^2 x^2 \partial_x^2 + (x^2-1) (x+1) (7x-5) x \partial_x + {}\\
+    8x^4+5x^3-11x^2-5x+4.
+\end{multline*}
+Using the algorithm described in~\cite{kauers15b} we compute the following
+integral basis $\{\omega_1,\omega_2\}$ for $A=\bC(x)[\partial_x]/\<L>$:
+\[
+  \bigl\{ (x-1) x^2,\, (x^2-1) (x-1) x^3 \partial_x + 2(x-1) x^4 \bigr\}
+\]
+For the differentiation matrix, a simple calculation yields
+\begin{equation}\label{eq:dmat}
+  \begin{pmatrix} \omega_1' \\[2pt] \omega_2' \end{pmatrix} =
+  \frac{1}{e} \begin{pmatrix} (x-1) (x+2) & 1 \\[2pt] -x^3-x^2+5x-4 & x^2-x+2 \end{pmatrix}
+  \begin{pmatrix} \omega_1 \\[2pt] \omega_2 \end{pmatrix}
+\end{equation}
+with $e=(x^2-1)x$. As the integrand corresponds to $1\in A$, its
+representation in the integral basis is
+\[
+  f = \frac{1}{(x-1)x^2} \omega_1 = \frac{x+1}{ex} \omega_1;
+\]
+using the notation employed above, we have $d=(x^2-1)x^2$, $f_1=x+1$,
+and $f_2=0$. Here we can only reduce the power of~$x$ in the denominator, so
+we start with $u=x^2-1$, $v=x$, and $m=2$. Then Equation~\eqref{eq:modv} leads
+to the following linear system for the unknowns $g_1$ and $g_2$:
+\[
+  \begin{pmatrix} x-1 & -x^3-x^2+5 x-4 \\ 1 & 3-x \end{pmatrix}
+  \begin{pmatrix} g_1 \\ g_2 \end{pmatrix} =
+  \begin{pmatrix} x+1 \\ 0 \end{pmatrix} \mod x.
+\]
+Thus we get $g_1=3$ and $g_2=-1$ and the final result of the Hermite reduction is
+\[
+f=
+  \biggl(\, \underbrace{\vphantom{\frac{1}{(x)}}  \frac{3}{x} \omega_1 - \frac{1}{x} \omega_2}_{=g} \,\biggr)' +\>
+  \underbrace{\frac{-x^2-x+3}{(x^2-1)x} \omega_1 - \frac{1}{(x^2-1)x} \omega_2}_{=h}.
+\]
+\end{example}
+
+\section{The Canonical Form Property}\label{sec:canonic}
+
+Recall from the introduction that reduction-based creative telescoping requires
+some $K$-linear reduction map $[\cdot]\colon A\to A$ with the property that
+$f-[f]$ is integrable in $A$ for every $f\in A$. This is sufficient for the
+correctness of the method, but additional properties are needed in order to
+ensure that the method terminates.
+
+As also explained already in the introduction, one possibility consists in
+showing that $[f]=0$ whenever $f$ is integrable. For the special case of
+algebraic functions, Trager showed that his Hermite reduction has this property:
+
+\begin{theorem} \cite{trager84}\label{thm:intiff0}
+  Let $A$ be an algebraic extension of~$K(x)$ and let $f\in A$ be such that
+  $f$ has a double root at infinity (i.e., for every Puiseux series expansion
+  of $f$ contains only monomials $x^\alpha$ with $\alpha\leq-2$). Let $B=\{\omega_1,\dots,\omega_n\}$
+  be an integral basis for $A$ which is normal at infinity.
+  If $f=g'+h$ is the result of the Hermite reduction with respect to~$B$,
+  then $h$ is zero if and only if $f$ is integrable in~$A$.
+\end{theorem}
+
+Note that the condition in Theorem~\ref{thm:intiff0} that $f$ has a double
+root at infinity is not a restriction at all, as it can always be achieved by
+a suitable change of variables. Let $a\in C$ be a regular point of~$L$; by
+the transformation $x\to a+1/x$ the regular point~$a$ is moved to
+infinity. From
+\[
+  \int f(x) \,\mathrm{d}x = \int f\left(\frac{1}{x}+a\right)\left(-\frac{1}{x^2}\right) \mathrm{d}x
+\]
+we see that the new integrand has a double root at infinity.
+
+Moreover, since the action of $\partial_t$ on series domains is defined coefficient-wise,
+it follows that when $f$ has (at least) a double root at infinity (with respect to~$x$),
+this is also true for $\partial_t\cdot f, \partial_t^2\cdot f, \partial_t^3\cdot f,\dots$,
+and then also for every $K$-linear combination $p_0f+p_1\partial_tf+\cdots+p_r\partial_t^rf$.
+This means that $p_0+p_1\partial_t+\cdots+p_r\partial_t^r$ is a telescoper for $f$ if
+\emph{and only if} $[p_0+p_1\partial_t+\cdots+p_r\partial_t^r]=0$.
+
+We already know for other reasons~\cite{Zeilberger1990,chyzak00,chen12d} that
+telescopers for algebraic functions exist, and therefore the reduction-based
+creative telescoping procedure with Hermite reduction with respect to an
+integral basis that is normal at infinity as reduction function succeeds when
+applied to an integrand $f\in A$ that has a double root at infinity. Again, if
+$f$ has no double root at infinity, we can produce one by a change of variables.
+In particular, the method finds a telescoper of smallest possible order.
+
+Unfortunately, Trager's theorem does not easily generalize to the case of
+fuchsian D-finite functions. Its proof relies on Chevalley's theorem~\cite[page 9, Cor.\ 3]{Chevalley1951},
+which says that an algebraic function that has no poles (neither at a finite
+place nor at infinity) must be constant. In our setting this is not true. For
+example, $\log(x)$ is fuchsian D-finite and has no poles (neither at a finite
+place nor at infinity), but it is not a constant. For general fuchsian D-finite
+functions, we therefore complete the discussion of creative telescoping using
+the second approach.
+
+\section{Polynomial Reduction}\label{sec:polynomial}
+
+Recall that instead of requesting that $[f]=0$ iff and only if $f$ is integrable
+(first approach), we can also justify the termination of reduction-based
+creative telescoping by showing that the $K$-vector space $\{\,[f]:f\in A\,\}$
+has finite dimension (second approach). If $[\cdot]$ is just the Hermite
+reduction, we do not have this property. We therefore introduce below an
+additional reduction, called \emph{polynomial reduction,} which we apply after
+Hermite reduction. We then show that the combined reduction (Hermite reduction
+followed by polynomial reduction) has the desired dimension property for the
+space of remainders. As a result, we obtain a new bound on the order of the
+telescoper, which is similar to that in~\cite{chen14a}.
+
+In this approach, we use two integral bases. First we use a global integral basis (not
+necessarily normal at infinity) in order to perform Hermite reduction. Then we write the
+remainder $h$ with respect to some local integral basis at infinity and perform the
+polynomial reduction on this representation.
+
+Throughout this section let $W=(\omega_1,\ldots,\omega_n)^T\in A^n$ be such
+that $\{\omega_1, \ldots, \omega_n\}$ is a global integral basis of~$A$, and
+let $e\in K[x]$ and $M=(m_{i,j})\in K[x]^{n\times n}$ be such that $eW'=MW$
+and $\gcd(e, m_{1, 1}, m_{1, 2}, \ldots, m_{n ,n})=1$. The Hermite reduction
+described in Section~\ref{sec:hermite} decomposes an input element $f\in A$
+into the form
+\[
+  f = g' + h = g' + \sum_{i=1}^n \frac{h_i}{de} \omega_i,\qquad
+  g, h\in A,
+\]
+with $h_i, d\in K[x]$ such that $\gcd(d, e)=\gcd(h_i,de)=1$ and $d$ is squarefree.
+\begin{lemma}\label{LEM:d}
+If $h$ is integrable in~$A$, then $d$ is constant in~$K$.
+\end{lemma}
+\begin{proof}
+Suppose that $h$ is integrable in~$A$, i.e., there exist $a, b_i\in K[x]$
+such that $h = \bigl(\frac{1}{a}\sum_{i=1}^n b_i \omega_i\bigr)'$. Then
+\[
+  h = \sum_{i=1}^n \frac{h_i}{de}\omega_i= \sum_{i=1}^n \biggl(\Bigl(\frac{b_i}{a}\Bigr)' \omega_i +
+  \frac{b_i}{a e} \sum_{j=1}^n  m_{i, j}\omega_j\biggr).
+\]
+We show that $a$ is constant. Otherwise, for any irreducible factor $p$ of~$a$, we would have that $h$ has a pole of
+multiplicity greater than $1$ at the roots of~$p$. This contradicts
+the fact that $d, e$ are squarefree. Thus, $d$ is a constant.
+\end{proof}
+
+By the extended Euclidean algorithm, we compute $u_i, v_i\in K[x]$ such that
+$h_i = u_i d + v_i e$ and $\deg_x(v_i) < \deg_x(d)$. Then the Hermite remainder~$h$
+decomposes as
+\begin{equation}\label{EQ:h}
+  \sum_{i=1}^n \frac{h_i}{de}\omega_i =  \sum_{i=1}^n \frac{u_i}{e}\omega_i + \sum_{i=1}^n \frac{v_i}{d}\omega_i.
+\end{equation}
+
+We now introduce the \emph{polynomial reduction} whose goal is to confine the $u_i$ to a finite-dimensional
+vector space over~$K$. Similar reductions had been introduced and used in creative telescoping
+for hyperexponential functions~\cite{bostan13a} and hypergeometric terms~\cite{chen15a}.
+Let $V = (\nu_1, \ldots, \nu_n)^T\in A^n$ be such that its entries form a $K(x)$-basis of~$A$,
+and let $a\in K[x]$ and $B = (b_{i, j})\in K[x]^{n \times n}$ be such that $aV'=BV$ and
+$\gcd(a, b_{1, 1}, b_{1, 2}, \ldots, b_{n ,n})=1$. Let $p = (p_1, \ldots, p_n)\in K[x]^n$. Then
+\begin{equation} \label{EQ:polyred}
+  (pV)' = \sum_{i=1}^n (p_i \nu_i)' = \frac{ap' + pB}{a}\, V.
+\end{equation}
+This motivates us to introduce the following definition.
+\begin{defi}
+Let the map $\phi_V\colon K[x]^n \rightarrow K[x]^n$
+be defined by $\phi_V(p) = ap' + pB$ for any $p\in K[x]^n$.
+We call $\phi_V$ the \emph{map for polynomial reduction} with respect to~$V$, and call
+the subspace $\im(\phi_V) = \{\phi_V(p) \mid p \in K[x]^n\}$
+the \emph{subspace for polynomial reduction} with respect to~$V$.
+\end{defi}
+\begin{remark}
+Note that, by construction and because of Lemma~\ref{LEM:d}, $q\in K[x]^n$ is in
+$\im(\phi_V)$ if and only if $\frac{q}{a}V$ is integrable in~$A$.
+\end{remark}
+
+We can always view an element of $K[x]^n$ (resp. $K[x]^{n\times n}$) as a polynomial in~$x$
+with coefficients in~$K^n$ (resp. $K^{n\times n}$). In this sense we use the notation $\lc(\cdot)$
+for the leading coefficient and $\lt(\cdot)$ for the leading term of a vector (resp. matrix).
+For example, if $p\in K[x]^n$ is of the form
+\[
+  p = p^{(r)}x^r + \dots + p^{(1)}x + p^{(0)},\quad p^{(i)}\in K^n,
+\]
+then $\deg_x(p)=r$, $\lc(p)=p^{(r)}$, and $\lt(p)=p^{(r)}x^r$.
+Let $\{e_1, \ldots, e_n\}$ be the standard basis of~$K^n$.
+Then the module $K[x]^n$ viewed as a $K$-vector space is generated by
+\[
+  \cS := \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, j\in \bN\bigr\}.
+\]
+We define $K[x]_m^n:=\{p\in K[x]^n \mid \deg_x(p) \leq m\}$; as a $K$-vector
+space it is generated by
+\[
+  \cS_m := \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, 0\leq j\leq m\bigr\}.
+\]
+Any element $q\in K[x]^n$ of degree at most $m$ can be expressed in the
+basis $\cS_m$ as a vector $\vec{q}\in K^{n(m+1)}$ (in the following the
+decoration~\raisebox{-1pt}{$\vec{}\;$} always indicates such a typecast).
+
+\begin{defi}
+Let $N_V$ be the $K$-subspace of $K[x]^n$ generated by
+\[
+  \bigl\{t \in \cS \mathrel{\big|} t \neq \lt(p) \ \text{for all $p\in \im(\phi_V)$}\bigr\}.
+\]
+Then $K[x]^n = \im(\phi_V) \oplus N_V$.
+We call $N_V$ the \emph{standard complement} of $\im(\phi_V)$.
+For any $p\in K[x]^n$, there exist $p_1\in K[x]^n$ and~$p_2\in N_V$ such that
+\[\frac{p}{a}V = (p_1V)' + \frac{p_2}{a}V.\]
+Such a decomposition is called the \emph{polynomial reduction} of~$p$
+with respect to~$V$.
+\end{defi}
+
+\begin{prop}\label{PROP:finite}
+Let $a\in K[x]$ and $B\in K[x]^{n \times n}$ be such that $aV'=BV$, as before.
+If $\deg_x(B) \leq \deg_x(a)-1$, then $N_V$ is a finite-dimensional
+vector space over~$K$.
+\end{prop}
+\begin{proof}
+In addition to the proof of the assertion, we also explain how to determine
+the dimension and a basis for $N_V$, for later use. For brevity, let
+$m:=\deg_x(a)-1$. We distinguish two cases.
+
+\smallskip
+{\it Case 1.}~
+Assume that $\deg_x(B) < m$. For any $p\in K[x]^n$ of degree $s>0$, we have
+\[
+  \lt\bigl(\phi_V(p)\bigr) = s\lc(a)\lc(p)x^{s+m}.
+\]
+Thus all monomials $e_i x^j\in \cS$ with $1\leq i\leq n$ and $j\geq m+1$ are not in~$N_V$.
+Let $\vec{B}_1, \ldots, \vec{B}_n$ be the columns of~$B$, expressed in the basis $\cS_m$.
+Let $C(B)$ be the $K$-subspace of $K[x]_m^n$ generated by these column vectors.
+If $q\in \im(\phi_V)$, then $q = \phi_V(p) = pB$ for some $p \in K^n$, which implies that
+$\vec{q}\,$ is a linear combination of $\vec{B}_i$'s. Then $K[x]_m^n = C(B) \oplus N_V$.
+So $\dim_K(N_V)= (m+1)n - \dim_K(C(B))$ and a basis of $N_V$ can be computed by
+looking at the echelon form of the matrix $\bigl(\vec{B}_1, \ldots, \vec{B}_n\bigr)$.
+
+\smallskip
+{\it Case 2.}~
+Assume that $\deg_x(B) =m$. For any $p\in K[x]^n$ of degree $s$, we have
+\[
+  \lt\bigl(\phi_V(p)\bigr) = \lc(p)(s\lc(a)I_n + \lc(B))x^{s+m}.
+\]
+Let $\ell$ be the largest nonnegative integer such that $-\ell \lc(a)$ is an
+eigenvalue of $\lc(B)\in K^{n\times n}$. Then for any $s>\ell$,
+the matrix $J_s = s\lc(a)I_n + \lc(B)$ is invertible. So any monomial $e_ix^j$ with $j> \ell+m$ is not in~$N_V$
+for any $i=1, \ldots, n$. Let $p = \sum_{i=1}^n \sum_{j=0}^{\ell} p_{i, j} e_ix^j$.
+Then $\phi_V(p)$ belongs to $K[x]_{\ell+m}^n$.
+In the basis $\cS_{\ell+m}$, we can
+express $\phi_V(p)$ as a vector of length ${n(\ell+m+1)}$ with entries linear in the $p_{i, j}$'s.
+This vector can be written in the form $M_{\ell} \vec{P}$,
+where $\vec{P} = (p_{1, 0}, p_{2, 0}, \ldots, p_{n, \ell})^T$ and $M_{\ell} \in K^{n(\ell+m +1) \times n(\ell+1)}$.
+Every $q\in K[x]_{\ell+m}^n$ can be expressed as a vector $\vec{q} \in K^{n(\ell + m +1)}$.
+Then $q\in\im(\phi_v)$ if and only if $\vec{q}\,$ is in the column space of $M_{\ell}$.
+Therefore,
+\[K[x]_{\ell+m}^n = C({M_{\ell}}) \oplus N_V. \]
+This implies that $\dim_K(N_V) = n(\ell+m+1) - \rank({M_{\ell}})$, and
+a basis of $N_V$ can be computed by
+looking at the echelon form of the matrix ${M_{\ell}}$.
+\end{proof}
+
+In general, the condition $\deg_x(B) \leq \deg_x(a)-1$ may not hold for an arbitrary basis~$V$ of~$A$.
+The following lemma shows that we can perform a simple change of bases to make the condition hold.
+
+\begin{lemma}\label{LM:CB}
+Let~$W =\{\omega_1, \ldots, \omega_n\}$ be an integral basis of~$A$ such that it is also normal at infinity. Then
+there exist nonnegative integers~$\tau_1, \ldots, \tau_n$ such that
+\[ V := \{\nu_1, \ldots, \nu_n\} \quad \text{with $\nu_i = x^{-\tau_i} \omega_i$}\]
+is a basis of~$A$ which is normal at $0$ and integral at all other places (including infinity).
+\end{lemma}
+\begin{proof}
+It is clear that such a basis~$V$ will be normal at zero, because multiplying the generators by
+the rational functions $x^{r_i}$ brings it back to a global integral basis, which is in particular
+a local integral basis at zero.
+It is also clear that such a basis will be integral at every other point $a\in\bar C\setminus\{0\}$, because the
+multipliers $x^{-r_i}$ are locally units at such~$a$.
+Finally, since the original basis is normal at infinity, there exist rational functions $u_1,\dots,u_n$
+such that $\{u_1\omega_1,\dots,u_n\omega_n\}$ is a local integral basis at infinity.
+Since $u_i$ can be written as $u_i=x^{-r_i}\tilde{u}_i$ with $r_i\in\set Z$ and $\tilde{u}_i$ being a unit
+in $\bar{C}(x)_\infty$, we see that also $V$ is a local integral basis at infinity.
+The integers~$r_i$ can only be nonnegative because the $\omega_i$'s have no finite poles and therefore each
+of them is either constant or has a pole at infinity.
+\end{proof}
+
+
+
+Combining the Hermite reduction and polynomial reduction, we get the following theorem.
+\begin{theorem}\label{THM:polyred}
+Let $W$ be an integral basis of~$A$ that is normal at infinity.
+Let $T := \diag(x^{-\tau_1}, \ldots, x^{-\tau_n}) \in K(x)^{n\times n}$
+be such that $V = TW$ is integral at infinity.
+Let $e\in K[x]$, $\lambda \in \bN$, and $B, M \in K[x]^{n \times n} $ be such that
+$eW' = MW$ and $x^\lambda eV' = BV$.
+Then any element $f\in A$ can be decomposed into
+\begin{equation}\label{EQ:add}
+f = g' + \frac{1}{d} PW + \frac{1}{x^\lambda e} QV,
+\end{equation}
+where $g\in A$, $d\in K[x]$ is squarefree and $\gcd(d, e)=1$, $P, Q\in K[x]^n$ with $\deg_x(P) < \deg_x(d)$ and $Q\in N_V$, which is
+a finite-dimensional vector space over $K$. Moreover, $P, Q$ are zero if and only if $f$ is integrable in~$A$.
+\end{theorem}
+\begin{proof}
+After performing the Hermite reduction on $f$, we get
+\[f = \tilde{g}' + \frac{1}{d} PW + \frac{1}{e} UW,\]
+where~$P = (v_1, \ldots, v_n)\in K[x]^n$ and $U = (u_1, \ldots, u_n)\in K[x]^n$
+with~$u_i, v_i$ introduced in~\eqref{EQ:h}. By Lemma~\ref{LM:CB}, there exists
+$T := \diag(x^{-\tau_1}, \ldots, x^{-\tau_n}) \in K(x)^{n\times n}$
+be such that $V = TW$ is normal at $0$ and integral at any other places (including the infinity). Note that we can
+choose~$T$ as the identity matrix if~$\deg_x(M)\leq \deg_x(e)-1$.
+By taking derivatives, we get
+\[V' = \left(T' + T\frac{M}{e}\right)T^{-1}V = \frac{B}{a}V, \]
+where $a=x^\lambda e$ for some $\lambda\in \bN$ and $B\in K[x]^{n\times n}$. Since $V$ is locally integral
+at infinity, $\deg_x(B) \leq \deg_x(a)-1$ by Lemma~\ref{lemma:degM}.
+By expanding in terms of the new basis~$V$, we get
+\[\frac{1}{e} UW = \frac{1}{a} \tilde{U}V, \]
+where $\tilde{U} = x^\lambda U T^{-1} \in K[x]^n$. Next, we decompose $\tilde{U}$ into
+$\tilde{U} = \phi_{V}(\tilde{U}_1) + \tilde{U}_2$ with $\tilde{U}_1, \tilde{U}_2\in K[x]^n$ and
+$\tilde{U}_2\in N_V$. Then we get
+\[\frac{1}{e} UW = (\tilde U_1 V)' + \frac{1}{a} \tilde U_2 V. \]
+We then get the decomposition~\eqref{EQ:add} by setting
+$g = \tilde g + \tilde U_1 V$ and~$Q = U_2$.
+
+Assume that $f$ is integrable. Then Lemma~\ref{LEM:d} implies that $d\in K$.
+Since $\deg_x(P) < \deg_x(d)$, we have $P=0$. Then $\frac{1}{x^\lambda e} QV = \sum_{i=1}^n (a_i \nu_i)'$
+for some $a_i\in K[x]$. So $Q \in \im(\phi_V)$.
+Since $\im(\phi_V) \cap N_V = \{0\}$, $Q=0$.
+\end{proof}
+The decomposition in~\eqref{EQ:add} is called an \emph{additive decomposition} of~$f$ with respect to~$x$.
+We now discuss how to compute telescopers for elements of~$A$ via Hermite reduction and
+polynomial reduction.
+
+We first consider the additive decompositions of the successive derivatives $\partial_t^i(f)$ for $i\in \bN$.
+Assume that
+\[\partial_t(W) = \frac{1}{\tilde{e}} \tilde{M}W \quad \text{and}
+\quad \partial_t(V) = \frac{1}{x^{\tilde{\lambda}} \tilde{e}} \tilde{B}V,\]
+where $\tilde e \in K[x]$, $\tilde M, \tilde B\in K[x]^{n\times n}$, and $\tilde \lambda \in \bN$.
+By Proposition 7 in~\cite{chen14a}, we have $\tilde e \mid e$ and $x^{\tilde{\lambda}} \tilde{e} \mid x^\lambda e$.
+So we can just take $\tilde e = e$ and $\tilde{\lambda}  = \lambda$ by multiplying $\tilde M, \tilde B$ by some factors
+of~$x^\lambda e$. A direct calculation yields $\partial_t(f) = (\partial_t(g))' + h$,
+where
+\[h = \left(\partial_t(\frac{P}{d})+\frac{P\tilde M}{de}\right)W + \left(\partial_t(\frac{Q}{x^\lambda e})+ \frac{Q\tilde B}{x^{2\lambda} e^2}\right)V.\]
+This implies that the squarefree part of the denominator of $h$ divides $xde$. Applying Hermite reduction and polynomial reduction
+to~$h$ yields
+\[ h = \tilde g_1' + \frac{1}{d} P_1W + \frac{1}{x^\lambda e} Q_1V,\]
+where $P_1, Q_1\in K[x]^n$ with $\deg_x(P_1) < \deg_x(d)$ and $Q_1\in N_V$.
+Repeating this discussion, we get the following lemma.
+\begin{lemma}\label{LEM:idtf}
+For any $i\in \bN$, the derivative $\partial_t^i(f)$ has an additive decomposition of the form
+\[ \partial_t^i(f) = g_i' + \frac{1}{d} P_iW + \frac{1}{x^\lambda e} Q_iV,\]
+where $g_i\in A$, $P_i, Q_i\in K[x]^n$ with $\deg_x(P_i) < \deg_x(d)$ and $Q_i\in N_V$.
+\end{lemma}
+As applications of the above lemma, we can compute the minimal telescoper for $f$ by finding the first
+linear dependency among $(P_i, Q_i)$'s over~$K$. We also obtain an upper bound for the order of telescopers.
+\begin{corollary}
+Every $f\in A$ has a telescoper of order at most $n\deg_x(d) + \dim_K(N_V)$.
+\end{corollary}
+
+\begin{example}
+We compute a minimal telescoper for the function
+\[
+  F := \frac{1}{x^2} \log\Bigl(\frac{1}{x^2}-t^2\Bigr)\sqrt{\frac{1+tx}{1-tx}}.
+\]
+Note that for $t=1$ we
+obtain the function from Example~\ref{ex:hr}. The operator~$L$ with $LF=0$
+and the integral basis $\{\omega_1,\omega_2\}$ for
+$A=\bC(t,x)[\partial_x]/\<L>$ are very similar to those in Example~\ref{ex:hr}.
+As before, $F$ is represented by $f=1\in A$.
+Also the computation of its Hermite reduction is analogous, yielding
+\[
+  h = \frac{-t^3x^2-t^2x+3t}{(t^2x^2-1)x} \omega_1 - \frac{t}{(t^2x^2-1)x} \omega_2
+\]
+as the Hermite remainder~$h$. The matrix~$M$ representing the differentiation
+of the $\omega_i$ does not satisfy the degree condition of
+Proposition~\ref{PROP:finite}; this fact is already visible
+in~\eqref{eq:dmat}. Hence we perform a change of basis to
+$\nu_1=x^{-1}\omega_1$, $\nu_2=x^{-2}\omega_2$, which is an integral basis at
+infinity. We have $aV'=BV$ for $V=(\nu_1,\nu_2)^T$, $a=x^2(t^2x^2-1)$, and
+some matrix~$B\in K[x]^{2\times2}$.  By investigating the eigenvalues of
+$\lc(B)$ we find that $\ell=1$ and the echelon form of $M_\ell$ is
+\begin{equation}\label{eq:M_ell}
+  \begin{pmatrix}
+  1 & 0 & 0 & 0 & 0 & 2/t^3 & 0 & 4/t^4 & -4/t^4 & 0 \\
+  0 & 0 & 1 & 1/t & 0 & 0 & 0 & -4/t^3 & 4/t^3 & 0 \\
+  0 & 0 & 0 & 0 & 1 & 1/t & 0 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0
+  \end{pmatrix}.
+\end{equation}
+Writing the Hermite remainder~$h$ in terms of the $\nu_i$, we see that all
+denominators divide the polynomial~$a$. Thus we write
+$h=a^{-1}(h_1\nu_1+h_2\nu_2)$ and in~\eqref{EQ:h} we get
+$u_1=h_1=-t^3x^4-t^2x^3+3tx^2$, $u_2=h_2=-tx^3$, and $v_1=v_2=0$.
+In the basis $\cS_4$ the vector $(u_1,u_2)$ reads
+% here we could employ the \vec notation
+\[
+  \bigl(-t^3, 0, -t^2, -t, 3 t, 0, 0, 0, 0, 0\bigr).
+\]
+The polynomial reduction now corresponds to reduce this vector with the rows
+of~\eqref{eq:M_ell}, yielding the final result $[f]=-x^2/a\nu_2$.  Next, we
+consider the derivative $\partial_tf=tx^3\partial_x+2tx^2+x\in A$ whose
+Hermite remainder is
+\[
+  \frac{1}{(tx+1)x} \omega_1 + \frac{1}{(t^2x^2-1)x} \omega_2.
+\]
+After polynomial reduction we obtain
+\[
+  \frac1a \Bigl( -\frac{4}{t^2} \nu_1 + \frac{(tx+4)x}{t^2} \nu_2 \Bigr).
+\]
+Since there is no linear dependency over $\bC(t)$ yet, we continue with
+\[
+  \partial_t^2f =
+  \frac{(tx+1)x^3}{1-tx} \partial_x -
+  \frac{x^2(2t^4x^4+5t^3x^3+2t^2x^2-5tx-3)}{(t^2x^2-1)^2}.
+\]
+Writing $\partial_t^2f$ in terms of the integral basis produces the denominator
+$d=(tx-1)^3(tx+1)^2x$, which means that the Hermite reduction consists of three
+reduction steps. As a Hermite remainder we obtain
+\[
+  \frac{t^2x^2+2tx-4}{(t^2x^2-1)tx} \omega_1 + \frac{2}{(t^2x^2-1)tx} \omega_2
+\]
+which by polynomial reduction is converted into
+\[
+  \frac1a \Bigl( -\frac{4}{t^3} \nu_1 + \frac{2(tx+2)x}{t^3} \nu_2 \Bigr).
+\]
+Now we can find a linear dependence that gives rise to the telescoper
+$t^2\partial_t^2-t\partial_t+1$, which is indeed the minimal one for this example.
+\end{example}
+
+\section*{Acknowledgements}
+
+We would like to thank Ruyong Feng and Michael F.\ Singer for helpful discussions.
+
+\bibliographystyle{abbrv}
+\bibliography{Hermite}
+
+\end{document}

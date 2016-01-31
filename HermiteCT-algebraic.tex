@@ -531,7 +531,7 @@ Again, if $f$ has no double root at infinity, we can produce one by a change of 
 Note that a change of variables $x\to a+1/x$ with $a\in C$ has no affect on
 the telescoper.
 
-\begin{example}\label{ex:hr}
+\begin{example}\label{ex:ct}
 We consider the algebraic function $f=y/x^2$ where $y$ is a solution of the
 third-degree polynomial equation $m(x,y) = y^3 + y + x + t = 0$. An integral
 basis for $A=K(x)[y]/\<m>$ that is normal at infinity is given by
@@ -543,7 +543,7 @@ By solving Equation~\eqref{eq:yprime} for $y'$ we obtain
 \[
   y' = \frac{-6y^2 + 9(t+x)y - 4}{27x^2+54tx+27t^2+4}.
 \]
-Then for the differentiation matrix~$M$, a simple calculation yields
+Then for the differentiation matrix~$\frac1eM$, a simple calculation yields
 \[
   \begin{pmatrix} \omega_1' \\[1pt] \omega_2' \\[1pt] \omega_3' \end{pmatrix} =
   \frac{1}{e} \begin{pmatrix} 0 & 0 & 0 \\[1pt] -4 & 9 (t+x) & -6 \\[1pt] 12 (t+x) & 4 & 18 (t+x) \\ \end{pmatrix}
@@ -582,7 +582,6 @@ and the integrable part $g_2$ is not displayed here for space reasons.
 
 Now one can find a linear dependence between $h_0,h_1,h_2$ that gives rise to the telescoper
 $(27t^2+4)\partial_t^2+81t\partial_t+24$, which is indeed the minimal one for this example.
-% TODO maybe mention polynomial reduction
 \end{example}
 
 
@@ -841,6 +840,33 @@ linear dependence among $(P_i, Q_i)$'s over~$K$. We also obtain an upper bound f
 \begin{corollary}
 Every $f\in A$ has a telescoper of order at most $n\deg_x(d) + \dim_K(N_V)$.
 \end{corollary}
+
+
+\begin{example}
+We continue with Example~\ref{ex:ct}, by applying the polynomial reduction
+to the Hermite remainders $h_0,h_1,h_2$. The matrix~$M$ computed before
+satisfies the degree condition of Proposition~\ref{PROP:finite}, so no
+change of basis is needed. First we compute polynomials
+$u_i,v_i\in K[x,y]$ such that for $i=0,1,2$ we have
+% TODO this d is not the same as the d in Section 3
+\[
+  h_i = \frac{u_i}{e} + \frac{v_i}{d} = \frac{u_i}{27x^2+54xt+27t^2+4} + \frac{v_i}{x}.
+\]
+By noting that $\deg_x(u_i)=1$ and $\deg_x(e)=2$, we see that the
+map for the polynomial reduction $\phi(p) = ep' + pM$ can only be
+applied for $p\in K^n$ so that it turns into $\phi(p) = pM$.
+This means that we reduce $xy^2$ using the third row of~$M$ and
+$xy$ using its second row. A straightforward calculation reveals
+that $h_0$, $h_1$, and $h_2$ all reduce to~$0$. Hence we are left
+with finding a $K$-linear combination among the $v_i$:
+\begin{align*}
+ v_0 &= \frac{-6y^2+9yt-4}{27t^2+4},\\
+ v_1 &= \frac{6\bigl(27y^2t-(27t^2-2)y+18t\bigr)}{(27t^2+4)^2},\\
+ v_2 &= \frac{6\bigl((96-1539t^2)y^2+(1215t^3-306t)y-1026t^2+64\bigr)}{(27t^2+4)^3}.
+\end{align*}
+Indeed, we obtain the same telescoper as in Example~\ref{ex:ct}.
+\end{example}
+
 
 
 \section{The D-finite Case}

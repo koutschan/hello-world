@@ -22,7 +22,7 @@
 \newtheorem{fact}[theorem]{Fact}
 \def\qed{\quad\rule{1ex}{1ex}}
 \def\ord{\operatorname{ord}}
-\def\<#1>{\langle#1\rangle}
+\def\<#1>{\langle\!\langle#1\rangle\!\rangle} % double brackets for puiseux series domains
 
 \newcommand{\red}{\color{red}}
 \newcommand{\blue}{\color{blue}}
@@ -185,7 +185,7 @@ the existence of a telescoper.
 In this paper, we show that Trager's Hermite reduction for algebraic
 functions directly gives rise to a reduction-based creative telescoping
 algorithm via the first approach (Section~\ref{SECT:CT-1}). We will combine Trager's Hermite reduction
-with a second reduction, called polynomial reduction, (Section~\ref{sec:polynomial}) to obtain a reduction-based creative
+with a second reduction, called polynomial reduction (Section~\ref{sec:polynomial}), to obtain a reduction-based creative
 telescoping algorithm for algebraic functions via the second approach (Section~\ref{SECT:CT-2}).
 This gives a new proof of a bound for the order of the telescopers, and in
 particular an independent proof for their existence.
@@ -205,19 +205,19 @@ creative telescoping algorithm for rational functions in three variables.
 Throughout the paper, let $C$ be a field of characteristic zero, $K=C(t)$, and $\bar K$ the algebraic closure of~$K$.
 We consider algebraic functions over~$K$.  For some absolutely irreducible
 polynomial $m\in K[x,y]$, we consider the field
-$A=K(x)[y]/\<m>$. If $n=\deg_ym$, then every element of $A$ can be written uniquely in the form
+$A=K(x)[y]/\langle m\rangle$. If $n=\deg_ym$, then every element of $A$ can be written uniquely in the form
 $f=f_0+f_1y+\cdots+f_{n-1}y^{n-1}$ for some $f_0,\dots,f_{n-1}\in K(x)$.
 
 The element $y\in A$ is a solution of the equation $m=0$,
 because in $A$ we have $m=0$ by construction. The polynomial $m$ also admits
 $n$ distinct solutions in the field
 \[
-  \bar K\<x-a>:=\bigcup_{r\in\set N\setminus\{0\}} \bar K((\ (x-a)^{1/r}\ ))
+  \bar K\<x-a>:=\bigcup_{r\in\set N\setminus\{0\}} \bar K(\!(\ (x-a)^{1/r}\ )\!)
 \]
 of formal Puiseux series around $a\in\bar K$. There are also $n$ distinct
 solutions in the field
 \[
-  \bar K\<x^{-1}>:=\bigcup_{r\in\set N\setminus\{0\}} \bar K((x^{-1/r}))
+  \bar K\<x^{-1}>:=\bigcup_{r\in\set N\setminus\{0\}} \bar K(\!(x^{-1/r})\!)
 \]
 of formal Puiseux series around~$\infty$.
 Since $\bar K\<x^{-1}>$ and the $\bar K\<x-a>$ are fields, we can associate to every
@@ -237,8 +237,8 @@ first that $m(x,y)=0$ implies
 \end{equation}
 so $y'=-(\frac d{dx}m)(x,y)/(\frac d{dy}m)(x,y)$. Regarding $m$ as element of $K(x)[y]$
 and observing that $0<\deg_y\frac d{dy}m<n$, we have $\gcd(m,\frac d{dy}m)=1$ in $K(x)[y]$,
-so $\frac{d}{dy}m$ is invertible in $A=K(x)[y]/\<m>$.
-Note that we have $x'=1$ and $c'=0$ for all $c\in K=C(t)$, in particular $t'=0$.
+so $\frac{d}{dy}m$ is invertible in $A=K(x)[y]/\langle m\rangle$.
+Note that we have $x'=1$ and $c'=0$ for all $c\in K=C(t)$, in particular also $t'=0$.
 The derivative of an arbitrary
 element $f\in A$, say $f=p(x,y)$ for some $p\in K(x)[y]$ of degree less than~$n$, is
 \[f'=(\frac{d}{dx}p)(x,y)+(\frac d{dy}p)(x,y)y'.\]
@@ -274,7 +274,7 @@ functions. Terms $(x-a)^\alpha$ or $(\tfrac1x)^\alpha$ are
 called \emph{integral} if $\alpha\geq0$. A series in
 $\bar K\<x-a>$ or $\bar K\<x^{-1}>$ is called integral if it only contains integral
 terms. A non-integral series is said to have a \emph{pole} at the reference
-point. Note that in this terminology also $1/\sqrt{x}$ has a ``pole''
+point. Note that in this terminology also $1/\sqrt{x}$ has a pole
 at~$0$. Note also that the terminology only refers to $x$ but not to~$t$.
 
 Integrality at $a\in\bar K$ is not preserved by differentiation,
@@ -283,7 +283,7 @@ integrality at infinity is preserved by differentiation, we even have the
 stronger property that when $f$ is integral at infinity, then not only $f'$ but also $xf'=(x^{-1})^{-1}f'$ is
 integral at infinity.
 
-An element $f\in A=K(x)[y]/\<m>$
+An element $f\in A=K(x)[y]/\langle m\rangle$
 is called (locally) integral at $a\in\bar K\cup\{\infty\}$ if for every series
 associated to $y$ the corresponding series for $f$ is integral.
 The element $f$ is called (globally) integral if it is locally integral at every
@@ -291,7 +291,7 @@ $a\in\bar K$ (``at all finite places'').
 This is the case if and only if the minimal polynomial of $f$ in $K[x,y]$ is monic
 with respect to~$y$.
 Because of Chevalley's theorem~\cite[page 9, Corollary 3]{Chevalley1951}, any
-non-constant algebraic function has at least one pole. Therefore, an element $f$ is
+non-constant algebraic function has at least one pole. Equivalently, an element $f$ is
 integral at all $a\in\bar K\cup\{\infty\}$ if and only if it is constant.
 
 For an element $f\in A$ to have a ``pole'' at $a\in\bar K\cup\{\infty\}$ means
@@ -369,7 +369,7 @@ $\sum_{i=1}^n f_i\omega_i$ have no chance to cancel each other.
 
 A $K(x)$-vector space basis $\{\omega_1,\dots,\omega_n\}$ of $A$ is
 called \emph{normal} at $a\in\bar K\cup\{\infty\}$ if there exist $r_1,\dots,r_n\in
-K(x)$ such that $r_1\omega_1,\dots,r_n\omega_n$ is a local integral basis
+K(x)$ such that $\{r_1\omega_1,\dots,r_n\omega_n\}$ is a local integral basis
 at~$a$. Trager shows how to construct
 an integral basis which is normal at infinity from a given integral basis and
 a given local integral basis at infinity~\cite{trager84}.
@@ -426,8 +426,8 @@ and the coefficients of $g$ are proper rational functions (i.e., their numerator
 have smaller degree than their denominators).
 
 It was observed that Hermite reduction itself often takes less time than the construction
-of an integral basis. If Hermite reduction is applied to some other basis instead
-of an integral basis, it either succeeds or it runs into a division by zero.
+of an integral basis. If Hermite reduction is applied to some other basis, for instance
+the standard basis $\{1,y,\dots,y^{n-1}\}$, it either succeeds or it runs into a division by zero.
 Bronstein~\cite{bronstein98a} noticed that when a division by zero occurs, then the basis can
 be replaced by some other basis that is a little closer to an integral basis, just
 as much as is needed to avoid this particular division by zero. After finitely many
@@ -436,7 +436,7 @@ output. This variant is known as lazy Hermite reduction.
 
 \section{Telescoping via reductions: \hskip0ptplus1fill\break first approach} \label{SECT:CT-1}
 Recall from the introduction that reduction-based creative telescoping requires
-some $K$-linear reduction map $[\cdot]\colon A\to A$ with the property that
+some $K$-linear map $[\cdot]\colon A\to A$ with the property that
 $f-[f]$ is integrable in $A$ for every $f\in A$. This is sufficient for the
 correctness of the method, but additional properties are needed in order to
 ensure that the method terminates.
@@ -516,7 +516,7 @@ we see that the new integrand has a double root at infinity.
 
 Moreover, since the action of $\partial_t$ on series domains is defined coefficient-wise,
 it follows that when $f$ has at least a double root at infinity (with respect to~$x$),
-this is also true for $\partial_t\cdot f, \partial_t^2\cdot f, \partial_t^3\cdot f,\dots$,
+then this is also true for $\partial_t\cdot f, \partial_t^2\cdot f, \partial_t^3\cdot f,\dots$,
 and then also for every $K$-linear combination $p_0f+p_1\partial_t\cdot f+\cdots+p_r\partial_t^r\cdot f$.
 Thus Theorem~\ref{thm:intiff0} implies that $p_0+p_1\partial_t+\cdots+p_r\partial_t^r$ is a telescoper for $f$ if
 \emph{and only if} $[p_0+p_1\partial_t+\cdots+p_r\partial_t^r]=0$.
@@ -534,7 +534,7 @@ the telescoper.
 \begin{example}\label{ex:ct}
 We consider the algebraic function $f=y/x^2$ where $y$ is a solution of the
 third-degree polynomial equation $m(x,y) = y^3 + y + x + t = 0$. An integral
-basis for $A=K(x)[y]/\<m>$ that is normal at infinity is given by
+basis for $A=K(x)[y]/\langle m\rangle$ that is normal at infinity is given by
 $\omega_1=1$, $\omega_2=y$, $\omega_3=y^2$.  This means that employing lazy
 Hermite reduction avoids completely the computation of an integral basis in
 this example.
@@ -601,7 +601,7 @@ additional reduction, called \emph{polynomial reduction,} which we apply after
 Hermite reduction. We then show that the combined reduction (Hermite reduction
 followed by polynomial reduction) has the desired dimension property for the
 space of remainders. As a result, we obtain a new bound on the order of the
-telescoper, which is similar to that in~\cite{chen14a}.
+telescoper, which is similar to those in~\cite{chen12d,chen14a}.
 
 In this approach, we use two integral bases. First we use a global integral basis (not
 necessarily normal at infinity) in order to perform Hermite reduction. Then we write the
@@ -642,7 +642,7 @@ decomposes as
 \end{equation}
 
 We now introduce the \emph{polynomial reduction} whose goal is to confine the $u_i$ to a finite-dimensional
-vector space over~$K$. Similar reductions had been introduced and used in creative telescoping
+vector space over~$K$. Similar reductions have been introduced and used in creative telescoping
 for hyperexponential functions~\cite{bostan13a} and hypergeometric terms~\cite{chen15a}.
 Let $V = (\nu_1, \ldots, \nu_n)^T\in A^n$ be such that its entries form a $K(x)$-basis of~$A$,
 and let $a\in K[x]$ and $B = (b_{i, j})\in K[x]^{n \times n}$ be such that $aV'=BV$ and
@@ -790,7 +790,7 @@ After performing the Hermite reduction on $f$, we get
 where~$P = (v_1, \ldots, v_n)\in K[x]^n$ and $U = (u_1, \ldots, u_n)\in K[x]^n$
 with~$u_i, v_i$ introduced in~\eqref{EQ:h}. By Lemma~\ref{LM:CB}, there exists
 $T := \diag(x^{-\tau_1}, \ldots, x^{-\tau_n}) \in K(x)^{n\times n}$
-such that $V = TW$ is normal at $0$ and integral at any other places (including the infinity). Note that we can
+such that $V = TW$ is normal at $0$ and integral at any other places (including infinity). Note that we can
 choose~$T$ as the identity matrix if~$\deg_x(M)\leq \deg_x(e)-1$.
 By taking derivatives, we get
 \[V' = \left(T' + T\frac{M}{e}\right)T^{-1}V = \frac{B}{a}V, \]
@@ -880,8 +880,8 @@ With algebraic functions being settled, it is natural to wonder about a possible
 reduction-based creative telescoping algorithm for D-finite functions. Recall
 that in this setting we consider an operator $L\in K(x)[\partial_x]$ instead of a minimal
 polynomial $m\in K[x,y]$ and instead of an algebraic field extension
-$K(x)[y]/\<m>$ we consider the $K(x)[\partial_x]$-left-module
-$A=K(x)[\partial_x]/\<L>$. Then the element $1\in A$ is a solution of $L$
+$K(x)[y]/\langle m\rangle$ we consider the $K(x)[\partial_x]$-left-module
+$A=K(x)[\partial_x]/\langle L\rangle$. Then the element $1\in A$ is a solution of $L$
 because $L\cdot 1=L=0$ in $A$ by construction. If $n=\deg_{\partial_x}L$, then
 the general element of $A$ has the form
 $f=f_0+f_1\partial_x+\cdots+f_{n-1}\partial_x^{n-1}$ for some
@@ -899,10 +899,10 @@ every $a\in\bar K\cup\{\infty\}$ although it does not have a pole anywhere. For 
 this is not possible by Chevalley's theorem, and this fact enters in an essential way in the proofs of
 Sections~\ref{SECT:CT-1} and~\ref{sec:polynomial}. The lack of Chevalley's theorem is not an artefact of a (possibly
 wrong) treatment of logarithmic terms. Because of the Fuchs relation \cite[p.~241]{schlesinger95} there exist operators
-$L\in K(x)[\partial_x]$ whose series solutions at every point $a\in\bar K\cup\{\infty\}$ have no logarithmic
+$L\in K(x)[\partial_x]$ whose series solutions at any point $a\in\bar K\cup\{\infty\}$ have no logarithmic
 terms, only nonnegative exponents, and which are nevertheless not constant.
 
-For the time being, the possibility of such operators are a severe obstruction to a possible generalization of
+For the time being, the existence of such operators is a severe obstruction to a possible generalization of
 the termination arguments for reduction-based creative telescoping from algebraic functions to Fuchsian D-finite
 functions. We hope to explore this topic further in the future.
 

@@ -549,8 +549,8 @@ Then for the differentiation matrix~$\frac1eM$, a simple calculation yields
   \frac{1}{e} \begin{pmatrix} 0 & 0 & 0 \\[1pt] -4 & 9 (t+x) & -6 \\[1pt] 12 (t+x) & 4 & 18 (t+x) \\ \end{pmatrix}
   \begin{pmatrix} \omega_1 \\[1pt] \omega_2 \\[1pt] \omega_3 \end{pmatrix}
 \]
-with $e=27x^2+54xt+27t^2+4$. Thus we write $f=\sum_{i=1}^3 (f_i/d) \omega_i$ with
-$f_1=f_3=0$, $f_2=e$, and $d=x^2e$.  After a single step the Hermite reduction
+with $e=27x^2+54xt+27t^2+4$. Thus we write $f=\sum_{i=1}^3 (f_i/D) \omega_i$ with
+$f_1=f_3=0$, $f_2=e$, and $D=x^2e$.  After a single step the Hermite reduction
 delivers the result
 \[
   f = \biggl(\, \underbrace{\vphantom{\frac{1}{(x)}} -\frac{y}{x}}_{\textstyle=g_0} \;\biggr)' +\>
@@ -561,24 +561,29 @@ $f$ is not integrable in~$A$. Hence we continue by applying Hermite reduction to
 \[
   \partial_tf = \frac{-6y^2+9(x+t)y-4}{x^2(27x^2+54xt+27t^2+4)}.
 \]
+Note that we could as well take $\partial_th_0$ instead of $\partial_tf$, which
+in general should result in a faster algorithm.
 Again after a single reduction step, the decomposition $\partial_tf = g_1' + h_1$
 is obtained, where
 \begin{align*}
   g_1 &= \frac{6y^2-9ty+4}{x(27t^2+4)} \\
   h_1 &= \frac{6\bigl((9x+27t)y^2-(27xt+27t^2-2)y+6x+18t\bigr)}{x(27t^2+4)(27x^2+54xt+27t^2+4)}.
 \end{align*}
-Since $h_0$ and $h_1$ are linearly independent over $C(t)$, we continue with
-$\partial_t^2f$, which is given by
+Since $h_0$ and $h_1$ are linearly independent over $K=C(t)$, we continue with
+$\partial_t^2f$.
+% = \frac{6\bigl(27(x+t)y^2-(27x^2+54xt+27t^2-2)y+18(x+t)\bigr)}{x^2(27x^2+54xt+27t^2+4)^2}.
+This time however, it is preferable to start the Hermite reduction
+with $\partial_th_1$, which is given by
 \[
-  \frac{6\bigl(27(x+t)y^2-(27x^2+54xt+27t^2-2)y+18(x+t)\bigr)}{x^2(27x^2+54xt+27t^2+4)^2}.
+  \frac{1}{x(27t^2+4)^2(27x^2+54xt+27t^2+4)^2}.
 \]
-This time the Hermite reduction consists of two steps, one with $v=x$ and one
-with $v=27x^2+54xt+27t^2+4=e$. The remainder $h_2$ is
+Setting $v=27x^2+54xt+27t^2+4=e$ and doing one reduction step,
+the Hermite remainder $h_2$ is found to be
 \begin{multline*}
  \bigl(6\bigl((-729xt-1539t^2+96)y^2+(1215xt^2-144x+1215t^3-{}\\
- 306t)y-486xt-1026t^2+64\bigr)\bigr)\mathrel{\big\slash}\bigl(x(27t^2+4)^2e\bigr)
+ 306t)y-486xt-1026t^2+64\bigr)\bigr)\mathrel{\big\slash}\bigl(x(27t^2+4)^2e\bigr).
 \end{multline*}
-and the integrable part $g_2$ is not displayed here for space reasons.
+The corresponding integrable part $g_2$ is not displayed here for space reasons.
 
 Now one can find a linear dependence between $h_0,h_1,h_2$ that gives rise to the telescoper
 $(27t^2+4)\partial_t^2+81t\partial_t+24$, which is indeed the minimal one for this example.
@@ -865,7 +870,7 @@ with finding a $K$-linear combination among the $v_i$:
  v_1 &= \frac{6\bigl(27y^2t-(27t^2-2)y+18t\bigr)}{(27t^2+4)^2},\\
  v_2 &= \frac{6\bigl((96-1539t^2)y^2+(1215t^3-306t)y-1026t^2+64\bigr)}{(27t^2+4)^3}.
 \end{align*}
-Indeed, we obtain the same telescoper as in Example~\ref{ex:ct}.
+As expected, we obtain the same telescoper as in Example~\ref{ex:ct}.
 \end{example}
 
 

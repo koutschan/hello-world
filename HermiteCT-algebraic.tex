@@ -517,7 +517,7 @@ we see that the new integrand has a double root at infinity.
 Moreover, since the action of $\partial_t$ on series domains is defined coefficient-wise,
 it follows that when $f$ has at least a double root at infinity (with respect to~$x$),
 this is also true for $\partial_t\cdot f, \partial_t^2\cdot f, \partial_t^3\cdot f,\dots$,
-and then also for every $K$-linear combination $p_0f+p_1\partial_tf+\cdots+p_r\partial_t^rf$.
+and then also for every $K$-linear combination $p_0f+p_1\partial_t\cdot f+\cdots+p_r\partial_t^r\cdot f$.
 Thus Theorem~\ref{thm:intiff0} implies that $p_0+p_1\partial_t+\cdots+p_r\partial_t^r$ is a telescoper for $f$ if
 \emph{and only if} $[p_0+p_1\partial_t+\cdots+p_r\partial_t^r]=0$.
 
@@ -559,21 +559,21 @@ delivers the result
 As the Hermite remainder~$h_0$ is nonzero, Theorem~\ref{thm:intiff0} tells us that
 $f$ is not integrable in~$A$. Hence we continue by applying Hermite reduction to
 \[
-  \partial_tf = \frac{-6y^2+9(x+t)y-4}{x^2(27x^2+54xt+27t^2+4)}.
+  \partial_t\cdot f = \frac{-6y^2+9(x+t)y-4}{x^2(27x^2+54xt+27t^2+4)}.
 \]
-Note that we could as well take $\partial_th_0$ instead of $\partial_tf$, which
+Note that we could as well take $\partial_t\cdot h_0$ instead of $\partial_t\cdot f$, which
 in general should result in a faster algorithm.
-Again after a single reduction step, the decomposition $\partial_tf = g_1' + h_1$
+Again after a single reduction step, the decomposition $\partial_t\cdot f = g_1' + h_1$
 is obtained, where
 \begin{align*}
   g_1 &= \frac{6y^2-9ty+4}{x(27t^2+4)} \\
   h_1 &= \frac{6\bigl((9x+27t)y^2-(27xt+27t^2-2)y+6x+18t\bigr)}{x(27t^2+4)(27x^2+54xt+27t^2+4)}.
 \end{align*}
 Since $h_0$ and $h_1$ are linearly independent over $K=C(t)$, we continue with
-$\partial_t^2f$.
+$\partial_t^2\cdot f$.
 % = \frac{6\bigl(27(x+t)y^2-(27x^2+54xt+27t^2-2)y+18(x+t)\bigr)}{x^2(27x^2+54xt+27t^2+4)^2}.
 This time however, it is preferable to start the Hermite reduction
-with $\partial_th_1$, which is given by
+with $\partial_t\cdot h_1$, which is given by
 \[
   \frac{1}{x(27t^2+4)^2(27x^2+54xt+27t^2+4)^2}.
 \]
@@ -820,25 +820,25 @@ polynomial reduction.
 
 Let $W, V, e, \lambda, M, B$ be as in Theorem~\ref{THM:polyred}.
 To construct a telescoper for~$f\in A$,
-we first consider the additive decompositions of the successive derivatives $\partial_t^i(f)$ for $i\in \bN$.
+we first consider the additive decompositions of the successive derivatives $\partial_t^i\cdot f$ for $i\in \bN$.
 Assume that
-\[\partial_t(W) = \frac{1}{\tilde{e}} \tilde{M}W \quad \text{and}
-\quad \partial_t(V) = \frac{1}{x^{\tilde{\lambda}} \tilde{e}} \tilde{B}V,\]
+\[\partial_t\cdot W = \frac{1}{\tilde{e}} \tilde{M}W \quad \text{and}
+\quad \partial_t\cdot V = \frac{1}{x^{\tilde{\lambda}} \tilde{e}} \tilde{B}V,\]
 where $\tilde e \in K[x]$, $\tilde M, \tilde B\in K[x]^{n\times n}$, and $\tilde \lambda \in \bN$.
 Since $\partial_t$ and~$\partial_x$ commute, Proposition 7 in~\cite{chen14a}
 implies that $\tilde e \mid e$ and $x^{\tilde{\lambda}} \tilde{e} \mid x^\lambda e$, as polynomials in $K[x]$.
 So we can just take $\tilde e = e$ and $\tilde{\lambda}  = \lambda$ by multiplying $\tilde M, \tilde B$ by some factors
-of~$x^\lambda e$. A direct calculation yields $\partial_t(f) = (\partial_t(g))' + h$,
+of~$x^\lambda e$. A direct calculation yields $\partial_t\cdot f = (\partial_t\cdot g)' + h$,
 where
-\[h = \left(\partial_t(\frac{P}{d})+\frac{P\tilde M}{de}\right)W + \left(\partial_t(\frac{Q}{x^\lambda e})+ \frac{Q\tilde B}{x^{2\lambda} e^2}\right)V.\]
+\[h = \left(\partial_t\cdot\frac{P}{d}+\frac{P\tilde M}{de}\right)W + \left(\partial_t\cdot\frac{Q}{x^\lambda e}+ \frac{Q\tilde B}{x^{2\lambda} e^2}\right)V.\]
 This implies that the squarefree part of the denominator of $h$ divides $xde$. Applying Hermite reduction and polynomial reduction
 to~$h$ yields
 \[ h = \tilde g_1' + \frac{1}{d} P_1W + \frac{1}{x^\lambda e} Q_1V,\]
 where $P_1, Q_1\in K[x]^n$ with $\deg_x(P_1) < \deg_x(d)$ and $Q_1\in N_V$.
 Repeating this discussion, we get the following lemma.
 \begin{lemma}\label{LEM:idtf}
-For any $i\in \bN$, the derivative $\partial_t^i(f)$ has an additive decomposition of the form
-\[ \partial_t^i(f) = g_i' + \frac{1}{d} P_iW + \frac{1}{x^\lambda e} Q_iV,\]
+For any $i\in \bN$, the derivative $\partial_t^i\cdot f$ has an additive decomposition of the form
+\[ \partial_t^i\cdot f = g_i' + \frac{1}{d} P_iW + \frac{1}{x^\lambda e} Q_iV,\]
 where $g_i\in A$, $P_i, Q_i\in K[x]^n$ with $\deg_x(P_i) < \deg_x(d)$ and $Q_i\in N_V$.
 \end{lemma}
 As application of the above lemma, we can compute the minimal telescoper for $f$ by finding the first
@@ -872,7 +872,6 @@ with finding a $K$-linear combination among the $v_i$:
 \end{align*}
 As expected, we obtain the same telescoper as in Example~\ref{ex:ct}.
 \end{example}
-
 
 
 \section{The D-finite Case}

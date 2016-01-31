@@ -72,8 +72,8 @@ by the President Fund of the Academy of
 Mathematics and Systems Science, CAS (2014-cjrwlzx-chshsh). This work was
 also supported by the Fields Institute's 2015 Thematic Program on Computer
 Algebra in Toronto, Canada.\\
-M. Kauers was supported by FWF grants F50-04 and Y464-N18.\\
-C. Koutschan was supported by the Austrian Science Fund (FWF): W1214.
+M.\ Kauers was supported by the Austrian Science Fund (FWF): F50-04 and Y464-N18.\\
+C.\ Koutschan was supported by the Austrian Science Fund (FWF): W1214.
 }}
 
 \numberofauthors{1}
@@ -136,7 +136,7 @@ $Q$ (which may be zero and need not be free of~$x$). In this case, we call $P$
 a telescoper for~$f$, and $Q$ a certificate for~$P$.
 
 Creative telescoping is the backbone of definite integration. Readers not
-familiar with this technique are refered to the literature~\cite{PWZbook1996,Zeilberger1990c,Zeilberger1991,Zeilberger1990,Koepf1998}
+familiar with this technique are referred to the literature~\cite{PWZbook1996,Zeilberger1990c,Zeilberger1991,Zeilberger1990,Koepf1998}
 for motivation, theory, algorithms, implementations, and applications. There are
 several ways to find telescopers for a given $f\in \mathfrak{D}$. In recent years, an
 approach has become popular which has the feature that it can find a telescoper
@@ -144,7 +144,7 @@ without also constructing the corresponding certificate. This is interesting
 because certificates tend to be much larger than telescopers, and in some
 applications only the telescoper is of interest. This approach was first
 formulated for rational functions $f\in C(t,x)$ in~\cite{BCCL2010} and later
-generalized to rational functions in several variables~\cite{bostan13}, to
+generalized to rational functions in several variables~\cite{bostan13, lairez15}, to
 hyperexponential functions~\cite{bostan13a} and, for the shift case, to hypergeometric
 terms~\cite{chen15a} and binomial sums~\cite{bostan15}. In the present paper, we will extend
 the approach to algebraic functions.
@@ -154,7 +154,7 @@ $x$-constants $\mathrm{Const}_x(\mathfrak{D})=\{\,c\in \mathfrak{D}:c'=0\,\}$ fo
 is a vector space over the field of $x$-constants. Assume further that there is
 some $\mathrm{Const}_x(\mathfrak{D})$-linear map $[\cdot]\colon \mathfrak{D}\to \mathfrak{D}$ such that for every
 $f\in \mathfrak{D}$ there exists a $g\in \mathfrak{D}$ with $f-[f]=g'$. Such a map is called a
-\emph{reduction.} For example, in $\mathfrak{D}=C(t,x)$ Hermite reduction produces for
+\emph{reduction.} For example, in $\mathfrak{D}=C(t,x)$ Hermite reduction~\cite{Hermite1872} produces for
 every $f\in \mathfrak{D}$ some $g\in \mathfrak{D}$ such that $f-g'$ is either zero or a rational function
 with a square-free denominator. In this case, we can take $[f]=f-g'$.
 In order to find a telescoper, we can compute $[f]$, $[\partial_t\cdot f]$, $[\partial_t^2\cdot f]$, \dots,
@@ -241,7 +241,7 @@ so $\frac{d}{dy}m$ is invertible in $A=K(x)[y]/\<m>$.
 Note that we have $x'=1$ and $c'=0$ for all $c\in K=C(t)$, in particular $t'=0$.
 The derivative of an arbitrary
 element $f\in A$, say $f=p(x,y)$ for some $p\in K(x)[y]$ of degree less than~$n$, is
-$f'=(\frac{d}{dx}p)(x,y)+(\frac d{dy}p)(x,y)y'$.
+\[f'=(\frac{d}{dx}p)(x,y)+(\frac d{dy}p)(x,y)y'.\]
 We have an action of the algebra $K(x)[\partial_x]$ of differential operators on~$A$.
 
 The derivations on $A$ and on the series domains are compatible in the sense
@@ -801,7 +801,8 @@ We then get the decomposition~\eqref{EQ:add} by setting
 $g = \tilde g + \tilde U_1 V$ and~$Q = U_2$.
 
 Assume that $f$ is integrable. Then Lemma~\ref{LEM:d} implies that $d\in K$.
-Since $\deg_x(P) < \deg_x(d)$, we have $P=0$. Then $\frac{1}{x^\lambda e} QV = \sum_{i=1}^n (a_i \nu_i)'$
+Since $\deg_x(P) < \deg_x(d)$, we have $P=0$. Then
+\[\frac{1}{x^\lambda e} QV = \sum_{i=1}^n (a_i \nu_i)'\]
 for some $a_i\in K[x]$. So $Q \in \im(\phi_V)$.
 Since $\im(\phi_V) \cap N_V = \{0\}$, $Q=0$.
 \end{proof}

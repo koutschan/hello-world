@@ -116,21 +116,21 @@ hyperexponential functions and extended to the algebraic case in this paper.
 
 The classical question in symbolic integration is whether the integral of
 a given function can be written in \lq\lq closed form\rq\rq. In its most restricted form,
-the question is whether for a given function~$f$ belonging to some domain $\mathfrak{D}$
-there exists another function~$g$, also belonging to~$\mathfrak{D}$, such that $f=g'$. For
-example, if $\mathfrak{D}$ is the field of rational functions, then for $f=1/x^2$ we can
+the question is whether for a given function~$f$ belonging to some domain $D$
+there exists another function~$g$, also belonging to~$D$, such that $f=g'$. For
+example, if $D$ is the field of rational functions, then for $f=1/x^2$ we can
 find $g=-1/x$, while for $f=1/x$ no suitable $g$ exists. When no $g$ exists
-in~$\mathfrak{D}$, there are several other questions we may ask. One possibility is to ask
-whether there is some extension~$\mathfrak{E}$ of $\mathfrak{D}$ such that in $\mathfrak{E}$ there exists some
+in~$D$, there are several other questions we may ask. One possibility is to ask
+whether there is some extension~$E$ of $D$ such that in $E$ there exists some
 $g$ with $g'=f$. For example, in the case of elementary functions, Liouville's
-principle restricts the possible extensions~$\mathfrak{E}$, and there are algorithms which
+principle restricts the possible extensions~$E$, and there are algorithms which
 construct such extensions whenever possible. Another possibility is
-to ask whether for some modification $\tilde f\in \mathfrak{D}$ of~$f$ there exists a $g\in
-\mathfrak{D}$ such that $\tilde f=g'$. Creative telescoping is a question of this
-type. Here we are dealing with domains~$\mathfrak{D}$ containing functions in several
+to ask whether for some modification $\tilde f\in D$ of~$f$ there exists a $g\in
+D$ such that $\tilde f=g'$. Creative telescoping is a question of this
+type. Here we are dealing with domains~$D$ containing functions in several
 variables, say $x$ and~$t$, and the question is whether there is a linear
 differential operator~$P$, nonzero and free of~$x$, such that there exists a
-$g\in \mathfrak{D}$ with $P\cdot f=g'$, where $g'$ denotes the derivative of $g$ with
+$g\in D$ with $P\cdot f=g'$, where $g'$ denotes the derivative of $g$ with
 respect to~$x$. Typically, $g$~itself has the form $Q\cdot f$ for some operator
 $Q$ (which may be zero and need not be free of~$x$). In this case, we call $P$
 a telescoper for~$f$, and $Q$ a certificate for~$P$.
@@ -138,7 +138,7 @@ a telescoper for~$f$, and $Q$ a certificate for~$P$.
 Creative telescoping is the backbone of definite integration. Readers not
 familiar with this technique are referred to the literature~\cite{PWZbook1996,Zeilberger1990c,Zeilberger1991,Zeilberger1990,Koepf1998}
 for motivation, theory, algorithms, implementations, and applications. There are
-several ways to find telescopers for a given $f\in \mathfrak{D}$. In recent years, an
+several ways to find telescopers for a given $f\in D$. In recent years, an
 approach has become popular which has the feature that it can find a telescoper
 without also constructing the corresponding certificate. This is interesting
 because certificates tend to be much larger than telescopers, and in some
@@ -150,34 +150,34 @@ terms~\cite{chen15a} and binomial sums~\cite{bostan15}. In the present paper, we
 the approach to algebraic functions.
 
 The basic principle of the general approach is as follows. Assume that the
-$x$-constants $\mathrm{Const}_x(\mathfrak{D})=\{\,c\in \mathfrak{D}:c'=0\,\}$ form a field and that $\mathfrak{D}$
+$x$-constants $\mathrm{Const}_x(D)=\{\,c\in D:c'=0\,\}$ form a field and that $D$
 is a vector space over the field of $x$-constants. Assume further that there is
-some $\mathrm{Const}_x(\mathfrak{D})$-linear map $[\cdot]\colon \mathfrak{D}\to \mathfrak{D}$ such that for every
-$f\in \mathfrak{D}$ there exists a $g\in \mathfrak{D}$ with $f-[f]=g'$. Such a map is called a
-\emph{reduction.} For example, in $\mathfrak{D}=C(t,x)$ Hermite reduction~\cite{Hermite1872} produces for
-every $f\in \mathfrak{D}$ some $g\in \mathfrak{D}$ such that $f-g'$ is either zero or a rational function
+some $\mathrm{Const}_x(D)$-linear map $[\cdot]\colon D\to D$ such that for every
+$f\in D$ there exists a $g\in D$ with $f-[f]=g'$. Such a map is called a
+\emph{reduction.} For example, in $D=C(t,x)$ Hermite reduction~\cite{Hermite1872} produces for
+every $f\in D$ some $g\in D$ such that $f-g'$ is either zero or a rational function
 with a square-free denominator. In this case, we can take $[f]=f-g'$.
 In order to find a telescoper, we can compute $[f]$, $[\partial_t\cdot f]$, $[\partial_t^2\cdot f]$, \dots,
-until we find that they are linearly dependent over $\mathrm{Const}_x(\mathfrak{D})$.
+until we find that they are linearly dependent over $\mathrm{Const}_x(D)$.
 Once we find a relation
 $p_0[f] + \cdots + p_r[\partial_t^r\cdot f] = 0$,
 then, by linearity,
 $[p_0 f + \cdots + p_r \partial_t^r\cdot f] = 0$,
-and then, by definition of $[\cdot]$, there exists a $g\in\mathfrak{D}$ such that $(p_0+\cdots + p_r\partial_t^r)\cdot f=g'$.
+and then, by definition of $[\cdot]$, there exists a $g\inD$ such that $(p_0+\cdots + p_r\partial_t^r)\cdot f=g'$.
 In other words, $P=p_0+\cdots + p_r\partial_t^r$ is a telescoper.
 
 There are two ways to guarantee that this method terminates. The first requires that we already know for
 other reasons that a telescoper exists. The idea is then to show that the
-reduction $[\cdot]$ has the property that when $f\in \mathfrak{D}$ is such that there
-exists a $g\in \mathfrak{D}$ with $g'=f$, then $[f]=0$. If this is the case and
+reduction $[\cdot]$ has the property that when $f\in D$ is such that there
+exists a $g\in D$ with $g'=f$, then $[f]=0$. If this is the case and
 $P=p_0+\cdots+p_r\partial_t^r$ is a telescoper for~$f$, then $P\cdot f$ is integrable
-in~$\mathfrak{D}$, so $[P\cdot f]=0$, and by linearity $[f]$, \dots, $[\partial_t^r\cdot f]$ are
-linearly dependent over $\mathrm{Const}_x(\mathfrak{D})$. This means that the method won't
+in~$D$, so $[P\cdot f]=0$, and by linearity $[f]$, \dots, $[\partial_t^r\cdot f]$ are
+linearly dependent over $\mathrm{Const}_x(D)$. This means that the method won't
 miss any telescoper. In particular, this argument has the nice feature that we
 are guaranteed to find a telescoper of smallest possible order~$r$. This
 approach was taken in~\cite{chen15a}.
-The second way consists in showing that $\{\,[f]:f\in \mathfrak{D}\,\}$ is a finite-dimensional vector space over
-$\mathrm{Const}_x(\mathfrak{D})$. This approach was taken in~\cite{BCCL2010,bostan13a}. It has the
+The second way consists in showing that $\{\,[f]:f\in D\,\}$ is a finite-dimensional vector space over
+$\mathrm{Const}_x(D)$. This approach was taken in~\cite{BCCL2010,bostan13a}. It has the
 nice additional feature that every bound for the dimension of this vector space
 gives rise to a bound for the order of the telescoper. In particular, it implies
 the existence of a telescoper.
@@ -242,7 +242,7 @@ Note that we have $x'=1$ and $c'=0$ for all $c\in K=C(t)$, in particular also $t
 The derivative of an arbitrary
 element $f\in A$, say $f=p(x,y)$ for some $p\in K(x)[y]$ of degree less than~$n$, is
 \[f'=(\frac{d}{dx}p)(x,y)+(\frac d{dy}p)(x,y)y'.\]
-We have an action of the algebra $K(x)[\partial_x]$ of differential operators on~$A$.
+Thus we have an action of the algebra $K(x)[\partial_x]$ of differential operators on~$A$.
 
 The derivations on $A$ and on the series domains are compatible in the sense
 that for every $f\in A$, the series associated to $f'$ are precisely the
@@ -462,12 +462,12 @@ can happen.
 \renewcommand{\labelenumi}{(\alph{enumi})}
 \begin{enumerate}
 \item The polynomial~$f_i$ has positive degree.  This means that $f_i+g_i$ has a
-pole at infinity, and thus $(f_i+g_i)\omega_i$ has a pole at infinity because
-$\omega_i$ has no poles at finite places and therefore no root at infinity, and
-because the $g_i$ are proper rational functions.
-\item The basis element $\omega_i$ is not constant and $f_i\neq0$. This
-  also implies that $(f_i+g_i)\omega_i$ has a pole at infinity, again because
-  the $g_i$ are proper rational functions.
+  pole at infinity, because the $g_i$ are proper rational functions.
+  Thus $(f_i+g_i)\omega_i$ has a pole at infinity, because $\omega_i$ has no poles
+  at finite places and therefore no root at infinity.
+\item The integral basis element $\omega_i$ is not constant and $f_i$ is not zero. Hence
+  $\omega_i$ has a pole at infinity, and this also implies that $(f_i+g_i)\omega_i$
+  has a pole at infinity, again employing the fact that $g_i$ is a proper rational function.
 \end{enumerate}
 In both cases, therefore, $f+g=\sum_{i=1}^n(f_i+g_i)\omega_i$ has a pole at
 infinity by Lemma~\ref{lemma:3}.
@@ -528,16 +528,16 @@ integral basis that is normal at infinity as reduction function succeeds when
 applied to an integrand $f\in A$ that has a double root at infinity.
 In particular, the method finds a telescoper of smallest possible order.
 Again, if $f$ has no double root at infinity, we can produce one by a change of variables.
-Note that a change of variables $x\to a+1/x$ with $a\in C$ has no affect on
+Note that a change of variables $x\to a+1/x$ with $a\in C$ has no effect on
 the telescoper.
 
 \begin{example}\label{ex:ct}
 We consider the algebraic function $f=y/x^2$ where $y$ is a solution of the
 third-degree polynomial equation $m(x,y) = y^3 + y + x + t = 0$. An integral
 basis for $A=K(x)[y]/\langle m\rangle$ that is normal at infinity is given by
-$\omega_1=1$, $\omega_2=y$, $\omega_3=y^2$.  This means that employing lazy
+$\omega_1=1$, $\omega_2=y$, $\omega_3=y^2$.  (This means that employing lazy
 Hermite reduction avoids completely the computation of an integral basis in
-this example.
+this example.)
 
 By solving Equation~\eqref{eq:yprime} for $y'$ we obtain
 \[
@@ -680,8 +680,8 @@ space it is generated by
 \[
   \cS_\mu := \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, 0\leq j\leq \mu\bigr\}.
 \]
-Any element $q\in K[x]^n$ of degree at most $\mu$ can be expressed in the
-basis $\cS_\mu$ as a vector $\vec{q}\in K^{n(\mu+1)}$ (in the following the
+Any element $p\in K[x]_\mu^n$ can be expressed in the
+basis $\cS_\mu$ as a vector $\vec{p}\in K^{n(\mu+1)}$ (in the following the
 decoration~\raisebox{-1pt}{$\vec{}\;$} always indicates such a typecast).
 
 \begin{defi}
@@ -700,7 +700,7 @@ with respect to~$V$.
 \begin{prop}\label{PROP:finite}
 Let $a\in K[x]$ and $B\in K[x]^{n \times n}$ be such that $aV'=BV$, as before.
 If $\deg_x(B) \leq \deg_x(a)-1$, then $N_V$ is a finite-dimensional
-vector space over~$K$.
+$K$-vector space.
 \end{prop}
 \begin{proof}
 In addition to the proof of the assertion, we also explain how to determine
@@ -746,7 +746,7 @@ looking at the echelon form of the matrix ${M_{\ell}}$.
 \end{proof}
 
 In general, the condition $\deg_x(B) \leq \deg_x(a)-1$ may not hold for an arbitrary basis~$V$ of~$A$.
-The following lemma shows that we can perform a simple change of bases to make the condition hold.
+The following lemma shows that we can perform a simple change of basis to make the condition hold.
 
 \begin{lemma}\label{LM:CB}
 Let~$W =\{\omega_1, \ldots, \omega_n\}$ be an integral basis of~$A$ such that it is also normal at infinity. Then
@@ -782,7 +782,7 @@ Then any element $f\in A$ can be decomposed into
 f = g' + \frac{1}{d} PW + \frac{1}{x^\lambda e} QV,
 \end{equation}
 where $g\in A$, $d\in K[x]$ is squarefree and $\gcd(d, e)=1$, $P, Q\in K[x]^n$ with $\deg_x(P) < \deg_x(d)$ and $Q\in N_V$, which is
-a finite-dimensional vector space over $K$. Moreover, $P, Q$ are zero if and only if $f$ is integrable in~$A$.
+a finite-dimensional $K$-vector space. Moreover, $P, Q$ are zero if and only if $f$ is integrable in~$A$.
 \end{theorem}
 \begin{proof}
 After performing the Hermite reduction on $f$, we get
@@ -809,7 +809,7 @@ Assume that $f$ is integrable. Then Lemma~\ref{LEM:d} implies that $d\in K$.
 Since $\deg_x(P) < \deg_x(d)$, we have $P=0$. Then
 \[\frac{1}{x^\lambda e} QV = \sum_{i=1}^n (a_i \nu_i)'\]
 for some $a_i\in K[x]$. So $Q \in \im(\phi_V)$.
-Since $\im(\phi_V) \cap N_V = \{0\}$, $Q=0$.
+Since $\im(\phi_V) \cap N_V = \{0\}$, it follows that $Q=0$.
 \end{proof}
 The decomposition in~\eqref{EQ:add} is called an \emph{additive decomposition} of~$f$ with respect to~$x$.
 
@@ -842,7 +842,7 @@ For any $i\in \bN$, the derivative $\partial_t^i\cdot f$ has an additive decompo
 where $g_i\in A$, $P_i, Q_i\in K[x]^n$ with $\deg_x(P_i) < \deg_x(d)$ and $Q_i\in N_V$.
 \end{lemma}
 As application of the above lemma, we can compute the minimal telescoper for $f$ by finding the first
-linear dependence among $(P_i, Q_i)$'s over~$K$. We also obtain an upper bound for the order of telescopers.
+linear dependence among the $(P_i, Q_i)$ over~$K$. We also obtain an upper bound for the order of telescopers.
 \begin{corollary}
 Every $f\in A$ has a telescoper of order at most $n\deg_x(d) + \dim_K(N_V)$.
 \end{corollary}
@@ -854,7 +854,6 @@ to the Hermite remainders $h_0,h_1,h_2$. The matrix~$M$ computed before
 satisfies the degree condition of Proposition~\ref{PROP:finite}, so no
 change of basis is needed. First we compute polynomials
 $u_i,v_i\in K[x,y]$ such that for $i=0,1,2$ we have
-% TODO this d is not the same as the d in Section 3
 \[
   h_i = \frac{u_i}{e} + \frac{v_i}{d} = \frac{u_i}{27x^2+54xt+27t^2+4} + \frac{v_i}{x}.
 \]
@@ -888,7 +887,7 @@ $f=f_0+f_1\partial_x+\cdots+f_{n-1}\partial_x^{n-1}$ for some
 $f_0,\dots,f_{n-1}\in K(x)$. Very much as in the algebraic case, there is a natural way
 to associate certain series objects to the elements of~$A$. Based on these
 series objects, a notion of integrality was proposed last year~\cite{kauers15b}, and an
-algorithm for computing integral basis has been given for so-called Fuchsian
+algorithm for computing integral bases has been given for so-called Fuchsian
 operators~$L$.
 
 It turns out that the Hermite reduction of Section~\ref{sec:hermite} also works in this setting, if we say that

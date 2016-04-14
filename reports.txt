@@ -1,0 +1,241 @@
+
+----------------------- REVIEW 1 ---------------------
+PAPER: 16
+TITLE: Reduction-Based Creative Telescoping for Algebraic Functions
+AUTHORS: Shaoshi Chen, Manuel Kauers and Christoph Koutschan
+
+
+----------- Review -----------
+The authors consider the problem of constructing a differential telescoper for a given  algebraic function and propose an approach,
+which in some respects is new. This work is a continuation of work performed and previously published by the authors
+and their colleagues. The relevant context is formed by approaches based on the reduction 
+(extracting  an integrated part of a given function). These approaches can be effective, since they often simplify the function for which
+one constructs a telescoper for later finding the definite integral. The reduction, however, does not avoid the problems associated with those
+many algorithms for the telescoper constructing considerable amount of time spent on the computing the so-called certificate, which in many 
+cases
+is not needed to obtain the definite integral. However, the algorithm can be difficult to release from the calculation of the certificate, as it
+calculated jointly with coefficients of the telescoper. In the submitted paper the authors modify and improve the previously proposed 
+their reduction,
+which is a combination of the Trager reduction and the  polynomial reduction. The novelty and improvement are in the fact that the proposed
+approach avoids the computing the certificate, which should speed up the construction of telescopers for algebraic functions.
+I think that the work can be accepted for presentation at  ISSAC'2016.
+
+In the list of references, the paper [21] should   be  alphabetically .immediately after [13], i.e., have the number 14 in the list.
+
+MK: DONE.
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 16
+TITLE: Reduction-Based Creative Telescoping for Algebraic Functions
+AUTHORS: Shaoshi Chen, Manuel Kauers and Christoph Koutschan
+
+
+----------- Review -----------
+This is an excellent paper, solving an interesting point, and I only have one
+substantive point.
+
+Theorem 6 says ``suppose that $f\in A$ has a double root at infinity (i.e.
+every series in $\overline K\langle\langle x^{-1}\rangle\rangle$ associated to
+$f$ only contains monomials $(1/x)^\alpha$ with $\alpha\ge2$)''.  But the
+conditio in brackets is for \emph{at least} a double root, not for precisely a
+double root. I think the authors mean "at least".
+
+MK: DONE.
+
+
+On page 1, the authors say ``for some applications'' - it would be nice to
+have an idea of which applications the authors had in mind. In general, there
+is room to give some applications of the result in this paper, e.g. a definite
+integral.
+
+MK: DONE.
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 16
+TITLE: Reduction-Based Creative Telescoping for Algebraic Functions
+AUTHORS: Shaoshi Chen, Manuel Kauers and Christoph Koutschan
+
+
+----------- Review -----------
+CONTENT
+=======
+
+The submission studies the problem of creative telescoping for single integrals with a parameter of algebraic functions.  The question is to compute a linear differential equation with polynomial coefficients satisfied by a function y(t) of the form
+  	y(t) = int F(x,t) dx
+where F(x,t) is an algebraic function, that is there exist a non zero polynomial P(T, x, t) such that P(F(x,t),x,t)=0.
+
+Numerous publications are motivated by this problem and there already exist algorithms to solve it for algebraic functions and much more general functions. However, finding efficient algorithms and understanding the complexity of creative telescoping is still an issue in many cases.
+
+More specifically, creative telescoping is about finding a linear differential operator P(t, ∂_t) such that P(t, ∂_t)F = ∂_x G for some function G.  The operator P is called “telescoper” and the function G is called “certificate” because it makes it possible to check the correctness of P easily, independently of the algorithm used to compute it. Unfortunately, the certificate is often much bigger than the telescoper, which is usually the only interesting part.
+
+Recently, a new line of algorithms for creative telescoping, based on reduction rather than on ansatz, has appeared.  The main advantage is that they do not compute the certificate and as a consequence they can be much more efficient than previous algorithms. However, such algorithms are known only in specific cases: rational functions (with any number of variables, equivalent to the algebraic case) [BCCL, BLS, CKS, L], hyperexponential functions (with one integration variable) [BCCLX] and some discrete analogues.  One of the important questions in symbolic integration today is to find such an algorithm for general multivariate holonomic functions.
+
+The authors propose here a reduction-based algorithm for algebraic functions, in the case of one variable of integration. The main tool is a generalization of Hermite reduction to algebraic functions due to Trager. It leads to an algorithms in the same way as Hermite reduction led to a creative telescoping algorithm for rational functions with one integration variable [BCCL].
+
+
+1. Introduction
+
+Well written.
+
+MODIFICATION REQUEST:
+  * The claim of the author that “the algorithms presented in the present
+    paper are the first which can find telescopers for algebraic functions
+    without also constructing corresponding certificates” is not quite exact.
+    Indeed, as noted by the authors, the algebraic case with n integration
+    variables is equivalent to the rational case with n+1 integration
+    variables [CKS] and there are already reduction-based algorithms for the
+    rational case [BLS, L].
+
+MK: DONE.
+
+2. Algebraic functions
+
+The notion of local and global integral basis of an algebraic extension of K(x) is introduced.
+
+Suggestions:
+  * p. 2, when the authors explain how to extend derivations to A and prove various compatibility properties, this could be simplified using the classical fact that a derivation defined on a field F extends *in a unique way* to any separable algebraic extension of F [ZS, Chap. II, Cor. 2', p. 125].
+
+MK: NO, THERE IS NO REASON FOR MYSTIFICATION. 
+
+  * p. 3, “somewhat conversely” -> “similarly”?
+
+MK: DONE. 
+
+
+3. Hermite reduction
+
+The authors explain Trager's (Hermite-like) reduction and recall that the computation of integral bases can be avoided even if it simplifies the exposition to assume that we compute them.
+
+
+4. Telescoping via reductions: first approach
+
+The authors explain how to turn Trager's reduction into a creative telescoping algorithm. They give a detailed example.
+
+Typo:
+  * p. 4, last line of second paragraph following the proof of Thm 6,
+    “[p_0 + p_1 ∂_t + ... ]” -> “[p_0 f + p_1 ∂_t f + ... ]”
+
+MK: DONE. 
+
+5. Polynomial reduction
+
+This part is very confusing and to be honest, I don't see how it is relevant. A little more context: the introduction explains two approaches to reduction-based creative telescoping.  Both start with a k(t)-algebra D on which acts two derivations: ∂_t and ∂_x (with some compatibility conditions). Then comes a reduction map D -> D, denoted [.], with the property that for all f in D, there is some g in D such that f - [f] = ∂_x g. To compute a telescoper
+for f, it is enough to find some p_i's in k(t) such that
+    p_0 [f] + p_1 [∂_t f] + p_2 [∂_t^2 f] + ... = 0.
+This is possible if and only if the family of all [∂_t^i f] is linearly dependent. The two approaches differ on how they ensure this property, that I call below (P), holds.
+
+The first approach consists in proving that [h] = 0 if and only if h = ∂_x g for some g in D.  In this case, the property (P) is equivalent to the existence of a telescoper for f, which is already proved in many cases.
+
+The second approach consists in proving that the image of D by [.] is finite dimensional.  This implies (P) directly and moreover, the order of the telescoper is at most the dimension of [D].
+
+Now, let us see what the authors wrote. “We can also justify the termination of reduction-based creative telescoping by showing that the K-vector space {[f] : f ∈ A} has finite dimension (second approach). If [·] is just the Hermite reduction, we do not have this property.”
+(It is true that {[f] : f ∈ A} is not finite-dimensional over K.)
+
+MK: FIXED.
+
+And then
+“We therefore introduce below an additional reduction, called polynomial reduction [...]. We then show that the combined reduction [...] has the desired dimension property for the space of remainders.”
+This cannot be true!
+Let R : A -> A be their new combined reduction, whatever it is.  Clearly, ker® is included in ∂_x(A), so A/∂_x(A) is a quotient of A/ker(R) which is isomorphic to the image R(A). However A/∂_x(A) is not finite dimensional, so R(A) cannot be finite dimensional.  It is easily seen on rational functions, i.e. A = K(x). In this case, all the functions 1/(x-a), for a in K, are linearly independent in A/∂_x(A), and they are infinitely many when K is infinite.
+
+MODIFICATION REQUEST:
+  * Clarify the purpose of the part 5.
+
+Remark:
+  * In Theorem 13 and its proof, T is defined twice but not exactly in the same
+    way, so that the meaning is unclear.
+
+
+Actually, the authors show that R(D) is finite-dimensional for some subring D of A which consists of the functions whose poles are in some fixed finite set. But then [D] is also finite dimensional, so there is no need for the polynomial reduction. In fact, the second approach is only used when the reduction is not strong enough to apply the first one.
+
+
+6. Telescoping via reductions: second approach
+
+The authors apply the previous section to creative telescoping. Corollary 15 gives a bound on the order of the telescoper. Unfortunately, it depends on the dimension of N_V and it is not easy to see how it can be bound in terms of the degree of f.
+
+Question:
+  * How does this bound compare to the bound (d+3)^2 that follows, if I am not
+    mistaken, from [BLS, Thm 12] and [CKS, Thm 7]? (Where d is the total
+    degree in x and y of m(x,y), the annihilating polynomial of f.)
+
+As a suggestion, I think we may obtain a bound on the order of the telescoper directly from Theorem 6 as follows. Let ‘a’ be a polynomial divided by ‘e’.
+    D = { f in A | f has a double root at ∞ and its poles are roots of a }.
+D is stable under differentiation by t. Let f in D.  Write
+    [f] = sum_i p_i omega_i / a,
+We can write f = g' + [f] for some g = sum_i q_i omega_i / a, where the q_i/a are proper rational functions. It seems to me that the fact that f has no pole at infinity implies a bound on the degree of the q_i's in terms of the tau_i's from Lemma 12.
+
+7. The D-finite case
+
+As a conclusion, the authors explain the obstruction they met when they tried to generalized this work to D-finite functions. This puts the submission into a nice perspective.
+
+
+CONCLUSION
+==========
+ 
+To sum up, the main contribution is the use of Trager's reduction in the context of creative telescoping.  It is definitely worth a publication at ISSAC.  By itself, it does not expand the scope of current reduction-based algorithms but it shows all the subtleties that arise on the way to the generalization to D-finite functions.
+
+The paper is correct and carefully written. I regret two things: No comparison is done with existing bounds and algorithms that also apply to algebraic functions [e.g. C, K, BLS, L]; The quality of Part 5 is a little weak.
+
+All in all, I recommend the acceptance of this work at ISSAC 2016, after the requested changes are performed.
+
+
+REFERENCES
+==========
+
+[BCCL] A. Bostan, S. Chen, F. Chyzak, and Z. Li. Complexity of creative
+telescoping for bivariate rational functions. In Proceedings of ISSAC’10,
+pages 203–210, 2010.
+
+[BCCLX] A. Bostan, S. Chen, F. Chyzak, Z. Li, and G. Xin. Hermite reduction
+and creative telescoping for hyperexponential functions. In Proceedings of
+ISSAC’13, pages 77–84, 2013.
+
+[BLS] A. Bostan, P. Lairez, and B. Salvy. Creative telescoping for rational
+functions using the Griffiths-Dwork method. In Proceedings of ISSAC’13, pages
+93–100, 2013.
+
+[C] F. Chyzak. An extension of Zeilberger’s fast algorithm to general
+holonomic functions. Discrete Math. 217(1–3):115–134, 2000.
+
+[CKS] S. Chen, M. Kauers, and C. Koutschan. A generalized Apagodu-Zeilberger
+algorithm. In Proceedings of ISSAC’14, pages 107–114, 2014.
+
+[K] C. Koutschan. A fast approach to creative telescoping. Mathematics in
+Computer Science 4(2–3):259–266, 2010.
+
+[L] P. Lairez. Computing periods of rational integrals. Mathematics of
+Computation, Published electr., 2015.
+
+[ZS] O. Zariski and P. Samuel.  Commutative algebra I, 1958.
+
+
+----------------------- REVIEW 4 ---------------------
+PAPER: 16
+TITLE: Reduction-Based Creative Telescoping for Algebraic Functions
+AUTHORS: Shaoshi Chen, Manuel Kauers and Christoph Koutschan
+
+
+----------- Review -----------
+This paper shows how creative telescoping can be done over fields of algebraic functions. 
+It gives 2 approaches to solving this problem. The first is directly based on the Hermite
+reduction algorithm for algebraic functions of Trager. Sections 2 and 3 of this paper
+essentially redevelops this algorithm. This is justified since Trager's algorithm only appeared
+in his thesis and was never published anywhere. Then they present polynomial reduction
+which extends Hermite reduction by reducing the order of poles at infinity and show that
+the combined algorithm guarantees the termination of creative telescoping since the
+remainders associated to successive derivatives with respect to t (as opposed to x) lie
+in a finite dimensional vector space. One minor imprecision is that in the introduction and
+in the first paragraph of section 5, they say that by using polynomial reduction they can
+show that the vector space of remainders of all functions in A (their algebraic function field)
+is finite. This statement is false as can be seen by just considering the set of rational
+functions 1/(x-a_i) each of which is reduced and generate an infinite dimensional vector space.
+This problem is easily fixable, since section 6 proves the correct result, that the
+remainders of successive derivatives with respect to t of any fixed function f, does
+generate a finite vector space and this is what they need to guarantee (and bound) termination
+of the algorithm. Besides clarifying this point, I feel it would be helpful if they provide
+a little more background on how creative telescoping can be used for definite integration.
+They supply references, but a few statements summarizing the principle ideas would make
+the paper more self contained for readers not familiar with those references.
+
+MK: DONE.

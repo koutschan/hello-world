@@ -136,9 +136,25 @@ $Q$ (which may be zero and need not be free of~$x$). In this case, we call $P$
 a telescoper for~$f$, and $Q$ a certificate for~$P$.
 
 Creative telescoping is the backbone of definite integration, because
-$P\cdot f=(Q\cdot f)'$ implies, for instance, $P\cdot\int_0^1 f(x,t)dt = (Q\cdot f)(1) - (Q\cdot f)(0)$.
+$P\cdot f=(Q\cdot f)'$ implies, for instance, $P\cdot\int_0^1 f(x,t)dx = (Q\cdot f)(1) - (Q\cdot f)(0)$.
 A telescoper $P$ for $f$ thus gives rise to an annihilating operator for the
-definite integral $F(x)=\int_0^1 f(x,t)dt$. In the common case when the right hand side
+definite integral $F(t)=\int_0^1 f(x,t)dx$.
+\begin{example}
+  The algebraic $f(x,t)=\frac1{\sqrt{x(x-1)(x-t)}}$ does not admit an elementary integral with respect to~$x$.
+  However, we have $P\cdot f=(Q\cdot f)'$ for
+  \[
+    P=4(t-1)t\,D_t^2 + 4(2t-1)D_t+1,\quad Q=\frac{2x(x-1)}{t-x}.
+  \]
+  This implies
+  \[
+    P\cdot \int_0^1 f(x,t)dx = \Bigl[\frac{2x(x-1)}{t-x}f(x,t)\Bigr]_{x=0}^1,
+  \]
+  so the integral $F(t)=\int_0^1\frac1{\sqrt{x(x-1)(x-t)}}dx$ satisfies the differential equation
+  \[
+    4(t-1)t\,F''(t) + 4(2t-1)F'(t) + F(t) = 0.
+  \]
+\end{example}
+In the common case when the right hand side
 collapses to zero, we say that the integral has ``natural boundaries''.
 Readers not familiar with creative telescoping are referred to the
 literature~\cite{PWZbook1996,Zeilberger1990c,Zeilberger1991,Zeilberger1990,Koepf1998,kauers11}

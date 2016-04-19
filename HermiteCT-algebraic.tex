@@ -139,8 +139,10 @@ Creative telescoping is the backbone of definite integration, because
 $P\cdot f=(Q\cdot f)'$ implies, for instance, $P\cdot\int_0^1 f(x,t)dx = (Q\cdot f)(1) - (Q\cdot f)(0)$.
 A telescoper $P$ for $f$ thus gives rise to an annihilating operator for the
 definite integral $F(t)=\int_0^1 f(x,t)dx$.
-\begin{example}
-  The algebraic $f(x,t)=\frac1{\sqrt{x(x-1)(x-t)}}$ does not admit an elementary integral with respect to~$x$.
+\begin{example}[Manin~\cite{manin1958}]
+  The algebraic function 
+  \[ f(x,t)=\frac1{\sqrt{x(x-1)(x-t)}}\]
+  does not admit an elementary integral with respect to~$x$.
   However, we have $P\cdot f=(Q\cdot f)'$ for
   \[
     P=4(t-1)t\,D_t^2 + 4(2t-1)D_t+1,\quad Q=\frac{2x(x-1)}{t-x}.
@@ -797,7 +799,7 @@ Combining the Hermite reduction and polynomial reduction, we get the following t
 \begin{theorem}\label{THM:polyred}
 Let $W$ be an integral basis of~$A$ that is normal at infinity.
 Let $T := \diag(x^{-\tau_1}, \ldots, x^{-\tau_n}) \in K(x)^{n\times n}$
-be such that $V = TW$ is integral at infinity.
+be such that $V = TW$ is normal at $0$ and integral at any other places (including infinity).
 Let $e\in K[x]$, $\lambda \in \bN$, and $B, M \in K[x]^{n \times n} $ be such that
 $eW' = MW$ and $x^\lambda eV' = BV$.
 Then any element $f\in A$ can be decomposed into
@@ -1038,6 +1040,11 @@ W.~Koepf.
 P.~Lairez.
 \newblock Computing periods of rational integrals.
 \newblock {\em {M}athematics of {C}omputation}, 85:1719-1752, 2016.
+
+\bibitem{manin1958}
+Yu.~I.~Manin
+\newblock Algebraic curves over fields with differentiation.
+\newblock {\em Izv. Akad. Nauk SSSR Ser. Mat.}, 22(6): 737--756, 1958.
 
 \bibitem{PWZbook1996}
 M.~Petkov{\v{s}}ek, H.~S. Wilf, and D.~Zeilberger.

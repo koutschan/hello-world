@@ -140,7 +140,7 @@ $P\cdot f=(Q\cdot f)'$ implies, for instance, $P\cdot\int_0^1 f(x,t)dx = (Q\cdot
 A telescoper $P$ for $f$ thus gives rise to an annihilating operator for the
 definite integral $F(t)=\int_0^1 f(x,t)dx$.
 \begin{example}[Manin~\cite{manin1958}]
-  The algebraic function 
+  The algebraic function
   \[ f(x,t)=\frac1{\sqrt{x(x-1)(x-t)}}\]
   does not admit an elementary integral with respect to~$x$.
   However, we have $P\cdot f=(Q\cdot f)'$ for
@@ -213,7 +213,7 @@ functions directly gives rise to a reduction-based creative telescoping
 algorithm via the first approach (Section~\ref{SECT:CT-1}). We will combine Trager's Hermite reduction
 with a second reduction, called polynomial reduction (Section~\ref{sec:polynomial}), to obtain a reduction-based creative
 telescoping algorithm for algebraic functions via the second approach (Section~\ref{SECT:CT-2}).
-This gives a new proof of a bound for the order of the telescopers, and in
+This gives a new bound for the order of the telescopers, and in
 particular an independent proof for their existence.
 
 A few years ago, Chen et al.~\cite{chen12d} have already considered the problem of creative
@@ -221,9 +221,12 @@ telescoping for algebraic functions. They have pointed out that by canceling res
 of the integrand, a given creative telescoping problem can be reduced to a creative
 telescoping problem for a function with no residues, which may be much smaller than the
 original function. For this smaller function, however, they still need to construct a
-certificate. The algorithms presented in the present paper can find
-telescopers for algebraic functions without also constructing corresponding certificates.
-By Theorem~6 of~\cite{chen12d}, our results also translate into a certificate-free
+certificate. With some regularity assumption on certificates, Bostan et al.~\cite{bostan13}
+gave a telescoping algorithm for multivariate rational functions using Griffiths-Dwork reduction,
+which then leads to a reduction-based telescoping algorithm for algebraic functions by Theorem~6 of~\cite{chen12d}.
+The algorithms presented in the present paper can find minimal
+telescopers for bivariate algebraic functions without any regularity assumption on certificates.
+Our results also translate into a certificate-free
 creative telescoping algorithm for rational functions in three variables.
 
 \section{Algebraic Functions}

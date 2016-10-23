@@ -545,7 +545,7 @@ It is easy to construct examples using the Papperitz symbol.
 
 Fortunately, we can still be sure that there are not too many such functions.
 
-\begin{lemma}
+\begin{lemma}\label{lemma:nopoles-space}
   Let $L$ be a fuchsian operator and let $A=K(x)[\partial_x]/\<L>$.
   Let $V$ be the set of all $f\in A$ which are integral at all finite places and at infinity.
   Then $V$ is a $K$-vector space of finite dimension.
@@ -740,8 +740,8 @@ f=
 \]
 \end{example}
 
-It was observed that Hermite reduction itself often takes less time than the
-construction of an integral basis. If Hermite reduction is applied to some
+For the integration of algebraic functions, it is known that Hermite reduction itself often
+takes less time than the construction of an integral basis. If Hermite reduction is applied to some
 other basis, for instance the standard basis $\{1,y,\dots,y^{n-1}\}$, it
 either succeeds or it runs into a division by zero.
 Bronstein~\cite{bronstein98a} noticed that when a division by zero occurs,
@@ -749,9 +749,7 @@ then the basis can be replaced by some other basis that is a little closer to
 an integral basis, just as much as is needed to avoid this particular division
 by zero. After finitely many such basis changes, the Hermite reduction will
 come to an end and produce a correct output. This variant is known as lazy
-Hermite reduction.
-\todo{expand this paragraph and adapt it to the fuchsian case.}
-
+Hermite reduction. The same technique also applies in the present situation.
 
 \section{The Canonical Form Property}\label{sec:canonic}
 
@@ -764,62 +762,56 @@ ensure that the method terminates.
 As also explained already in the introduction, one possibility consists in
 showing that $[f]=0$ whenever $f$ is integrable. For the special case of
 algebraic functions, Trager showed that his Hermite reduction has this
-property~\cite[page 50, Theorem 1]{trager84}. As this result was never
-published elsewhere, and for the sake of completeness, we reproduce his proof
-here.
-
-\todo{Lemma~\ref{lemma:pole_at_inf} and Theorem~\ref{thm:intiff0} are due to Trager
-and refer to the algebraic case. If we want to keep them as they are, this fact has
-to made clear in the notation. Or we generalize them to the fuchsian case.}
+property~\cite[page 50, Theorem 1]{trager84}. Essentially the same argument
+works for the fuchsian case, as we will show next. The main difference is
+that in the case of algebraic functions, we can exploit that all the functions
+which have no poles at either a finite place or at infinity are the constant
+functions. As we have pointed out above, this is no longer true in the fuchsian
+D-finite case, but in this case, we can still exploit that the space of all
+the functions which have no poles at finite places or at infinity form a finite
+dimensional vector space over~$K$.
 
 \begin{lemma}\label{lemma:pole_at_inf}
-Let $W=\{\omega_1,\dots,\omega_n\}$ be an integral basis for~$A$ that is normal at
+Let $\{\omega_1,\dots,\omega_n\}$ be an integral basis for~$A$ that is normal at
 infinity. Let $g=\sum_{i=1}^ng_i\omega_i\in A$ be such that all its
 coefficients $g_i\in K(x)$ are proper rational functions. If an integral
 element $f\in A$ has a pole at infinity, then also $f+g$ has a pole at
 infinity.
 \end{lemma}
 \begin{proof}
-Since $f$ is assumed to be integral we can write it as
+Since $f$ is integral we can write it as
 $f=f_1\omega_1+\cdots+f_n\omega_n$ with $f_i\in K[x]$.
 If $f$ has a pole at infinity, there is at least one index~$i$
-such that $f_i\omega_i$ has a pole at infinity. There are two cases why this
-can happen.
-\renewcommand{\labelenumi}{(\alph{enumi})}
-\begin{enumerate}
-\item The polynomial~$f_i$ has positive degree.  This means that $f_i+g_i$ has
-  a pole at infinity, because the $g_i$ are proper rational functions.  Thus
-  $(f_i+g_i)\omega_i$ has a pole at infinity, because $\omega_i$ has no poles
-  at finite places and therefore no root at infinity.
-  \todo{this last statement is not true in the fuchsian case.}
-\item The integral basis element $\omega_i$ is not constant and $f_i$ is not
-  zero. Hence $\omega_i$ has a pole at infinity, and this also implies that
-  $(f_i+g_i)\omega_i$ has a pole at infinity, again employing the fact that
-  $g_i$ is a proper rational function.
-\end{enumerate}
-In both cases, therefore, $f+g=\sum_{i=1}^n(f_i+g_i)\omega_i$ has a pole at
-infinity by Lemma~\ref{lemma:3}.
+such that $f_i\omega_i$ has a pole at infinity.
+Since $f_i$ is a polynomial and $g_i$ is a proper rational function,
+$f_i$~and $f_i+g_i$ have the same exponent at infinity.
+% MK THINKS THAT CHEVALLEY IS NOT REALLY USED HERE. 
+Therefore, if $f_i\omega_i$ has a pole at infinity, so does $(f_i+g_i)\omega_i$.
+But then, by Lemma~\ref{lemma:3}, also $f+g=\sum_{i=1}^n(f_i+g_i)\omega_i$ has
+a pole at infinity.
 \end{proof}
 
 \begin{theorem}\label{thm:intiff0}
   Suppose that $f\in A$ has at least a double root at infinity (i.e., every
-  series in $\bar C\<x^{-1}>$ associated to $f$ only contains monomials
-  $(1/x)^\alpha$ with $\alpha\geq2$).  Let $W=\{\omega_1,\dots,\omega_n\}$ be
-  an integral basis for $A$ that is normal at infinity.  If $f=g'+h$ is the
-  result of the Hermite reduction with respect to~$W$, then $h=0$ if and only
-  if $f$ is integrable in~$A$.
+  series in $\bar C[[[x^{-1}]]]$ associated to $f$ only contains monomials
+  $(1/x)^\alpha\log(x)^\beta$ with $\alpha\geq2$).
+  Let $W=\{\omega_1,\dots,\omega_n\}$ be an integral basis for $A$ that is normal at infinity,
+  and let $f=g'+h$ be the  result of the Hermite reduction with respect to~$W$.
+  Let $V\subseteq A$ be the $K$-vector space of all elements that are integral at all places,
+  including infinity, and let $U=\{u':u\in V\}\subseteq V$ be the subspace of all elements
+  that are integrable in~$V$. 
+  Then $f$ is integrable in~$A$ if and only if $h\in U$.
 \end{theorem}
 
 \begin{proof}
-The direction ``$\Rightarrow$'' is trivial. To show the implication
-``$\Leftarrow$'' assume that $f$ is integrable in~$A$. From $f=g'+h$ it follows that
+The direction ``$\Leftarrow$'' is trivial. To show the implication
+``$\Rightarrow$'' assume that $f$ is integrable in~$A$. From $f=g'+h$ it follows that
 then also $h$ is integrable in~$A$; let $H\in A$ be such that $H'=h$.  In order to show
-that $h=0$, we show that $H$ is constant.  To this end, it suffices to show that
-it has neither finite poles nor a pole at infinity; the claim then follows from
-Chevalley's theorem.
+that $h\in U$, we show that $H\in V$, i.e., we show that $H$ has no finite poles and
+no poles at infinity.
 
 It is clear that $H$ has no finite poles because $h$ has at most simple poles
-(i.e., all series associated to $h$ have only exponents $\geq-1$).
+(i.e., all series associated to $h$ have only exponents $\alpha\geq-1$).
 This follows from the facts that the $\omega_i$ are integral and that
 the coefficients of~$h$ have squarefree denominators.
 
@@ -831,8 +823,22 @@ assumption, $g+H$ must have at least a single root at infinity. This is
 a contradiction.
 \end{proof}
 
+By Lemma~\ref{lemma:nopoles-space}, the vector space~$V$ has finite dimension and computing a
+vector space basis of it is not harder than computing an integral basis. Once
+a basis $\{b_1,\dots,b_d\}$ of $V$ is known, it is also easy to obtain a basis
+of~$U$, as this subspace is generated by $\{b_1',\dots,b_d'\}$. Therefore, we
+can decide whether a given $f\in A$ with a double pole at infinity is integrable in~$A$
+by first executing Hermite reduction, and then checking whether the Hermite
+remainder~$h$ belongs to~$U$. More generally, by performing a reduction modulo~$U$
+as a post-processing step after the Hermite reduction, we can even ensure that $f$
+is integrable if and only if $h=0$. 
+
+\begin{example}
+  ... 
+\end{example}
+
 Note that the condition in Theorem~\ref{thm:intiff0} that $f$ has a double
-root at infinity is not a restriction at all, as it can always be achieved by
+root at infinity is not a restriction, as it can always be achieved by
 a suitable change of variables. Let $a\in C$ be a regular point of~$L$; by
 the substitution $x\to a+1/x$ the regular point~$a$ is moved to
 infinity. From
@@ -848,27 +854,16 @@ and then also for every $K$-linear combination $p_0f+p_1\partial_t\cdot f+\cdots
 Thus Theorem~\ref{thm:intiff0} implies that $p_0+p_1\partial_t+\cdots+p_r\partial_t^r$
 is a telescoper for $f$ if \emph{and only if}
 $[p_0f+p_1\partial_t\cdot f+\cdots+p_r\partial_t^r\cdot f]=0$.
-\todo{at the moment, we don't have this theorem in the fuchsian case.}
 
-We already know for other reasons~\cite{Zeilberger1990,chyzak00,chen12d} that
-telescopers for algebraic functions exist, and therefore the reduction-based
+We already know for other reasons~\cite{Zeilberger1990,chyzak00} that
+telescopers for D-finite functions exist, and therefore the reduction-based
 creative telescoping procedure with Hermite reduction with respect to an
-integral basis that is normal at infinity as reduction function succeeds when
-applied to an integrand $f\in A$ that has a double root at infinity.
+integral basis that is normal at infinity plus reduction modulo $U$
+as reduction function $[\cdot]$ succeeds when applied to an integrand $f\in A$ that has a double root at infinity.
 In particular, the method finds a telescoper of smallest possible order.
 Again, if $f$ has no double root at infinity, we can produce one by a change of variables.
 Note that a change of variables $x\to a+1/x$ with $a\in C$ has no effect on
 the telescoper.
-
-
-Unfortunately, Trager's theorem does not easily generalize to the case of
-fuchsian D-finite functions. Its proof relies on Chevalley's theorem~\cite[page 9, Cor.\ 3]{Chevalley1951},
-which says that an algebraic function that has no poles (neither at a finite
-place nor at infinity) must be constant. In our setting this is not true. For
-example, $\log(x)$ is fuchsian D-finite and has no poles (neither at a finite
-place nor at infinity), but it is not a constant. For general fuchsian D-finite
-functions, we therefore complete the discussion of creative telescoping using
-the second approach.
 
 \section{Polynomial Reduction}\label{sec:polynomial}
 

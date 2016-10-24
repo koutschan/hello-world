@@ -124,11 +124,11 @@ example, if $D$ is the field of rational functions, then for $f=1/x^2$ we can
 find $g=-1/x$, while for $f=1/x$ no suitable $g$ exists. When no $g$ exists
 in~$D$, there are several other questions we may ask. One possibility is to ask
 whether there is some extension~$E$ of $D$ such that in $E$ there exists some
-$g$ with $g'=f$. For example, in the case of elementary functions, Liouville's
+$g$ with $f=g'$. For example, in the case of elementary functions, Liouville's
 principle restricts the possible extensions~$E$, and there are algorithms
 which construct such extensions whenever possible. Another possibility is
 to ask whether for some modification $\tilde f\in D$ of~$f$ there exists a $g\in
-D$ such that $\tilde f=g'$. Creative telescoping is a question of this
+D$ such that $\tilde f=g'$. Creative telescoping leads to a question of this
 type. Here we are dealing with domains~$D$ containing functions in several
 variables, say $x$ and~$t$, and the question is whether there is a linear
 differential operator~$P$, nonzero and free of~$x$, such that there exists a
@@ -139,7 +139,7 @@ a telescoper for~$f$, and $Q$ a certificate for~$P$.
 
 Creative telescoping is the backbone of definite integration, because
 $P\cdot f=(Q\cdot f)'$ implies, for instance, $P\cdot\int_0^1 f(x,t)dx = (Q\cdot f)(1) - (Q\cdot f)(0)$.
-A telescoper $P$ for $f$ thus gives rise to an annihilating operator for the
+A telescoper $P$ for~$f$ thus gives rise to an annihilating operator for the
 definite integral $F(t)=\int_0^1 f(x,t)dx$.
 \begin{example}[Manin~\cite{manin1958}]
   \todo{change this example to a fuchsian one? Or omit it? It was requested by one of the referees.}
@@ -161,7 +161,7 @@ definite integral $F(t)=\int_0^1 f(x,t)dx$.
     4(t-1)t\,F''(t) + 4(2t-1)F'(t) + F(t) = 0.
   \]
 \end{example}
-In the common case when the right hand side
+In the common case when the right-hand side
 collapses to zero, we say that the integral has ``natural boundaries''. Readers not
 familiar with creative telescoping are referred to the
 literature~\cite{PWZbook1996,Zeilberger1990c,Zeilberger1991,Zeilberger1990,Koepf1998,kauers11}
@@ -182,9 +182,9 @@ $x$-constants $\mathrm{Const}_x(D)=\{\,c\in D:c'=0\,\}$ form a field and that $D
 is a vector space over the field of $x$-constants. Assume further that there is
 some $\mathrm{Const}_x(D)$-linear map $[\cdot]\colon D\to D$ such that for every
 $f\in D$ there exists a $g\in D$ with $f-[f]=g'$. Such a map is called a
-\emph{reduction.} For example, in $D=C(t,x)$ Hermite reduction~\cite{Hermite1872} produces for
-every $f\in D$ some $g$ such that $f-g'$ is either zero or a rational function
-with a squarefree denominator. In this case, we can take $[f]=f-g'$.
+\emph{reduction.} For example, in $D=C(t,x)$ Hermite reduction~\cite{Hermite1872} decomposes
+any $f\in D$ into $f=g'+h$ with $g,h\in D$ such that $h$ is a proper rational function
+with a squarefree denominator. In this case, we can take $[f]=h$.
 In order to find a telescoper, we can compute $[f]$, $[\partial_t\cdot f]$, $[\partial_t^2\cdot f]$, \dots,
 until we find that they are linearly dependent over $\mathrm{Const}_x(D)$.
 Once we find a relation
@@ -212,15 +212,16 @@ bound for the dimension of this vector space gives rise to a bound for the
 order of the telescoper. In particular, it implies the existence of a
 telescoper.
 
-In this paper, we show that Trager's Hermite reduction for algebraic functions
-directly gives rise to a reduction-based creative telescoping algorithm via
-the first approach (Section~\ref{sec:canonic}). We will also generalize his
-Hermite reduction to fuchsian D-finite functions in Section~\ref{sec:hermite}
-and then combine it with a second reduction, called polynomial reduction
-(Section~\ref{sec:polynomial}), which together give rise to a reduction-based
-creative telescoping algorithm for fuchsian D-finite functions via the second
-approach.  This gives a new bound for the order of the telescopers,
-and in particular an independent proof for their existence.
+In this paper, we generalize Trager's Hermite reduction for algebraic
+functions to fuchsian D-finite functions (Section~\ref{sec:hermite}), which
+yields a reduction-based creative telescoping algorithm via the first approach
+(Section~\ref{sec:canonic}). In Section~\ref{sec:polynomial}, we introduce a
+second reduction, called polynomial reduction, which together with the Hermite
+reduction gives rise to a reduction-based creative telescoping algorithm via
+the second approach.  It also delivers a new bound for the order of the
+telescoper of a fuchsian D-finite function, and in particular an independent
+proof for its existence.
+
 
 \section{Fuchsian D-finite Functions}
 
@@ -292,7 +293,7 @@ $\sum_{k=0}^{n-1}k=\frac12n(n-1)$, then the Fuchs relation~\cite{schlesinger95,i
 \[
  \sum_{a\in\bar C\cup\{\infty\}} \defect_a(f) = n(1-n)
 \]
-for all $f\in A$. This relation is the counterpart of the Bezout relation in the algebraic case.
+for all $f\in A$. This relation is the counterpart of the B\'{e}zout relation in the algebraic case.
 Note that when $a$ is an ordinary point, then $\defect_a(f)=0$, but $\defect_a(f)=0$ does in
 general not imply that $a$ is an ordinary point. 
 
@@ -338,12 +339,14 @@ called \emph{integral} if $\alpha\geq0$. A series in
 $C[[[x-a]]]$ or $C[[[x^{-1}]]]$ is called integral if it only contains integral
 terms. A non-integral series is said to have a \emph{pole} at the reference
 point. Note that in this terminology also $1/\sqrt{x}$ has a pole
-at~$0$, while $\log(x)$ does not. Note also that the terminology only refers
-to $x$ but not to~$t$.
+at~$0$, while $\log(x)$ does not; this convention differs slightly from the
+default setting of~\cite[Ex.~2]{kauers15b}, but can be achieved by defining
+the function~$\iota$~\cite[Def.~1]{kauers15b} accordingly. Note also that
+the terminology only refers to $x$ but not to~$t$.
 
 Integrality at $a\in\bar C$ is not preserved by differentiation,
 but if $f$ is integral at~$a$, then so is $(x-a)f'$. On the other hand,
-integrality at infinity is preserved by differentiation, we even have the
+integrality at infinity is preserved by differentiation: we even have the
 stronger property that when $f$ is integral at infinity, then not only $f'$
 but also $xf'=(x^{-1})^{-1}f'$ is integral at infinity.
 
@@ -353,13 +356,6 @@ is called (locally) integral at $a\in\bar C\cup\{\infty\}$ if for every solution
 of $L$ in $C[[[x-a]]]$ or $C[[[x^{-1}]]]$, respectively, the series $f\cdot y$ is
 integral. $f$~is called (globally) integral if it is locally integral at every
 $a\in\bar C$ (``at all finite places'').
-
-%\todo{the following remark was added for algebraic functions. 
-%Say something about fuchsian functions that are integral everywhere.}
-%Because of Chevalley's theorem~\cite[page 9, Corollary 3]{Chevalley1951}, any
-%non-constant algebraic function has at least one pole. Equivalently, an
-%element~$f$ is integral at all $a\in\bar C\cup\{\infty\}$ if and only if it is
-%constant.
 
 For an element $f\in A$ to have a ``pole'' at $a\in\bar C\cup\{\infty\}$ means
 that $f$ is not locally integral at~$a$; to have a ``double pole'' at $a$ means
@@ -470,7 +466,7 @@ number of iterations.
 
 \begin{lemma}
   Let $\{\omega_1,\dots,\omega_n\}$, $\{\nu_1,\dots,\nu_n\}$, $m_{i,j}$ and $r_1,\dots,r_n$ be as above.
-  Let $N$ the number of points $a\in\bar C\cup\{\infty\}$ where at least one of the $\omega_i$ has at least
+  Let $N$ be the number of points $a\in\bar C\cup\{\infty\}$ where at least one of the $\omega_i$ has at least
   one exponent that is not in~$\set N$. Then
   \[
     r_1+\cdots+r_n \geq -\tfrac12 n(n-1)(N-1).
@@ -495,7 +491,7 @@ number of iterations.
     \defect_\infty(\omega_i)\leq n(1-n) + \tfrac12 n(n-1) N = \tfrac12 n(n-1)(N-2).
   \]
   Next, for every $r\in\set Z$ we have $\defect_\infty(x^{-r}\omega_i) = rn+\defect_\infty(\omega_i)$.
-  Next, if $r\in\set Z$ is such that $x^{-r}\omega_i$ is integral at infinity, then we must have
+  Moreover, if $r\in\set Z$ is such that $x^{-r}\omega_i$ is integral at infinity, then we must have
   $\defect_\infty(x^{-r}\omega_i)\geq -\frac12n(n-1)$, i.e., 
   \[
     rn + \defect_\infty(\omega_i) \geq -\tfrac12n(n-1),
@@ -556,7 +552,7 @@ Fortunately, we can still be sure that there are not too many such functions.
 \end{lemma}
 \begin{proof}
   It is clear that $V$ is closed under taking $K$-linear combinations, so it is clearly a vector space.
-  We show that $\{\,x^j\omega_i : i=1,\dots,n; j=0,\dots,e_i\,\}$ is a basis.
+  We show that $B=\{\,x^j\omega_i : i=1,\dots,n; j=0,\dots,e_i\,\}$ is a basis.
 
   Every $x^j\omega_i\in B$ is by definition integral at every finite place and because of $0\leq j\leq e_i$ also
   integral at infinity. Therefore $x^j\omega_i\in V$, and therefore $B$ generates a subspace of~$V$.
@@ -596,11 +592,11 @@ of order~$n$ and let $A=K(x)[\partial_x]/\<L>$.
 \begin{lemma}\label{lemma:ibv}
 Let $v\in K[x]$ be a squarefree polynomial and let $\{\omega_1,\ldots,\omega_n\}$
 be a basis of~$A$ that is locally integral at all roots of~$v$.
-For some integer $m>1$ we define $\psi_i:=v^m\left(v^{1-m}\omega_i\right)'$; then
+For some integer $\mu>1$ we define $\psi_i:=v^\mu\left(v^{1-\mu}\omega_i\right)'$; then
 $\{\psi_1,\ldots,\psi_n\}$ is a local integral basis at each root of~$v$.
 \end{lemma}
 \begin{proof}
-By expanding $\psi_i=v\omega_i'-(m-1)v'\omega_i$ one sees that the $\psi_i$
+By expanding $\psi_i=v\omega_i'-(\mu-1)v'\omega_i$ one sees that the $\psi_i$
 themselves are integral at all roots of~$v$. Let now $a\in\bar{C}$ be an
 arbitrary but fixed root of~$v$. We have to show that each $f\in A$ that is
 integral at~$a$ can be expressed as a linear combination of the $\psi_i$ with
@@ -614,9 +610,9 @@ coefficient, i.e.,
 (here we use the fact that $v$ is squarefree).  Further let $g=\sum_{i=1}^n
 c_i'\omega_i$, which is obviously integral. Then also their sum
 \begin{align*}
-  f+g &= v^{m-1} \sum_{i=1}^n \left(c_i\left(v^{1-m}\omega_i\right)'
-  + c_i'v^{1-m}\omega_i \right) \\
-  &= v^{m-1} \sum_{i=1}^n \left(c_iv^{1-m}\omega_i\right)'
+  f+g &= v^{\mu-1} \sum_{i=1}^n \left(c_i\left(v^{1-\mu}\omega_i\right)'
+  + c_i'v^{1-\mu}\omega_i \right) \\
+  &= v^{\mu-1} \sum_{i=1}^n \left(c_iv^{1-\mu}\omega_i\right)'
 \end{align*}
 must be integral. Since $\{\omega_1,\ldots,\omega_n\}$ is an integral basis at~$a$,
 there exists for each $i=1,\ldots,n$ a series solution $y_i\in C[[[x-a]]]$
@@ -626,9 +622,9 @@ Let now $i$ be an index such that $c_i(a)\neq0$;
 this implies that $T$ appears in $(c_i\omega_i)\cdot y_i$.
 Using the fact that the $\omega_i$ form a local integral basis, it follows by
 Lemma~\ref{lemma:1} that $T$ is also present in $h\cdot y_i$ where
-$h=\sum_{i=1}^n c_i\omega_i$. Applying the operator $v^{m-1}\partial_xv^{1-m}$
+$h=\sum_{i=1}^n c_i\omega_i$. Applying the operator $v^{\mu-1}\partial_xv^{1-\mu}$
 to $h\cdot y_i$ turns $T$ into $(x-a)^{\alpha-1}\log(x-a)^\beta$, which reveals that
-$v^{m-1}(v^{1-m}h)'=f+g$ is not integral at~$a$. This contradicts our assumption on
+$v^{\mu-1}(v^{1-\mu}h)'=f+g$ is not integral at~$a$. This contradicts our assumption on
 the integrality of~$f$, and hence $\{\psi_1,\ldots,\psi_n\}$ is a local integral
 basis at~$a$.
 \end{proof}
@@ -647,7 +643,7 @@ denominators, name\-ly the factors of~$e$, it is convenient to consider those
 denominators from the very beginning on, which means that we shall assume
 $e\mid D$. Note that $\gcd(D,f_1,\ldots,f_n)$ can then be nontrivial.
 
-We now describe one step of the Hermite reduction, where the multiplicity
+We now execute one step of the Hermite reduction, where the multiplicity
 $\mu>1$ of some nontrivial squarefree factor~$v\in K[x]$ of $D$ is reduced.
 Let $u\in K[x]$ be such that $D=uv^\mu$; it follows that $\gcd(u,v)=1$ and
 $\gcd(v,v')=1$. We want to find $g_1,\ldots,g_n,h_1,\ldots,h_n\in K[x]$
@@ -672,10 +668,10 @@ clearing the denominator $uv^\mu$ yields
 and then this equation is reduced modulo~$v$:
 \begin{equation}\label{eq:modv}
   \sum_{i=1}^n f_i\omega_i =
-  \sum_{i=1}^n uv^\mu g_i\left(v^{1-\mu}\omega_i\right)' \mod v.
+  \sum_{i=1}^n g_iuv^\mu\left(v^{1-\mu}\omega_i\right)' \mod v.
 \end{equation}
 By Lemma~\ref{lemma:ibv} and from $\gcd(u,v)=1$ it follows that
-the elements $uv^\mu(v^{1-\mu}\omega_i)'$ form a local integral basis
+the elements $uv^\mu\left(v^{1-\mu}\omega_i\right)'$ form a local integral basis
 at each root of~$v$, which implies that the coefficients $g_i$ are
 uniquely determined modulo~$v$.
 
@@ -685,7 +681,7 @@ derivatives of the $\omega_i$ in terms of the integral basis,
 Equation~\eqref{eq:modv} turns into
 \begin{align*}
   \sum_{i=1}^n f_i\omega_i
-  &= \sum_{i=1}^n ug_i \bigl( v\omega_i' - (\mu-1)v'\omega_i \bigr) \mod v\\
+  &= \sum_{i=1}^n g_i \bigl( uv\omega_i' - (\mu-1)uv'\omega_i \bigr) \mod v\\
   &= \sum_{i=1}^n g_i\, \biggl( w\sum_{j=1}^n m_{i,j}\omega_j - (\mu-1)uv'\omega_i \biggr) \mod v.
 \end{align*}
 Coefficient comparison with respect to $\omega_1,\ldots,\omega_n$ yields a
@@ -785,7 +781,6 @@ If $f$ has a pole at infinity, there is at least one index~$i$
 such that $f_i\omega_i$ has a pole at infinity.
 Since $f_i$ is a polynomial and $g_i$ is a proper rational function,
 $f_i$~and $f_i+g_i$ have the same exponent at infinity.
-% MK THINKS THAT CHEVALLEY IS NOT REALLY USED HERE. 
 Therefore, if $f_i\omega_i$ has a pole at infinity, so does $(f_i+g_i)\omega_i$.
 But then, by Lemma~\ref{lemma:3}, also $f+g=\sum_{i=1}^n(f_i+g_i)\omega_i$ has
 a pole at infinity.

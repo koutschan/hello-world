@@ -70,9 +70,7 @@
 \title{Reduction-Based Creative~Telescoping for \\
 Fuchsian D-finite~Functions\titlenote{S.\ Chen was supported by the NSFC grant
 11501552 and by the President Fund of the Academy of
-Mathematics and Systems Science, CAS (2014-cjrwlzx-chshsh). This work was
-also supported by the Fields Institute's 2015 Thematic Program on Computer
-Algebra in Toronto, Canada.\\
+Mathematics and Systems Science, CAS (2014-cjrwlzx-chshsh).\\
 M. Kauers was supported by the Austrian Science Fund (FWF): F50-04 and Y464-N18.\\
 C. Koutschan was supported by the Austrian Science Fund (FWF): W1214.
 }}
@@ -80,18 +78,16 @@ C. Koutschan was supported by the Austrian Science Fund (FWF): W1214.
 \numberofauthors{1}
 
 \author{\medskip
-Shaoshi Chen$^{1,2}$, \, Mark van Hoeij$^{3}$, \, Manuel Kauers$^{4}$, \, Christoph Koutschan$^{5}$ \\
+Shaoshi Chen$^{1}$, \, Mark van Hoeij$^{2}$, \, Manuel Kauers$^{3}$, \, Christoph Koutschan$^{4}$ \\
 \smallskip
        \affaddr{$^1$KLMM,\, AMSS, \,Chinese Academy of Sciences, Beijing, 100190, (China)}\\
        \smallskip
-       \affaddr{$^2$Symbolic Computation Group, University of Waterloo, Ontario, N2L3G1, (Canada)}\\
+       \affaddr{$^2$Department of Mathematics,  Florida State University, FL 32306-4510, (USA)}\\
        \smallskip
-       \affaddr{$^3$Department of Mathematics,  Florida State University, FL 32306-4510, (USA)}\\
-       \smallskip
-       \affaddr{$^4$Institute for Algebra, Johannes Kepler University, Altenberger Stra\ss e 69,
+       \affaddr{$^3$Institute for Algebra, Johannes Kepler University, Altenberger Stra\ss e 69,
  A-4040 Linz, (Austria)}\\
         \smallskip
-       \affaddr{$^5$RICAM, Austrian Academy of Sciences, Altenberger Stra\ss e 69, A-4040 Linz, (Austria)}\\
+       \affaddr{$^4$RICAM, Austrian Academy of Sciences, Altenberger Stra\ss e 69, A-4040 Linz, (Austria)}\\
        \smallskip
       \email{schen@amss.ac.cn, hoeij@math.fsu.edu}\\
       \email{manuel.kauers@jku.at, christoph.koutschan@ricam.oeaw.ac.at}
@@ -295,7 +291,7 @@ $\sum_{k=0}^{n-1}k=\frac12n(n-1)$, then the Fuchs relation~\cite{schlesinger95,i
 \]
 for all $f\in A$. This relation is the counterpart of the B\'{e}zout relation in the algebraic case.
 Note that when $a$ is an ordinary point, then $\defect_a(f)=0$, but $\defect_a(f)=0$ does in
-general not imply that $a$ is an ordinary point. 
+general not imply that $a$ is an ordinary point.
 
 In the context of creative telescoping, we let $\bar C$ be some algebraically
 closed field containing the rational function field $K=C(t)$, and we
@@ -474,7 +470,7 @@ number of iterations.
 \end{lemma}
 \begin{proof}
   We show that when $r_i\in\set Z$ is such that $x^{-r_i}\omega_i$ is locally integral at infinity,
-  then $r_i\geq -\frac12 (n-1)(N-1)$, for every~$i$. 
+  then $r_i\geq -\frac12 (n-1)(N-1)$, for every~$i$.
   By the Fuchs relation we have
   \[
     \sum_{a\in\bar C\cup\{\infty\}}\defect_a(\omega_i) = n(1-n),
@@ -492,7 +488,7 @@ number of iterations.
   \]
   Next, for every $r\in\set Z$ we have $\defect_\infty(x^{-r}\omega_i) = rn+\defect_\infty(\omega_i)$.
   Moreover, if $r\in\set Z$ is such that $x^{-r}\omega_i$ is integral at infinity, then we must have
-  $\defect_\infty(x^{-r}\omega_i)\geq -\frac12n(n-1)$, i.e., 
+  $\defect_\infty(x^{-r}\omega_i)\geq -\frac12n(n-1)$, i.e.,
   \[
     rn + \defect_\infty(\omega_i) \geq -\tfrac12n(n-1),
   \]
@@ -501,7 +497,7 @@ number of iterations.
     r &\geq \frac1n\Bigl( -\frac12n(n-1) - \defect_\infty(\omega_i) \Bigr) \\
       &\geq -\tfrac12 (n-1) - \tfrac12 (n-1)(N-2) = -\tfrac12 (n-1)(N-1),
   \end{alignat*}
-  as claimed. 
+  as claimed.
 \end{proof}
 
 Although normality is a somewhat weaker condition on a basis than integrality,
@@ -523,12 +519,12 @@ of basis elements can cancel:
 \end{proof}
 
 We will mostly be using bases that are integral at every point in $\bar C\cup\{\infty\}$ except one.
-For the case of algebraic functions, the reason is that the only algebraic functions which are 
+For the case of algebraic functions, the reason is that the only algebraic functions which are
 integral at all finite places and also at infinity are the constant functions (Chevalley's
 theorem~\cite[page 9, Corollary 3]{Chevalley1951}). The results presented in~\cite{chen16}
 depend heavily on this fact. There is no analogous result for fuchsian D-finite functions: such
 functions may be integral at all finite places and also at infinity without being constant.
-It is easy to construct examples using the Papperitz symbol. 
+It is easy to construct examples using the Papperitz symbol.
 
 \begin{example}
   The operator $L = 3 x(x^2-1) D_x^2 + 2 (3x^2 - 1) D_x\in\set Q(x)[\partial_x]$
@@ -536,7 +532,7 @@ It is easy to construct examples using the Papperitz symbol.
   At all three singularities, there is one local solution starting with exponent~$0$
   and another starting with exponent~$1/3$, so all the solutions are integral
   everywhere according to our standard definition of integrality of generalized
-  series. 
+  series.
 \end{example}
 
 Fortunately, we can still be sure that there are not too many such functions.
@@ -556,7 +552,7 @@ Fortunately, we can still be sure that there are not too many such functions.
 
   Every $x^j\omega_i\in B$ is by definition integral at every finite place and because of $0\leq j\leq e_i$ also
   integral at infinity. Therefore $x^j\omega_i\in V$, and therefore $B$ generates a subspace of~$V$.
-  
+
   Conversely, let $f\in V$ be arbitrary. Then $f$ is in particular integral at all finite places,
   and since $\{\omega_1,\dots,\omega_n\}$ is a global integral basis we can write $f=\sum_{i=1}^n p_i\omega_i$
   for some polynomials $p_1,\dots,p_n$.
@@ -794,7 +790,7 @@ a pole at infinity.
   and let $f=g'+h$ be the  result of the Hermite reduction with respect to~$W$.
   Let $V\subseteq A$ be the $K$-vector space of all elements that are integral at all places,
   including infinity, and let $U=\{u':u\in V\}$ be the subspace of all elements of~$A$
-  that are integrable in~$V$. 
+  that are integrable in~$V$.
   Then $f$ is integrable in~$A$ if and only if $h\in U$.
 \end{theorem}
 
@@ -826,10 +822,10 @@ can decide whether a given $f\in A$ with a double pole at infinity is integrable
 by first executing Hermite reduction, and then checking whether the Hermite
 remainder~$h$ belongs to~$U$. More generally, by performing a reduction modulo~$U$
 as a post-processing step after the Hermite reduction, we can even ensure that $f$
-is integrable if and only if $h=0$. 
+is integrable if and only if $h=0$.
 
 \begin{example}
-  ... 
+  ...
 \end{example}
 
 Note that the condition in Theorem~\ref{thm:intiff0} that $f$ has a double

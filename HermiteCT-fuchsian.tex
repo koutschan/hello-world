@@ -460,10 +460,12 @@ Repeating the process, it can be checked that the value of $r_1+\cdots+r_n$ stri
 According to the following lemma, the sum is bounded from below, so the procedure must terminate after a finite
 number of iterations.
 
-\begin{lemma}
+\begin{lemma}\label{lemma:bound-exps}
   Let $\{\omega_1,\dots,\omega_n\}$, $\{\nu_1,\dots,\nu_n\}$, $m_{i,j}$ and $r_1,\dots,r_n$ be as above.
-  Let $N$ be the number of points $a\in\bar C\cup\{\infty\}$ where at least one of the $\omega_i$ has at least
-  one exponent that is not in~$\set N$. Then
+  Let $N$ be the number of points $a\in\bar C$ where at least one of the $\omega_i$ has
+  exponents that are not an $n$-subset of~$\set N$ (i.e., $N$ counts the
+  finite singular points of~$L$ that are not ``apparent'' singularities).
+  Then
   \[
     r_1+\cdots+r_n \geq -\tfrac12 n(n-1)(N-1).
   \]
@@ -479,7 +481,7 @@ number of iterations.
   \[
     \defect_\infty(\omega_i) = n(1-n) - \sum_{a\in\bar C}\defect_a(\omega_i).
   \]
-  When all exponents of the series associated to $\omega_i$ at $a\in\bar C$ belong to~$\set N$, then
+  When all exponents of the series associated to $\omega_i$ at $a\in\bar C$ form an $n$-subset of~$\set N$, then
   $\defect_a(\omega_i)\geq0$. At all other points~$a$, of which there are at most~$N$ by assumption,
   we still have the estimate $\defect_a(\omega_i)\geq-\frac12n(n-1)$, because $\omega_i$ is integral at all finite places.
   It follows that
@@ -562,6 +564,20 @@ Fortunately, we can still be sure that there are not too many such functions.
   But $f$ is in $V$ and therefore integral at every place, including infinity.
   It follows that $\deg(p_i)\leq e_i$ for all~$i$, and therefore $f$ is a $K$-linear combination
   of elements of~$B$.
+\end{proof}
+
+\begin{corollary}
+With the notation of Lemmas~\ref{lemma:bound-exps}
+and~\ref{lemma:nopoles-space}, we have
+\[
+  \dim_{\set K}(V)\leq n\bigl(\tfrac12(n-1)(N-1)+1\bigr).
+\]
+\end{corollary}
+\begin{proof}
+Note that the exponents~$e_i$ in Lemma~\ref{lemma:nopoles-space} differ from
+the~$r_i$ only by sign. In the proof of Lemma~\ref{lemma:bound-exps} it was
+shown that $r_i\geq-\frac12(n-1)(N-1)$. The estimate on the dimension of~$V$
+then follows immediately.
 \end{proof}
 
 \section{Hermite Reduction}\label{sec:hermite}

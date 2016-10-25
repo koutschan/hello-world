@@ -447,32 +447,32 @@ integral basis at infinity. Let $m_{i,j}\in K(x)$ be such that
 \[
  \omega_i = \sum_{j=1}^n m_{i,j}\nu_j.
 \]
-For each~$i$, let $r_i$ be the smallest integer such that $x^{-r_i}m_{i,j}$ has no pole at infinity for any~$j$.
-Then each $x^{-r_i}\omega_i$ is locally integral at infinity.
-Let $A\in K^{n\times n}$ be the matrix obtained by evaluating $((x^{-r_i}m_{i,j}))_{i,j=1}^n$ at infinity
-(this is possible by the choice of~$r_i$).
-If $A$ is invertible, then the $x^{-r_i}\omega_i$ form a local integral basis at infinity and we are done.
+For each~$i$, let $\tau_i\in\set Z$ be the largest integer such that $x^{\tau_i}m_{i,j}$ has no pole at infinity for any~$j$.
+Then each $x^{\tau_i}\omega_i$ is locally integral at infinity.
+Let $A\in K^{n\times n}$ be the matrix obtained by evaluating $((x^{\tau_i}m_{i,j}))_{i,j=1}^n$ at infinity
+(this is possible by the choice of~$\tau_i$).
+If $A$ is invertible, then the $x^{\tau_i}\omega_i$ form a local integral basis at infinity and we are done.
 Otherwise, there exists a nonzero vector $a=(a_1,\dots,a_n)\in K^n$ with $aA=0$.
-Among the indices $\ell$ with $a_\ell\neq0$ choose one where $r_\ell$ is maximal,
-and then replace $\omega_\ell$ by $\sum_{i=1}^n a_i x^{r_\ell-r_i}\omega_i$.
+Among the indices $\ell$ with $a_\ell\neq0$ choose one where $\tau_\ell$ is minimal,
+and then replace $\omega_\ell$ by $\sum_{i=1}^n a_i x^{\tau_i-\tau_\ell}\omega_i$.
 Note that the resulting basis is still global integral.
-Repeating the process, it can be checked that the value of $r_1+\cdots+r_n$ strictly decreases in each iteration.
-According to the following lemma, the sum is bounded from below, so the procedure must terminate after a finite
+Repeating the process, it can be checked that the value of $\tau_1+\cdots+\tau_n$ strictly increases in each iteration.
+According to the following lemma, the sum is bounded, so the procedure must terminate after a finite
 number of iterations.
 
 \begin{lemma}\label{lemma:bound-exps}
-  Let $\{\omega_1,\dots,\omega_n\}$, $\{\nu_1,\dots,\nu_n\}$, $m_{i,j}$ and $r_1,\dots,r_n$ be as above.
+  Let $\{\omega_1,\dots,\omega_n\}$, $\{\nu_1,\dots,\nu_n\}$, and $\tau_1,\dots,\tau_n$ be as above.
   Let $N$ be the number of points $a\in\bar C$ where at least one of the $\omega_i$ has
   exponents that are not an $n$-subset of~$\set N$ (i.e., $N$ counts the
   finite singular points of~$L$ that are not ``apparent'' singularities).
   Then
   \[
-    r_1+\cdots+r_n \geq -\tfrac12 n(n-1)(N-1).
+    \tau_1+\cdots+\tau_n \leq \tfrac12 n(n-1)(N-1).
   \]
 \end{lemma}
 \begin{proof}
-  We show that when $r_i\in\set Z$ is such that $x^{-r_i}\omega_i$ is locally integral at infinity,
-  then $r_i\geq -\frac12 (n-1)(N-1)$, for every~$i$.
+  We show that when $\tau_i\in\set Z$ is such that $x^{\tau_i}\omega_i$ is locally integral at infinity,
+  then $\tau_i\leq \frac12 (n-1)(N-1)$, for every~$i$.
   By the Fuchs relation we have
   \[
     \sum_{a\in\bar C\cup\{\infty\}}\defect_a(\omega_i) = n(1-n),
@@ -489,15 +489,15 @@ number of iterations.
     \defect_\infty(\omega_i)\leq n(1-n) + \tfrac12 n(n-1) N = \tfrac12 n(n-1)(N-2).
   \]
   Next, for every $r\in\set Z$ we have $\defect_\infty(x^{-r}\omega_i) = rn+\defect_\infty(\omega_i)$.
-  Moreover, if $r\in\set Z$ is such that $x^{-r}\omega_i$ is integral at infinity, then we must have
-  $\defect_\infty(x^{-r}\omega_i)\geq -\frac12n(n-1)$, i.e.,
+  Moreover, if $\tau\in\set Z$ is such that $x^{\tau}\omega_i$ is integral at infinity, then we must have
+  $\defect_\infty(x^{\tau}\omega_i)\geq -\frac12n(n-1)$, i.e.,
   \[
-    rn + \defect_\infty(\omega_i) \geq -\tfrac12n(n-1),
+    \defect_\infty(\omega_i) - \tau n \geq -\tfrac12n(n-1),
   \]
-  i.e.,
+  and hence,
   \begin{alignat*}1
-    r &\geq \frac1n\Bigl( -\frac12n(n-1) - \defect_\infty(\omega_i) \Bigr) \\
-      &\geq -\tfrac12 (n-1) - \tfrac12 (n-1)(N-2) = -\tfrac12 (n-1)(N-1),
+    \tau &\leq \frac1n\Bigl( \frac12n(n-1) + \defect_\infty(\omega_i) \Bigr) \\
+      &\leq \tfrac12 (n-1) + \tfrac12 (n-1)(N-2) = \tfrac12 (n-1)(N-1),
   \end{alignat*}
   as claimed.
 \end{proof}
@@ -544,25 +544,25 @@ Fortunately, we can still be sure that there are not too many such functions.
   Let $V$ be the set of all $f\in A$ which are integral at all finite places and at infinity.
   Then $V$ is a $K$-vector space of finite dimension.
   Let $\{\omega_1,\dots,\omega_n\}$ be a global integral basis of~$A$ which is normal at infinity,
-  and let $e_1,\dots,e_n\in\set Z$ be such that $\{x^{e_1}\omega_1,\dots,x^{e_n}\omega_n\}$ is
+  and let $\tau_1,\dots,\tau_n\in\set Z$ be such that $\{x^{\tau_1}\omega_1,\dots,x^{\tau_n}\omega_n\}$ is
   a local integral basis at infinity.
-  Then $\{\,x^j\omega_i : i=1,\dots,n; j=0,\dots,e_i\,\}$ is a $K$-vector space basis of~$V$.
+  Then $\{\,x^j\omega_i : i=1,\dots,n; j=0,\dots,\tau_i\,\}$ is a $K$-vector space basis of~$V$.
 \end{lemma}
 \begin{proof}
   It is clear that $V$ is closed under taking $K$-linear combinations, so it is clearly a vector space.
-  We show that $B=\{\,x^j\omega_i : i=1,\dots,n; j=0,\dots,e_i\,\}$ is a basis.
+  We show that $B=\{\,x^j\omega_i : i=1,\dots,n; j=0,\dots,\tau_i\,\}$ is a basis.
 
-  Every $x^j\omega_i\in B$ is by definition integral at every finite place and because of $0\leq j\leq e_i$ also
+  Every $x^j\omega_i\in B$ is by definition integral at every finite place and because of $0\leq j\leq \tau_i$ also
   integral at infinity. Therefore $x^j\omega_i\in V$, and therefore $B$ generates a subspace of~$V$.
 
   Conversely, let $f\in V$ be arbitrary. Then $f$ is in particular integral at all finite places,
   and since $\{\omega_1,\dots,\omega_n\}$ is a global integral basis we can write $f=\sum_{i=1}^n p_i\omega_i$
   for some polynomials $p_1,\dots,p_n$.
-  If we had $\deg(p_i)>e_i$ for some~$i$, then $p_i\omega_i$ would not be integral at infinity
-  (by definition of the numbers~$e_i$), and then, because $\{\omega_1,\dots,\omega_n\}$ is normal
+  If we had $\deg(p_i)>\tau_i$ for some~$i$, then $p_i\omega_i$ would not be integral at infinity
+  (by definition of the numbers~$\tau_i$), and then, because $\{\omega_1,\dots,\omega_n\}$ is normal
   at infinity, Lemma~\ref{lemma:3} implies that $f$ would not be integral at infinity.
   But $f$ is in $V$ and therefore integral at every place, including infinity.
-  It follows that $\deg(p_i)\leq e_i$ for all~$i$, and therefore $f$ is a $K$-linear combination
+  It follows that $\deg(p_i)\leq \tau_i$ for all~$i$, and therefore $f$ is a $K$-linear combination
   of elements of~$B$.
 \end{proof}
 
@@ -574,9 +574,9 @@ and~\ref{lemma:nopoles-space}, we have
 \]
 \end{corollary}
 \begin{proof}
-Note that the exponents~$e_i$ in Lemma~\ref{lemma:nopoles-space} differ from
-the~$r_i$ only by sign. In the proof of Lemma~\ref{lemma:bound-exps} it was
-shown that $r_i\geq-\frac12(n-1)(N-1)$. The estimate on the dimension of~$V$
+Note that the exponents~$\tau_i$ in Lemma~\ref{lemma:nopoles-space} are the
+same as in Lemma~\ref{lemma:bound-exps}; in the proof of the latter it was
+shown that $tau_i\leq\frac12(n-1)(N-1)$. The estimate on the dimension of~$V$
 then follows immediately.
 \end{proof}
 
@@ -1031,22 +1031,22 @@ The following lemma shows that we can perform a simple change of basis to make t
 
 \begin{lemma}\label{LM:CB}
 Let~$W =\{\omega_1, \ldots, \omega_n\}$ be an integral basis of~$A$ such that it is also normal at infinity. Then
-there exist nonnegative integers~$\tau_1, \ldots, \tau_n$ such that
-\[ V := \{\nu_1, \ldots, \nu_n\} \quad \text{with $\nu_i = x^{-\tau_i} \omega_i$}\]
+there exist integers~$\tau_1, \ldots, \tau_n\in\set Z$ such that
+\[
+  V := \{\nu_1, \ldots, \nu_n\} \quad \text{with $\nu_i = x^{\tau_i} \omega_i$}
+\]
 is a basis of~$A$ which is normal at $0$ and integral at all other places (including infinity).
 \end{lemma}
 \begin{proof}
 It is clear that such a basis~$V$ will be normal at zero, because multiplying the generators by
-the rational functions $x^{\tau_i}$ brings it back to a global integral basis, which is in particular
+the rational functions $x^{-\tau_i}$ brings it back to a global integral basis, which is in particular
 a local integral basis at zero.
 It is also clear that such a basis will be integral at every other point $a\in\bar C\setminus\{0\}$, because the
-multipliers $x^{-\tau_i}$ are locally units at such~$a$.
+multipliers $x^{\tau_i}$ are locally units at such~$a$.
 Finally, since the original basis is normal at infinity, there exist rational functions $u_1,\dots,u_n$
 such that $\{u_1\omega_1,\dots,u_n\omega_n\}$ is a local integral basis at infinity.
-Since $u_i$ can be written as $u_i=x^{-\tau_i}\tilde{u}_i$ with $\tau_i\in\set Z$ and $\tilde{u}_i$ being a unit
+Since $u_i$ can be written as $u_i=x^{\tau_i}\tilde{u}_i$ with $\tau_i\in\set Z$ and $\tilde{u}_i$ being a unit
 in $\bar{C}(x)_\infty$, we see that also $V$ is a local integral basis at infinity.
-The integers~$\tau_i$ can only be nonnegative because the $\omega_i$'s have no finite poles and therefore each
-of them is either constant or has a pole at infinity by Chevalley's theorem.
 \end{proof}
 
 
@@ -1054,7 +1054,7 @@ of them is either constant or has a pole at infinity by Chevalley's theorem.
 Combining the Hermite reduction and polynomial reduction, we get the following theorem.
 \begin{theorem}\label{THM:polyred}
 Let $W$ be an integral basis of~$A$ that is normal at infinity.
-Let $T := \diag(x^{-\tau_1}, \ldots, x^{-\tau_n}) \in K(x)^{n\times n}$
+Let $T := \diag(x^{\tau_1}, \ldots, x^{\tau_n}) \in K(x)^{n\times n}$
 be such that $V = TW$ is integral at infinity.
 Let $e\in K[x]$, $\lambda \in \bN$, and $B, M \in K[x]^{n \times n} $ be such that
 $eW' = MW$ and $x^\lambda eV' = BV$.
@@ -1070,7 +1070,7 @@ After performing the Hermite reduction on $f$, we get
 \[f = \tilde{g}' + \frac{1}{d} PW + \frac{1}{e} UW,\]
 where~$P = (v_1, \ldots, v_n)\in K[x]^n$ and $U = (u_1, \ldots, u_n)\in K[x]^n$
 with~$u_i, v_i$ introduced in~\eqref{EQ:h}. By Lemma~\ref{LM:CB}, there exists
-$T := \diag(x^{-\tau_1}, \ldots, x^{-\tau_n}) \in K(x)^{n\times n}$
+$T := \diag(x^{\tau_1}, \ldots, x^{\tau_n}) \in K(x)^{n\times n}$
 such that $V = TW$ is integral at infinity. By the same lemma it follows
 that $V$ is also normal at $0$ and integral at all other places. Note that we can
 choose~$T$ as the identity matrix if~$\deg_x(M)\leq \deg_x(e)-1$.

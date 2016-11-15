@@ -464,7 +464,7 @@ number of iterations.
 \begin{lemma}\label{lemma:bound-exps}
   Let $\{\omega_1,\dots,\omega_n\}$, $\{\nu_1,\dots,\nu_n\}$, and $\tau_1,\dots,\tau_n$ be as above.
   Let $N$ be the number of points $a\in\bar C$ where at least one of the $\omega_i$ has
-  at $n$ distinct exponents in~$\set N$ (i.e., $N$ counts the
+  $n$ distinct exponents in~$\set N$ (i.e., $N$ counts the
   finite singular points of~$L$ that are not ``apparent'' singularities).
   Then
   \[
@@ -1052,49 +1052,69 @@ in $\bar{C}(x)_\infty$, we see that also $V$ is a local integral basis at infini
 
 
 
-Combining the Hermite reduction and polynomial reduction, we get the following theorem.
+Combining the Hermite reduction described in Section~\ref{sec:hermite}
+with the polynomial reduction from above, we get the following decomposition.
 \begin{theorem}\label{THM:polyred}
-Let $W$ be an integral basis of~$A$ that is normal at infinity.
-Let $T := \diag(x^{\tau_1}, \ldots, x^{\tau_n}) \in K(x)^{n\times n}$
-be such that $V = TW$ is integral at infinity.
-Let $e\in K[x]$, $\lambda \in \bN$, and $B, M \in K[x]^{n \times n} $ be such that
-$eW' = MW$ and $x^\lambda eV' = BV$.
-Then any element $f\in A$ can be decomposed into
+Let $W\in A^n$ be an integral basis of~$A$ that is normal at infinity.
+Let $T = \diag(x^{\tau_1}, \ldots, x^{\tau_n}) \in K(x)^{n\times n}$ be such
+that $V := TW$ is a local integral basis at infinity.  Let $e\in K[x]$,
+$\lambda \in \bN$, and $B, M \in K[x]^{n \times n} $ be such that $eW' = MW$
+and $x^\lambda eV' = BV$.  Then any element $f\in A$ can be decomposed into
 \begin{equation}\label{EQ:add}
-f = g' + \frac{1}{d} PW + \frac{1}{x^\lambda e} QV,
+  f = g' + \frac{1}{d} RW + \frac{1}{x^\lambda e} QV,
 \end{equation}
-where $g\in A$, $d\in K[x]$ is squarefree and $\gcd(d, e)=1$, $P, Q\in K[x]^n$ with $\deg_x(P) < \deg_x(d)$ and $Q\in N_V$, which is
-a finite-dimensional $K$-vector space. Moreover, $P, Q$ are zero if and only if $f$ is integrable in~$A$.
+where $g\in A$, $d\in K[x]$ is squarefree and $\gcd(d, e)=1$, $R, Q\in K[x]^n$
+with $\deg_x(R) < \deg_x(d)$ and $Q\in N_V$, which is a finite-dimensional
+$K$-vector space. Moreover, $R=Q=0$ if and only if $f$ is integrable in~$A$.
 \end{theorem}
 \begin{proof}
 After performing the Hermite reduction on $f$, we get
-\[f = \tilde{g}' + \frac{1}{d} PW + \frac{1}{e} UW,\]
-where~$P = (v_1, \ldots, v_n)\in K[x]^n$ and $U = (u_1, \ldots, u_n)\in K[x]^n$
-with~$u_i, v_i$ introduced in~\eqref{EQ:h}. By Lemma~\ref{LM:CB}, there exists
-$T := \diag(x^{\tau_1}, \ldots, x^{\tau_n}) \in K(x)^{n\times n}$
-such that $V = TW$ is integral at infinity. By the same lemma it follows
-that $V$ is also normal at $0$ and integral at all other places. Note that we can
-choose~$T$ as the identity matrix if~$\deg_x(M)\leq \deg_x(e)-1$.
-By taking derivatives, we get
-\[V' = \left(T' + T\frac{M}{e}\right)T^{-1}V = \frac{B}{a}V, \]
-where $a=x^\lambda e$ for some $\lambda\in \bN$ and $B\in K[x]^{n\times n}$. Since $V$ is locally integral
-at infinity, $\deg_x(B) \leq \deg_x(a)-1$ by Lemma~\ref{lemma:degM}.
-By expanding in terms of the new basis~$V$, we get
-\[\frac{1}{e} UW = \frac{1}{a} \tilde{U}V, \]
-where $\tilde{U} = x^\lambda U T^{-1} \in K[x]^n$. Next, we decompose $\tilde{U}$ into
-$\tilde{U} = \phi_{V}(\tilde{U}_1) + \tilde{U}_2$ with $\tilde{U}_1, \tilde{U}_2\in K[x]^n$ and
-$\tilde{U}_2\in N_V$. Then we get
-\[\frac{1}{e} UW = (\tilde U_1 V)' + \frac{1}{a} \tilde U_2 V. \]
-We then get the decomposition~\eqref{EQ:add} by setting
-$g = \tilde g + \tilde U_1 V$ and~$Q = U_2$.
-
-Assume that $f$ is integrable. Then Lemma~\ref{LEM:d} implies that $d\in K$.
-Since $\deg_x(P) < \deg_x(d)$, we have $P=0$. Then
+\begin{equation}\label{EQ:add1}
+  f = \tilde{g}' + \frac{1}{d} RW + \frac{1}{e} SW,
+\end{equation}
+where~$R = (r_1, \ldots, r_n)\in K[x]^n$ and $S = (s_1, \ldots, s_n)\in K[x]^n$
+with~$r_i, s_i$ introduced in~\eqref{EQ:h}. By Lemma~\ref{LM:CB}, there exists
+$T = \diag(x^{\tau_1}, \ldots, x^{\tau_n}) \in K(x)^{n\times n}$ such that $V = TW$
+is a local integral basis at infinity. By the same lemma it follows
+that $V$ is also normal at $0$ and integral at all other places.
+The derivative of~$V$ can be reexpressed in the same basis as
 \[
-  \frac{1}{x^\lambda e} QV = \sum_{i=1}^n (a_i \nu_i)'
+  V' = (TW)' = \left(T' + \frac{1}{e}TM\right)T^{-1}V = \frac{1}{a}BV,
 \]
-for some $a_i\in K[x]$. So $Q \in \im(\phi_V)$.
-Since $\im(\phi_V) \cap N_V = \{0\}$, if follows that $Q=0$.
+where $a=x^\lambda e$ for some $\lambda\in \bN$ and $B\in K[x]^{n\times n}$.
+Since $V$ is a local integral basis at infinity, it follows by
+Lemma~\ref{lemma:degM} that $\deg_x(B) \leq \deg_x(a)-1$, which is a
+prerequisite for applying Proposition~\ref{PROP:finite}; hence the
+corresponding space~$N_V$ is finite-dimensional, as claimed.
+We rewrite the last summand in~\eqref{EQ:add1} w.r.t. the new basis~$V$:
+\[
+  \frac{1}{e} SW = \frac{1}{a} x^\lambda ST^{-1}V= \frac{1}{a} \tilde{S}V,
+\]
+where $\tilde{S} = x^\lambda S T^{-1} \in K[x,x^{-1}]^n$. Note that the entries
+of~$\tilde{S}$ are not necessarily polynomials, but Laurent polynomials in~$x$.
+Indeed, because of Lemma~\ref{lemma:nopoles-space}, some of the $\tau_i$
+may be positive. Next, using the polynomial reduction, we decompose
+$\tilde{S}$ into $\tilde{S} = \phi_{V}(S_1) + S_2$ with
+$S_1\in K[x,x^{-1}]^n$ and $S_2\in N_V$, which means that
+\[
+  \frac{1}{e} SW = (S_1 V)' + \frac{1}{a} S_2 V.
+\]
+We finally obtain the decomposition~\eqref{EQ:add} by setting
+$g = \tilde{g} + S_1 V$ and $Q = S_2$.
+
+For the last assertion, assume that $f$ is integrable (the other direction of
+the equivalence holds trivially). Then Lemma~\ref{LEM:d} implies that $d\in K$,
+and therefore $R$ must be zero because $\deg_x(R) < \deg_x(d)$. Hence the last
+summand in~\eqref{EQ:add} is also integrable, i.e., there exist $a_i\in K(x)$
+such that
+\[
+  \frac{1}{x^\lambda e} QV = \biggl(\sum_{i=1}^n a_i \nu_i\biggr)'.
+\]
+Note that the expression on the left-hand side has only simple poles at finite
+places except~$0$. Therefore, by Lemma~\ref{LEM:d}, its integral is integral
+at all nonzero finite places. In other words, the coefficients $a_i$ are actually
+Laurent polynomials in $K[x,x^{-1}]$, which implies that $Q \in \im(\phi_V)$.
+Since $\im(\phi_V) \cap N_V = \{0\}$, it follows that $Q=0$.
 \end{proof}
 The decomposition in~\eqref{EQ:add} is called an \emph{additive decomposition} of~$f$ with respect to~$x$.
 We now discuss how to compute telescopers for elements of~$A$ via Hermite reduction and
@@ -1109,19 +1129,19 @@ By Proposition 7 in~\cite{chen14a}, we have $\tilde e \mid e$ and $x^{\tilde{\la
 So we can just take $\tilde e = e$ and $\tilde{\lambda}  = \lambda$ by multiplying $\tilde M, \tilde B$ by some factors
 of~$x^\lambda e$. A direct calculation yields $\partial_t\cdot f = (\partial_t\cdot g)' + h$,
 where
-\[h = \left(\partial_t\cdot\frac{P}{d}+\frac{P\tilde M}{de}\right)W + \left(\partial_t\cdot\frac{Q}{x^\lambda e}+ \frac{Q\tilde B}{x^{2\lambda} e^2}\right)V.\]
+\[h = \left(\partial_t\cdot\frac{R}{d}+\frac{R\tilde M}{de}\right)W + \left(\partial_t\cdot\frac{Q}{x^\lambda e}+ \frac{Q\tilde B}{x^{2\lambda} e^2}\right)V.\]
 This implies that the squarefree part of the denominator of $h$ divides $xde$. Applying Hermite reduction and polynomial reduction
 to~$h$ yields
-\[ h = \tilde g_1' + \frac{1}{d} P_1W + \frac{1}{x^\lambda e} Q_1V,\]
-where $P_1, Q_1\in K[x]^n$ with $\deg_x(P_1) < \deg_x(d)$ and $Q_1\in N_V$.
+\[ h = \tilde g_1' + \frac{1}{d} R_1W + \frac{1}{x^\lambda e} Q_1V,\]
+where $R_1, Q_1\in K[x]^n$ with $\deg_x(R_1) < \deg_x(d)$ and $Q_1\in N_V$.
 Repeating this discussion, we get the following lemma.
 \begin{lemma}\label{LEM:idtf}
 For any $i\in \bN$, the derivative $\partial_t^i\cdot f$ has an additive decomposition of the form
-\[ \partial_t^i\cdot f = g_i' + \frac{1}{d} P_iW + \frac{1}{x^\lambda e} Q_iV,\]
-where $g_i\in A$, $P_i, Q_i\in K[x]^n$ with $\deg_x(P_i) < \deg_x(d)$ and $Q_i\in N_V$.
+\[ \partial_t^i\cdot f = g_i' + \frac{1}{d} R_iW + \frac{1}{x^\lambda e} Q_iV,\]
+where $g_i\in A$, $R_i, Q_i\in K[x]^n$ with $\deg_x(R_i) < \deg_x(d)$ and $Q_i\in N_V$.
 \end{lemma}
 As application of the above lemma, we can compute the minimal telescoper for $f$ by finding the first
-linear dependence among the $(P_i, Q_i)$ over~$K$. We also obtain an upper bound for the order of telescopers.
+linear dependence among the $(R_i, Q_i)$ over~$K$. We also obtain an upper bound for the order of telescopers.
 \begin{corollary}
 Every $f\in A$ has a telescoper of order at most $n\deg_x(d) + \dim_K(N_V)$.
 \end{corollary}
@@ -1159,8 +1179,8 @@ $\lc(B)$ we find that $\ell=1$ and the echelon form of $M_\ell$ is
 Writing the Hermite remainder~$h$ in terms of the $\nu_i$, we see that all
 denominators divide the polynomial~$a$. Thus we write
 $h=a^{-1}(h_1\nu_1+h_2\nu_2)$ and in~\eqref{EQ:h} we get
-$u_1=h_1=-t^3x^4-t^2x^3+3tx^2$, $u_2=h_2=-tx^3$, and $v_1=v_2=0$.
-In the basis $\cS_4$ the vector $(u_1,u_2)$ reads
+$s_1=h_1=-t^3x^4-t^2x^3+3tx^2$, $s_2=h_2=-tx^3$, and $r_1=r_2=0$.
+In the basis $\cS_4$ the vector $(s_1,s_2)$ reads
 % here we could employ the \vec notation
 \[
   \bigl(-t^3, 0, -t^2, -t, 3 t, 0, 0, 0, 0, 0\bigr).

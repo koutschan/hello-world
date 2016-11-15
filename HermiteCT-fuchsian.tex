@@ -901,93 +901,145 @@ into the form
   f = g' + h = g' + \sum_{i=1}^n \frac{h_i}{de} \omega_i,\qquad
   g, h\in A,
 \]
-with $h_i, d\in K[x]$ such that $\gcd(d, e)=\gcd(h_i,de)=1$ and $d$ is squarefree.
+with $h_i, d\in K[x]$ such that $\gcd(d, e)=1$ and $d$ is squarefree.
 \begin{lemma}\label{LEM:d}
-If $h$ is integrable in~$A$, then $d$ is in~$K$.
+  Let $h$ be as above. If $h$ is integrable in~$A$,
+  then its integral is integral, and we have $d\in K$.
 \end{lemma}
 \begin{proof}
-Suppose that $h$ is integrable in~$A$, i.e., there exist $a, b_i\in K[x]$
-such that $h = \bigl(\frac{1}{a}\sum_{i=1}^n b_i \omega_i\bigr)'$. Then
-\[
-  h = \sum_{i=1}^n \frac{h_i}{de}\omega_i= \sum_{i=1}^n \biggl(\Bigl(\frac{b_i}{a}\Bigr)' \omega_i +
-  \frac{b_i}{a e} \sum_{j=1}^n  m_{i, j}\omega_j\biggr).
-\]
-We show that $a$ is constant. Otherwise, for any irreducible factor $p$ of~$a$, we would have that $h$ has a pole of
-multiplicity greater than $1$ at the roots of~$p$. This contradicts
-the fact that $d, e$ are squarefree. Thus, $d$ is a constant.
+  Suppose that $h$ is integrable in~$A$, i.e., there exist $b_i\in K(x)$
+  such that $h = \bigl(\sum_{i=1}^n b_i \omega_i\bigr)'$.
+  If one of the $b_i$ had a pole at a finite place, then $\sum_{i=1}^n b_i\omega_i$
+  would have a pole at a finite place, because $\{\omega_1,\dots,\omega_n\}$ is
+  an integral basis. But then $h$ would have a pole of order greater than $1$
+  there, which is impossible because $\gcd(d,e)=1$ and $d$ is squarefree and
+  $\{\omega_1,\dots,\omega_n\}$ is an integral basis.
+  Therefore, $b_1,\dots,b_n\in K[x]$ and we have shown that the integral of $h$
+  is integral. The claim on $d$ then follows directly from the definition of~$e$.
 \end{proof}
 
+Note that the lemma continues to hold when $\{\omega_1,\dots,\omega_n\}$ is
+a local integral basis at a finite place~$a\in\bar C$. In this case, we can conclude
+that the integral is locally integral at $a$ and $d\in K(x)_a$. 
+
 By the extended Euclidean algorithm, we compute $u_i, v_i\in K[x]$ such that
-$h_i = u_i d + v_i e$ and $\deg_x(v_i) < \deg_x(d)$. Then the Hermite remainder~$h$
+$h_i = r_i e + s_i d$ and $\deg_x(r_i) < \deg_x(d)$. Then the Hermite remainder~$h$
 decomposes as
 \begin{equation}\label{EQ:h}
-  \sum_{i=1}^n \frac{h_i}{de}\omega_i =  \sum_{i=1}^n \frac{u_i}{e}\omega_i + \sum_{i=1}^n \frac{v_i}{d}\omega_i.
+  \sum_{i=1}^n \frac{h_i}{de}\omega_i =
+  \sum_{i=1}^n \frac{r_i}{d}\omega_i +
+  \sum_{i=1}^n \frac{s_i}{e}\omega_i.
 \end{equation}
-
-We now introduce the \emph{polynomial reduction} whose goal is to confine the $u_i$ to a finite-dimensional
+We now introduce the \emph{polynomial reduction} whose goal is to confine the $r_i$ to a finite-dimensional
 vector space over~$K$. Similar reductions have been introduced and used in creative telescoping
 for hyperexponential functions~\cite{bostan13a} and hypergeometric terms~\cite{chen15a}.
-Let $V = (\nu_1, \ldots, \nu_n)^T\in A^n$ be such that its entries form a $K(x)$-basis of~$A$,
-and let $a\in K[x]$ and $B = (b_{i, j})\in K[x]^{n \times n}$ be such that $aV'=BV$ and
-$\gcd(a, b_{1, 1}, b_{1, 2}, \ldots, b_{n ,n})=1$. Let $p = (p_1, \ldots, p_n)\in K[x]^n$. Then
+Our version below is slightly different from these, and also from the reduction given in~\cite{..} for
+the algebraic case, because we will be considering Laurent polynomials instead of polynomials.
+
+Throughout the rest of the section, let $V = (\nu_1, \ldots, \nu_n)^T\in A^n$ be such that its entries
+form a local integral basis at $\infty$ as well as a local integral basis at every $a\in\bar C\setminus\{0\}$,
+and which is normal at~$0$.
+The existence of such a basis follows from the existence of global integral bases that is normal at infinity,
+as follows.
+
+\begin{lemma}\label{LM:CB}
+Let $W =\{\omega_1, \ldots, \omega_n\}$ be an integral basis of~$A$ that is normal at infinity. Then
+there exist integers $\tau_1, \ldots, \tau_n\in\set Z$ such that
+\[
+  V := \{\nu_1, \ldots, \nu_n\} \quad \text{with $\nu_i = x^{\tau_i} \omega_i$}
+\]
+is a basis of~$A$ which is normal at $0$ and integral at all other places (including infinity).
+\end{lemma}
+\begin{proof}
+It is clear that such a basis $V$ will be normal at zero, because multiplying the generators by
+the rational functions $x^{-\tau_i}$ brings it back to a global integral basis, which is in particular
+a local integral basis at zero.
+It is also clear that such a basis will be integral at every other point $a\in\bar C\setminus\{0\}$, because the
+multipliers $x^{\tau_i}$ are locally units at such~$a$.
+Finally, since the original basis is normal at infinity, there exist rational functions $u_1,\dots,u_n$
+such that $\{u_1\omega_1,\dots,u_n\omega_n\}$ is a local integral basis at infinity.
+Since $u_i$ can be written as $u_i=x^{\tau_i}\tilde{u}_i$ with $\tau_i\in\set Z$ and $\tilde{u}_i$ being a unit
+in $\bar{C}(x)_\infty$, we see that also $V$ is a local integral basis at infinity.
+\end{proof}
+
+In the case of algebraic functions~\cite{..}, it is a consequence of Chevalley's theorem that the exponents
+$\tau_i$ cannot be negative. In the more general fuchsian situation, this is no longer the case, and this is
+why we are led to consider Laurent polynomials rather than polynomials. 
+
+Let $a\in K[x]$ and $B = (b_{i, j})\in K[x]^{n \times n}$ be such that $aV'=BV$ and
+$\gcd(a, b_{1, 1}, b_{1, 2}, \ldots, b_{n ,n})=1$. By Lemma~\ref{..}, we may assume that
+$a=x^\lambda e$ for some $\lambda\in\set N$, and we will do so. 
+
+Let $P = (p_1, \ldots, p_n)\in K[x,x^{-1}]^n$. Then
 \begin{equation} \label{EQ:polyred}
-  (pV)' = \sum_{i=1}^n (p_i \nu_i)' = \frac{ap' + pB}{a}\, V.
+  (PV)' = \sum_{i=1}^n (p_i \nu_i)' = \frac{aP' + PB}{a}\,V.
 \end{equation}
 This motivates us to introduce the following definition.
 \begin{defi}
-Let the map $\phi_V\colon K[x]^n \rightarrow K[x]^n$
-be defined by $\phi_V(p) = ap' + pB$ for any $p\in K[x]^n$.
+Let the map $\phi_V\colon K[x,x^{-1}]^n \rightarrow K[x,x^{-1}]^n$
+be defined by $\phi_V(P) = aP' + PB$ for any $P\in K[x,x^{-1}]^n$.
 We call $\phi_V$ the \emph{map for polynomial reduction} with respect to~$V$, and call
-the subspace $\im(\phi_V) = \{\phi_V(p) \mid p \in K[x]^n\}$
+the subspace
+\[
+ \im(\phi_V) = \{\phi_V(p) \mid p \in K[x,x^{-1}]^n\}
+\]
 the \emph{subspace for polynomial reduction} with respect to~$V$.
 \end{defi}
-Note that, by construction and because of Lemma~\ref{LEM:d}, $q\in K[x]^n$ is in
-$\im(\phi_V)$ if and only if $\frac{q}{a}V$ is integrable in~$A$.
 
-We can always view an element of $K[x]^n$ (resp. $K[x]^{n\times n}$) as a polynomial in~$x$
+Note that, by construction and because of Lemma~\ref{LEM:d}, $Q\in K[x,x^{-1}]^n$ belongs to
+$\im(\phi_V)$ if and only if $\frac{1}{x^\lambda e}QV$ is integrable in~$A$. 
+
+We can always view an element of $K[x,x^{-1}]^n$ (resp. $K[x,x^{-1}]^{n\times n}$) as a Laurent polynomial in~$x$
 with coefficients in~$K^n$ (resp. $K^{n\times n}$). In this sense we use the notation $\lc(\cdot)$
 for the leading coefficient and $\lt(\cdot)$ for the leading term of a vector (resp. matrix).
-For example, if $p\in K[x]^n$ is of the form
+For example, if $P\in K[x,x^{-1}]^n$ is of the form
 \[
-  p = p^{(r)}x^r + \dots + p^{(1)}x + p^{(0)},\quad p^{(i)}\in K^n,
+  P = p^{(i_1)}x^{i_1} + \dots + p^{(i_m)}x^{i_m},\quad p^{(i)}\in K^n,
 \]
-then $\deg_x(p)=r$, $\lc(p)=p^{(r)}$, and $\lt(p)=p^{(r)}x^r$.
+\def\ldeg{\operatorname{ldeg}}%
+then
+$\deg_x(P)=\max\{i_1,\dots,i_m\}$,
+$\ldeg_x(P)=\min\{i_1,\dots,i_m\}$, $\lc(P)=p^{(\deg_x(P))}$, and $\lt(P)=p^{(\deg_x(P))}x^{\deg_x(P)}$,
+and so on.
 Let $\{e_1, \ldots, e_n\}$ be the standard basis of~$K^n$.
-Then the module $K[x]^n$ viewed as a $K$-vector space is generated by
+Then the module $K[x,x^{-1}]^n$ viewed as a $K$-vector space is generated by
 \[
-  \cS := \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, j\in \bN\bigr\}.
+  \cS := \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, j\in \bZ\bigr\}.
 \]
-We define $K[x]_\mu^n:=\{p\in K[x]^n \mid \deg_x(p) \leq\mu\}$; as a $K$-vector
-space it is generated by
-\[
-  \cS_\mu := \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, 0\leq j\leq \mu\bigr\}.
-\]
-Any element $p\in K[x]_\mu^n$ can be expressed in the
-basis $\cS_\mu$ as a vector $\vec{p}\in K^{n(\mu+1)}$ (in the following the
-decoration~\raisebox{-1pt}{$\vec{}\;$} always indicates such a typecast).
+We define
+\begin{alignat*}1
+  K[x]_{\eta,\mu}^n&:=\{P\in K[x,x^{-1}]^n \mid \ldeg_x(P)\geq\eta,\deg_x(P)\leq\mu\},\\
+  \cS_{\eta,\mu}&:= \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, \eta\leq j\leq \mu\bigr\}.
+\end{alignat*}
+Any element $P\in K[x]_{\eta,\mu}^n$ can be expressed in the
+basis $\cS_{\eta,\mu}$ as a vector $\vec{P}\in K^{n(\mu-\eta+1)}$.
+In the following the decoration~\raisebox{-1pt}{$\vec{}\;$} always indicates
+such a typecast.
 
 \begin{defi}
-Let $N_V$ be the $K$-subspace of $K[x]^n$ generated by
+Let $N_V$ be the $K$-subspace of $K[x,x^{-1}]^n$ generated by
 \[
   \bigl\{t \in \cS \mathrel{\big|} t \neq \lt(p) \ \text{for all $p\in \im(\phi_V)$}\bigr\}.
 \]
-Then $K[x]^n = \im(\phi_V) \oplus N_V$.
+Then $K[x,x^{-1}]^n = \im(\phi_V) \oplus N_V$.
 We call $N_V$ the \emph{standard complement} of $\im(\phi_V)$.
-For any $p\in K[x]^n$, there exist $p_1\in K[x]^n$ and~$p_2\in N_V$ such that
-\[\frac{p}{a}V = (p_1V)' + \frac{p_2}{a}V.\]
-This decomposition is called the \emph{polynomial reduction} of~$p$
+For any $P\in K[x,x^{-1}]^n$, there exist $P_1\in K[x]^n$ and~$P_2\in N_V$ such that
+\[\frac{1}{x^\lambda e}PV = (P_1V)' + \frac{1}{x^\lambda e}P_2V.\]
+This decomposition is called the \emph{polynomial reduction} of~$P$
 with respect to~$V$.
 \end{defi}
 
 \begin{prop}\label{PROP:finite}
-Let $a\in K[x]$ and $B\in K[x]^{n \times n}$ be such that $aV'=BV$, as before.
+Let $\lambda\in\set N$, $e\in K[x]$ and $B\in K[x]^{n \times n}$ be such that $x^\lambda eV'=BV$, as before.
 If $\deg_x(B) \leq \deg_x(a)-1$, then $N_V$ is a finite-dimensional
 $K$-vector space.
 \end{prop}
 \begin{proof}
 In addition to the proof of the assertion, we also explain how to determine
-the dimension and a basis for $N_V$, for later use. For brevity, let
+the dimension and a basis for~$N_V$, for later use. For brevity, let
 $\mu:=\deg_x(a)-1$. We distinguish two cases.
+
+====
 
 \smallskip
 {\it Case 1.}~
@@ -1027,32 +1079,13 @@ a basis of $N_V$ can be computed by
 looking at the echelon form of the matrix ${M_{\ell}}$.
 \end{proof}
 
-In general, the condition $\deg_x(B) \leq \deg_x(a)-1$ may not hold for an arbitrary basis~$V$ of~$A$.
-The following lemma shows that we can perform a simple change of basis to make the condition hold.
+It follows from our general assumptions on $V$ that the
+condition $\deg_x(B) \leq \deg_x(a)-1$ is always satisfied.
+Therefore, by the combination of Hermite reduction and polynomial
+reduction, we get the following theorem.
 
-\begin{lemma}\label{LM:CB}
-Let~$W =\{\omega_1, \ldots, \omega_n\}$ be an integral basis of~$A$ such that it is also normal at infinity. Then
-there exist integers~$\tau_1, \ldots, \tau_n\in\set Z$ such that
-\[
-  V := \{\nu_1, \ldots, \nu_n\} \quad \text{with $\nu_i = x^{\tau_i} \omega_i$}
-\]
-is a basis of~$A$ which is normal at $0$ and integral at all other places (including infinity).
-\end{lemma}
-\begin{proof}
-It is clear that such a basis~$V$ will be normal at zero, because multiplying the generators by
-the rational functions $x^{-\tau_i}$ brings it back to a global integral basis, which is in particular
-a local integral basis at zero.
-It is also clear that such a basis will be integral at every other point $a\in\bar C\setminus\{0\}$, because the
-multipliers $x^{\tau_i}$ are locally units at such~$a$.
-Finally, since the original basis is normal at infinity, there exist rational functions $u_1,\dots,u_n$
-such that $\{u_1\omega_1,\dots,u_n\omega_n\}$ is a local integral basis at infinity.
-Since $u_i$ can be written as $u_i=x^{\tau_i}\tilde{u}_i$ with $\tau_i\in\set Z$ and $\tilde{u}_i$ being a unit
-in $\bar{C}(x)_\infty$, we see that also $V$ is a local integral basis at infinity.
-\end{proof}
+% === END MK / BEGIN CK ===
 
-
-
-Combining the Hermite reduction and polynomial reduction, we get the following theorem.
 \begin{theorem}\label{THM:polyred}
 Let $W$ be an integral basis of~$A$ that is normal at infinity.
 Let $T := \diag(x^{\tau_1}, \ldots, x^{\tau_n}) \in K(x)^{n\times n}$

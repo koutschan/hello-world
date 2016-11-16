@@ -524,7 +524,7 @@ depend heavily on this fact. There is no analogous result for fuchsian D-finite 
 functions may be integral at all finite places and also at infinity without being constant.
 It is easy to construct examples using the Papperitz symbol.
 
-\begin{example}
+\begin{example}\label{example:integral-everywhere}
   The operator $L = 3 x(x^2-1) D_x^2 + 2 (3x^2 - 1) D_x\in\set Q(x)[\partial_x]$
   has three singular places $0,+1,-1$. Infinity is an ordinary point of~$L$.
   At all three singularities, there is one local solution starting with exponent~$0$
@@ -838,7 +838,35 @@ as a post-processing step after the Hermite reduction, we can even ensure that $
 is integrable if and only if $h=0$.
 
 \begin{example}
-  ...
+Let $L = 3 (x^3-x) D_x^2 + 2 (3x^2 - 1) D_x$ be the same operator as in
+Example~\ref{example:integral-everywhere}; its solution space is spanned by
+$y_1(x)=1$ and $y_2(x)=x^{1/3}{}\,_2F_{\!1}\bigl(\frac16,\frac23;\frac76;x^2\bigr)$.
+An integral basis for $A=\bQ(x)[\partial_x]/\<L>$, that is also normal at
+infinity, is given by $\omega_1=1$ and $\omega_2=(x^3-x)\partial_x$. Recall
+that both solutions are integral everywhere, and hence $\omega_1\in V$.
+Actually, the $K$-vector space~$V$ is spanned by~$\omega_1$, as can be seen
+from the fact that $\tau_1=0$ and $\tau_2=-1$. The straightforward calculation
+\[
+  W' = \frac{1}{e}MW =
+  \frac{1}{x^3-x}\begin{pmatrix}0 & 1\\ 0 & x^2-\frac13\end{pmatrix}W
+  \quad\text{for }W=\begin{pmatrix}\omega_1\\ \omega_2\end{pmatrix}.
+\]
+exhibits that $e=x^3-x$. Consider now
+\[
+  f = \frac{3}{x^2}\omega_1 + \frac{2(2x+1)}{(x^3-x)^2}\omega_2,
+\]
+which has a double root at infinity. The result of the Hermite reduction is
+\[
+  f = \left(-\frac{3}{x}\omega_1-\frac{3(2x+1)}{2(x^3-x)}\omega_2\right)'
+    - \frac{3}{x^3-x}\omega_2,
+\]
+which has a nonzero remainder. According to Theorem~\ref{thm:intiff0}, $f$
+is integrable if this remainder lies in the subspace~$U=\{v':v\in V\}$.
+Using the matrix~$M$ above, we find that $\omega_1'=\frac{1}{x^3-x}\omega_2$,
+which is indeed a scalar multiple of our remainder. Hence, $f$ is integrable:
+\[
+  f = \left(-\frac{3(x+1)}{x}\omega_1 - \frac{3(2x+1)}{2(x^3-x)}\omega_2\right)'.
+\]
 \end{example}
 
 Note that the condition in Theorem~\ref{thm:intiff0} that $f$ has a double

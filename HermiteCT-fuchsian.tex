@@ -21,6 +21,7 @@
 \def\qed{\quad\rule{1ex}{1ex}}
 \def\ord{\operatorname{ord}}
 \def\<#1>{\langle#1\rangle}
+\def\defect{\operatorname{defect}}
 
 \newcommand{\red}{\color{red}}
 \newcommand{\blue}{\color{blue}}
@@ -36,7 +37,7 @@
 \newcommand{\bK}{ {\mathbb K}}
 \newcommand{\cM}{ {\mathcal M}}
 \newcommand{\cN}{ {\mathcal N}}
-\newcommand{\cS}{ {\mathcal S}}
+\newcommand{\cX}{ {\mathcal X}}
 \newcommand{\cO}{ {\mathcal O}}
 \newcommand{\cE}{ {\mathcal E}}
 \newcommand{\cP}{ {\mathcal P}}
@@ -274,7 +275,6 @@ Puiseux series solutions of $M=0$ at places above~$a$. They correspond in the
 differential setting to the series solutions of $L$ in $\bar C[[[x-a]]]$, which
 generate a $\bar C$-vector space of dimension $\ord(L)$.
 
-\def\defect{\operatorname{defect}}%
 The exponents of an element $f\in A=R[\partial_x]/\<L>$ at a point $a\in\bar C\cup\{\infty\}$
 are the values $\alpha$ such that one of the series in $C[[[x-a]]]$ (or $C[[[x^{-1}]]]$, respectively)
 associated to $f$ has $(x-a)^\alpha\log(x-a)^\beta$ (or $(\frac1x)^\alpha\log(x)^\beta$) as initial
@@ -445,10 +445,10 @@ integral basis at infinity. Let $m_{i,j}\in K(x)$ be such that
 \]
 For each~$i$, let $\tau_i\in\set Z$ be the largest integer such that $x^{\tau_i}m_{i,j}$ has no pole at infinity for any~$j$.
 Then each $x^{\tau_i}\omega_i$ is locally integral at infinity.
-Let $A\in K^{n\times n}$ be the matrix obtained by evaluating $((x^{\tau_i}m_{i,j}))_{i,j=1}^n$ at infinity
+Let $B\in K^{n\times n}$ be the matrix obtained by evaluating $((x^{\tau_i}m_{i,j}))_{i,j=1}^n$ at infinity
 (this is possible by the choice of~$\tau_i$).
-If $A$ is invertible, then the $x^{\tau_i}\omega_i$ form a local integral basis at infinity and we are done.
-Otherwise, there exists a nonzero vector $a=(a_1,\dots,a_n)\in K^n$ with $aA=0$.
+If $B$ is invertible, then the $x^{\tau_i}\omega_i$ form a local integral basis at infinity and we are done.
+Otherwise, there exists a nonzero vector $a=(a_1,\dots,a_n)\in K^n$ with $aB=0$.
 Among the indices $\ell$ with $a_\ell\neq0$ choose one where $\tau_\ell$ is minimal,
 and then replace $\omega_\ell$ by $\sum_{i=1}^n a_i x^{\tau_i-\tau_\ell}\omega_i$.
 Note that the resulting basis is still global integral.
@@ -536,13 +536,14 @@ It is easy to construct examples using the Papperitz symbol.
 Fortunately, we can still be sure that there are not too many such functions.
 
 \begin{lemma}\label{lemma:nopoles-space}
-  Let $L$ be a fuchsian operator and let $A=K(x)[\partial_x]/\<L>$.
-  Let $V$ be the set of all $f\in A$ which are integral at all finite places and at infinity.
-  Then $V$ is a $K$-vector space of finite dimension.
-  Let $\{\omega_1,\dots,\omega_n\}$ be a global integral basis of~$A$ which is normal at infinity,
-  and let $\tau_1,\dots,\tau_n\in\set Z$ be such that $\{x^{\tau_1}\omega_1,\dots,x^{\tau_n}\omega_n\}$ is
-  a local integral basis at infinity.
-  Then $\{\,x^j\omega_i : i=1,\dots,n; j=0,\dots,\tau_i\,\}$ is a $K$-vector space basis of~$V$.
+  Let $A=K(x)[\partial_x]/\<L>$ for some fuchsian operator~$L$, let
+  $\{\omega_1,\dots,\omega_n\}$ be a global integral basis of~$A$ which is
+  normal at infinity, and let $\tau_1,\dots,\tau_n\in\set Z$ be such that
+  $\{x^{\tau_1}\omega_1,\dots,x^{\tau_n}\omega_n\}$ is a local integral basis
+  at infinity. Denote by $V$ the set of all $f\in A$ which are integral at all
+  finite places and at infinity.  Then $V$ is a $K$-vector space of finite
+  dimension, and $\{\,x^j\omega_i : i=1,\dots,n; j=0,\dots,\tau_i\,\}$ is a
+  basis of~$V$.
 \end{lemma}
 \begin{proof}
   It is clear that $V$ is closed under taking $K$-linear combinations, so it is clearly a vector space.
@@ -578,7 +579,6 @@ then follows immediately.
 
 \section{Hermite Reduction}\label{sec:hermite}
 
-% MK: MAYBE THE WHOLE PARAGRAPH CAN BE DROPPED.
 Hermite reduction was first introduced by Hermite~\citep{Hermite1872} for
 rational functions.  This reduction was later extended to liouvillean
 functions by Risch~\citep{Risch1969,Risch1970,ACA1992,bronstein98,BronsteinBook}, to algebraic functions by
@@ -665,7 +665,6 @@ By a repeated application of such reduction steps one can decompose any $f\in A$
 as $f=g'+h$ where the denominators of the coefficients of $h$ are squarefree
 and the coefficients of $g$ are proper rational functions (i.e., their numerators
 have smaller degree than their denominators).
-% This gives rise to the reduction map $[f]=h$.
 
 In order to determine the unknown polynomials $g_1,\ldots,g_n$ in~\eqref{eq:hred},
 clearing the denominator $uv^\mu$ yields
@@ -773,8 +772,8 @@ that in the case of algebraic functions, we can exploit that all the functions
 which have no poles at either a finite place or at infinity are the constant
 functions. As we have pointed out above, this is no longer true in the fuchsian
 D-finite case, but in this case, we can still exploit that the space of all
-the functions which have no poles at finite places or at infinity form a finite
-dimensional vector space over~$K$.
+the functions which have no poles at finite places or at infinity form a
+finite-dimensional vector space over~$K$.
 
 \begin{lemma}\label{lemma:pole_at_inf}
 Let $\{\omega_1,\dots,\omega_n\}$ be an integral basis for~$A$ that is normal at
@@ -901,7 +900,7 @@ the telescoper.
 
 Recall that instead of requesting that $[f]=0$ if and only if $f$ is integrable
 (first approach), we can also justify the termination of reduction-based
-creative telescoping by showing that the $K$-vector space generated by $\{\,[\partial_t^if]:i\in\set N\,\}$
+creative telescoping by showing that the $K$-vector space generated by $\bigl\{\,[\partial_t^if]:i\in\set N\,\bigr\}$
 has finite dimension (second approach). If $[\cdot]$ is just the Hermite
 reduction, we do not necessarily have this property. We therefore introduce below an
 additional reduction, called \emph{polynomial reduction,} which we apply after
@@ -919,8 +918,8 @@ Throughout this section let $W=(\omega_1,\ldots,\omega_n)^T\in A^n$ be such
 that $\{\omega_1, \ldots, \omega_n\}$ is a global integral basis of~$A$, and
 let $e\in K[x]$ and $M=((m_{i,j}))\in K[x]^{n\times n}$ be such that $eW'=MW$
 and $\gcd(e, m_{1, 1}, m_{1, 2}, \ldots, m_{n ,n})=1$. The Hermite reduction
-described in Section~\ref{sec:hermite} decomposes an input element $f\in A$
-into the form
+described in Section~\ref{sec:hermite} decomposes an element $f\in A$ into
+the form
 \[
   f = g' + h = g' + \sum_{i=1}^n \frac{h_i}{de} \omega_i,\qquad
   g, h\in A,
@@ -935,7 +934,7 @@ with $h_i, d\in K[x]$ such that $\gcd(d, e)=\gcd(d,h_1,\dots,h_n)=1$ and $d$ is 
   such that $h = \bigl(\sum_{i=1}^n b_i \omega_i\bigr)'$.
   If one of the $b_i$ had a pole at a finite place, then $\sum_{i=1}^n b_i\omega_i$
   would have a pole at a finite place, because $\{\omega_1,\dots,\omega_n\}$ is
-  an integral basis. But then $h$ would have a pole of order greater than $1$
+  an integral basis. But then $h$ would have a pole of order greater than~$1$
   there, which is impossible because $\gcd(d,e)=1$ and $d$ is squarefree and
   $\{\omega_1,\dots,\omega_n\}$ is an integral basis.
   Therefore, $b_1,\dots,b_n\in K[x]$ and we have shown that the integral of $h$
@@ -985,8 +984,9 @@ in $\bar{C}(x)_\infty$, we see that also $V$ is a local integral basis at infini
 \end{proof}
 
 In the case of algebraic functions~\citep{chen16}, it is a consequence of Chevalley's theorem that the exponents
-$\tau_i$ cannot be positive. In the more general fuchsian situation, this is no longer the case. 
-Let $a\in K[x]$ and $B = (b_{i, j})\in K[x]^{n \times n}$ be such that $aV'=BV$ and
+$\tau_i$ can never be positive, and that they can be zero only if the function is constant.
+In the more general fuchsian situation, this is no longer the case. 
+Let $a\in K[x]$ and $B = ((b_{i, j}))\in K[x]^{n \times n}$ be such that $aV'=BV$ and
 $\gcd(a, b_{1, 1}, b_{1, 2}, \ldots, b_{n ,n})=1$. By Lemma~\ref{LEM:d}, we may assume that
 $a=x^\lambda e$ for some $\lambda\in\set N$, and we will do so. Writing the expression
 $\sum_{i=1}^n\frac{s_i}{e}\omega_i$ from equation~\eqref{EQ:h} in terms of the basis~$V$,
@@ -1001,7 +1001,7 @@ The purpose of polynomial reduction is to write
   \sum_{i=1}^n\frac{x^{\lambda-\tau_i}s_i}{x^{\lambda}e}\nu_i=\tilde g'+
   \sum_{i=1}^n\frac{\tilde s_i}{x^\lambda e}\nu_i,
 \]
-where the $\tilde s_i$ belong to a finite dimensional subspace of~$x^{-\tau}K[x]$.
+where the $\tilde s_i$ belong to a finite-dimensional subspace of~$x^{-\tau}K[x]$.
 Let us write $K[x]_{\eta,\mu}$ for the subspace of $K[x,x^{-1}]$ consisting of all Laurent polynomials
 whose exponents are at least $\eta$ and at most~$\mu$. Then $x^{-\tau}K[x]=K[x]_{-\tau,\infty}$, and
 while $x^{-\tau_1}s_1,\dots,x^{-\tau_n}s_n$ belong to this space, we will show that it is possible to
@@ -1021,7 +1021,7 @@ This motivates the following definition.
   We call $\phi_V$ the \emph{map for polynomial reduction} with respect to~$V$, and call
   the subspace
 \[
- \im(\phi_V) = \{\phi_V(P) \mid P \in K[x]_{-\tau+1,\infty}^n\}\subseteq K[x]_{-\tau,\infty}^n
+ \im(\phi_V) = \bigl\{\phi_V(P) \mid P \in K[x]_{-\tau+1,\infty}^n\bigr\}\subseteq K[x]_{-\tau,\infty}^n
 \]
 the \emph{subspace for polynomial reduction} with respect to~$V$.
 \end{defi}
@@ -1041,18 +1041,21 @@ then $\deg_x(P)=i_m$, $\lc(P)=p^{(i_m)}$, and $\lt(P)=p^{(i_m)}x^{i_m}$.
 Let $\{e_1, \ldots, e_n\}$ be the standard basis of~$K^n$.
 Then the $K$-vector space $K[x]_{\eta,\mu}^n$ is generated by
 \[
-  \cS_{\eta,\mu}:= \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, \eta\leq j\leq \mu\bigr\}.
+  \cX_{\eta,\mu}:= \bigl\{e_ix^j \mathrel{|} 1\leq i \leq n,\, \eta\leq j\leq \mu\bigr\}.
 \]
 
 \begin{defi}
   Let $N_V$ be the $K$-subspace of $K[x]_{-\tau,\infty}^n$ generated by
 \[
-  \bigl\{t \in \cS_{-\tau,\infty} \mathrel{\big|} t \neq \lt(P) \ \text{for all $P\in \im(\phi_V)$}\bigr\}.
+  \bigl\{t \in \cX_{-\tau,\infty} \mathrel{|} t \neq \lt(P) \ \text{for all $P\in \im(\phi_V)$}\bigr\}.
 \]
 Then $K[x]_{-\tau,\infty}^n = \im(\phi_V) \oplus N_V$.
 We call $N_V$ the \emph{standard complement} of $\im(\phi_V)$.
-For any $P\in K[x]_{-\tau,\infty}^n$, there exist $P_1\in K[x]_{-\tau+1,\infty}^n$ and~$P_2\in N_V$ such that
-\[\frac{1}{x^\lambda e}PV = (P_1V)' + \frac{1}{x^\lambda e}P_2V.\]
+For any $P\in K[x]_{-\tau,\infty}^n$, there exist $P_1\in K[x]_{-\tau+1,\infty}^n$ and~$P_2\in N_V$
+such that $P=\phi_V(P_1)+P_2$ and
+\[
+  \frac{1}{x^\lambda e}PV = (P_1V)' + \frac{1}{x^\lambda e}P_2V.
+\]
 This decomposition is called the \emph{polynomial reduction} of~$P$
 with respect to~$V$.
 \end{defi}
@@ -1068,7 +1071,7 @@ For brevity, let $\delta:=\lambda+\deg_x(e)-1$. We distinguish two cases.
 {\it Case 1.}
 Assume that $\deg_x(B) < \delta$. For any $P\in K[x]_{-\tau+1,\infty}^n$ of degree~$\mu$, we have
 \[
-  \lt\bigl(\phi_V(P)\bigr) = s\lc(e)\lc(P)x^{\mu+\delta}.
+  \lt\bigl(\phi_V(P)\bigr) = \mu\lc(e)\lc(P)x^{\mu+\delta}.
 \]
 Thus all monomials $e_i x^j$ with $1\leq i\leq n$ and $j\geq \delta+1$ are not in~$N_V$,
 and thus $\dim N_V\leq n(\tau+\delta+1)<\infty$.
@@ -1091,13 +1094,11 @@ condition $\deg_x(B) \leq \lambda+\deg_x(e)-1$ is always satisfied.
 Therefore, by the combination of Hermite reduction described in Section~\ref{sec:hermite}
 with polynomial reduction, we get the following theorem.
 
-% === END MK / BEGIN CK ===
-
 \begin{theorem}\label{THM:polyred}
 Let $W\in A^n$ be an integral basis of~$A$ that is normal at infinity.
 Let
 \[
-T = \diag(x^{\tau_1}, \ldots, x^{\tau_n}) \in K(x)^{n\times n}
+  T = \diag\bigl(x^{\tau_1}, \ldots, x^{\tau_n}\bigr) \in K(x)^{n\times n}
 \]
 be such that $V := TW$ is a local integral basis at infinity.  Let $e\in K[x]$,
 $\lambda \in \bN$, and $B, M \in K[x]^{n \times n} $ be such that $eW' = MW$
@@ -1121,25 +1122,25 @@ is a local integral basis at infinity. By the same lemma it follows
 that $V$ is also normal at $0$ and integral at all other places.
 The derivative of~$V$ can be reexpressed in the same basis as
 \[
-  V' = (TW)' = \biggl(T' + \frac{1}{e}TM\biggr)T^{-1}V = \frac{1}{a}BV,
+  V' = (TW)' = \biggl(T' + \frac{1}{e}TM\biggr)T^{-1}V = \frac{1}{x^\lambda e}BV,
 \]
-where $a=x^\lambda e$ for some $\lambda\in \bN$ and $B\in K[x]^{n\times n}$.
 Since $V$ is a local integral basis at infinity, it follows by
-Lemma~\ref{lemma:degM} that $\deg_x(B) \leq \deg_x(a)-1$, which is a
+Lemma~\ref{lemma:degM} that $\deg_x(B) \leq \lambda + \deg_x(e)-1$, which is a
 prerequisite for applying Proposition~\ref{PROP:finite}; hence the
 corresponding space~$N_V$ is finite-dimensional, as claimed.
 We rewrite the last summand in~\eqref{EQ:add1} w.r.t. the new basis~$V$:
 \[
-  \frac{1}{e} SW = \frac{1}{a} x^\lambda ST^{-1}V= \frac{1}{a} \tilde{S}V,
+  \frac{1}{e} SW = \frac{1}{x^\lambda e} \tilde{S}V,
 \]
 where $\tilde{S} = x^\lambda S T^{-1} \in K[x,x^{-1}]^n$. Note that the entries
 of~$\tilde{S}$ are not necessarily polynomials, but Laurent polynomials in~$x$.
 Indeed, because of Lemma~\ref{lemma:nopoles-space}, some of the $\tau_i$
-may be positive. Next, using the polynomial reduction, we decompose
+may be positive, and actually, $\tilde{S}\in K[x]_{-\tau,\infty}^n$ where
+$\tau:=\max\{\tau_1,\dots,\tau_n\}$, as before. Next, using the polynomial reduction, we decompose
 $\tilde{S}$ into $\tilde{S} = \phi_{V}(S_1) + S_2$ with
-$S_1\in K[x,x^{-1}]^n$ and $S_2\in N_V$, which means that
+$S_1\in K[x]_{-\tau+1,\infty}^n$ and $S_2\in N_V$, which means that
 \[
-  \frac{1}{e} SW = (S_1 V)' + \frac{1}{a} S_2 V.
+  \frac{1}{e} SW = (S_1 V)' + \frac{1}{x^\lambda e} S_2 V.
 \]
 We finally obtain the decomposition~\eqref{EQ:add} by setting
 $g = \tilde{g} + S_1 V$ and $Q = S_2$.
@@ -1150,7 +1151,7 @@ and therefore $R$ must be zero because $\deg_x(R) < \deg_x(d)$. Hence the last
 summand in~\eqref{EQ:add} is also integrable, i.e., there exist $c_i\in K(x)$
 such that
 \[
-  \frac{1}{x^\lambda e} QV = \biggl(\sum_{i=1}^n c_i \nu_i\biggr)'.
+  \frac{1}{x^\lambda e} QV = \Biggl(\sum_{i=1}^n c_i \nu_i\Biggr)'.
 \]
 Note that the expression on the left-hand side has only simple poles at finite
 places except~$0$. Therefore, by Lemma~\ref{LEM:d}, its integral is integral
@@ -1236,12 +1237,12 @@ Writing the Hermite remainder~$h$ in terms of the $\nu_i$, we see that all
 denominators divide the polynomial~$a$. Thus we write
 $h=a^{-1}(h_1\nu_1+h_2\nu_2)$ and in~\eqref{EQ:h} we get
 $s_1=h_1=-t^3x^4-t^2x^3+3tx^2$, $s_2=h_2=-tx^3$, and $r_1=r_2=0$.
-In the basis $\cS_{0,4}$ the vector $(s_1,s_2)$ reads
+In the basis $\cX_{0,4}$ the vector $(s_1,s_2)$ reads
 \[
   \bigl(-t^3, 0, -t^2, -t, 3 t, 0, 0, 0, 0, 0\bigr).
 \]
 The polynomial reduction now corresponds to reducing this vector with the rows
-of~\eqref{eq:M_ell}, yielding the final result $[f]=-x^2/a\nu_2$.  Next, we
+of~\eqref{eq:M_ell}, yielding the final result $[f]=-x^2a^{-1}\nu_2$.  Next, we
 consider the derivative $\partial_t\cdot f=tx^3\partial_x+2tx^2+x\in A$ whose
 Hermite remainder is
 \[
@@ -1251,7 +1252,7 @@ Hermite remainder is
 in general should result in a faster algorithm.)
 After polynomial reduction we obtain
 \[
-  \frac1a \Bigl( -\frac{4}{t^2} \nu_1 + \frac{(tx+4)x}{t^2} \nu_2 \Bigr).
+  \frac1a \biggl( -\frac{4}{t^2} \nu_1 + \frac{(tx+4)x}{t^2} \nu_2 \biggr).
 \]
 Since there is no linear dependence over $\bC(t)$ yet, we continue with
 \[

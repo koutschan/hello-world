@@ -925,7 +925,7 @@ into the form
   f = g' + h = g' + \sum_{i=1}^n \frac{h_i}{de} \omega_i,\qquad
   g, h\in A,
 \]
-with $h_i, d\in K[x]$ such that $\gcd(d, e)=1$ and $d$ is squarefree.
+with $h_i, d\in K[x]$ such that $\gcd(d, e)=\gcd(d,h_1,\dots,h_n)=1$ and $d$ is squarefree.
 \begin{lemma}\label{LEM:d}
   Let $h$ be as above. If $h$ is integrable in~$A$,
   then its integral is integral, and we have $d\in K$.
@@ -954,7 +954,7 @@ decomposes as
   \sum_{i=1}^n \frac{r_i}{d}\omega_i +
   \sum_{i=1}^n \frac{s_i}{e}\omega_i.
 \end{equation}
-We now introduce the \emph{polynomial reduction} whose goal is to confine the $r_i$ to a finite-dimensional
+We now introduce the \emph{polynomial reduction} whose goal is to confine the $s_i$ to a finite-dimensional
 vector space over~$K$. Similar reductions have been introduced and used in creative telescoping
 for hyperexponential functions~\citep{bostan13a} and hypergeometric terms~\citep{chen15a}.
 Our version below is slightly different from these, and also from the reduction given by~\cite{chen16} for
@@ -969,9 +969,7 @@ as follows.
 \begin{lemma}\label{LM:CB}
 Let $W =\{\omega_1, \ldots, \omega_n\}$ be an integral basis of~$A$ that is normal at infinity. Then
 there exist integers $\tau_1, \ldots, \tau_n\in\set Z$ such that
-\[
-  V := \{\nu_1, \ldots, \nu_n\} \quad \text{with $\nu_i = x^{\tau_i} \omega_i$}
-\]
+$V := \{\nu_1, \ldots, \nu_n\}$ with $\nu_i = x^{\tau_i} \omega_i$ ($i=1,\dots,n$)
 is a basis of~$A$ which is normal at $0$ and integral at all other places (including infinity).
 \end{lemma}
 \begin{proof}
@@ -987,39 +985,57 @@ in $\bar{C}(x)_\infty$, we see that also $V$ is a local integral basis at infini
 \end{proof}
 
 In the case of algebraic functions~\citep{chen16}, it is a consequence of Chevalley's theorem that the exponents
-$\tau_i$ cannot be negative. In the more general fuchsian situation, this is no longer the case, and this is
-why we are led to consider Laurent polynomials rather than polynomials. 
-
+$\tau_i$ cannot be negative. In the more general fuchsian situation, this is no longer the case. 
 Let $a\in K[x]$ and $B = (b_{i, j})\in K[x]^{n \times n}$ be such that $aV'=BV$ and
 $\gcd(a, b_{1, 1}, b_{1, 2}, \ldots, b_{n ,n})=1$. By Lemma~\ref{LEM:d}, we may assume that
-$a=x^\lambda e$ for some $\lambda\in\set N$, and we will do so. 
+$a=x^\lambda e$ for some $\lambda\in\set N$, and we will do so. Writing the expression
+$\sum_{i=1}^n\frac{s_i}{e}\omega_i$ from equation~\eqref{EQ:h} in terms of the basis~$V$,
+we obtain $\sum_{i=1}^n\frac{x^{\lambda-\tau_i}s_i}{x^\lambda e}\omega_i$, where now
+the numerators of the coefficients are Laurent polynomials. Note however that since
+$s_1,\dots,s_n$ are in~$K[x]$, the new numerators cannot have arbitrarily negative exponents.
+In fact, they will live in $x^{-\tau}K[x]$ where $\tau=\max(\tau_1,\dots,\tau_n)$.
+An a priori bound for $\tau$ follows from Lemma~\ref{lemma:bound-exps}.
 
-Let $P = (p_1, \ldots, p_n)\in K[x,x^{-1}]^n$. Then
+The purpose of polynomial reduction is to write
+\[
+  \sum_{i=1}^n\frac{x^{\lambda-\tau_i}s_i}{x^{\lambda}e}\nu_i=\tilde g'+
+  \sum_{i=1}^n\frac{\tilde s_i}{x^\lambda e}\nu_i,
+\]
+where the $\tilde s_i$ also belong to a finite dimensional subspace of~$x^{-\tau}K[x]$.
+Let us write $K[x]_{\eta,\mu}$ for the subspace of $K[x,x^{-1}]$ consisting of all Laurent polynomials
+whose terms are at least $\eta$ and at most~$\mu$. Then $x^{-\tau}K[x]=K[x]_{-\tau,\infty}$, and
+while $x^{-\tau_1}s_1,\dots,x^{-\tau_n}s_n$ belong to this space, we will show that it is possible to
+choose $\tilde s_1,\dots,\tilde s_n$ so that they belong to $K[x]_{-\tau,\delta}$ for some finite~$\delta\in\set Z$.
+To this end, note that for any $P = (p_1, \ldots, p_n)\in K[x,x^{-1}]^n$ we have
 \begin{equation} \label{EQ:polyred}
-  (PV)' = \sum_{i=1}^n (p_i \nu_i)' = \frac{aP' + PB}{a}\,V.
+  (PV)' = \sum_{i=1}^n (p_i \nu_i)' = \frac{x^\lambda eP' + PB}{x^\lambda e}\,V.
 \end{equation}
-This motivates us to introduce the following definition.
+This motivates the following definition.
+
 \begin{defi}
   Let 
   \[
-    \phi_V\colon K[x,x^{-1}]^n \rightarrow K[x,x^{-1}]^n,\quad
+    \phi_V\colon K[x]_{-\tau,\infty}^n \to K[x]_{-\tau,\infty}^n,\quad
     \phi_V(P) = x^\lambda eP' + PB.
   \]
-We call $\phi_V$ the \emph{map for polynomial reduction} with respect to~$V$, and call
-the subspace
+  MK: STILL NOT OK; $K[x]_{-\tau,\infty}$ IS NOT CLOSED UNDER DIFFERENTIATION;
+  $(x^{-\tau})'=-\tau x^{-\tau-1}$.
+    
+  We call $\phi_V$ the \emph{map for polynomial reduction} with respect to~$V$, and call
+  the subspace
 \[
- \im(\phi_V) = \{\phi_V(P) \mid P \in K[x,x^{-1}]^n\}
+ \im(\phi_V) = \{\phi_V(P) \mid P \in K[x]_{-\tau,\infty}^n\}
 \]
 the \emph{subspace for polynomial reduction} with respect to~$V$.
 \end{defi}
 
-Note that, by construction and because of Lemma~\ref{LEM:d}, $Q\in K[x,x^{-1}]^n$ belongs to
+Note that, by construction and because of Lemma~\ref{LEM:d}, $Q\in K[x]_{-\tau,\infty}^n$ belongs to
 $\im(\phi_V)$ if and only if $\frac{1}{x^\lambda e}QV$ is integrable in~$A$. 
 
-We can always view an element of $K[x,x^{-1}]^n$ (resp. $K[x,x^{-1}]^{n\times n}$) as a Laurent polynomial in~$x$
+We can always view an element of $K[x]_{\eta,\mu}^n$ (resp. $K[x]_{\eta,\mu}^{n\times n}$) as a Laurent polynomial in~$x$
 with coefficients in~$K^n$ (resp. $K^{n\times n}$). In this sense we use the notation $\lc(\cdot)$
 for the leading coefficient and $\lt(\cdot)$ for the leading term of a vector (resp. matrix).
-For example, if $P\in K[x,x^{-1}]^n$ is of the form
+For example, if $P\in K[x]_{\eta,\mu}^n$ is of the form
 \[
   P = p^{(i_1)}x^{i_1} + \dots + p^{(i_m)}x^{i_m},\quad p^{(i)}\in K^n,
 \]
@@ -1029,32 +1045,23 @@ $\deg_x(P)=\max\{i_1,\dots,i_m\}$,
 $\ldeg_x(P)=\min\{i_1,\dots,i_m\}$, $\lc(P)=p^{(\deg_x(P))}$, and $\lt(P)=p^{(\deg_x(P))}x^{\deg_x(P)}$,
 and so on.
 Let $\{e_1, \ldots, e_n\}$ be the standard basis of~$K^n$.
-Then the $K$-vector space $K[x,x^{-1}]^n$ is generated by
+Then the $K$-vector space $K[x]_{\eta,\mu}^n$ is generated by
 \[
-  \cS := \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, j\in \bZ\bigr\}.
+  \cS_{\eta,\mu}:= \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, \eta\leq j\leq \mu\bigr\}.
 \]
-We define
-\begin{alignat*}1
-  K[x]_{\eta,\mu}^n&:=\{P\in K[x,x^{-1}]^n \mid \ldeg_x(P)\geq\eta,\deg_x(P)\leq\mu\},\\
-  \cS_{\eta,\mu}&:= \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, \eta\leq j\leq \mu\bigr\}.
-\end{alignat*}
-Any element $P\in K[x]_{\eta,\mu}^n$ can be expressed in the
-basis $\cS_{\eta,\mu}$ as a vector $\vec{P}\in K^{n(\mu-\eta+1)}$.
+When $\eta,\mu\in\set Z$ both are finite, then any element $P\in K[x]_{\eta,\mu}^n$ can be expressed
+in the basis $\cS_{\eta,\mu}$ as a vector $\vec{P}\in K^{n(\mu-\eta+1)}$.
 In the following the decoration~\raisebox{-1pt}{$\vec{}\;$} always indicates
 such a typecast.
 
 \begin{defi}
-  Let $N_V$ be the $K$-subspace of $K[x,x^{-1}]^n$ generated by
-  MK: I BELIEVE THIS DEFINITION IS NOT SUITABLE FOR THE LAURENT CASE. INSTEAD, WE HAVE
-  TO REDUCE POSITIVE DEGREE TERMS DOWN (AS USUAL) BUT NEGATIVE DEGREE TERMS UP, TO ENSURE
-  FINITE TERMINATION. ALTERNATIVELY, WE CAN MAYBE CHOOSE A SUFFICIENTLY NEGATIVE REFERENCE
-  EXPONENT AND DEFINE THE REDUCTION WITH RESPECT TO THAT EXPONENT, FOR ALL TERMS ABOVE IT.
+  Let $N_V$ be the $K$-subspace of $K[x]_{-\tau,\infty}^n$ generated by
 \[
   \bigl\{t \in \cS \mathrel{\big|} t \neq \lt(P) \ \text{for all $P\in \im(\phi_V)$}\bigr\}.
 \]
-Then $K[x,x^{-1}]^n = \im(\phi_V) \oplus N_V$.
+Then $K[x]_{-\tau,\infty}^n = \im(\phi_V) \oplus N_V$.
 We call $N_V$ the \emph{standard complement} of $\im(\phi_V)$.
-For any $P\in K[x,x^{-1}]^n$, there exist $P_1\in K[x]^n$ and~$P_2\in N_V$ such that
+For any $P\in K[x]_{-\tau,\infty}^n$, there exist $P_1\in K[x]_{-\tau,\infty}^n$ and~$P_2\in N_V$ such that
 \[\frac{1}{x^\lambda e}PV = (P_1V)' + \frac{1}{x^\lambda e}P_2V.\]
 This decomposition is called the \emph{polynomial reduction} of~$P$
 with respect to~$V$.
@@ -1065,48 +1072,28 @@ Let $\lambda\in\set N$, $e\in K[x]$ and $B\in K[x]^{n \times n}$ be such that $x
 If $\deg_x(B) \leq \lambda+\deg_x(e)-1$, then $N_V$ is a finite-dimensional $K$-vector space.
 \end{prop}
 \begin{proof}
-In addition to the proof of the assertion, we also explain how to determine
-the dimension and a basis for~$N_V$, for later use. For brevity, let
-$\delta:=\lambda+\deg_x(e)-1$. We distinguish two cases.
-
-TODO. FINISH TRANSLATION TO LAURENT.
+For brevity, let $\delta:=\lambda+\deg_x(e)-1$. We distinguish two cases.
 
 \smallskip
 {\it Case 1.}
-Assume that $\deg_x(B) < \delta$. For any $P\in K[x,x^{-1}]^n$ of low-degree $\eta$ and degree~$\mu$, we have
+Assume that $\deg_x(B) < \delta$. For any $P\in K[x]_{-\tau,\infty}^n$ of degree~$\mu$, we have
 \[
   \lt\bigl(\phi_V(P)\bigr) = s\lc(e)\lc(P)x^{\mu+\delta}.
 \]
-Thus all monomials $e_i x^j\in \cS$ with $1\leq i\leq n$ and $j\geq \delta+1$ are not in~$N_V$.
-Let $\vec{B}_1, \ldots, \vec{B}_n$ be the columns of~$B$, expressed in the basis $\cS_{0,\delta}$.
-Let $C(B)$ be the $K$-subspace of $K[x]_{0,\delta}^n$ generated by these column vectors.
-If $Q\in \im(\phi_V)$, then $Q = \phi_V(P) = QB$ for some $P\in K^n$, which implies that
-$\vec{Q}$ is a linear combination of the $\vec{B}_i$'s. Then $K[x]_{0,\delta}^n = C(B) \oplus N_V$.
-So $\dim_K(N_V)= (\delta+1)n - \dim_K(C(B))$ and a basis of $N_V$ can be computed by
-looking at the echelon form of the matrix $\bigl(\vec{B}_1, \ldots, \vec{B}_n\bigr)$.
+Thus all monomials $e_i x^j$ with $1\leq i\leq n$ and $j\geq \delta+1$ are not in~$N_V$,
+and thus $\dim N_V\leq n(\tau+\delta+1)<\infty$.
 
 \smallskip
 {\it Case 2.}
-Assume that $\deg_x(B)=\delta$. For any $P\in K[x]^n$ of degree~$s$, we have
+Assume that $\deg_x(B)=\delta$. For any $P\in K[x]_{-\tau,\infty}^n$ of degree~$\mu$, we have
 \[
-  \lt\bigl(\phi_V(P)\bigr) = \lc(P)(s\lc(e)I_n + \lc(B))x^{s+\delta}.
+  \lt\bigl(\phi_V(P)\bigr) = \lc(P)(s\lc(e)I_n + \lc(B))x^{\mu+\delta}.
 \]
 Let $\ell$ be the largest nonnegative integer such that $-\ell \lc(a)$ is an
-eigenvalue of $\lc(B)\in K^{n\times n}$. Then for any $s>\ell$,
-the matrix $J_s = s\lc(a)I_n + \lc(B)$ is invertible. So any monomial $e_ix^j$ with $j> \ell+\delta$ is not in~$N_V$
-for any $i=1, \ldots, n$. Let $P = \sum_{i=1}^n \sum_{j=0}^{\ell} p_{i, j} e_ix^j$.
-Then $\phi_V(P)$ belongs to $K[x]_{\ell+\delta}^n$.
-In the basis $\cS_{\ell+\delta}$, we can
-express $\phi_V(P)$ as a vector of length ${n(\ell+\delta+1)}$ with entries linear in the $p_{i, j}$'s.
-This vector can be written in the form $M_{\ell} \vec{P}$,
-where $\vec{P} = (p_{1, 0}, p_{2, 0}, \ldots, p_{n, \ell})^T$ and $M_{\ell} \in K^{n(\ell+\delta+1) \times n(\ell+1)}$.
-Every $q\in K[x]_{\ell+\delta}^n$ can be expressed as a vector $\vec{q} \in K^{n(\ell + \delta +1)}$.
-Then $Q\in\im(\phi_V)$ if and only if $\vec{Q}\,$ is in the column space of~$M_{\ell}$.
-Therefore,
-\[K[x]_{\ell+\delta}^n = C({M_{\ell}}) \oplus N_V. \]
-This implies that $\dim_K(N_V) = n(\ell+\delta+1) - \rank({M_{\ell}})$, and
-a basis of $N_V$ can be computed by
-looking at the echelon form of the matrix ${M_{\ell}}$.
+eigenvalue of $\lc(B)\in K^{n\times n}$ (or let $\ell=0$ if no such integers exist).
+Then for any $\mu>\ell$, the matrix $\mu\lc(a)I_n + \lc(B)\in K^{n\times n}$ is invertible.
+So any monomial $e_ix^j$ with $j> \ell+\delta$ is not in~$N_V$ for any $i=1, \ldots, n$,
+and thus $\dim N_V\leq n(\tau+\delta+\ell+1)<\infty$.
 \end{proof}
 
 It follows from our general assumptions on $V$ that the

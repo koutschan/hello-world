@@ -519,7 +519,7 @@ of basis elements can cancel:
 We will mostly be using bases that are integral at every point in $\bar C\cup\{\infty\}$ except one.
 For the case of algebraic functions, the reason is that the only algebraic functions which are
 integral at all finite places and also at infinity are the constant functions (Chevalley's
-theorem~\citep[page 9, Corollary 3]{Chevalley1951}). The results of~\cite{chen16}
+theorem~\citep[p.~9, Cor.~3]{Chevalley1951}). The results of~\cite{chen16}
 depend heavily on this fact. There is no analogous result for fuchsian D-finite functions: such
 functions may be integral at all finite places and also at infinity without being constant.
 It is easy to construct examples using the Papperitz symbol.
@@ -767,7 +767,7 @@ ensure that the method terminates.
 As also explained already in the introduction, one possibility consists in
 showing that $[f]=0$ whenever $f$ is integrable. For the special case of
 algebraic functions, Trager showed that his Hermite reduction has this
-property~\citep[page 50, Theorem 1]{trager84}. Essentially the same argument
+property~\citep[p.~50, Thm.~1]{trager84}. Essentially the same argument
 works for the fuchsian case, as we will show next. The main difference is
 that in the case of algebraic functions, we can exploit that all the functions
 which have no poles at either a finite place or at infinity are the constant
@@ -1159,17 +1159,31 @@ polynomial reduction.
 
 We first consider the additive decompositions of the successive derivatives $\partial_t^i\cdot f$ for $i\in \bN$.
 Assume that
-\[\partial_t\cdot W = \frac{1}{\tilde{e}} \tilde{M}W \quad \text{and}
-\quad \partial_t\cdot V = \frac{1}{x^{\tilde{\lambda}} \tilde{e}} \tilde{B}V,\]
-where $\tilde e \in K[x]$, $\tilde M, \tilde B\in K[x]^{n\times n}$, and $\tilde \lambda \in \bN$.
-By Proposition~7 of~\cite{chen14a}, we have $\tilde e \mid e$ and $x^{\tilde{\lambda}} \tilde{e} \mid x^\lambda e$.
-So we can just take $\tilde e = e$ and $\tilde{\lambda}  = \lambda$ by multiplying $\tilde M, \tilde B$ by some factors
-of~$x^\lambda e$. A direct calculation yields $\partial_t\cdot f = (\partial_t\cdot g)' + h$,
-where
-\[h = \left(\partial_t\cdot\frac{R}{d}+\frac{R\tilde M}{de}\right)W + \left(\partial_t\cdot\frac{Q}{x^\lambda e}+ \frac{Q\tilde B}{x^{2\lambda} e^2}\right)V.\]
-This implies that the squarefree part of the denominator of $h$ divides $xde$. Applying Hermite reduction and polynomial reduction
-to~$h$ yields
-\[ h = \tilde g_1' + \frac{1}{d} R_1W + \frac{1}{x^\lambda e} Q_1V,\]
+\begin{equation}\label{EQ:tmat}
+  \partial_t\cdot W = \frac{1}{\tilde{e}} \tilde{M}W
+  \quad \text{and}\quad
+  \partial_t\cdot V = \frac{1}{\tilde{a}} \tilde{B}V,
+\end{equation}
+for some polynomials $\tilde{e},\tilde{a}\in K[x]$ and matrices
+$\tilde{M},\tilde{B}\in K[x]^{n\times n}$ such that $\tilde{e}$ is coprime
+with~$\tilde{M}$ and $\tilde{a}$ is coprime with~$\tilde{B}$.  By
+\cite[Prop.~7]{chen14a}, we have that $\tilde e \mid e$ and $\tilde{a} \mid
+x^\lambda e$.  Hence, we can take $\tilde{e} = e$ and $\tilde{a} = x^\lambda
+e$ in~\eqref{EQ:tmat}, by multiplying the matrices $\tilde{M}$ and $\tilde{B}$
+by some factors of~$x^\lambda e$. Now we differentiate~\eqref{EQ:add} with
+respect to~$t$, and obtain, after a direct calculation, $\partial_t\cdot f =
+(\partial_t\cdot g)' + h$, where
+\[
+  h =
+    \left(\partial_t\cdot\biggl(\frac{1}{d}R\biggr) + \frac{1}{de}R\tilde{M}\right)W +
+    \left(\partial_t\cdot\biggl(\frac{1}{x^\lambda e}Q\biggr) + \frac{1}{x^{2\lambda} e^2}Q\tilde{B}\right)V.
+\]
+Obviously the squarefree part of the denominator of~$h$
+divides~$xde$. Applying Hermite reduction and polynomial reduction to~$h$
+then yields
+\[
+  h = \tilde g_1' + \frac{1}{d} R_1W + \frac{1}{x^\lambda e} Q_1V,
+\]
 where $R_1, Q_1\in K[x]^n$ with $\deg_x(R_1) < \deg_x(d)$ and $Q_1\in N_V$.
 Repeating this discussion, we get the following lemma.
 \begin{lemma}\label{LEM:idtf}

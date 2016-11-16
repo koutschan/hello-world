@@ -300,19 +300,19 @@ operator algebra $R[\partial_x,\partial_t]$, in which $\partial_x,\partial_t$
 commute with each other (although they need not commute with elements of~$R$).
 
 The action of $R[\partial_x]$ on $C[[[x-a]]]$ or $C[[[x^{-1}]]]$ is extended
-to $R[\partial_t,\partial_x]$ by letting $\partial_t$ act coefficient-wise.
+to $R[\partial_x,\partial_t]$ by letting $\partial_t$ act coefficient-wise.
 We further assume that the action of $R[\partial_x]$ on $A=R[\partial_x]/\<L>$ is
-extended to an action of $R[\partial_t,\partial_x]$ on~$A$ in a way that is
-compatible with the action of $R[\partial_t,\partial_x]$ on series domains.
+extended to an action of $R[\partial_x,\partial_t]$ on~$A$ in a way that is
+compatible with the action of $R[\partial_x,\partial_t]$ on series domains.
 This means that when $y\in C[[[x-a]]]$ is a solution of~$L$ and $f$ is an
 element of~$A$, so that $f\cdot y$ is an element of $C[[[x-a]]]$, then we
 want to have $(\partial_t\cdot f)\cdot y=\partial_t\cdot(f\cdot y)$, where
-the $\cdot$ in $(\partial_t\cdot f)$ refers to the action of $R[\partial_t,\partial_x]$
+the $\cdot$ in $(\partial_t\cdot f)$ refers to the action of $R[\partial_x,\partial_t]$
 on $A$ and the three other dots refer to the action on $C[[[x-a]]]$.
 
 If $u\in A$ is such that $\partial_t\cdot 1 = u$ and $U\in R[\partial_x]$ is such
-that $u=U+\<L>$, then the annihilator $\mathfrak{a}\subseteq R[\partial_t,\partial_x]$
-of $1\in A$ in $R[\partial_t,\partial_x]$ contains $L$ and $\partial_t-U$. We
+that $u=U+\<L>$, then the annihilator $\mathfrak{a}\subseteq R[\partial_x,\partial_t]$
+of $1\in A$ in $R[\partial_x,\partial_t]$ contains $L$ and $\partial_t-U$. We
 therefore have $\dim\mathfrak{a}=0$, and this is the usual
 definition of D-finiteness in the case of several variables~\citep{Zeilberger1990,chyzak98,koutschan09,kauers14c}.
 
@@ -433,9 +433,9 @@ $\sum_{i=1}^n f_i\omega_i$ cannot cancel each other.
 A $K(x)$-vector space basis $\{\omega_1,\dots,\omega_n\}$ of $A=K(x)[\partial_x]/\<L>$ is
 called \emph{normal} at $a\in\bar C\cup\{\infty\}$ if there exist $r_1,\dots,r_n\in
 K(x)$ such that $\{r_1\omega_1,\dots,r_n\omega_n\}$ is a local integral basis
-at~$a$. Trager shows for the case of algebraic function fields how to construct
+at~$a$. \cite{trager84} shows for the case of algebraic function fields how to construct
 an integral basis which is normal at infinity from a given integral basis and
-a given local integral basis at infinity~\citep{trager84}. The same procedure also applies
+a given local integral basis at infinity. The same procedure also applies
 in the present situation. It works as follows.
 
 Let $\{\omega_1,\dots,\omega_n\}$ be a global integral basis and $\{\nu_1,\dots,\nu_n\}$ be a local
@@ -458,7 +458,7 @@ number of iterations.
 
 \begin{lemma}\label{lemma:bound-exps}
   Let $\{\omega_1,\dots,\omega_n\}$, $\{\nu_1,\dots,\nu_n\}$, and $\tau_1,\dots,\tau_n$ be as above.
-  Let $N$ be the number of points $a\in\bar C$ where at least one of the $\omega_i$ has
+  Let $N$ be the number of points $a\in\bar C$ where at least one of the $\omega_i$ does not have
   $n$ distinct exponents in~$\set N$ (i.e., $N$ counts the
   finite singular points of~$L$ that are not ``apparent'' singularities).
   Then
@@ -617,11 +617,11 @@ coefficient, i.e.,
 \]
 (here we use the fact that $v$ is squarefree).  Further let $g=\sum_{i=1}^n
 c_i'\omega_i$, which is obviously integral. Then also their sum
-\begin{align*}
-  f+g &= v^{\mu-1} \sum_{i=1}^n \left(c_i\left(v^{1-\mu}\omega_i\right)'
-  + c_i'v^{1-\mu}\omega_i \right) \\
-  &= v^{\mu-1} \sum_{i=1}^n \left(c_iv^{1-\mu}\omega_i\right)'
-\end{align*}
+\[
+  f+g = v^{\mu-1} \sum_{i=1}^n \left(c_i\left(v^{1-\mu}\omega_i\right)'
+  + c_i'v^{1-\mu}\omega_i \right) 
+  = v^{\mu-1} \sum_{i=1}^n \left(c_iv^{1-\mu}\omega_i\right)'
+\]
 must be integral. Since $\{\omega_1,\ldots,\omega_n\}$ is an integral basis at~$a$,
 there exists for each $i=1,\ldots,n$ a series solution $y_i\in C[[[x-a]]]$
 of~$L$ such that $\omega_i\cdot y_i$ involves a term
@@ -696,7 +696,7 @@ Comparing coefficients w.r.t.\ $\omega_1,\ldots,\omega_n$ yields a
 system of linear equations over $K[x]/\<v>$ for the unknown
 functions $g_1,\ldots,g_n$. This system has
 a unique solution. For the coordinates of the solution vector $(g_1,\dots,g_n)$,
-we can choose representatives in $K[X]$ whose degrees are less than~$\deg_x(v)$.
+we can choose representatives in $K[x]$ whose degrees are less than~$\deg_x(v)$.
 
 The remaining unknowns $h_1,\ldots,h_n$ are obtained by plugging
 $g_1,\ldots,g_n$ into Equation~\eqref{eq:clear}.
@@ -871,8 +871,8 @@ which is indeed a scalar multiple of our remainder. Hence, $f$ is integrable:
 
 Note that the condition in Theorem~\ref{thm:intiff0} that $f$ has a double
 root at infinity is not a restriction, as it can always be achieved by
-a suitable change of variables. Let $a\in C$ be a regular point of~$L$; by
-the substitution $x\to a+1/x$ the regular point~$a$ is moved to
+a suitable change of variables. Let $a\in C$ be an ordinary point of~$L$; by
+the substitution $x\to a+1/x$ the ordinary point~$a$ is moved to
 infinity. From
 \[
   \int f(x) \,\mathrm{d}x = \int f\left(\frac{1}{x}+a\right)\left(-\frac{1}{x^2}\right) \mathrm{d}x
@@ -917,7 +917,7 @@ polynomial reduction on this representation.
 
 Throughout this section let $W=(\omega_1,\ldots,\omega_n)^T\in A^n$ be such
 that $\{\omega_1, \ldots, \omega_n\}$ is a global integral basis of~$A$, and
-let $e\in K[x]$ and $M=(m_{i,j})\in K[x]^{n\times n}$ be such that $eW'=MW$
+let $e\in K[x]$ and $M=((m_{i,j}))\in K[x]^{n\times n}$ be such that $eW'=MW$
 and $\gcd(e, m_{1, 1}, m_{1, 2}, \ldots, m_{n ,n})=1$. The Hermite reduction
 described in Section~\ref{sec:hermite} decomposes an input element $f\in A$
 into the form
@@ -1021,7 +1021,7 @@ This motivates the following definition.
   We call $\phi_V$ the \emph{map for polynomial reduction} with respect to~$V$, and call
   the subspace
 \[
- \im(\phi_V) = \{\phi_V(P) \mid P \in K[x]_{-\tau+1,\infty}^n\}
+ \im(\phi_V) = \{\phi_V(P) \mid P \in K[x]_{-\tau+1,\infty}^n\}\subseteq K[x]_{-\tau,\infty}^n
 \]
 the \emph{subspace for polynomial reduction} with respect to~$V$.
 \end{defi}
@@ -1034,27 +1034,20 @@ with coefficients in~$K^n$ (resp. $K^{n\times n}$). In this sense we use the not
 for the leading coefficient and $\lt(\cdot)$ for the leading term of a vector (resp. matrix).
 For example, if $P\in K[x]_{\eta,\mu}^n$ is of the form
 \[
-  P = p^{(i_1)}x^{i_1} + \dots + p^{(i_m)}x^{i_m},\quad p^{(i)}\in K^n,
+  P = p^{(i_1)}x^{i_1} + \dots + p^{(i_m)}x^{i_m},\quad p^{(i)}\in K^n,\quad i_1\leq\cdots\leq i_m,\quad p^{(i_m)}\neq0
 \]
-\def\ldeg{\operatorname{ldeg}}%
-then
-$\deg_x(P)=\max\{i_1,\dots,i_m\}$,
-$\ldeg_x(P)=\min\{i_1,\dots,i_m\}$, $\lc(P)=p^{(\deg_x(P))}$, and $\lt(P)=p^{(\deg_x(P))}x^{\deg_x(P)}$,
-and so on.
+then $\deg_x(P)=i_m$, $\lc(P)=p^{(i_m)}$, and $\lt(P)=p^{(i_m)}x^{i_m}$.
+
 Let $\{e_1, \ldots, e_n\}$ be the standard basis of~$K^n$.
 Then the $K$-vector space $K[x]_{\eta,\mu}^n$ is generated by
 \[
   \cS_{\eta,\mu}:= \bigl\{e_ix^j \mathrel{\big|} 1\leq i \leq n,\, \eta\leq j\leq \mu\bigr\}.
 \]
-When $\eta,\mu\in\set Z$ both are finite, then any element $P\in K[x]_{\eta,\mu}^n$ can be expressed
-in the basis $\cS_{\eta,\mu}$ as a vector $\vec{P}\in K^{n(\mu-\eta+1)}$.
-In the following the decoration~\raisebox{-1pt}{$\vec{}\;$} always indicates
-such a typecast.
 
 \begin{defi}
   Let $N_V$ be the $K$-subspace of $K[x]_{-\tau,\infty}^n$ generated by
 \[
-  \bigl\{t \in \cS \mathrel{\big|} t \neq \lt(P) \ \text{for all $P\in \im(\phi_V)$}\bigr\}.
+  \bigl\{t \in \cS_{-\tau,\infty} \mathrel{\big|} t \neq \lt(P) \ \text{for all $P\in \im(\phi_V)$}\bigr\}.
 \]
 Then $K[x]_{-\tau,\infty}^n = \im(\phi_V) \oplus N_V$.
 We call $N_V$ the \emph{standard complement} of $\im(\phi_V)$.
@@ -1243,12 +1236,11 @@ Writing the Hermite remainder~$h$ in terms of the $\nu_i$, we see that all
 denominators divide the polynomial~$a$. Thus we write
 $h=a^{-1}(h_1\nu_1+h_2\nu_2)$ and in~\eqref{EQ:h} we get
 $s_1=h_1=-t^3x^4-t^2x^3+3tx^2$, $s_2=h_2=-tx^3$, and $r_1=r_2=0$.
-In the basis $\cS_4$ the vector $(s_1,s_2)$ reads
-% here we could employ the \vec notation
+In the basis $\cS_{0,4}$ the vector $(s_1,s_2)$ reads
 \[
   \bigl(-t^3, 0, -t^2, -t, 3 t, 0, 0, 0, 0, 0\bigr).
 \]
-The polynomial reduction now corresponds to reduce this vector with the rows
+The polynomial reduction now corresponds to reducing this vector with the rows
 of~\eqref{eq:M_ell}, yielding the final result $[f]=-x^2/a\nu_2$.  Next, we
 consider the derivative $\partial_t\cdot f=tx^3\partial_x+2tx^2+x\in A$ whose
 Hermite remainder is
@@ -1261,7 +1253,7 @@ After polynomial reduction we obtain
 \[
   \frac1a \Bigl( -\frac{4}{t^2} \nu_1 + \frac{(tx+4)x}{t^2} \nu_2 \Bigr).
 \]
-Since there is no linear dependency over $\bC(t)$ yet, we continue with
+Since there is no linear dependence over $\bC(t)$ yet, we continue with
 \[
   \partial_t^2\cdot f =
   \frac{(tx+1)x^3}{1-tx} \partial_x -

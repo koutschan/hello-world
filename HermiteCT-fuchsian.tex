@@ -98,9 +98,9 @@ C. Koutschan was supported by the Austrian Science Fund (FWF): W1214.
 \end{abstract}
 
 \begin{keyword}
-  Algebraic function,
+  D-finite function,
   Integral basis,
-  Trager's Reduction,
+  Trager's reduction,
   Telescoper
 \end{keyword}
 \end{frontmatter}
@@ -946,7 +946,7 @@ Note that the lemma continues to hold when $\{\omega_1,\dots,\omega_n\}$ is
 a local integral basis at a finite place~$a\in\bar C$. In this case, we can conclude
 that the integral is locally integral at $a$ and $d\in K(x)_a$. 
 
-By the extended Euclidean algorithm, we compute $u_i, v_i\in K[x]$ such that
+By the extended Euclidean algorithm, we compute $r_i, s_i\in K[x]$ such that
 $h_i = r_i e + s_i d$ and $\deg_x(r_i) < \deg_x(d)$. Then the Hermite remainder~$h$
 decomposes as
 \begin{equation}\label{EQ:h}
@@ -963,7 +963,7 @@ the algebraic case, because we will be considering Laurent polynomials instead o
 Throughout the rest of the section, let $V = (\nu_1, \ldots, \nu_n)^T\in A^n$ be such that its entries
 form a local integral basis at $\infty$ as well as a local integral basis at every $a\in\bar C\setminus\{0\}$,
 and which is normal at~$0$.
-The existence of such a basis follows from the existence of global integral bases that is normal at infinity,
+The existence of such a basis follows from the existence of global integral bases that are normal at infinity,
 as follows.
 
 \begin{lemma}\label{LM:CB}
@@ -987,7 +987,7 @@ in $\bar{C}(x)_\infty$, we see that also $V$ is a local integral basis at infini
 \end{proof}
 
 In the case of algebraic functions~\citep{chen16}, it is a consequence of Chevalley's theorem that the exponents
-$\tau_i$ cannot be negative. In the more general fuchsian situation, this is no longer the case, and this is
+$\tau_i$ cannot be positive. In the more general fuchsian situation, this is no longer the case, and this is
 why we are led to consider Laurent polynomials rather than polynomials. 
 
 Let $a\in K[x]$ and $B = (b_{i, j})\in K[x]^{n \times n}$ be such that $aV'=BV$ and
@@ -1144,7 +1144,7 @@ is a local integral basis at infinity. By the same lemma it follows
 that $V$ is also normal at $0$ and integral at all other places.
 The derivative of~$V$ can be reexpressed in the same basis as
 \[
-  V' = (TW)' = \left(T' + \frac{1}{e}TM\right)T^{-1}V = \frac{1}{a}BV,
+  V' = (TW)' = \biggl(T' + \frac{1}{e}TM\biggr)T^{-1}V = \frac{1}{a}BV,
 \]
 where $a=x^\lambda e$ for some $\lambda\in \bN$ and $B\in K[x]^{n\times n}$.
 Since $V$ is a local integral basis at infinity, it follows by

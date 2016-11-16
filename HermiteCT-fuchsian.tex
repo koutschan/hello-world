@@ -990,7 +990,7 @@ Let $a\in K[x]$ and $B = (b_{i, j})\in K[x]^{n \times n}$ be such that $aV'=BV$ 
 $\gcd(a, b_{1, 1}, b_{1, 2}, \ldots, b_{n ,n})=1$. By Lemma~\ref{LEM:d}, we may assume that
 $a=x^\lambda e$ for some $\lambda\in\set N$, and we will do so. Writing the expression
 $\sum_{i=1}^n\frac{s_i}{e}\omega_i$ from equation~\eqref{EQ:h} in terms of the basis~$V$,
-we obtain $\sum_{i=1}^n\frac{x^{\lambda-\tau_i}s_i}{x^\lambda e}\omega_i$, where now
+we obtain $\sum_{i=1}^n\frac{x^{\lambda-\tau_i}s_i}{x^\lambda e}\nu_i$, where now
 the numerators of the coefficients are Laurent polynomials. Note however that since
 $s_1,\dots,s_n$ are in~$K[x]$, the new numerators cannot have arbitrarily negative exponents.
 In fact, they will live in $x^{-\tau}K[x]$ where $\tau=\max(\tau_1,\dots,\tau_n)$.
@@ -1001,9 +1001,9 @@ The purpose of polynomial reduction is to write
   \sum_{i=1}^n\frac{x^{\lambda-\tau_i}s_i}{x^{\lambda}e}\nu_i=\tilde g'+
   \sum_{i=1}^n\frac{\tilde s_i}{x^\lambda e}\nu_i,
 \]
-where the $\tilde s_i$ also belong to a finite dimensional subspace of~$x^{-\tau}K[x]$.
+where the $\tilde s_i$ belong to a finite dimensional subspace of~$x^{-\tau}K[x]$.
 Let us write $K[x]_{\eta,\mu}$ for the subspace of $K[x,x^{-1}]$ consisting of all Laurent polynomials
-whose terms are at least $\eta$ and at most~$\mu$. Then $x^{-\tau}K[x]=K[x]_{-\tau,\infty}$, and
+whose exponents are at least $\eta$ and at most~$\mu$. Then $x^{-\tau}K[x]=K[x]_{-\tau,\infty}$, and
 while $x^{-\tau_1}s_1,\dots,x^{-\tau_n}s_n$ belong to this space, we will show that it is possible to
 choose $\tilde s_1,\dots,\tilde s_n$ so that they belong to $K[x]_{-\tau,\delta}$ for some finite~$\delta\in\set Z$.
 To this end, note that for any $P = (p_1, \ldots, p_n)\in K[x,x^{-1}]^n$ we have
@@ -1015,16 +1015,13 @@ This motivates the following definition.
 \begin{defi}
   Let 
   \[
-    \phi_V\colon K[x]_{-\tau,\infty}^n \to K[x]_{-\tau,\infty}^n,\quad
+    \phi_V\colon K[x]_{-\tau+1,\infty}^n \to K[x]_{-\tau,\infty}^n,\quad
     \phi_V(P) = x^\lambda eP' + PB.
   \]
-  MK: STILL NOT OK; $K[x]_{-\tau,\infty}$ IS NOT CLOSED UNDER DIFFERENTIATION;
-  $(x^{-\tau})'=-\tau x^{-\tau-1}$.
-    
   We call $\phi_V$ the \emph{map for polynomial reduction} with respect to~$V$, and call
   the subspace
 \[
- \im(\phi_V) = \{\phi_V(P) \mid P \in K[x]_{-\tau,\infty}^n\}
+ \im(\phi_V) = \{\phi_V(P) \mid P \in K[x]_{-\tau+1,\infty}^n\}
 \]
 the \emph{subspace for polynomial reduction} with respect to~$V$.
 \end{defi}
@@ -1061,7 +1058,7 @@ such a typecast.
 \]
 Then $K[x]_{-\tau,\infty}^n = \im(\phi_V) \oplus N_V$.
 We call $N_V$ the \emph{standard complement} of $\im(\phi_V)$.
-For any $P\in K[x]_{-\tau,\infty}^n$, there exist $P_1\in K[x]_{-\tau,\infty}^n$ and~$P_2\in N_V$ such that
+For any $P\in K[x]_{-\tau,\infty}^n$, there exist $P_1\in K[x]_{-\tau+1,\infty}^n$ and~$P_2\in N_V$ such that
 \[\frac{1}{x^\lambda e}PV = (P_1V)' + \frac{1}{x^\lambda e}P_2V.\]
 This decomposition is called the \emph{polynomial reduction} of~$P$
 with respect to~$V$.
@@ -1076,7 +1073,7 @@ For brevity, let $\delta:=\lambda+\deg_x(e)-1$. We distinguish two cases.
 
 \smallskip
 {\it Case 1.}
-Assume that $\deg_x(B) < \delta$. For any $P\in K[x]_{-\tau,\infty}^n$ of degree~$\mu$, we have
+Assume that $\deg_x(B) < \delta$. For any $P\in K[x]_{-\tau+1,\infty}^n$ of degree~$\mu$, we have
 \[
   \lt\bigl(\phi_V(P)\bigr) = s\lc(e)\lc(P)x^{\mu+\delta}.
 \]
@@ -1085,19 +1082,19 @@ and thus $\dim N_V\leq n(\tau+\delta+1)<\infty$.
 
 \smallskip
 {\it Case 2.}
-Assume that $\deg_x(B)=\delta$. For any $P\in K[x]_{-\tau,\infty}^n$ of degree~$\mu$, we have
+Assume that $\deg_x(B)=\delta$. For any $P\in K[x]_{-\tau+1,\infty}^n$ of degree~$\mu$, we have
 \[
-  \lt\bigl(\phi_V(P)\bigr) = \lc(P)(s\lc(e)I_n + \lc(B))x^{\mu+\delta}.
+  \lt\bigl(\phi_V(P)\bigr) = \lc(P)(\mu\lc(e)I_n + \lc(B))x^{\mu+\delta}.
 \]
-Let $\ell$ be the largest nonnegative integer such that $-\ell \lc(a)$ is an
+Let $\ell$ be the largest nonnegative integer such that $-\ell \lc(e)$ is an
 eigenvalue of $\lc(B)\in K^{n\times n}$ (or let $\ell=0$ if no such integers exist).
-Then for any $\mu>\ell$, the matrix $\mu\lc(a)I_n + \lc(B)\in K^{n\times n}$ is invertible.
+Then for any $\mu>\ell$, the matrix $\mu\lc(e)I_n + \lc(B)\in K^{n\times n}$ is invertible.
 So any monomial $e_ix^j$ with $j> \ell+\delta$ is not in~$N_V$ for any $i=1, \ldots, n$,
 and thus $\dim N_V\leq n(\tau+\delta+\ell+1)<\infty$.
 \end{proof}
 
 It follows from our general assumptions on $V$ that the
-condition $\deg_x(B) \leq \deg_x(a)-1$ is always satisfied.
+condition $\deg_x(B) \leq \lambda+\deg_x(e)-1$ is always satisfied.
 Therefore, by the combination of Hermite reduction described in Section~\ref{sec:hermite}
 with polynomial reduction, we get the following theorem.
 

@@ -386,9 +386,9 @@ of the $f_i$ has a pole there.
 \end{lemma}
 \begin{proof}
   The direction ``$\Leftarrow$'' is obvious. To show ``$\Rightarrow$'', suppose
-  that $f$ is integral at~$a$. Then there exist $w_1,\dots,w_n\in\bar C(x)_a$ such that
-  $f=\sum_{i=1}^nw_i\omega_i$. Thus $\sum_{i=1}^n(w_i-f_i)\omega_i=0$, and then
-  $w_i=f_i$ for all $i$, because $\{\omega_1,\dots,\omega_n\}$ is a vector space basis of~$A$.
+  that $f$ is integral at~$a$. Then there exist $\tilde{f}_1,\dots,\tilde{f}_n\in\bar C(x)_a$ such that
+  $f=\sum_{i=1}^n\tilde{f}_i\omega_i$. Thus $\sum_{i=1}^n(\tilde{f}_i-f_i)\omega_i=0$, and then
+  $\tilde{f}_i=f_i$ for all~$i$, because $\{\omega_1,\dots,\omega_n\}$ is a vector space basis of~$A$.
   As elements of $\bar C(x)_a$, the $f_i$ are integral at~$a$, and hence also all the $f_i\omega_i$
   are integral at~$a$.
 \end{proof}
@@ -802,7 +802,7 @@ a pole at infinity.
   Let $W=\{\omega_1,\dots,\omega_n\}$ be an integral basis for $A$ that is normal at infinity,
   and let $f=g'+h$ be the  result of the Hermite reduction with respect to~$W$.
   Let $V\subseteq A$ be the $K$-vector space of all elements that are integral at all places,
-  including infinity, and let $U=\{u':u\in V\}$ be the space of all elements of~$A$
+  including infinity, and let $U=\{v':v\in V\}$ be the space of all elements of~$A$
   that are integrable in~$V$.
   Then $f$ is integrable in~$A$ if and only if $h\in U$.
 \end{theorem}
@@ -1142,14 +1142,14 @@ $g = \tilde{g} + S_1 V$ and $Q = S_2$.
 For the last assertion, assume that $f$ is integrable (the other direction of
 the equivalence holds trivially). Then Lemma~\ref{LEM:d} implies that $d\in K$,
 and therefore $R$ must be zero because $\deg_x(R) < \deg_x(d)$. Hence the last
-summand in~\eqref{EQ:add} is also integrable, i.e., there exist $a_i\in K(x)$
+summand in~\eqref{EQ:add} is also integrable, i.e., there exist $c_i\in K(x)$
 such that
 \[
-  \frac{1}{x^\lambda e} QV = \biggl(\sum_{i=1}^n a_i \nu_i\biggr)'.
+  \frac{1}{x^\lambda e} QV = \biggl(\sum_{i=1}^n c_i \nu_i\biggr)'.
 \]
 Note that the expression on the left-hand side has only simple poles at finite
 places except~$0$. Therefore, by Lemma~\ref{LEM:d}, its integral is integral
-at all nonzero finite places. In other words, the coefficients $a_i$ are actually
+at all nonzero finite places. In other words, the coefficients $c_i$ are actually
 Laurent polynomials in $K[x,x^{-1}]$, which implies that $Q \in \im(\phi_V)$.
 Since $\im(\phi_V) \cap N_V = \{0\}$, it follows that $Q=0$.
 \end{proof}

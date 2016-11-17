@@ -134,7 +134,6 @@ $P\cdot f=(Q\cdot f)'$ implies, for instance, $P\cdot\int_0^1 f(x,t)dx = (Q\cdot
 A telescoper $P$ for~$f$ thus gives rise to an annihilating operator for the
 definite integral $F(t)=\int_0^1 f(x,t)dx$.
 \begin{example}[\citep{manin1958}]
-  \todo{change this example to a fuchsian one? Or omit it? It was requested by one of the referees.}
   The algebraic function
   \[
     f(x,t)=\frac1{\sqrt{x(x-1)(x-t)}}
@@ -223,9 +222,10 @@ $L=\ell_0+\cdots+\ell_n\partial_x^n$ with $\ell_0,\dots,\ell_n$ belonging to som
 $R$ containing~$C$. Typical choices for $R$ will be $C[x]$ or~$C(x)$.
 When $\ell_n\neq0$, we say that $\ord(L):=n$ is the order of~$L$.
 
-We write $R[\partial_x]$ for the algebra consisting of all these operators, together
+Let $R$ be a differential ring and write $'$ for its derivation.
+We write $R[\partial_x]$ for the algebra consisting of all linear differential operators, together
 with the usual addition and the unique non-commutative multiplication satisfying
-$\partial_xc=c\partial_x$ for all $c\in C$ and $\partial_xx=x\partial_x+1$.
+$\partial_xa=a\partial_x+a'$ for all $a\in R$. We shall assume throughout that $C\subseteq\const_x(R)$.
 The algebra $R[\partial_x]$ acts on a differential $R$-module~$F$ via
 \[
   (\ell_0+\ell_1\partial_x+\cdots+\ell_n\partial_x^n)\cdot f=
@@ -313,8 +313,11 @@ on $A$ and the three other dots refer to the action on $C[[[x-a]]]$.
 If $u\in A$ is such that $\partial_t\cdot 1 = u$ and $U\in R[\partial_x]$ is such
 that $u=U+\<L>$, then the annihilator $\mathfrak{a}\subseteq R[\partial_x,\partial_t]$
 of $1\in A$ in $R[\partial_x,\partial_t]$ contains $L$ and $\partial_t-U$. We
-therefore have $\dim\mathfrak{a}=0$, and this is the usual
+therefore have $\dim\mathfrak{a}=0$, which is the usual
 definition of D-finiteness in the case of several variables~\citep{Zeilberger1990,chyzak98,koutschan09,kauers14c}.
+Pathological situations, where we also have $\dim\mathfrak{a}=0$ but 
+$\mathfrak{a}$ does not have a basis of the form $\<L,\partial_t-U>$, are not
+considered in this paper. 
 
 \section{Integral Bases}
 
@@ -526,7 +529,7 @@ It is easy to construct examples using the Papperitz symbol.
 
 \begin{example}\label{example:integral-everywhere}
   The operator $L = 3 x(x^2-1) D_x^2 + 2 (3x^2 - 1) D_x\in\set Q(x)[\partial_x]$
-  has three singular places $0,+1,-1$. Infinity is an ordinary point of~$L$.
+  has three singular points $0,+1,-1$. Infinity is an ordinary point of~$L$.
   At all three singularities, there is one local solution starting with exponent~$0$
   and another starting with exponent~$1/3$, so all the solutions are integral
   everywhere according to our standard definition of integrality of generalized
@@ -549,7 +552,7 @@ Fortunately, we can still be sure that there are not too many such functions.
   It is clear that $V$ is closed under taking $K$-linear combinations, so it is clearly a vector space.
   We show that $B=\{\,x^j\omega_i : i=1,\dots,n; j=0,\dots,\tau_i\,\}$ is a basis.
 
-  Every $x^j\omega_i\in B$ is by definition integral at every finite place and because of $0\leq j\leq \tau_i$ also
+  Every $x^j\omega_i\in B$ is by definition integral at all finite places and because of $0\leq j\leq \tau_i$ also
   integral at infinity. Therefore $x^j\omega_i\in V$, and therefore $B$ generates a subspace of~$V$.
 
   Conversely, let $f\in V$ be arbitrary. Then $f$ is in particular integral at all finite places,
@@ -558,7 +561,7 @@ Fortunately, we can still be sure that there are not too many such functions.
   If we had $\deg(p_i)>\tau_i$ for some~$i$, then $p_i\omega_i$ would not be integral at infinity
   (by definition of the numbers~$\tau_i$), and then, because $\{\omega_1,\dots,\omega_n\}$ is normal
   at infinity, Lemma~\ref{lemma:3} implies that $f$ would not be integral at infinity.
-  But $f$ is in $V$ and therefore integral at every place, including infinity.
+  But $f$ is in $V$ and therefore integral at all points, including infinity.
   It follows that $\deg(p_i)\leq \tau_i$ for all~$i$, and therefore $f$ is a $K$-linear combination
   of elements of~$B$.
 \end{proof}
@@ -772,8 +775,8 @@ that in the case of algebraic functions, we can exploit that all the functions
 which have no poles at either a finite place or at infinity are the constant
 functions. As we have pointed out above, this is no longer true in the fuchsian
 D-finite case, but in this case, we can still exploit that the space of all
-the functions which have no poles at finite places or at infinity form a
-finite-dimensional vector space over~$K$.
+the functions which have no poles at all (neither at finite points nor at infinity)
+form a finite-dimensional vector space over~$K$.
 
 \begin{lemma}\label{lemma:pole_at_inf}
 Let $\{\omega_1,\dots,\omega_n\}$ be an integral basis for~$A$ that is normal at
@@ -969,7 +972,7 @@ as follows.
 Let $W =\{\omega_1, \ldots, \omega_n\}$ be an integral basis of~$A$ that is normal at infinity. Then
 there exist integers $\tau_1, \ldots, \tau_n\in\set Z$ such that
 $V := \{\nu_1, \ldots, \nu_n\}$ with $\nu_i = x^{\tau_i} \omega_i$ ($i=1,\dots,n$)
-is a basis of~$A$ which is normal at $0$ and integral at all other places (including infinity).
+is a basis of~$A$ which is normal at $0$ and integral at all other points (including infinity).
 \end{lemma}
 \begin{proof}
 It is clear that such a basis $V$ will be normal at zero, because multiplying the generators by
@@ -1005,7 +1008,7 @@ where the $\tilde s_i$ belong to a finite-dimensional subspace of~$x^{-\tau}K[x]
 Let us write $K[x]_{\eta,\mu}$ for the subspace of $K[x,x^{-1}]$ consisting of all Laurent polynomials
 whose exponents are at least $\eta$ and at most~$\mu$. Then $x^{-\tau}K[x]=K[x]_{-\tau,\infty}$, and
 while $x^{-\tau_1}s_1,\dots,x^{-\tau_n}s_n$ belong to this space, we will show that it is possible to
-choose $\tilde s_1,\dots,\tilde s_n$ so that they belong to $K[x]_{-\tau,\delta}$ for some finite~$\delta\in\set Z$.
+choose $\tilde s_1,\dots,\tilde s_n$ that belong to $K[x]_{-\tau,\delta}$ for some finite~$\delta\in\set Z$.
 To this end, note that for any $P = (p_1, \ldots, p_n)\in K[x,x^{-1}]^n$ we have
 \begin{equation} \label{EQ:polyred}
   (PV)' = \sum_{i=1}^n (p_i \nu_i)' = \frac{x^\lambda eP' + PB}{x^\lambda e}\,V.
@@ -1119,7 +1122,7 @@ where~$R = (r_1, \ldots, r_n)\in K[x]^n$ and $S = (s_1, \ldots, s_n)\in K[x]^n$
 with~$r_i, s_i$ introduced in~\eqref{EQ:h}. By Lemma~\ref{LM:CB}, there exists
 $T = \diag(x^{\tau_1}, \ldots, x^{\tau_n}) \in K(x)^{n\times n}$ such that $V = TW$
 is a local integral basis at infinity. By the same lemma it follows
-that $V$ is also normal at $0$ and integral at all other places.
+that $V$ is also normal at $0$ and integral at all other points.
 The derivative of~$V$ can be reexpressed in the same basis as
 \[
   V' = (TW)' = \biggl(T' + \frac{1}{e}TM\biggr)T^{-1}V = \frac{1}{x^\lambda e}BV,
@@ -1154,8 +1157,8 @@ such that
   \frac{1}{x^\lambda e} QV = \Biggl(\sum_{i=1}^n c_i \nu_i\Biggr)'.
 \]
 Note that the expression on the left-hand side has only simple poles at finite
-places except~$0$. Therefore, by Lemma~\ref{LEM:d}, its integral is integral
-at all nonzero finite places. In other words, the coefficients $c_i$ are actually
+points except~$0$. Therefore, by Lemma~\ref{LEM:d}, its integral is integral
+at all nonzero finite points. In other words, the coefficients $c_i$ are actually
 Laurent polynomials in $K[x,x^{-1}]$, which implies that $Q \in \im(\phi_V)$.
 Since $\im(\phi_V) \cap N_V = \{0\}$, it follows that $Q=0$.
 \end{proof}

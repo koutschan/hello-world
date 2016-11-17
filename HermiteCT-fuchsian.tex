@@ -225,7 +225,7 @@ When $\ell_n\neq0$, we say that $\ord(L):=n$ is the order of~$L$.
 Let $R$ be a differential ring and write $'$ for its derivation.
 We write $R[\partial_x]$ for the algebra consisting of all linear differential operators, together
 with the usual addition and the unique non-commutative multiplication satisfying
-$\partial_xa=a\partial_x+a'$ for all $a\in R$. We shall assume throughout that $C\subseteq\const_x(R)$.
+$\partial_xa=a\partial_x+a'$ for all $a\in R$. We shall assume throughout that $C\subseteq\mathrm{Const}_x(R)$.
 The algebra $R[\partial_x]$ acts on a differential $R$-module~$F$ via
 \[
   (\ell_0+\ell_1\partial_x+\cdots+\ell_n\partial_x^n)\cdot f=
@@ -1225,9 +1225,14 @@ of the $\omega_i$ does not satisfy the degree condition of
 Proposition~\ref{PROP:finite}; this fact is already visible
 in~\eqref{eq:dmat}. Hence we perform a change of basis to
 $\nu_1=x^{-1}\omega_1$, $\nu_2=x^{-2}\omega_2$, which is an integral basis at
-infinity. We have $aV'=BV$ for $V=(\nu_1,\nu_2)^T$, $a=x^2(t^2x^2-1)$, and
-some matrix~$B\in K[x]^{2\times2}$.  By investigating the eigenvalues of
-$\lc(B)$ we find that $\ell=1$ and the echelon form of $M_\ell$ is
+infinity. We have $xeV'=BV$ for $V=(\nu_1,\nu_2)^T$, $e=x(t^2x^2-1)$, and
+some matrix~$B\in K[x]^{2\times2}$ with $\deg_x(B)=3$; since
+$\delta=\lambda+\deg_x(e)-1=3$ we are in Case~2 of
+Proposition~\ref{PROP:finite}.  By investigating the eigenvalues of $\lc(B)$
+we find that $\ell=1$. In order to determine a basis for~$N_V$ and to execute
+the polynomial reduction conveniently, we consider the matrix whose rows are
+constituted by $\phi_V(t)$ for all $t\in\cX_{0,\ell}$, written in the
+basis~$\cX_{0,\ell+\delta}$. The echelon form of this $4\times10$ matrix is
 \begin{equation}\label{eq:M_ell}
   \begin{pmatrix}
   1 & 0 & 0 & 0 & 0 & 2/t^3 & 0 & 4/t^4 & -4/t^4 & 0 \\
@@ -1237,15 +1242,15 @@ $\lc(B)$ we find that $\ell=1$ and the echelon form of $M_\ell$ is
   \end{pmatrix}.
 \end{equation}
 Writing the Hermite remainder~$h$ in terms of the $\nu_i$, we see that all
-denominators divide the polynomial~$a$. Thus we write
-$h=a^{-1}(h_1\nu_1+h_2\nu_2)$ and in~\eqref{EQ:h} we get
+denominators divide the polynomial~$xe$. Thus we write
+$h=\frac{1}{xe}(h_1\nu_1+h_2\nu_2)$ and in~\eqref{EQ:h} we get
 $s_1=h_1=-t^3x^4-t^2x^3+3tx^2$, $s_2=h_2=-tx^3$, and $r_1=r_2=0$.
 In the basis $\cX_{0,4}$ the vector $(s_1,s_2)$ reads
 \[
   \bigl(-t^3, 0, -t^2, -t, 3 t, 0, 0, 0, 0, 0\bigr).
 \]
 The polynomial reduction now corresponds to reducing this vector with the rows
-of~\eqref{eq:M_ell}, yielding the final result $[f]=-x^2a^{-1}\nu_2$.  Next, we
+of~\eqref{eq:M_ell}, yielding the final result $[f]=-\frac{x^2}{xe}\nu_2$.  Next, we
 consider the derivative $\partial_t\cdot f=tx^3\partial_x+2tx^2+x\in A$ whose
 Hermite remainder is
 \[
@@ -1255,7 +1260,7 @@ Hermite remainder is
 in general should result in a faster algorithm.)
 After polynomial reduction we obtain
 \[
-  \frac1a \biggl( -\frac{4}{t^2} \nu_1 + \frac{(tx+4)x}{t^2} \nu_2 \biggr).
+  \frac{1}{xe} \biggl( -\frac{4}{t^2} \nu_1 + \frac{(tx+4)x}{t^2} \nu_2 \biggr).
 \]
 Since there is no linear dependence over $\bC(t)$ yet, we continue with
 \[
@@ -1271,7 +1276,7 @@ reduction steps. As a Hermite remainder we obtain
 \]
 which by polynomial reduction is converted into
 \[
-  \frac1a \Bigl( -\frac{4}{t^3} \nu_1 + \frac{2(tx+2)x}{t^3} \nu_2 \Bigr).
+  \frac{1}{xe} \Bigl( -\frac{4}{t^3} \nu_1 + \frac{2(tx+2)x}{t^3} \nu_2 \Bigr).
 \]
 Now we can find a linear dependence that gives rise to the telescoper
 $t^2\partial_t^2-t\partial_t+1$, which is indeed the minimal one for this example.

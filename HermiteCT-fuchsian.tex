@@ -253,7 +253,7 @@ operator $L=x\partial_x^2-\partial_x$, whose solutions are $1$ and $\log(x)$.
 However, the class of fuchsian D-finite functions
 considered in this paper is not as rich as it may seem at first glance, because
 we require that the operators under consideration should be fuchsian at all
-points \emph{including infinity.} Most of the popular transcendental functions
+points \emph{including infinity}. Functions
 such as $\exp(x)$, $\sin(x)$, $\cos(x)$, Bessel functions, etc.\ are only
 fuchsian at all finite points but not at infinity.
 
@@ -278,9 +278,11 @@ generate a $\bar C$-vector space of dimension $\ord(L)$.
 The exponents of an element $f\in A=R[\partial_x]/\<L>$ at a point $a\in\bar C\cup\{\infty\}$
 are the values $\alpha$ such that one of the series in $C[[[x-a]]]$ (or $C[[[x^{-1}]]]$, respectively)
 associated to $f$ has $(x-a)^\alpha\log(x-a)^\beta$ (or $(\frac1x)^\alpha\log(x)^\beta$) as initial
-term. We say that $a$ is an ordinary point of $f$ if the set of exponents of $f$ at $a$ is $\{0,1,\dots,n-1\}$.
+term. We say that $a$ is an ordinary point of $f$ if the set of exponents of $f$ at $a$ is $\{0,1,\dots,n-1\}$
+and the solutions at $a$ do not involve a logarithm.
 There can be at most finitely many non-ordinary points; these are called the singular points. If we define
-the defect $\defect_a(f)$ of $f\in A$ at $a\in\bar C\cup\{\infty\}$ as the sum of the exponents of $f$ at $a$ minus
+the defect of $f\in A$ at $a\in\bar C\cup\{\infty\}$, denoted $\defect_a(f)$,
+as the sum of the exponents of $f$ at $a$ minus
 $\sum_{k=0}^{n-1}k=\frac12n(n-1)$, then the Fuchs relation~\citep{schlesinger95,ince26} says that we have
 \[
  \sum_{a\in\bar C\cup\{\infty\}} \defect_a(f) = n(1-n)
@@ -360,7 +362,7 @@ and so on.
 
 The set of all globally integral elements $f\in A$ forms a $K[x]$-submodule of~$A$.
 A basis $\{\omega_1,\dots,\omega_n\}$ of this module is called an \emph{integral basis}
-for~$A$. \cite{kauers15b} have given an algorithm was given which computes an integral basis
+for~$A$. \cite{kauers15b} proposed an algorithm which computes an integral basis
 for a given~$A$. This algorithm is a generalization of van Hoeij's
 algorithm~\citep{vanHoeij94} for computing integral bases of algebraic function
 fields~\citep{trager84,Rybowicz:1991:ACI:120694.120715}.
@@ -961,6 +963,7 @@ vector space over~$K$. Similar reductions have been introduced and used in creat
 for hyperexponential functions~\citep{bostan13a} and hypergeometric terms~\citep{chen15a}.
 Our version below is slightly different from these, and also from the reduction given by~\cite{chen16} for
 the algebraic case, because we will be considering Laurent polynomials instead of polynomials.
+Note that the same idea can be applied in the polynomial reduction for $q$-hypergeometric terms~\cite{du16}.
 
 Throughout the rest of the section, let $V = (\nu_1, \ldots, \nu_n)^T\in A^n$ be such that its entries
 form a local integral basis at $\infty$ as well as a local integral basis at every $a\in\bar C\setminus\{0\}$,

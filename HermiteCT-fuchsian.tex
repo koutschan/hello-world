@@ -623,22 +623,29 @@ coefficient, i.e.,
 (here we use the fact that $v$ is squarefree).  Further let $g=\sum_{i=1}^n
 c_i'\omega_i$, which is obviously integral. Then also their sum
 \[
-  f+g = v^{\mu-1} \sum_{i=1}^n \left(c_i\left(v^{1-\mu}\omega_i\right)'
+  f+g = v^{\mu-1} \sum_{i=1}^n \left(c_i\bigl(v^{1-\mu}\omega_i\bigr)'
   + c_i'v^{1-\mu}\omega_i \right) 
-  = v^{\mu-1} \sum_{i=1}^n \left(c_iv^{1-\mu}\omega_i\right)'
+  = v^{\mu-1} \sum_{i=1}^n \bigl(c_iv^{1-\mu}\omega_i\bigr)'
 \]
 must be integral. Since $\{\omega_1,\ldots,\omega_n\}$ is an integral basis at~$a$,
 there exists for each $i=1,\ldots,n$ a series solution $y_i\in C[[[x-a]]]$
 of~$L$ such that $\omega_i\cdot y_i$ involves a term
-$T=(x-a)^\alpha\log(x-a)^\beta$ with $0\leq\alpha<1$.
+$T=(x-a)^\alpha\log(x-a)^\beta$ with $0\leq\alpha<1$ and $\beta\in\bN$.
 Let now $i$ be an index such that $c_i(a)\neq0$;
 this implies that $T$ appears in $(c_i\omega_i)\cdot y_i$.
 Using the fact that the $\omega_i$ form a local integral basis, it follows by
 Lemma~\ref{lemma:1} that $T$ is also present in $h\cdot y_i$ where
-$h=\sum_{i=1}^n c_i\omega_i$. Applying the operator $v^{\mu-1}\partial_xv^{1-\mu}$
-to $h\cdot y_i$ turns $T$ into $(x-a)^{\alpha-1}\log(x-a)^\beta$, which reveals that
-$v^{\mu-1}(v^{1-\mu}h)'=f+g$ is not integral at~$a$. This contradicts our assumption on
-the integrality of~$f$, and hence $\{\psi_1,\ldots,\psi_n\}$ is a local integral
+$h=\sum_{i=1}^n c_i\omega_i$. From
+\begin{equation}\label{eq:T}
+  \bigl((x-a)^{\mu-1} \partial_x (x-a)^{1-\mu}\bigr) \cdot T =
+  (1-\mu+\alpha)(x-a)^{\alpha-1}\log(x-1)^\beta + \beta(x-a)^{\alpha-1}\log(x-a)^{\beta-1}
+\end{equation}
+it follows that at least one term with $(x-a)^{\alpha-1}$ appears in
+$\bigl(v^{\mu-1}\partial_xv^{1-\mu}\bigr)\cdot (h\cdot y_i)$; here we use the
+assumption that $\mu>1$, because for $\mu=1$ and $\alpha=\beta=0$ the
+right-hand side of~\eqref{eq:T} is zero. This calculation reveals that
+$v^{\mu-1}\bigl(v^{1-\mu}h\bigr)'=f+g$ is not integral at~$a$, which contradicts our assumption on
+the integrality of~$f$. Hence $\{\psi_1,\ldots,\psi_n\}$ is a local integral
 basis at~$a$.
 \end{proof}
 

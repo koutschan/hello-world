@@ -635,15 +635,17 @@ Let now $i$ be an index such that $c_i(a)\neq0$;
 this implies that $T$ appears in $(c_i\omega_i)\cdot y_i$.
 Using the fact that the $\omega_i$ form a local integral basis, it follows by
 Lemma~\ref{lemma:1} that $T$ is also present in $h\cdot y_i$ where
-$h=\sum_{i=1}^n c_i\omega_i$. From
+$h=\sum_{i=1}^n c_i\omega_i$. Let now $T$ be the dominant term of $h\cdot y_i$,
+i.e., among all terms with minimal $\alpha$ the one with the largest exponent~$\beta$.
+From
 \begin{equation}\label{eq:T}
   \bigl((x-a)^{\mu-1} \partial_x (x-a)^{1-\mu}\bigr) \cdot T =
-  (1-\mu+\alpha)(x-a)^{\alpha-1}\log(x-1)^\beta + \beta(x-a)^{\alpha-1}\log(x-a)^{\beta-1}
+  (1-\mu+\alpha)(x-a)^{\alpha-1}\log(x-a)^\beta + \beta(x-a)^{\alpha-1}\log(x-a)^{\beta-1}
 \end{equation}
-it follows that at least one term with $(x-a)^{\alpha-1}$ appears in
+it follows that $(x-a)^{\alpha-1}\log(x-a)^\beta$ is the dominant term of
 $\bigl(v^{\mu-1}\partial_xv^{1-\mu}\bigr)\cdot (h\cdot y_i)$; here we use the
-assumption that $\mu>1$, because for $\mu=1$ and $\alpha=\beta=0$ the
-right-hand side of~\eqref{eq:T} is zero. This calculation reveals that
+assumption that $\mu>1$, because for $\mu=1$ and $\alpha=0$ the
+coefficient $(1-\mu+\alpha)$ in~\eqref{eq:T} is zero. This calculation reveals that
 $v^{\mu-1}\bigl(v^{1-\mu}h\bigr)'=f+g$ is not integral at~$a$, which contradicts our assumption on
 the integrality of~$f$. Hence $\{\psi_1,\ldots,\psi_n\}$ is a local integral
 basis at~$a$.

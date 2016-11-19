@@ -71,8 +71,9 @@
   \title{Reduction-Based Creative~Telescoping for Fuchsian D-finite~Functions\footnote{S.\ Chen was supported by the NSFC grant
 11501552 and by the President Fund of the Academy of
 Mathematics and Systems Science, CAS (2014-cjrwlzx-chshsh).\\
-M. Kauers was supported by the Austrian Science Fund (FWF): F50-04 and Y464-N18.\\
-C. Koutschan was supported by the Austrian Science Fund (FWF): W1214.
+M. van Hoeij was supported by the National Science Foundation (NSF) grant 1618657.\\
+M. Kauers was supported by the Austrian Science Fund (FWF) grants F50-04 and Y464-N18.\\
+C. Koutschan was supported by the Austrian Science Fund (FWF) grant W1214.
 }}
 
   \author{Shaoshi Chen}
@@ -176,6 +177,7 @@ some $\mathrm{Const}_x(D)$-linear map $[\cdot]\colon D\to D$ such that for every
 $f\in D$ there exists a $g\in D$ with $f-[f]=g'$. Such a map is called a
 \emph{reduction.} For example, in $D=C(t,x)$ Hermite reduction~\citep{Hermite1872} decomposes
 any $f\in D$ into $f=g'+h$ with $g,h\in D$ such that $h$ is a proper rational function
+(i.e., the numerator degree is smaller than the denominator degree)
 with a squarefree denominator. In this case, we can take $[f]=h$.
 In order to find a telescoper, we can compute $[f]$, $[\partial_t\cdot f]$, $[\partial_t^2\cdot f]$, \dots,
 until we find that they are linearly dependent over $\mathrm{Const}_x(D)$.
@@ -280,12 +282,13 @@ are the values $\alpha$ such that one of the series in $C[[[x-a]]]$ (or $C[[[x^{
 associated to $f$ has $(x-a)^\alpha\log(x-a)^\beta$ (or $(\frac1x)^\alpha\log(x)^\beta$) as initial
 term. We say that $a$ is an ordinary point of $f$ if the set of exponents of $f$ at $a$ is $\{0,1,\dots,n-1\}$
 and the solutions at $a$ do not involve a logarithm.
-There can be at most finitely many non-ordinary points; these are called the singular points. If we define
-the defect of $f\in A$ at $a\in\bar C\cup\{\infty\}$, denoted $\defect_a(f)$,
+There can be at most finitely many non-ordinary points; these are called the singular points.
+For an element $f\in A$, let $n_f$ be the minimal order of an operator $L\in R[\partial_x]\setminus\{0\}$ with $L\cdot f=0$.
+Then the defect of $f\in A$ at $a\in\bar C\cup\{\infty\}$, denoted $\defect_a(f)$, is defined 
 as the sum of the exponents of $f$ at $a$ minus
-$\sum_{k=0}^{n-1}k=\frac12n(n-1)$, then the Fuchs relation~\citep{schlesinger95,ince26} says that we have
+$\sum_{k=0}^{n-1}k=\frac12n_f(n_f-1)$, then the Fuchs relation~\citep{schlesinger95,ince26} says that we have
 \[
- \sum_{a\in\bar C\cup\{\infty\}} \defect_a(f) = n(1-n)
+ \sum_{a\in\bar C\cup\{\infty\}} \defect_a(f) = n_f(1-n_f)
 \]
 for all $f\in A$. This relation is the counterpart of the B\'{e}zout relation in the algebraic case.
 Note that when $a$ is an ordinary point, then $\defect_a(f)=0$, but $\defect_a(f)=0$ does in
@@ -474,31 +477,32 @@ number of iterations.
 \begin{proof}
   We show that when $\tau_i\in\set Z$ is such that $x^{\tau_i}\omega_i$ is locally integral at infinity,
   then $\tau_i\leq \frac12 (n-1)(N-1)$, for every~$i$.
+  Let $n_i$ be the minimal order of an operator $L\in R[\partial_x]\setminus\{0\}$ with $L\cdot\omega_i=0$.
   By the Fuchs relation we have
   \[
-    \sum_{a\in\bar C\cup\{\infty\}}\defect_a(\omega_i) = n(1-n),
+    \sum_{a\in\bar C\cup\{\infty\}}\defect_a(\omega_i) = n_i(1-n_i),
   \]
   hence
   \[
-    \defect_\infty(\omega_i) = n(1-n) - \sum_{a\in\bar C}\defect_a(\omega_i).
+    \defect_\infty(\omega_i) = n_i(1-n_i) - \sum_{a\in\bar C}\defect_a(\omega_i).
   \]
-  When all exponents of the series associated to $\omega_i$ at $a\in\bar C$ form a subset of~$\set N$ of size~$n$, then
+  When all exponents of the series associated to $\omega_i$ at $a\in\bar C$ form a subset of~$\set N$ of size~$n_i$, then
   $\defect_a(\omega_i)\geq0$. At all other points~$a$, of which there are at most~$N$ by assumption,
-  we still have the estimate $\defect_a(\omega_i)\geq-\frac12n(n-1)$, because $\omega_i$ is integral at all finite places.
+  we still have the estimate $\defect_a(\omega_i)\geq-\frac12n_i(n_i-1)$, because $\omega_i$ is integral at all finite places.
   It follows that
   \[
-    \defect_\infty(\omega_i)\leq n(1-n) + \tfrac12 n(n-1) N = \tfrac12 n(n-1)(N-2).
+    \defect_\infty(\omega_i)\leq n_i(1-n_i) + \tfrac12 n_i(n_i-1) N = \tfrac12 n_i(n_i-1)(N-2).
   \]
-  Next, for every $r\in\set Z$ we have $\defect_\infty(x^{-r}\omega_i) = rn+\defect_\infty(\omega_i)$.
+  Next, for every $r\in\set Z$ we have $\defect_\infty(x^{-r}\omega_i) = rn_i+\defect_\infty(\omega_i)$.
   Moreover, if $\tau\in\set Z$ is such that $x^{\tau}\omega_i$ is integral at infinity, then we must have
-  $\defect_\infty(x^{\tau}\omega_i)\geq -\frac12n(n-1)$, i.e.,
+  $\defect_\infty(x^{\tau}\omega_i)\geq -\frac12n_i(n_i-1)$, i.e.,
   \[
-    \defect_\infty(\omega_i) - \tau n \geq -\tfrac12n(n-1),
+    \defect_\infty(\omega_i) - \tau n_i \geq -\tfrac12n_i(n_i-1),
   \]
   and hence,
   \begin{alignat*}1
-    \tau &\leq \frac1n\Bigl( \frac12n(n-1) + \defect_\infty(\omega_i) \Bigr) \\
-      &\leq \tfrac12 (n-1) + \tfrac12 (n-1)(N-2) = \tfrac12 (n-1)(N-1),
+    \tau &\leq \frac1{n_i}\Bigl( \frac12n_i(n_i-1) + \defect_\infty(\omega_i) \Bigr) \\
+      &\leq \tfrac12 (n_i-1) + \tfrac12 (n_i-1)(N-2) = \tfrac12 (n_i-1)(N-1) \leq \tfrac12(n-1)(N-1)
   \end{alignat*}
   as claimed.
 \end{proof}
@@ -585,7 +589,7 @@ then follows immediately.
 \section{Hermite Reduction}\label{sec:hermite}
 
 Hermite reduction was first introduced by Hermite~\citep{Hermite1872} for
-rational functions.  This reduction was later extended to liouvillean
+rational functions.  This reduction was later extended to elementary
 functions by Risch~\citep{Risch1969,Risch1970,ACA1992,bronstein98,BronsteinBook}, to algebraic functions by
 Trager~\citep{trager84,ACA1992,bronstein98}, and to hyperexponential
 functions~\citep{bostan13a}.  These generalizations are the key step in many
@@ -677,8 +681,7 @@ such that
 \end{equation}
 By a repeated application of such reduction steps one can decompose any $f\in A$
 as $f=g'+h$ where the denominators of the coefficients of $h$ are squarefree
-and the coefficients of $g$ are proper rational functions (i.e., their numerators
-have smaller degree than their denominators).
+and the coefficients of $g$ are proper rational functions.
 
 In order to determine the unknown polynomials $g_1,\ldots,g_n$ in~\eqref{eq:hred},
 clearing the denominator $uv^\mu$ yields

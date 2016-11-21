@@ -240,14 +240,15 @@ By $\bar C$ we denote some algebraically closed field containing~$C$ (not necess
 An operator $L$ of order~$n$ is called fuchsian at a point $a\in\bar C$ if
 it admits $n$ linearly independent solutions in
 \[
-  C[[[x-a]]] := \bigcup_{\nu\in C} (x-a)^\nu\bar C[[x-a]][\log(x-a)].
+  \bar C[[[x-a]]] := \bigcup_{\nu\in C} (x-a)^\nu\bar C[[x-a]][\log(x-a)].
 \]
 It is called fuchsian at $\infty$ if it admits $n$ linearly independent solutions in
 \[
-  C[[[x^{-1}]]] := \bigcup_{\nu\in C} x^{-\nu} \bar C[[x^{-1}]][\log(x)].
+  \bar C[[[x^{-1}]]] := \bigcup_{\nu\in C} x^{-\nu} \bar C[[x^{-1}]][\log(x)].
 \]
 It is simply called \emph{fuchsian} if it is fuchsian at all $a\in\bar C\cup\{\infty\}$.
 Note that the exponents $\nu$ are restricted to~$C$, not to the larger field~$\bar C$.
+For simplicity, the dependence on $C$ is not reflected in the notation.
 
 Examples for fuchsian operators are operators that have a basis of algebraic
 function solutions, the Gauss hypergeometric differential operator, or the
@@ -278,7 +279,7 @@ differential setting to the series solutions of $L$ in $\bar C[[[x-a]]]$, which
 generate a $\bar C$-vector space of dimension $\ord(L)$.
 
 The exponents of an element $f\in A=R[\partial_x]/\<L>$ at a point $a\in\bar C\cup\{\infty\}$
-are the values $\alpha$ such that one of the series in $C[[[x-a]]]$ (or $C[[[x^{-1}]]]$, respectively)
+are the values $\alpha$ such that one of the series in $\bar C[[[x-a]]]$ (or $\bar C[[[x^{-1}]]]$, respectively)
 associated to $f$ has $(x-a)^\alpha\log(x-a)^\beta$ (or $(\frac1x)^\alpha\log(x)^\beta$) as initial term.
 For an element $f\in A$, let $n_f$ be the minimal order of an operator
 $\tilde{L}\in R[\partial_x]\setminus\{0\}$ with $\tilde{L}\cdot f=0$.
@@ -305,16 +306,16 @@ algebra $R[\partial_x]$, we consider the
 operator algebra $R[\partial_x,\partial_t]$, in which $\partial_x,\partial_t$
 commute with each other (although they need not commute with elements of~$R$).
 
-The action of $R[\partial_x]$ on $C[[[x-a]]]$ or $C[[[x^{-1}]]]$ is extended
+The action of $R[\partial_x]$ on $\bar C[[[x-a]]]$ or $\bar C[[[x^{-1}]]]$ is extended
 to $R[\partial_x,\partial_t]$ by letting $\partial_t$ act coefficient-wise.
 We further assume that the action of $R[\partial_x]$ on $A=R[\partial_x]/\<L>$ is
 extended to an action of $R[\partial_x,\partial_t]$ on~$A$ in a way that is
 compatible with the action of $R[\partial_x,\partial_t]$ on series domains.
-This means that when $y\in C[[[x-a]]]$ is a solution of~$L$ and $f$ is an
-element of~$A$, so that $f\cdot y$ is an element of $C[[[x-a]]]$, then we
+This means that when $y\in\bar C[[[x-a]]]$ is a solution of~$L$ and $f$ is an
+element of~$A$, so that $f\cdot y$ is an element of $\bar C[[[x-a]]]$, then we
 want to have $(\partial_t\cdot f)\cdot y=\partial_t\cdot(f\cdot y)$, where
 the $\cdot$ in $(\partial_t\cdot f)$ refers to the action of $R[\partial_x,\partial_t]$
-on $A$ and the three other dots refer to the action on $C[[[x-a]]]$.
+on $A$ and the three other dots refer to the action on $\bar C[[[x-a]]]$.
 
 If $u\in A$ is such that $\partial_t\cdot 1 = u$ and $U\in R[\partial_x]$ is such
 that $u=U+\<L>$, then the annihilator $\mathfrak{a}\subseteq R[\partial_x,\partial_t]$
@@ -332,12 +333,12 @@ integral bases. The notion of integral bases has been generalized to D-finite
 functions~\citep{kauers15b}, and an algorithm was also given there for
 computing such bases. We recall here the relevant definitions and properties.
 
-Although the elements of a generalized series ring $C[[[x-a]]]$ are formal
+Although the elements of a generalized series ring $\bar C[[[x-a]]]$ are formal
 objects, the series notation suggests certain analogies with complex
 functions.  For simplicity, let us assume throughout that $C\subseteq\set
 R$. Terms $(x-a)^\alpha\log(x-a)^\beta$ or $(\tfrac1x)^\alpha\log(x)^\beta$ are
 called \emph{integral} if $\alpha\geq0$. A series in
-$C[[[x-a]]]$ or $C[[[x^{-1}]]]$ is called integral if it only contains integral
+$\bar C[[[x-a]]]$ or $\bar C[[[x^{-1}]]]$ is called integral if it only contains integral
 terms. A non-integral series is said to have a \emph{pole} at the reference
 point. Note that in this terminology also $1/\sqrt{x}$ has a pole
 at~$0$, while $\log(x)$ does not; this convention differs slightly from the
@@ -354,7 +355,7 @@ but also $xf'=(x^{-1})^{-1}f'$ is integral at infinity.
 Let $K$ be some field with $C\subseteq K\subseteq\bar C$.
 Let $L\in K(x)[\partial_x]$ be a fuchsian operator. An element $f\in A=K(x)[\partial_x]/\<L>$
 is called (locally) integral at $a\in\bar C\cup\{\infty\}$ if for every solution $y$
-of $L$ in $C[[[x-a]]]$ or $C[[[x^{-1}]]]$, respectively, the series $f\cdot y$ is
+of $L$ in $\bar C[[[x-a]]]$ or $\bar C[[[x^{-1}]]]$, respectively, the series $f\cdot y$ is
 integral. $f$~is called (globally) integral if it is locally integral at every
 $a\in\bar C$ (``at all finite places'').
 
@@ -633,7 +634,7 @@ c_i'\omega_i$, which is obviously integral. Then also their sum
   = v^{\mu-1} \sum_{i=1}^n \bigl(c_iv^{1-\mu}\omega_i\bigr)'
 \]
 must be integral. Since $\{\omega_1,\ldots,\omega_n\}$ is an integral basis at~$a$,
-there exists for each $i=1,\ldots,n$ a series solution $y_i\in C[[[x-a]]]$
+there exists for each $i=1,\ldots,n$ a series solution $y_i\in\bar C[[[x-a]]]$
 of~$L$ such that $\omega_i\cdot y_i$ involves a term
 $T=(x-a)^\alpha\log(x-a)^\beta$ with $0\leq\alpha<1$ and $\beta\in\bN$.
 Let now $i$ be an index such that $c_i(a)\neq0$;

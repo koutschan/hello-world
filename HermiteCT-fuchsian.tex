@@ -279,14 +279,15 @@ generate a $\bar C$-vector space of dimension $\ord(L)$.
 
 The exponents of an element $f\in A=R[\partial_x]/\<L>$ at a point $a\in\bar C\cup\{\infty\}$
 are the values $\alpha$ such that one of the series in $C[[[x-a]]]$ (or $C[[[x^{-1}]]]$, respectively)
-associated to $f$ has $(x-a)^\alpha\log(x-a)^\beta$ (or $(\frac1x)^\alpha\log(x)^\beta$) as initial
-term. We say that $a$ is an ordinary point of $f$ if the set of exponents of $f$ at $a$ is $\{0,1,\dots,n-1\}$
-and the solutions at $a$ do not involve a logarithm.
+associated to $f$ has $(x-a)^\alpha\log(x-a)^\beta$ (or $(\frac1x)^\alpha\log(x)^\beta$) as initial term.
+For an element $f\in A$, let $n_f$ be the minimal order of an operator
+$\tilde{L}\in R[\partial_x]\setminus\{0\}$ with $\tilde{L}\cdot f=0$.
+We say that $a$ is an ordinary point of $f$ if the set of exponents of $f$ at $a$
+is $\{0,1,\dots,n_f-1\}$ and the solutions at $a$ do not involve logarithms.
 There can be at most finitely many non-ordinary points; these are called the singular points.
-For an element $f\in A$, let $n_f$ be the minimal order of an operator $L\in R[\partial_x]\setminus\{0\}$ with $L\cdot f=0$.
-Then the defect of $f\in A$ at $a\in\bar C\cup\{\infty\}$, denoted $\defect_a(f)$, is defined 
-as the sum of the exponents of $f$ at $a$ minus
-$\sum_{k=0}^{n-1}k=\frac12n_f(n_f-1)$, then the Fuchs relation~\citep{schlesinger95,ince26} says that we have
+The defect of $f\in A$ at $a\in\bar C\cup\{\infty\}$, denoted $\defect_a(f)$, is defined 
+as the sum of the exponents of $f$ at $a$ minus $\sum_{k=0}^{n_f-1}k=\frac12n_f(n_f-1)$.
+Then the Fuchs relation~\citep{schlesinger95,ince26} says that we have
 \[
  \sum_{a\in\bar C\cup\{\infty\}} \defect_a(f) = n_f(1-n_f)
 \]

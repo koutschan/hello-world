@@ -1,0 +1,169 @@
+> ----------------------------------------------------------------------------------
+> Report 1
+> ----------------------------------------------------------------------------------
+> The submission focuses on Fuchsian functions with a parameter `t`. That is
+> functions F(x,t) that satisfies a Fuchsian linear differential equation w.r.t.
+> `x` with polynomial coefficients (in `x` and `t`). A differential equation
+> is Fuchsian if all the singular points are regular singular (there is no
+> exponential term in the formal expansion of the solutions).
+> 
+> The authors also require that F(x,t) satisfies a differential equation w.r.t. to
+> `t` and that this equation has a special shape. They discard functions that do
+> not fit into this setting as “pathological”. While it is true that this shape is
+> generic and that they method does not depend so much on this hypothesis,
+> nongeneric situations appear frequently in practice and it is excessive to call
+> them “pathological”.
+
+MK: changed to degenerate
+
+> Finally, the authors require a condition on the exponents of the singularities
+> of the Fuchsian differential equation of which F is solution (that is the
+> exponent of x in the leading terms of the solutions of the diff. eq. at a given
+> point). They demand that these exponents are real and do not depend on `t`.
+> Here, the hypothesis is not generic but almost always satisfied in practice
+> (most often the exponents are rational). However this restriction should be
+> metionned in the abstract. It may be that the fact that the exponents do not
+> depend on `t` is a consequence of the D-finiteness w.r.t. `t`, but the fact that
+> exponents are real is a restriction.
+
+MK: done. 
+
+> So given F(x,t), the question is to compute a linear differential equation
+> satisfied by the integral of F(x,t) w.r.t. to x. Much effort has been devoted to
+> this question and many algorithms exist yo solve even more general questions.
+> However, performance are such an issue that the search for new algorithms goes
+> on. In particular, the approach by reduction is promising because it relies only
+> on elementary tools. The submission extend this approach to Fuchsian D-finite
+> functions.
+> 
+> The ISSAC paper on which the submission is based only deals with algebraic
+> functions, this was a promising yet minor improvement on the state-of-the-art.
+> In the present submission, promises have been kept and this extension to
+> Fuchsian functions is a major step forward for symbolic integration,
+> congratulations! The submission is very well written and I have very little to
+> complain about.
+> 
+> 
+> The only weak point is Part 6 “Polynomial reduction”. Firstly, it is written
+> that the space {[∂^i f] : i ∈ N} has not necessarily finite dimension when [-]
+> denotes Hermite-Trager-Chen-Hoeij-Kauers-Koutschan reduction. It seems to me
+> that this contradicts either the canonical form property or the existence of a
+> telescoper. More explanation would be welcome.
+
+SC: Yes, this is confusing. Maybe we could say that:
+"The residual forms {[∂^i f] : i ∈ N} are linearly dependent by the external
+existence of telescopers and the cannonical property. We now introduce polynomial reductions which decompose further
+the residual forms computed by the previous reduction so that the new
+residual forms are lying in a finitely dimensional vector space. This enables us to obtain an order bound
+for telescopers and the existence of telescopers is achieved as an immediate consequence."
+
+MK: I think we wanted to say that {[∂^i f] : i ∈ N} need not be finite dimensional
+if the hypotheses of Theorem thm:intiff0 (integrand having a double root at infinity)
+are not satisfied. Polynomial reduction does not require this assumption. 
+
+> As far as I understand, the purpose of Part 6 is to devise a bound on the order
+> of the minimal telescoper. This is achieved with Corollary 22.  Unfortunately,
+> the bound is not very informative: how much is dim(N_V) is terms of the input
+> function?
+
+SC:  In fact, our proof of Prop. 19 implies an explicit bound for the dimension of N_V, which is
+
+n(\tau + \delta + 1) (when \deg_x(B)<\delta) and n(\tau+\delta + \ell +1) (when \deg_x(B) = \delta).
+
+The second bound can be improved by using the number t of s's such that -s\lc(e) is an
+eigenvalue of \lc(B), that is  n(\tau + \delta + 1) + n*t (This avoids using the parameter \ell which maybe
+arbitrary large nonnegative integer).
+
+> In my report on the ISSAC version of the paper, I wrote:
+> 
+>     As a suggestion, I think we may obtain a bound on the order of the
+>     telescoper directly from Theorem 6 as follows. Let ‘a’ be a polynomial
+>     divided by ‘e’.
+>     
+>       D = { f in A | f has a double root at ∞ and its poles are
+>                      roots of a }.
+> 		     
+>     D is stable under differentiation by t. Let f in D.  Write
+>     
+>       [f] = sum_i p_i omega_i / a,
+> 
+>     We can write f = g' + [f] for some g = sum_i q_i omega_i / a, where the
+>     q_i/a are proper rational functions. It seems to me that the fact that
+>     f has no pole at infinity implies a bound on the degree of the p_i's in
+>     terms of the tau_i's.
+> 
+> I think that this remark still applies, even in the Fuchsian case, and that it
+> leads to more informative without the hassle of the polynomial reduction. Of
+> course I may be mistaken but I would appreciate that the authors give me their
+> thoughts on this point.
+
+SC:  I could not understand how to use the idea of this referee to obtain an order bound.
+We could discuss so that we know how to use this idea.
+
+> In any case, I highly recommend this work for publication in the JSC, it is one
+> of the most significant progress in the field in the last years.
+> 
+> 
+> --------------------------------------------------------------------
+> Report 2
+> --------------------------------------------------------------------
+> 
+> The proposed approach generalizes the approach that has been described by the
+> authors in their ISSAC'16 article, where they were discussing how to construct a
+> telescoper for an algebraic function. The presented approach preserves the
+> positive features of the previous algorithm, the main of which is the
+> construction of a telescoper without concomitant constructing a corresponding
+> certificate: the authors note that the certificate can be very cumbersome, its
+> computation takes a significant time, while it may not be necessary, for
+> example, to obtain the definite integral. The proposed generalization
+> significantly complements the result described in the authors' ISSAC'16 article.
+> The paper is presented in quite understandable way.
+> 
+> All statements of the article are proved correctly. The presentation is
+> accompanied by interesting examples. The main idea is clearly explained.
+> 
+> I think that it would make sense to transform the paragraph, which is below
+> Example 14, into a "Remark" or a "Proposition".
+
+MK: done. I turned all three paragraphs into a remark consisting of three parts,
+because I don't see why the observation in the first paragraph is "more important"
+than the observations in the other two paragraphs. If we want to turn them into
+formal propositions, we should also include formal proofs. I guess we don't want
+this. 
+
+> I also have some comments on the references.  Reduction rational functions was
+> first considered in the article of M.Ostrogradsky (27 years earlier then
+> Ch.Hermite):
+> 
+> Ostogradsky M.W. De l'integration des fractions rationelles. Bull. de la
+> classe Physico-Mathematiques de l'Academie Imperiale des Scienses de St.
+> Petersburg, IV:145-167, 286-300, 1845.
+
+MK: added to the hermite citation (although, as far as I know, Ostrogradsky's
+reduction is not quite the same). 
+
+> For the difference case, in the first time it was done in S.Abramov's
+> article
+> 
+> Abramov S.A. The rational component of the solution of a first-order linear
+> recurrence relation with a rational right side. USSR Computational Mathematics
+> and Mathematical Physics, 15(4), 216-221, 1975
+
+MK: Where should we add this? We don't speak about the rational shift case. 
+
+> For hypergeometric terms, a corresponding reduction was first introduced in the
+> articles of S.Abramov and M.Petkovsek (11 years earlier then A.Bostan et al.):
+> 
+> Abramov S. and Petkovsek M. Rational Normal Forms and Minimal Decompositions of
+> Hypergeometric Terms. J. Symbolic Computation 33, 521-543, 2002.
+> 
+> Abramov S. and Petkovsek M. On the structure of multivariate hypergeometric
+> term.  Advances in Applied Mathematics, v. 29, 386-411, 2002
+
+MK: Also for these it's not so obvious how to add them. We cite Bostan16 for
+"binomial sums", but this is a reduction based approach to multi-summation, which
+is different from the Abramov/Petkovsek approach. 
+
+> The paper can be accepted after the authors take into account the above
+> comments.
+> --------------------------------------------------------------------

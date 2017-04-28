@@ -94,7 +94,8 @@ C. Koutschan was supported by the Austrian Science Fund (FWF) grant W1214.
   
 \begin{abstract}
   Continuing a series of articles in the past few years on creative telescoping using reductions,
-  we adapt Trager's Hermite reduction for algebraic functions to fuchsian D-finite functions and
+  we adapt Trager's Hermite reduction for algebraic functions to fuchsian D-finite functions
+  whose singularities have real exponents. We 
   develop a reduction-based creative telescoping algorithm for this class of functions, thereby
   generalizing our recent reduction-based algorithm for algebraic functions, presented at ISSAC 2016.
 \end{abstract}
@@ -175,7 +176,7 @@ $x$-constants $\mathrm{Const}_x(D)=\{\,c\in D:c'=0\,\}$ form a field and that $D
 is a vector space over the field of $x$-constants. Assume further that there is
 some $\mathrm{Const}_x(D)$-linear map $[\cdot]\colon D\to D$ such that for every
 $f\in D$ there exists a $g\in D$ with $f-[f]=g'$. Such a map is called a
-\emph{reduction.} For example, in $D=C(t,x)$ Hermite reduction~\citep{Hermite1872} decomposes
+\emph{reduction.} For example, in $D=C(t,x)$ Hermite reduction~\citep{Ostrogradsky1845,Hermite1872} decomposes
 any $f\in D$ into $f=g'+h$ with $g,h\in D$ such that $h$ is a proper rational function
 (i.e., the numerator degree is smaller than the denominator degree)
 with a squarefree denominator. In this case, we can take $[f]=h$.
@@ -322,7 +323,7 @@ that $u=U+\<L>$, then the annihilator $\mathfrak{a}\subseteq R[\partial_x,\parti
 of $1\in A$ in $R[\partial_x,\partial_t]$ contains $L$ and $\partial_t-U$. We
 therefore have $\dim\mathfrak{a}=0$, which is the usual
 definition of D-finiteness in the case of several variables~\citep{Zeilberger1990,chyzak98,koutschan09,kauers14c}.
-Pathological situations, where we also have $\dim\mathfrak{a}=0$ but 
+Degenerate situations, where we also have $\dim\mathfrak{a}=0$ but 
 $\mathfrak{a}$ does not have a basis of the form $\<L,\partial_t-U>$, are not
 considered in this paper. 
 
@@ -887,7 +888,9 @@ which is indeed a scalar multiple of our remainder. Hence, $f$ is integrable:
 \]
 \end{example}
 
-Note that the condition in Theorem~\ref{thm:intiff0} that $f$ has a double
+\begin{remark}
+  \begin{enumerate}
+  \item The condition in Theorem~\ref{thm:intiff0} that $f$ has a double
 root at infinity is not a restriction, as it can always be achieved by
 a suitable change of variables. Let $a\in C$ be an ordinary point of~$L$; by
 the substitution $x\to a+1/x$ the ordinary point~$a$ is moved to
@@ -896,16 +899,14 @@ infinity. From
   \int f(x) \,\mathrm{d}x = \int f\left(\frac{1}{x}+a\right)\left(-\frac{1}{x^2}\right) \mathrm{d}x
 \]
 we see that the new integrand has a double root at infinity.
-
-Moreover, since the action of $\partial_t$ on series domains is defined coefficient-wise,
+  \item Since the action of $\partial_t$ on series domains is defined coefficient-wise,
 it follows that when $f$ has at least a double root at infinity (with respect to~$x$),
 this is also true for $\partial_t\cdot f, \partial_t^2\cdot f, \partial_t^3\cdot f,\dots$,
 and then also for every $K$-linear combination $p_0f+p_1\partial_t\cdot f+\cdots+p_r\partial_t^r\cdot f$.
 Thus Theorem~\ref{thm:intiff0} implies that $p_0+p_1\partial_t+\cdots+p_r\partial_t^r$
 is a telescoper for $f$ if \emph{and only if}
 $[p_0f+p_1\partial_t\cdot f+\cdots+p_r\partial_t^r\cdot f]=0$.
-
-We already know for other reasons~\citep{Zeilberger1990,chyzak00} that
+  \item We already know for other reasons~\citep{Zeilberger1990,chyzak00} that
 telescopers for D-finite functions exist, and therefore the reduction-based
 creative telescoping procedure with Hermite reduction with respect to an
 integral basis that is normal at infinity plus reduction modulo $U$
@@ -914,6 +915,8 @@ In particular, the method finds a telescoper of smallest possible order.
 Again, if $f$ has no double root at infinity, we can produce one by a change of variables.
 Note that a change of variables $x\to a+1/x$ with $a\in C$ has no effect on
 the telescoper.
+  \end{enumerate}
+\end{remark}
 
 \section{Polynomial Reduction}\label{sec:polynomial}
 

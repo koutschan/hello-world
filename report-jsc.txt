@@ -100,6 +100,13 @@ arbitrary large nonnegative integer).
 SC:  I could not understand how to use the idea of this referee to obtain an order bound.
 We could discuss so that we know how to use this idea.
 
+MK:  I think I understand what he means. I inserted the argument as a proposition into
+the paper. If we think it is correct (to me it looks OK) and we want to keep it, we need
+to fix some of the motivating sentences for polynomial reduction, because so far the main
+motivation was that it gives us a bound. A new motivation could be that it gives us an
+alternative bound that does not depend on the \tau_i. On the other hand, Lemma 5 bounds
+\sum_i\tau_i in terms of reasonably nice quantities. 
+
 > In any case, I highly recommend this work for publication in the JSC, it is one
 > of the most significant progress in the field in the last years.
 > 
@@ -139,7 +146,7 @@ this.
 > classe Physico-Mathematiques de l'Academie Imperiale des Scienses de St.
 > Petersburg, IV:145-167, 286-300, 1845.
 
-MK: added to the hermite citation (although, as far as I know, Ostrogradsky's
+MK: added to the Hermite citation (although, as far as I know, Ostrogradsky's
 reduction is not quite the same). 
 
 > For the difference case, in the first time it was done in S.Abramov's
@@ -149,7 +156,7 @@ reduction is not quite the same).
 > recurrence relation with a rational right side. USSR Computational Mathematics
 > and Mathematical Physics, 15(4), 216-221, 1975
 
-MK: Where should we add this? We don't speak about the rational shift case. 
+MK: done. 
 
 > For hypergeometric terms, a corresponding reduction was first introduced in the
 > articles of S.Abramov and M.Petkovsek (11 years earlier then A.Bostan et al.):
@@ -160,9 +167,7 @@ MK: Where should we add this? We don't speak about the rational shift case.
 > Abramov S. and Petkovsek M. On the structure of multivariate hypergeometric
 > term.  Advances in Applied Mathematics, v. 29, 386-411, 2002
 
-MK: Also for these it's not so obvious how to add them. We cite Bostan16 for
-"binomial sums", but this is a reduction based approach to multi-summation, which
-is different from the Abramov/Petkovsek approach. 
+MK: done.
 
 > The paper can be accepted after the authors take into account the above
 > comments.

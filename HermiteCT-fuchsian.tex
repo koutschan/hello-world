@@ -967,7 +967,7 @@ is formulated in the following proposition.
   $\{x^{\tau_1}\omega_1,\dots,x^{\tau_n}\omega_n\}$, we have
   $\deg_x(m_{j,i})<\deg_x(e) + \tau_j-\tau_i$ for all $i,j$,
   so $m_{j,i}/e$ only contains terms $(1/x)^\alpha$
-  with $\alpha\geq\tau_j-\tau_i+1$. 
+  with $\alpha\geq\tau_j-\tau_i+1$.
   % MK: e \omega_i' = \sum_j m_{i,j}\omega_j
   % ==> x^(-\tau_i) e (x^(\tau_i)\omega_i)'
   %     = \tau_i(e/x) x^(-\tau_i)x^(\tau_i) \omega_i + \sum_j m_{i,j} x^(-\tau_i) (x^(\tau_j)\omega_j)
@@ -1330,14 +1330,25 @@ where $g_i\in A$, $R_i, Q_i\in K[x]^n$ with $\deg_x(R_i) < \deg_x(d)$ and $Q_i\i
 \end{lemma}
 As application of the above lemma, we can compute the minimal telescoper for $f$ by finding the first
 linear dependence among the $(R_i, Q_i)$ over~$K$. We also obtain an upper bound for the order of telescopers.
-\begin{corollary}
-Every $f\in A$ has a telescoper of order at most $n(\deg_x(d)  +\deg_x(e) + \tau + \lambda + 1)$.
+\begin{corollary} \label{COR:order}
+Every $f\in A$ has a telescoper of order at most $n\deg_x(d) + \dim_K(N_V)$, which is bounded by $n(\deg_x(d) +\deg_x(e) + \tau + \lambda + 1)$.
 \end{corollary}
 
 \begin{remark}
 Note that the order bound as above is obtained without the double-root assumption on the input, which however
 generically matches the bound given in Proposition~\ref{PROP:order}, since the set $\mathcal{L}$ in the
-proof of Proposition~\ref{PROP:finite} is generically empty.
+proof of Proposition~\ref{PROP:finite} is generically empty. Both bounds are tight since they can be reached
+at least for rational inputs. Indeed, let us consider rational functions of the
+form $f(t, x) = P(t, x)/Q(t, x)$, where $P, Q\in \bC[t, x]$  with $\deg_x(P)=\deg_x(Q)-1$
+and $Q$ being irreducible. To turn $f$ into a rational function having a double root at infinity, we perform
+the substitution $x \rightarrow a + 1/x$ for some $a\in \bC$ such that $Q(t, a)\neq 0$. Then the telescoping problem
+for $f$ is translated to that for $\tilde f = \tilde P/\tilde{Q} = -f(t, a+1/x)/x^2$.
+If no cancellation happens, we have $\deg_x(\tilde P) = \deg_x(P)$ and $\deg_x(\tilde Q) = \deg_x(Q)+1$.
+By substituting the order bound $n(\deg_x(E)-1-\min(0,\min_j(\tau_j)))+\sum_{i=1}^n\tau_i$
+in Proposition~\ref{PROP:order} with $n=1$, $\deg_x(E) = \deg_x(\tilde Q)$
+and $\tau_i=0$ for all $i\in \{1, 2, \ldots, n\}$, we get the order bound $\deg_x(Q)$ for
+the input~$f(t, x)$. By Corollary~\ref{COR:order}, we also get the order bound $\deg_x(Q)$, since $n=1$,
+$\dim_K(N_v)=0$, and $\deg_x(d) = \deg_x(Q)$. So the two bounds match each other for such rational inputs generically.
 \end{remark}
 
 \begin{example}
